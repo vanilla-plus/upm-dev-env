@@ -1,0 +1,16 @@
+{
+    "name": "Vanilla.SchrodingerAssets",
+    "rootNamespace": "Vanilla.SchrodingerAssets",
+    "references": [
+        "Vanilla.TypeMenu"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

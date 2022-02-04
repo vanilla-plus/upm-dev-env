@@ -1,0 +1,14 @@
+{
+    "name": "Vanilla.TypeMenu",
+    "rootNamespace": "Vanilla.TypeMenu",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

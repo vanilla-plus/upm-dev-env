@@ -1,0 +1,25 @@
+{
+  "name": "vanilla.schrodinger-assets",
+  "displayName": "Vanilla Schrodinger Assets",
+  "description": "Schrodinger Assets are a type of ScriptableObject that has an weakly-typed data payload through questionable use of Unitys SerializeReference and Vanilla Type Menu.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-schrodinger-assets.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample A",
+      "description": "This sample demonstrates how to get and set values from a schrodinger asset.",
+      "path": ".Samples/Sample A"
+    }
+  ],
+  "dependencies": {
+    "vanilla.type-menu": "1.0.0"
+  }
+}

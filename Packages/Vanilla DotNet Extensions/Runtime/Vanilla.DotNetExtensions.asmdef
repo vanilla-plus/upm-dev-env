@@ -1,0 +1,20 @@
+{
+    "name": "Vanilla.DotNetExtensions",
+    "rootNamespace": "Vanilla.DotNetExtensions",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "vanilla.unity-extensions",
+            "expression": "",
+            "define": "VANILLA_UNITY_EXT_SUPPORT"
+        }
+    ],
+    "noEngineReferences": false
+}

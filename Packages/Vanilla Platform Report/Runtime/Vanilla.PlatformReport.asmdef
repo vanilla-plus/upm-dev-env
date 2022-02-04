@@ -1,0 +1,16 @@
+{
+    "name": "Vanilla.PlatformReport",
+    "rootNamespace": "Vanilla.PlatformReport",
+    "references": [
+        "Vanilla.StringFormatting"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,25 @@
+{
+  "name": "vanilla.swaperators",
+  "displayName": "Vanilla Swaperators",
+  "description": "Swaperators is a package for swappable & serializable operators. The following types are currently supported:\n\n- Add\n- Subtract\n- Multiply\n- Divide\n- Power\n- Modulo",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-swaperators.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample A",
+      "description": "Sample to demonstrate system A",
+      "path": "Samples~/Sample A"
+    }
+  ],
+  "dependencies": {
+    "vanilla.type-menu": "1.0.0"
+  }
+}

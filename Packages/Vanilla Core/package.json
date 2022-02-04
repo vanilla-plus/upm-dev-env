@@ -1,0 +1,15 @@
+{
+  "name": "vanilla.core",
+  "displayName": "Vanilla Core",
+  "description": "Vanilla is a collection of behaviours, extension methods, Editor scripts and various other tools that can assist in rapid prototyping and increased readability.\n\nThe tools and systems found in this package are bare-bones and provide the foundational behaviour used in other Vanilla packages.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+   "repository":"github:vanilla-plus/upm-core.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "0.2.0",
+  "type": "library"
+}

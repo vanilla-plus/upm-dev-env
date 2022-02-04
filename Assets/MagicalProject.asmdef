@@ -1,0 +1,28 @@
+{
+    "name": "MagicalProject",
+    "rootNamespace": "MagicalProject",
+    "references": [
+        "Vanilla.MetaScript.Two",
+        "Vanilla.DataAssets.Two",
+        "Vanilla.Easing",
+        "Vanilla.UnityExtensions",
+        "Vanilla.RayDetectors",
+        "Vanilla.Geodetics",
+        "Vanilla.DotNetExtensions",
+        "Vanilla.TypeMenu",
+        "Vanilla.SchrodingerAssets",
+        "Vanilla.FuncOlympics",
+        "Vanilla.Pools",
+        "Vanilla.Ballistics",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

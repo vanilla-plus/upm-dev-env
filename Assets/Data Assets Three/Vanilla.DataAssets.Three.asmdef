@@ -1,0 +1,19 @@
+{
+    "name": "Vanilla.DataAssets.Three",
+    "rootNamespace": "Vanilla.DataAssets",
+    "references": [
+        "GUID:4ed40374a3ba8cc468277ea617ce46d9",
+        "GUID:41e4c56486c8ea04bb769c4fa80b2cba",
+        "GUID:62e768a55cec7954f91e7b5d23397369",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

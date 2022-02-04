@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fff172eaab90144a051d6657c9cc87, type: 3}
+  m_Name: New PlayerPrefs Data Set
+  m_EditorClassIdentifier: Assembly-CSharp:Vanilla.Data.Assets:PlayerPrefsDataSet
+  bools:
+  - {fileID: 11400000, guid: 68ffbdb1019ad6740ae06d711220abbd, type: 2}
+  floats:
+  - {fileID: 11400000, guid: d54c2b0e867da504d8f2b0fa51cf2414, type: 2}
+  ints:
+  - {fileID: 11400000, guid: ec237151c691e19469a3779449d7e820, type: 2}
+  strings:
+  - {fileID: 11400000, guid: 89ad1d9869597ba43bc455f6f20c19fe, type: 2}
+  vector2s:
+  - {fileID: 11400000, guid: 3769020efdfe3ba478ba81289fe4878f, type: 2}
+  vector3s:
+  - {fileID: 11400000, guid: dfb4722de9e9a5f4f8eeffa3a03e984f, type: 2}

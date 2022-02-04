@@ -1,0 +1,14 @@
+{
+    "name": "Vanilla.RayDetectors",
+    "rootNamespace": "Vanilla.RayDetectors",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

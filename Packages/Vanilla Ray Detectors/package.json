@@ -1,0 +1,22 @@
+{
+  "name": "vanilla.ray-detectors",
+  "displayName": "Vanilla RayDetectors",
+  "description": "Vanilla Ray Detectors is a toolkit for easy raycast-based target detection and monitoring.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-ray-detectors.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Boss Fight",
+      "description": "Use the RayDetector to correct Earths timeline",
+      "path": "Samples~/Boss Fight"
+    }
+  ]
+}

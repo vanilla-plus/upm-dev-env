@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa12cdfc7b90624a9f2f04689b2a303, type: 3}
+  m_Name: '[String] Message A'
+  m_EditorClassIdentifier: 
+  _enabled: 1
+  source:
+    id: 0
+  initializationValue: Well hey there kids I'm farty joe!
+  references:
+    version: 1
+    00000000:
+      type: {class: StringSource_Raw, ns: Vanilla.DataAssets.Three, asm: Vanilla.DataAssets.Three}
+      data:
+        _initialized: 0
+        _onBroadcast:
+          m_PersistentCalls:
+            m_Calls: []
+        _onSet:
+          m_PersistentCalls:
+            m_Calls: []
+        _value: 

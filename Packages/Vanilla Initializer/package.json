@@ -1,0 +1,25 @@
+{
+  "name": "vanilla.initializer",
+  "displayName": "Vanilla Initializer",
+  "description": "Initializer is a small tool that adds an extra start-up callback to the classic cast of Start/Awake/OnEnable. It runs once per scene load and lets scripts take as long as they need before initialization is considered 'complete'. It even runs on GameObjects that aren't active, a crucial detail missing for Awake/Start/etc.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-initializer.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.1",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample A",
+      "description": "Sample to demonstrate system A",
+      "path": "Samples~/Sample A"
+    }
+  ],
+  "dependencies": {
+    "com.cysharp.unitask": "2.2.1"
+  }
+}

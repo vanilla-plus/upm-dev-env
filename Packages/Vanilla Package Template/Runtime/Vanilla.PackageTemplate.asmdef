@@ -1,0 +1,14 @@
+{
+    "name": "Vanilla.PackageTemplate",
+    "rootNamespace": "Vanilla.PackageTemplate",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

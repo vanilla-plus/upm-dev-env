@@ -1,0 +1,25 @@
+{
+  "name": "vanilla.ballistics",
+  "displayName": "Vanilla Ballistics",
+  "description": "Vanilla Ballistics provides several functions for easily calculating ballistics projectile velocity.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-ballistics.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.1",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Firing Range",
+      "description": "Demonstrates several types of projectile arcs.",
+      "path": "Samples~/Firing Range"
+    }
+  ],
+  "dependencies": {
+    "vanilla.unity-extensions": "1.0.0"
+  }
+}

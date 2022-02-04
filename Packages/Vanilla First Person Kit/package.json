@@ -1,0 +1,22 @@
+{
+  "name": "vanilla.first-person-kit",
+  "displayName": "Vanilla First Person Kit",
+  "description": "Vanilla First Person Kit is a series of tools for creating first-person games.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-first-person-kit.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample A",
+      "description": "Sample to demonstrate system A",
+      "path": "Samples~/Sample A"
+    }
+  ]
+}

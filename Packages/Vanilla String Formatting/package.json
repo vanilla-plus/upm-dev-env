@@ -1,0 +1,15 @@
+{
+  "name": "vanilla.string-formatting",
+  "displayName": "Vanilla String Formatting",
+  "description": "String Formatting is a collection of extension methods for string manipulation including human-readable conversions and some simple encryption. For example...\n\nlong byteTotal = 5000;\n\nDebug.Log(byteTotal.AsDataSize);\n\n...will print out 5Kb.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-string-formatting.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template"
+}

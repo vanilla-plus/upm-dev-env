@@ -1,0 +1,15 @@
+{
+  "name": "vanilla.context-menu-tools",
+  "displayName": "Vanilla Context Menu Tools",
+  "description": "Vanilla Context Menu Tools features base classes for easily adding context menu items to the Editor under the Vanilla banner.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-context-menu-tools.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template"
+}

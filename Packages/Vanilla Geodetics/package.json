@@ -1,0 +1,22 @@
+{
+  "name": "vanilla.geodetics",
+  "displayName": "Vanilla Geodetics",
+  "description": "Vanilla Geodetics provides two simple methods for easily converting between traditional cartesian positions (x/y/z) and geodetic positions (longitude/latitude/radius).\n\nIt doesn't even introduce any new kinds of data, just use Vector3s! Each component maps directly to its axis equivalent - for example, x maps to longitude.\n\nThis allows you to have more intuitive and powerful rotational behaviour without trying to make cartesian positions work in ways they weren't built for.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-geodetics.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "2.0.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Geodetic Transform",
+      "description": "Demonstrates use of geodetic positions by orbiting a camera around a target.",
+      "path": "Samples~/Geodetic Transform"
+    }
+  ]
+}

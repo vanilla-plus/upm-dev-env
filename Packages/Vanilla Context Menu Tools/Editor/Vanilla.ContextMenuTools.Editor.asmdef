@@ -1,0 +1,14 @@
+{
+    "name": "Vanilla.ContextMenuTools.Editor",
+    "rootNamespace": "Vanilla.ContextMenuTools.Editor",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

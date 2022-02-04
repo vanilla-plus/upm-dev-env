@@ -1,0 +1,18 @@
+{
+    "name": "Vanilla.MetaScript.Three",
+    "rootNamespace": "Vanilla.MetaScript.Three",
+    "references": [
+        "GUID:4ed40374a3ba8cc468277ea617ce46d9",
+        "GUID:8b4183187f8cfe04a8fb3a401111a376",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

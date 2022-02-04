@@ -1,0 +1,18 @@
+{
+    "name": "Vanilla.DataAssets.Two",
+    "rootNamespace": "Vanilla.DataAssets",
+    "references": [
+        "Vanilla.QuitUtility",
+        "Vanilla.TypeMenu",
+        "Vanilla.Swaperators"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

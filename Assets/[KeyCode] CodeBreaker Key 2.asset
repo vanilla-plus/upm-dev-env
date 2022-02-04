@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de6dde3c681fdb47a445bf5d50f33ed, type: 3}
+  m_Name: '[KeyCode] CodeBreaker Key 2'
+  m_EditorClassIdentifier: 
+  _description: Which key should be used in slot 2?
+  _value: 98
+  GetTasks: []
+  SetTasks: []
+  references:
+    version: 1

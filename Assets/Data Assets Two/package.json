@@ -1,0 +1,20 @@
+{
+  "name": "vanilla.data-assets",
+  "displayName": "Vanilla Data Assets",
+  "description": "Data Assets is a collection of ScriptableObject-based data classes, created with the goal of breaking important values out of your scenes or static scripting. Things like your players health or a reference to your main camera can float freely with ScriptableObject data assets allowing universal access.\n\nData Assets was heavily inspired by the Unite Austin 2017 demonstration by Ryan Hipple from Schell Games.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-data-assets.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "0.1.4",
+  "type": "library",
+  "dependencies": {
+    "com.cysharp.unitask": "2.2.1",
+    "vanilla.type-menu": "1.0.0",
+    "vanilla.quit-utility": "1.0.0"
+  }
+}

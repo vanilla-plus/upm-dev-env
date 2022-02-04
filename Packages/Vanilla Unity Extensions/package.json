@@ -1,0 +1,18 @@
+{
+  "name": "vanilla.unity-extensions",
+  "displayName": "Vanilla Unity Extensions",
+  "description": "Vanilla Extensions is a collection of extension methods for all the data types and classes found in the Unity GameObject ecosystem.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-unity-extensions.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template",
+  "dependencies": {
+    "vanilla.dotnet-extensions": "1.0.0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "name": "Vanilla.Core",
+    "rootNamespace": "Vanilla.Core",
+    "references": [
+        "GUID:1e60e3db02f12b54681d318b1678565c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

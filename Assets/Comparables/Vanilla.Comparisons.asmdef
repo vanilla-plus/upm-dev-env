@@ -1,0 +1,14 @@
+{
+    "name": "Vanilla.Comparisons",
+    "rootNamespace": "Vanilla.Comparisons",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

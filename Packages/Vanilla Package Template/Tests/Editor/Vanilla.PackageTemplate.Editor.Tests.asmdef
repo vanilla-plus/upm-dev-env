@@ -1,0 +1,18 @@
+{
+    "name": "Vanilla.PackageTemplate.Editor.Tests",
+    "rootNamespace": "Vanilla.PackageTemplate.Editor.Tests",
+    "references": [
+        "Vanilla.PackageTemplate.Tests"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

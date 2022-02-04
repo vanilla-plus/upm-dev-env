@@ -1,0 +1,19 @@
+{
+    "name": "Vanilla.MetaScript.Four",
+    "rootNamespace": "Vanilla.MetaScript.Four",
+    "references": [
+        "GUID:4ed40374a3ba8cc468277ea617ce46d9",
+        "GUID:2898bcc59d5d1544a8203fa84ba70e75",
+        "GUID:62e768a55cec7954f91e7b5d23397369",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

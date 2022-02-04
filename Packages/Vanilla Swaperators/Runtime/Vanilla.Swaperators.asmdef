@@ -1,0 +1,14 @@
+{
+    "name": "Vanilla.Swaperators",
+    "rootNamespace": "Vanilla.Swaperators",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

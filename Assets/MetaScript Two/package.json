@@ -1,0 +1,22 @@
+{
+  "name": "vanilla.metascript",
+  "displayName": "Vanilla MetaScript",
+  "description": "Vanilla MetaScript is a system for quickly and easily creating content sequences, not unlike a visual scripting or an animation-based approach.\r\n\r\nBecause MetaScript is script-based, your sequencing lives inside a given Unity scene. The benefit of this approach is that changes to sequencing can be considered an asset change rather than a code change, which means they can be remotely updated without an app update. In fact, Scenes can be treated like downloadable episodes for your project without the needing to adhere to any pre-built paradigms. Users can even create their own interactive content by attaching and serializing Scenes at run-time!\r\n\r\nMaking your own MetaScript is incredibly simple; create a new script, inherit from MetaScript_Base and override Run(). Thats it!",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-metascript.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "0.1.3",
+  "type": "library",
+  "dependencies": {
+    "vanilla.data-assets": "0.1.2",
+    "vanilla.dotnet-extensions": "1.0.0",
+    "vanilla.string-formatting": "1.0.0",
+    "vanilla.type-menu": "1.0.0",
+    "com.cysharp.unitask": "2.2.1"
+  }
+}

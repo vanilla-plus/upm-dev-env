@@ -1,0 +1,22 @@
+{
+  "name": "vanilla.type-menu",
+  "displayName": "Vanilla Type Menu",
+  "description": "Type Menu offers developers attributes allowing them to easily populate fields that are using the SerializeReference attribute.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-type-menu.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Type Selection",
+      "description": "Demonstrates the ability to hot-swap non-MonoBehaviour classes on a MonoBehaviour.",
+      "path": "Samples~/Type Selection"
+    }
+  ]
+}
