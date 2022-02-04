@@ -1,0 +1,14 @@
+{
+    "name": "Vanilla.MenuMachine.Tests",
+    "rootNamespace": "Vanilla.MenuMachine.Tests",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -218,6 +218,12 @@
         "com.cysharp.unitask": "2.2.1"
       }
     },
+    "vanilla.menu-machine": {
+      "version": "file:Vanilla Menu Machine",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "vanilla.package-template": {
       "version": "file:Vanilla Package Template",
       "depth": 0,
