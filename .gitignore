@@ -30,3 +30,5 @@
 # Just for vanilla-plus/upm-dev-env, we want to track all the contents of Packages.
 # This shouldn't be included in regular Unity project repo.
 !Packages/**
+
+Library/**
