@@ -2,6 +2,7 @@
 # Only explicitly listed files and directories will be tracked.
 
 # Ignore everything.
+
 *
 
 !*/
@@ -11,21 +12,21 @@
 # it won’t even try to check anything in the directory to see if it was unblocked later.
 # It simply skips it and ignores all rules inside that directory.
 
+# Whitelisting specific files
+
 !.gitignore
 !.gitattributes
 
-!*.meta
-
-# whitelist everything in Assets
-!Assets/
-!ProjectSettings/
-
-# Track which packages are in use
 !Packages/manifest.json
 !Packages/packages-lock.json
 
+# whitelist everything in these folders.
+# * to whitelist just the directory contents, but not subdirectories.
+# ** to include subdirectories.
+
+!Assets/**
+!ProjectSettings/**
+
 # Just for vanilla-plus/upm-dev-env, we want to track all the contents of Packages.
 # This shouldn't be included in regular Unity project repo.
-!Packages
-!Packages/
-!Packages/*
+!Packages/**
