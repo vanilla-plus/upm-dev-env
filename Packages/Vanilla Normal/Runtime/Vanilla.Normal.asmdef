@@ -1,0 +1,20 @@
+{
+    "name": "Vanilla.Normal",
+    "rootNamespace": "Vanilla",
+    "references": [
+        "Vanilla.Danger",
+        "Vanilla.Easing",
+        "Vanilla.Toggle",
+        "Vanilla.TypeMenu",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

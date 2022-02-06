@@ -1,8 +1,8 @@
 {
-    "name": "Vanilla.MenuMachine.Editor.Tests",
-    "rootNamespace": "Vanilla.MenuMachine.Editor.Tests",
+    "name": "Vanilla.Toggle.Editor",
+    "rootNamespace": "Vanilla.Toggle.Editor",
     "references": [
-        "Vanilla.PackageTemplate.Tests"
+        "Vanilla.Toggle"
     ],
     "includePlatforms": [
         "Editor"

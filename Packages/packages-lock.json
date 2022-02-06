@@ -224,6 +224,12 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "vanilla.normal": {
+      "version": "file:Vanilla Normal",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "vanilla.package-template": {
       "version": "file:Vanilla Package Template",
       "depth": 0,
@@ -277,6 +283,12 @@
       "dependencies": {
         "vanilla.type-menu": "1.0.0"
       }
+    },
+    "vanilla.toggle": {
+      "version": "file:Vanilla Toggle",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
     },
     "vanilla.type-menu": {
       "version": "file:Vanilla Type Menu",

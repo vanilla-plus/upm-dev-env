@@ -1,8 +1,12 @@
 {
-    "name": "Vanilla.MenuMachine.Tests",
-    "rootNamespace": "Vanilla.MenuMachine.Tests",
-    "references": [],
-    "includePlatforms": [],
+    "name": "Vanilla.Normal.Editor",
+    "rootNamespace": "Vanilla.Normal.Editor",
+    "references": [
+        "Vanilla.Normal"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
