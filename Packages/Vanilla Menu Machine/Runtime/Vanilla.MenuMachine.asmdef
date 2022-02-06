@@ -1,7 +1,10 @@
 {
     "name": "Vanilla.MenuMachine",
     "rootNamespace": "Vanilla.MenuMachine",
-    "references": [],
+    "references": [
+        "Vanilla.Toggle",
+        "Vanilla.Normal"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

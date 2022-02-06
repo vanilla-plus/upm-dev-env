@@ -20,7 +20,7 @@ namespace Vanilla.MenuMachine
 
         private void OnValidate()
         {
-            state.OnValidate();
+//            state.OnValidate();
         }
 
 
