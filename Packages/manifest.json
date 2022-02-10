@@ -44,8 +44,7 @@
       "name": "OpenUPM",
       "url": "https://package.openupm.com",
       "scopes": [
-        "com.cysharp",
-        "textus"
+        "com.cysharp"
       ]
     },
     {

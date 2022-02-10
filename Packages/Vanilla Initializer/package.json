@@ -1,7 +1,7 @@
 {
   "name": "vanilla.initializer",
   "displayName": "Vanilla Initializer",
-  "description": "Initializer is a small tool that adds an extra start-up callback to the classic cast of Start/Awake/OnEnable. It runs once per scene load and lets scripts take as long as they need before initialization is considered 'complete'. It even runs on GameObjects that aren't active, a crucial detail missing for Awake/Start/etc.",
+  "description": "[Deprecated] Initializer is a small tool that adds an extra start-up callback to the classic cast of Start/Awake/OnEnable. It runs once per scene load and lets scripts take as long as they need before initialization is considered 'complete'. It even runs on GameObjects that aren't active, a crucial detail missing for Awake/Start/etc.",
   "author": {
     "name": "Lucas Hehir",
     "email": "lucas@vanilla.com",

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
+  m_Name: RemoteConfigDataStoreAsset
+  m_EditorClassIdentifier: 
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"68131eab-2388-41fb-984b-60b553761358\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"manifest\",\r\n      \"type\": \"json\",\r\n     
+    \"schemaId\": null,\r\n      \"value\": {\r\n        \"_initialized\": false,\r\n       
+    \"version\": 347344,\r\n        \"_items\": [\r\n          {\r\n            \"_name\":
+    \"Mars\",\r\n            \"_available\": true,\r\n            \"duration\": 1,\r\n           
+    \"borderColor\": [],\r\n            \"latLong\": [],\r\n            \"rawDataKeyTest\":
+    \"duration\"\r\n          },\r\n          {\r\n            \"_name\": \"Hell\",\r\n           
+    \"_available\": true,\r\n            \"duration\": 5,\r\n            \"borderColor\":
+    [\r\n              0.0,\r\n              0.11999999731779099,\r\n             
+    0.0,\r\n              0.0\r\n            ],\r\n            \"latLong\": [\r\n             
+    8.119999885559082,\r\n              12.399999618530273\r\n            ],\r\n           
+    \"rawDataKeyTest\": \"duration\"\r\n          }\r\n        ]\r\n      }\r\n   
+    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"68131eab-2388-41fb-984b-60b553761358\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"manifest\",\r\n      \"type\": \"json\",\r\n     
+    \"schemaId\": null,\r\n      \"value\": {\r\n        \"_initialized\": false,\r\n       
+    \"version\": 347344,\r\n        \"_items\": [\r\n          {\r\n            \"_name\":
+    \"Mars\",\r\n            \"_available\": true,\r\n            \"duration\": 1,\r\n           
+    \"borderColor\": [],\r\n            \"latLong\": [],\r\n            \"rawDataKeyTest\":
+    \"duration\"\r\n          },\r\n          {\r\n            \"_name\": \"Hell\",\r\n           
+    \"_available\": true,\r\n            \"duration\": 5,\r\n            \"borderColor\":
+    [\r\n              0.0,\r\n              0.11999999731779099,\r\n             
+    0.0,\r\n              0.0\r\n            ],\r\n            \"latLong\": [\r\n             
+    8.119999885559082,\r\n              12.399999618530273\r\n            ],\r\n           
+    \"rawDataKeyTest\": \"duration\"\r\n          }\r\n        ]\r\n      }\r\n   
+    }\r\n  }\r\n]"
+  _environments: "[\r\n  {\r\n    \"projectId\": \"e96092a7-a929-44ae-91a1-4c7661d5136f\",\r\n   
+    \"name\": \"production\",\r\n    \"id\": \"fc9400ca-2183-45aa-b9b6-3885877ade7e\",\r\n   
+    \"isDefault\": true,\r\n    \"createdAt\": \"2022-02-10T07:10:25Z\",\r\n    \"updatedAt\":
+    \"2022-02-10T07:10:25Z\"\r\n  }\r\n]"

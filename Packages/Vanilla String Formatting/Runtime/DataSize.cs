@@ -12,29 +12,28 @@ namespace Vanilla.StringFormatting
 		public const long Eb = Pb * 1024;
 
 
-		public static string AsDataSize(this long bytes)
-		{
-			if (bytes < Kb) return $"{bytes:0.##}b";
+		public static string AsDataSize(this long bytes) => bytes switch
+		                                                    {
+			                                                    < Kb => $"{bytes:0.##}b",
+			                                                    < Mb => $"{(double)bytes / Kb:0.##}Kb",
+			                                                    < Gb => $"{(double)bytes / Mb:0.##}Mb",
+			                                                    < Tb => $"{(double)bytes / Gb:0.##}Gb",
+			                                                    < Pb => $"{(double)bytes / Tb:0.##}Tb",
+			                                                    < Eb => $"{(double)bytes / Pb:0.##}Pb",
+			                                                    _    => $"{(double)bytes / Eb:0.##}Eb"
+		                                                    };
 
-			if (bytes >= Kb &&
-			    bytes < Mb) return $"{(double) bytes / Kb:0.##}Kb";
 
-			if (bytes >= Mb &&
-			    bytes < Gb) return $"{(double) bytes / Mb:0.##}Mb";
-
-			if (bytes >= Gb &&
-			    bytes < Tb) return $"{(double) bytes / Gb:0.##}Gb";
-
-			if (bytes >= Tb &&
-			    bytes < Pb) return $"{(double) bytes / Tb:0.##}Tb";
-
-			if (bytes >= Pb &&
-			    bytes < Eb) return $"{(double) bytes / Pb:0.##}Pb";
-
-			if (bytes >= Eb) return $"{(double) bytes / Eb:0.##}Eb";
-
-			return "a whole bunch";
-		}
+		public static string AsDataSize(this ulong bytes) => bytes switch
+		                                                     {
+			                                                     < Kb => $"{bytes:0.##}b",
+			                                                     < Mb => $"{(double)bytes / Kb:0.##}Kb",
+			                                                     < Gb => $"{(double)bytes / Mb:0.##}Mb",
+			                                                     < Tb => $"{(double)bytes / Gb:0.##}Gb",
+			                                                     < Pb => $"{(double)bytes / Tb:0.##}Tb",
+			                                                     < Eb => $"{(double)bytes / Pb:0.##}Pb",
+			                                                     _    => $"{(double)bytes / Eb:0.##}Eb"
+		                                                     };
 
 	}
 

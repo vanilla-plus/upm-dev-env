@@ -1,0 +1,15 @@
+{
+  "name": "aws.sdk.dotnet",
+  "displayName": "AWS SDK DotNet",
+  "description": "This is a simple upm compatible version of the official AWS SDK for DotNet.",
+  "author": {
+    "name": "Jeff Bezos",
+    "email": "jeff@amazon.com",
+    "url": "https://github.com/aws/aws-sdk-net/"
+  },
+  "repository": "github:aws/aws-sdk-net.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "0.1.0",
+  "type": "template"
+}

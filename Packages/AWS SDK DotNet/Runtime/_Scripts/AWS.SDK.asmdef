@@ -1,14 +1,7 @@
 {
-    "name": "Vanilla.MenuMachine",
-    "rootNamespace": "Vanilla.MenuMachine",
-    "references": [
-        "Vanilla.Toggle",
-        "Vanilla.Normal",
-        "Vanilla.StringFormatting",
-        "UniTask",
-        "Unity.RemoteConfig",
-        "AWS.SDK.DotNet"
-    ],
+    "name": "AWS.SDK.DotNet",
+    "rootNamespace": "AWS.SDK.DotNet",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

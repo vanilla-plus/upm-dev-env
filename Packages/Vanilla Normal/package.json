@@ -14,9 +14,9 @@
   "type": "template",
   "samples": [
     {
-      "displayName": "Sample A",
-      "description": "Sample to demonstrate system A",
-      "path": "Samples~/Sample A"
+      "displayName": "Normal Sample",
+      "description": "Demonstrates some very basic implementations of Normal classes.",
+      "path": "Samples~/Normal Sample"
     }
   ]
 }
