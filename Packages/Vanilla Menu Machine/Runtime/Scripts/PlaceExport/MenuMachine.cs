@@ -22,11 +22,14 @@ namespace Vanilla.MenuMachine
 
 		public static JObject RawData;
 
+		public static Action OnCatalogueInitialized;
+
 		public static Action OnCatalogueFetchBegun;
 		public static Action OnCatalogueFetchFailed;
 		public static Action OnCatalogueFetchSuccess;
-		public static Action OnFirstCatalogueFetchSuccess;
+//		public static Action OnFirstCatalogueFetchSuccess;
 
+		//public static Action<ICatalogueItem> OnNewItem;
 
 		public static async UniTask FetchViaRemoteConfig<C, I>(C catalogue)
 			where C : class, ICatalogue<I>
@@ -144,32 +147,42 @@ namespace Vanilla.MenuMachine
 
 //				Debug.Log(RawData);
 
-				var firstCatalogueFetch = !catalogue.Initialized;
-
-				if (firstCatalogueFetch)
-				{
-					catalogue.Initialized = true;
-
-					await catalogue.Initialize();
-				}
+				await catalogue.PreFetch();
 
 				JsonUtility.FromJsonOverwrite(json: json,
 				                              objectToOverwrite: catalogue);
 
-				await UniTask.Yield();
+				/*
+				if (!catalogue.Initialized)
+				{
+					catalogue.Initialized = true;
 
-				await catalogue.Update();
+					await catalogue.Initialize();
+
+					OnCatalogueInitialized?.Invoke();
+				}
+				*/
 
 				var i = -1;
 
+				var _items = RawData[propertyName: "_items"]?;
+
 				foreach (var newItem in catalogue.Items)
 				{
-					newItem.RawData = RawData[propertyName: "_items"]?[key: ++i];
+					newItem.RawData = _items[key: ++i];
 
 					await newItem.Initialize();
+
+					//OnNewItem?.Invoke(newItem);
 				}
 
-				if (firstCatalogueFetch) OnFirstCatalogueFetchSuccess?.Invoke();
+				//var firstCatalogueFetch = !catalogue.Initialized;
+
+				//await UniTask.Yield();
+
+				await catalogue.PostFetch();
+
+				//if (firstCatalogueFetch) OnFirstCatalogueFetchSuccess?.Invoke();
 
 				OnCatalogueFetchSuccess?.Invoke();
 			}
