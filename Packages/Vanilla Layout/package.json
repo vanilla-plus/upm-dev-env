@@ -1,0 +1,27 @@
+{
+  "name": "vanilla.layout",
+  "displayName": "Vanilla Layout",
+  "description": "This toolkit provides a boilerplate framework for arranging both 2D or 3D collections of objects.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-layout.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample UI Menu",
+      "description": "Demonstrates a basic canvas-based menu",
+      "path": "Samples~/Sample UI Menu"
+    },
+	{
+	  "displayName": "Sample 3D Menu",
+      "description": "Demonstrates a basic transform-based menu",
+      "path": "Samples~/Sample 3D Menu"
+	}
+  ]
+}

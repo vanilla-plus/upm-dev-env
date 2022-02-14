@@ -224,8 +224,14 @@
         "com.cysharp.unitask": "2.2.1"
       }
     },
-    "vanilla.menu-machine": {
-      "version": "file:Vanilla Menu Machine",
+    "vanilla.layout": {
+      "version": "file:Vanilla Layout",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "vanilla.media-library": {
+      "version": "file:Vanilla Media Library",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

@@ -1,0 +1,18 @@
+{
+    "name": "Vanilla.Layout",
+    "rootNamespace": "Vanilla.Layout",
+    "references": [
+        "Vanilla.Toggle",
+        "Vanilla.Normal",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

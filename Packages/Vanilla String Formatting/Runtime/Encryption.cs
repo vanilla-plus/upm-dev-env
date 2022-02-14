@@ -6,9 +6,8 @@ namespace Vanilla.StringFormatting
 	public static class Encryption
 	{
 
-		public static string Xor(this string input,
-		                         int         key) =>
-			new string(input.Select(c => (char) (c ^ key)).ToArray());
+		public static string X(this string input,
+		                       int twist) => new(input.Select(c => (char)(c ^ twist)).ToArray());
 
 	}
 

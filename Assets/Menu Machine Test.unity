@@ -454,33 +454,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1022037161}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 455f8631a97490846b5519b27d0b0ef0, type: 3}
+  m_Script: {fileID: 11500000, guid: 37027d2165d692146a2030708b2a3101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   input: 
-  catalogue:
-    _initialized: 0
-    version: 347344
-    _items:
-    - _name: Mars
-      _available: 1
-      duration: 1
-      borderColor: []
-      latLong: []
-      rawDataKeyTest: duration
-    - _name: Hell
-      _available: 1
-      duration: 5
-      borderColor:
-      - 0
-      - 0.12
-      - 0
-      - 0
-      latLong:
-      - 8.12
-      - 12.4
-      rawDataKeyTest: duration
-  output: '{"_initialized":false,"version":347344,"_items":[{"_name":"Mars","_available":true,"duration":1,"borderColor":[],"latLong":[],"rawDataKeyTest":"duration"},{"_name":"Hell","_available":true,"duration":5,"borderColor":[0.0,0.11999999731779099,0.0,0.0],"latLong":[8.119999885559082,12.399999618530274],"rawDataKeyTest":"duration"}]}'
+  output: 
 --- !u!4 &1022037163
 Transform:
   m_ObjectHideFlags: 0
@@ -643,10 +621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46956e0978980349b8f393dd8430594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  local:
-    _initialized: 0
-    version: 0
-    _items: []
 --- !u!4 &1397892817
 Transform:
   m_ObjectHideFlags: 0
