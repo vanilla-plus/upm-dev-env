@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Vanilla.MediaLibrary
+namespace Vanilla.Layout
 {
 
 	public class MenuBase<M, I> : MonoBehaviour

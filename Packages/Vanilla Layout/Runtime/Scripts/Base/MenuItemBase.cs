@@ -2,9 +2,10 @@ using System;
 
 using UnityEngine;
 
-namespace Vanilla.MediaLibrary
+namespace Vanilla.Layout
 {
 
+    [Serializable]
     public abstract class MenuItemBase<M, I> : MonoBehaviour
         where M : MenuBase<M, I>
         where I : MenuItemBase<M, I>
@@ -30,7 +31,10 @@ namespace Vanilla.MediaLibrary
 
         public static Action<I, I> onNewSelection;
 
+        [SerializeField]
         public Toggle preview;
+
+        [SerializeField]
         public Toggle selected;
 
     }

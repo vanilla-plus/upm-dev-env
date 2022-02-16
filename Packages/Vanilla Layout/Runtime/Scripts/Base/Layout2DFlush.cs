@@ -2,14 +2,12 @@ using System;
 
 using UnityEngine;
 
-namespace Vanilla.MediaLibrary
+namespace Vanilla.Layout
 {
 
 	[Serializable]
-	public class Layout2DFlush : Layout2D<Layout2DFlush>
+	public class Layout2DFlush : Layout2D
 	{
-
-		public Layout2DFlush(LayoutItem2D[] items) : base(items) { }
 
 		[SerializeField]
 		public float topMargin = 25.0f;

@@ -1,14 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Vanilla.MediaLibrary
+namespace Vanilla.Layout
 {
 
 	[Serializable]
-	public class Layout2DHorizontal : Layout2D<Layout2DHorizontal>
+	public class Layout2DHorizontal : Layout2D
 	{
 
 		[SerializeField]
@@ -20,8 +18,6 @@ namespace Vanilla.MediaLibrary
 		[Tooltip("Use this to modify the direction of the layout. -1 will flip the direction entirely.")]
 		[SerializeField]
 		public float offsetScalar = 1.0f;
-
-		protected Layout2DHorizontal(LayoutItem2D[] items) : base(items) { }
 
 
 		public override Vector2 GetPreviousOffset(RectTransform prev) => new(x: offsetScalar * (prev.sizeDelta.x * 0.5f + rightMargin),

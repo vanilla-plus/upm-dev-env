@@ -3,24 +3,24 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Vanilla.MediaLibrary
+namespace Vanilla.Layout
 {
 
 	public interface ILayoutItem<T>
 		where T : Transform
 	{
 
-		T Transform
+		bool IsDirty
 		{
 			get;
-			set;
 		}
-		
-		T Previous
-		{
-			get;
-			set;
-		}
+
+
+//		T Transform
+//		{
+//			get;
+//			set;
+//		}
 
 	}
 
