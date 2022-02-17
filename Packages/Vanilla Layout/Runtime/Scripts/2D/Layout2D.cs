@@ -8,7 +8,7 @@ namespace Vanilla.Layout
 {
 
 	[Serializable]
-	public abstract class Layout2D : LayoutBase<LayoutItem2D, RectTransform, Vector2>
+	public abstract class Layout2D : Layout<ILayoutItem, RectTransform, Vector2>
 	{
 
 		public override void ArrangeItem(RectTransform target,

@@ -1,7 +1,9 @@
 {
     "name": "Vanilla.Pools",
     "rootNamespace": "Vanilla.Pools",
-    "references": [],
+    "references": [
+        "UniTask"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,0 +1,22 @@
+{
+    "name": "Vanilla.MediaLibrary",
+    "rootNamespace": "Vanilla.MediaLibrary",
+    "references": [
+        "Vanilla.Catalogue",
+        "Vanilla.Layout",
+        "Vanilla.Toggle",
+        "Vanilla.Normal",
+        "Vanilla.Easing",
+        "Vanilla.Pools",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -6,7 +6,7 @@ namespace Vanilla.Layout
 {
 
 	[Serializable]
-	public abstract class Layout3D : LayoutBase<LayoutItem3D, Transform, Vector3>
+	public abstract class Layout3D : Layout<ILayoutItem, Transform, Vector3>
 	{
 
 		public override void ArrangeItem(Transform target,

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Vanilla.Layout
 {
-    public class TestLayout2D<L> : TestLayout<L, LayoutItem2D, RectTransform, Vector2>
+    public class TestLayout2D<L> : TestLayout<L, ILayoutItem, RectTransform, Vector2>
         where L : Layout2D
     {
         

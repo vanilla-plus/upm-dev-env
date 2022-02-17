@@ -49,7 +49,7 @@ namespace Vanilla
                 {
                     if (outgoing < Mathf.Epsilon)
                     {
-                        empty.True = false;
+                        empty.State = false;
                     }
 
                     onChange?.Invoke(obj: e);
@@ -58,14 +58,14 @@ namespace Vanilla
 
                     if (1.0f - _value < Mathf.Epsilon)
                     {
-                        full.True = true;
+                        full.State = true;
                     }
                 }
                 else
                 {
                     if (1.0f - outgoing < Mathf.Epsilon)
                     {
-                        full.True = false;
+                        full.State = false;
                     }
 
                     onChange?.Invoke(obj: e);
@@ -74,7 +74,7 @@ namespace Vanilla
 
                     if (_value < Mathf.Epsilon)
                     {
-                        empty.True = true;
+                        empty.State = true;
                     }
                 }
             }
@@ -106,8 +106,8 @@ namespace Vanilla
         {
             _value = Mathf.Clamp01(value: _value);
 
-            empty.True = Value        < Mathf.Epsilon;
-            full.True  = 1.0f - Value < Mathf.Epsilon;
+            empty.State = Value        < Mathf.Epsilon;
+            full.State  = 1.0f - Value < Mathf.Epsilon;
         }
 
 
@@ -133,7 +133,7 @@ namespace Vanilla
             }
             else
             {
-                while ((targetCondition ? conditional.True : !conditional.True) &&
+                while ((targetCondition ? conditional.State : !conditional.State) &&
                        Value < 1.0f)
                 {
                     Value += Time.deltaTime * speed;
@@ -166,7 +166,7 @@ namespace Vanilla
             }
             else
             {
-                while ((targetCondition ? conditional.True : !conditional.True) &&
+                while ((targetCondition ? conditional.State : !conditional.State) &&
                        Value > 0.0f)
                 {
                     Value -= Time.deltaTime * speed;

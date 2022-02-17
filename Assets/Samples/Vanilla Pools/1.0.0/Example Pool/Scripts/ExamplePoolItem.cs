@@ -1,34 +1,32 @@
 using System;
 
+using Cysharp.Threading.Tasks;
+
 using UnityEngine;
 
 namespace Vanilla.Pools.Samples
 {
 
 	[Serializable]
-	public class ExamplePoolItem : PoolItem<ExamplePool, ExamplePoolItem>
+	public class ExamplePoolItem : PoolItem
 	{
 
-		public static ExamplePool _pool;
-		public override ExamplePool Pool
-		{
-			get => _pool;
-			set => _pool = value;
-		}
-
-
-		protected override void OnGet()
+		public override async UniTask OnGet()
 		{
 			var t = transform;
 
 			const float p = 10.0f;
 
+			await UniTask.Delay(500);
+
 			t.localPosition = new Vector3(x: UnityEngine.Random.Range(minInclusive: -p,
-			                                                          maxInclusive:  p),
+			                                                          maxInclusive: p),
 			                              y: UnityEngine.Random.Range(minInclusive: -p,
-			                                                          maxInclusive:  p),
+			                                                          maxInclusive: p),
 			                              z: UnityEngine.Random.Range(minInclusive: -p,
-			                                                          maxInclusive:  p));
+			                                                          maxInclusive: p));
+
+			await UniTask.Delay(500);
 
 			const float e = 360.0f;
 
@@ -38,6 +36,8 @@ namespace Vanilla.Pools.Samples
 			                                                             maxInclusive: e),
 			                                 z: UnityEngine.Random.Range(minInclusive: 0,
 			                                                             maxInclusive: e));
+
+			await UniTask.Delay(500);
 
 			const float sMin = 0.1f;
 			const float sMax = 3.0f;
@@ -51,7 +51,8 @@ namespace Vanilla.Pools.Samples
 		}
 
 
-		protected override void OnRetire() { }
+		public override UniTask OnRetire() => default;
+
 
 		[ContextMenu("Retire Self")]
 		public void RetireSelf() => Retire();

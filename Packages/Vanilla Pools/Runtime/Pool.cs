@@ -5,6 +5,8 @@
 using System;
 using System.Collections.Generic;
 
+using Cysharp.Threading.Tasks;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -19,77 +21,98 @@ namespace Vanilla.Pools
 {
 
 	[Serializable]
-	public class Pool<P, I>
-		where P : Pool<P, I>
-		where I : PoolItem<P, I>
+	public class Pool<PI> : IPool<PI>
+		where PI : MonoBehaviour, IPoolItem
 	{
 
-		public GameObject prefab;
+		[SerializeField] private   int        _total    = 20;
+		[SerializeField] protected List<PI>   _active   = new();
+		[SerializeField] protected List<PI>  _inactive = new();
+		[SerializeField] private   GameObject _prefab;
+		[SerializeField] private   Transform  _inactiveParent;
+		[SerializeField] private   Transform  _activeParent;
 
-		public Transform sceneParent;
+//		[Tooltip(tooltip: "If true, items will be automatically activated on Get and de-activated on Retire.")]
+//		public bool toggleActiveOnAccess = true;
 
-		public int total = 20;
+		public GameObject Prefab
+		{
+			get => _prefab;
+			set => _prefab = value;
+		}
 
-		[Tooltip(tooltip: "If true, items will be automatically activated on Get and de-activated on Retire.")]
-		public bool toggleActiveOnAccess = true;
+		public Transform InactiveParent
+		{
+			get => _inactiveParent;
+			set => _inactiveParent = value;
+		}
 
-		[Tooltip(tooltip: "If true, items will have their root transform reset upon Retire.")]
-		public bool resetTransformOnRetire = true;
+		public Transform ActiveParent
+		{
+			get => _activeParent;
+			set => _activeParent = value;
+		}
 
-		[SerializeField]
-		protected List<I> _available = new();
-		public List<I> Available => _available ??= new List<I>();
-
-		[SerializeField]
-		protected List<I> _inUse = new();
-		public List<I> InUse => _inUse ??= new List<I>();
+		public int       Total    => _total;
+		public List<PI>  Active   => _active ??= new List<PI>();
+//		public Stack<PI> Inactive => _inactive ??= new Stack<PI>();
+		public List<PI> Inactive => _inactive ??= new List<PI>();
 
 
 		public virtual void Fill()
 		{
-			while (Available.Count + InUse.Count < total)
+			while (Active.Count + Inactive.Count < Total)
 			{
-				var newbie = Create();
+				var newItem = Create();
 
-				if (ReferenceEquals(objA: newbie,
+				if (ReferenceEquals(objA: newItem,
 				                    objB: null)) return;
 
-				newbie.gameObject.name = $"{typeof(I).Name} [{Available.Count}]";
+				newItem.gameObject.name = $"{typeof(PI).Name} [{Inactive.Count}]";
 
-				newbie.Pool = this as P;
+				newItem.Pool = this as IPool<IPoolItem>;
 
-				Available.Add(item: newbie);
+				Inactive.Add(item: newItem);
 			}
 		}
 
 
 		#if UNITY_EDITOR
-		public virtual I Create() => ((GameObject)PrefabUtility.InstantiatePrefab(assetComponentOrGameObject: prefab,
-		                                                                          parent: sceneParent)).GetComponent<I>();
+		public virtual PI Create() => ((GameObject) PrefabUtility.InstantiatePrefab(assetComponentOrGameObject: _prefab,
+		                                                                            parent: _inactiveParent)).GetComponentInChildren<PI>(true);
 		#else
-		public virtual I Create() => Object.Instantiate(original: prefab,
+		public virtual PI Create() => Object.Instantiate(original: _prefab,
 		                                                position: Vector3.zero,
 		                                                rotation: Quaternion.identity,
-		                                                parent: sceneParent).GetComponent<I>();
+		                                                parent: _parent).GetComponentInChildren<PI>(true);
 		#endif
 
 
 		public virtual void Drain()
 		{
-			for (var i = Available.Count - 1;
-			     i >= 0;
-			     i--) DestroyItem(item: Available[index: i]);
+			while (Active.Count > 0)
+			{
+				Destroy(item: Active[0]);
+				Active.RemoveAt(0);
+			}
 
-			for (var i = InUse.Count - 1;
-			     i >= 0;
-			     i--) DestroyItem(item: InUse[index: i]);
+//			while (Inactive.Count > 0) Destroy(Inactive.Pop());
 
-			_available = new List<I>(capacity: total);
-			_inUse     = new List<I>(capacity: total);
+			while (Inactive.Count > 0)
+			{
+				var item = Inactive[0];
+				
+				Destroy(item: item);
+				
+				Inactive.RemoveAt(0);
+			}
+
+			_active.Clear();
+			_inactive.Clear();
 		}
 
 
-		private void DestroyItem(I item)
+		public void Destroy(PI item)
 		{
 			if (Application.isPlaying)
 			{
@@ -102,71 +125,72 @@ namespace Vanilla.Pools
 		}
 
 
-		public I Get()
+		public async UniTask<PI> Get()
 		{
-			if (_available.Count < 1)
+			if (Inactive.Count == 0)
 			{
 				#if debug
-				LogWarning($"I'm fresh out of [{typeof(I).Name}]s");
+				LogWarning($"I'm fresh out of [{typeof(PI).Name}]s");
 				#endif
 
 				return null;
 			}
 
-			var item = _available[index: 0];
+//			var item = Inactive.Pop();
 
-			_available.Remove(item: item);
+			var item = Inactive[0];
+			
+			Inactive.RemoveAt(0);
 
-			_inUse.Add(item: item);
+			Active.Add(item: item);
 
 			#if debug
-			LogWarning($"{typeof(I).Name} Get! [{_available.Count}/{total}] available.");
+			LogWarning($"{typeof(PI).Name} Get! [{_inactive.Count}/{_total}] available.");
 			#endif
 
-			if (toggleActiveOnAccess)
-			{
-				item.gameObject.SetActive(value: true);
-			}
+			item.transform.SetParent(_activeParent);
 
-			item.OnGet();
+//			if (toggleActiveOnAccess) item.gameObject.SetActive(value: true);
+
+			await item.OnGet();
 
 			return item;
 		}
 
 
-		public void Retire(I item)
+		public async UniTask Retire(PI item)
 		{
-			if (!_inUse.Contains(item: item)) return;
+			if (!_active.Contains(item: item)) return;
 
-			_inUse.Remove(item: item);
+			_active.Remove(item);
 
-			_available.Add(item: item);
+//			_inactive.Push(item);
+
+			_inactive.Add(item);
 
 			var t = item.transform;
 
-			t.SetParent(p: sceneParent);
+			t.SetParent(p: _inactiveParent);
 
-			if (resetTransformOnRetire)
-			{
-				t.position    = Vector3.zero;
-				t.eulerAngles = Vector3.zero;
-				t.localScale  = Vector3.one;
-			}
+//			if (resetTransformOnRetire)
+//			{
+//				t.position    = Vector3.zero;
+//				t.eulerAngles = Vector3.zero;
+//				t.localScale  = Vector3.one;
+//			}
 
-			if (toggleActiveOnAccess)
-			{
-				item.gameObject.SetActive(value: false);
-			}
+//			if (toggleActiveOnAccess)
+//			{
+//				item.gameObject.SetActive(value: false);
+//			}
 
-			item.OnRetire();
+			await item.OnRetire();
 		}
 
 
-		public virtual void RetireAll()
+		public virtual async UniTask RetireAll()
 		{
-			for (var i = InUse.Count - 1;
-			     i >= 0;
-			     i--) Retire(item: InUse[index: i]);
+			while (Active.Count > 0) await Retire(Active[0]);
 		}
 
 	}

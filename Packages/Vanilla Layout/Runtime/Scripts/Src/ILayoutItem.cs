@@ -6,29 +6,23 @@ using UnityEngine;
 namespace Vanilla.Layout
 {
 
-	public interface ILayoutItem<T>
-		where T : Transform
+	public interface ILayoutItem
 	{
-
-		T Transform
-		{
-			get;
-		}
 
 		Toggle Dirty
 		{
 			get;
 		}
 
-		Toggle Hover
-		{
-			get;
-		}
-
-		Toggle Selected
-		{
-			get;
-		}
+//		Toggle Hover
+//		{
+//			get;
+//		}
+//
+//		Toggle Selected
+//		{
+//			get;
+//		}
 
 
 	}

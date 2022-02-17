@@ -7,8 +7,8 @@ using UnityEngine;
 namespace Vanilla.Layout
 {
 
-	public interface ILayout<out I, T, P>
-		where I : ILayoutItem<T>
+	public interface ILayout<I, T, P>
+		where I : ILayoutItem
 		where T : Transform
 		where P : struct
 	{

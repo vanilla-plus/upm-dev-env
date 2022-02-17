@@ -2,27 +2,30 @@
 #define debug
 #endif
 
+using Cysharp.Threading.Tasks;
+
 using UnityEngine;
 
 namespace Vanilla.Pools
 {
 
-	public abstract class PoolItem<P, I> : MonoBehaviour
-		where P : Pool<P, I>
-		where I : PoolItem<P, I>
+	public abstract class PoolItem : MonoBehaviour,
+	                                 IPoolItem
 	{
 
-		public abstract P Pool
+		[SerializeField] protected IPool<IPoolItem> _pool;
+
+		public IPool<IPoolItem> Pool
 		{
-			get;
-			set;
+			get => _pool;
+			set => _pool = value;
 		}
 
-		protected internal abstract void OnGet();
-		
-		protected internal abstract void OnRetire();
+		public abstract UniTask OnGet();
 
-		public void Retire() => Pool.Retire(item: this as I);
+		public abstract UniTask OnRetire();
+
+		public async UniTask Retire() => await Pool.Retire(item: this);
 
 	}
 

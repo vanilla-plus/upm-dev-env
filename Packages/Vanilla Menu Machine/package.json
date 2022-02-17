@@ -1,0 +1,27 @@
+{
+  "name": "vanilla.media-library",
+  "displayName": "Vanilla Media Library",
+  "description": "This toolkit works with Vanilla Catalogue and Vanilla Layout to create and present dynamic and interactive media collections to users.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-menu-machine.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample UI Menu",
+      "description": "Demonstrates a basic canvas-based menu",
+      "path": "Samples~/Sample UI Menu"
+    },
+    {
+      "displayName": "Sample 3D Menu",
+      "description": "Demonstrates a basic transform-based menu",
+      "path": "Samples~/Sample 3D Menu"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ namespace Vanilla.Pools.Samples
 {
 
 	[Serializable]
-	public class ExamplePool : Pool<ExamplePool, ExamplePoolItem>
+	public class ExamplePool : Pool<ExamplePoolItem>
 	{
 
 		

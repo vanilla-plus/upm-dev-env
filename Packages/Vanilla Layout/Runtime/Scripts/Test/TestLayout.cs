@@ -7,8 +7,8 @@ namespace Vanilla.Layout
 
 	[Serializable]
 	public abstract class TestLayout<L, I, T, P> : MonoBehaviour
-		where L : LayoutBase<I, T, P>
-		where I : LayoutItem<T>
+		where L : Layout<I, T, P>
+		where I : ILayoutItem
 		where T : Transform
 		where P : struct
 	{

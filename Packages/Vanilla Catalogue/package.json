@@ -1,0 +1,22 @@
+{
+  "name": "vanilla.catalogue",
+  "displayName": "Vanilla Catalogue",
+  "description": "This toolkit enables users to easily create Netflix-style content menus.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-media-library.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample Catalogue From Local File",
+      "description": "Demonstrates a simple catalogue setup",
+      "path": "Samples~/Sample Catalogue From Local File"
+    }
+  ]
+}

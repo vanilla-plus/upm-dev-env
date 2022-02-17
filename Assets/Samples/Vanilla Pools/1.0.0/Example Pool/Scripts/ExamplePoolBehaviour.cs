@@ -37,10 +37,10 @@ namespace Vanilla.Pools.Samples
 			}
 			else if (Input.GetKeyDown(retireKey))
 			{
-				if (pool.InUse.Count == 0) return;
+				if (pool.Active.Count == 0) return;
 
-				pool.Retire(item: pool.InUse[Mathf.RoundToInt(f: UnityEngine.Random.Range(minInclusive: 0,
-				                                                                          maxExclusive: pool.InUse.Count - 1))]);
+				pool.Retire(item: pool.Active[Mathf.RoundToInt(f: UnityEngine.Random.Range(minInclusive: 0,
+				                                                                           maxExclusive: pool.Active.Count - 1))]);
 			}
 			else if (Input.GetKeyDown(retireAllKey))
 			{

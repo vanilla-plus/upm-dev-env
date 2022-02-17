@@ -44,7 +44,7 @@ namespace Vanilla
                     if (BitwiseEquals(a: outgoing,
                                       b: 0.0f))
                     {
-                        empty.True = false;
+                        empty.State = false;
                     }
 
                     onChange?.Invoke(obj: _value);
@@ -54,7 +54,7 @@ namespace Vanilla
                     if (BitwiseEquals(a: _value,
                                       b: 1.0f))
                     {
-                        full.True = true;
+                        full.State = true;
                     }
                 }
                 else
@@ -62,7 +62,7 @@ namespace Vanilla
                     if (BitwiseEquals(a: outgoing,
                                       b: 1.0f))
                     {
-                        full.True = false;
+                        full.State = false;
                     }
 
                     onChange?.Invoke(obj: _value);
@@ -72,7 +72,7 @@ namespace Vanilla
                     if (BitwiseEquals(a: _value,
                                       b: 0.0f))
                     {
-                        empty.True = true;
+                        empty.State = true;
                     }
                 }
             }
@@ -104,8 +104,8 @@ namespace Vanilla
         {
             Value = Mathf.Clamp01(value: _value);
 
-            empty.True = Value        < Mathf.Epsilon;
-            full.True  = 1.0f - Value < Mathf.Epsilon;
+            empty.State = Value        < Mathf.Epsilon;
+            full.State  = 1.0f - Value < Mathf.Epsilon;
         }
 
 
@@ -131,7 +131,7 @@ namespace Vanilla
             }
             else
             {
-                while ((targetCondition ? conditional.True : !conditional.True) &&
+                while ((targetCondition ? conditional.State : !conditional.State) &&
                        Value < 1.0f)
                 {
                     Value += Time.deltaTime * speed;
@@ -164,7 +164,7 @@ namespace Vanilla
             }
             else
             {
-                while ((targetCondition ? conditional.True : !conditional.True) &&
+                while ((targetCondition ? conditional.State : !conditional.State) &&
                        Value > 0.0f)
                 {
                     Value -= Time.deltaTime * speed;
