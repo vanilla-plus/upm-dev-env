@@ -12,33 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"68131eab-2388-41fb-984b-60b553761358\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"manifest\",\r\n      \"type\": \"json\",\r\n     
-    \"schemaId\": null,\r\n      \"value\": {\r\n        \"_initialized\": false,\r\n       
-    \"version\": 347344,\r\n        \"_items\": [\r\n          {\r\n            \"_name\":
-    \"Mars\",\r\n            \"_available\": true,\r\n            \"duration\": 1,\r\n           
-    \"borderColor\": [],\r\n            \"latLong\": [],\r\n            \"rawDataKeyTest\":
-    \"duration\"\r\n          },\r\n          {\r\n            \"_name\": \"Hell\",\r\n           
-    \"_available\": true,\r\n            \"duration\": 5,\r\n            \"borderColor\":
-    [\r\n              0.0,\r\n              0.11999999731779099,\r\n             
-    0.0,\r\n              0.0\r\n            ],\r\n            \"latLong\": [\r\n             
-    8.119999885559082,\r\n              12.399999618530273\r\n            ],\r\n           
-    \"rawDataKeyTest\": \"duration\"\r\n          }\r\n        ]\r\n      }\r\n   
-    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"68131eab-2388-41fb-984b-60b553761358\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"manifest\",\r\n      \"type\": \"json\",\r\n     
-    \"schemaId\": null,\r\n      \"value\": {\r\n        \"_initialized\": false,\r\n       
-    \"version\": 347344,\r\n        \"_items\": [\r\n          {\r\n            \"_name\":
-    \"Mars\",\r\n            \"_available\": true,\r\n            \"duration\": 1,\r\n           
-    \"borderColor\": [],\r\n            \"latLong\": [],\r\n            \"rawDataKeyTest\":
-    \"duration\"\r\n          },\r\n          {\r\n            \"_name\": \"Hell\",\r\n           
-    \"_available\": true,\r\n            \"duration\": 5,\r\n            \"borderColor\":
-    [\r\n              0.0,\r\n              0.11999999731779099,\r\n             
-    0.0,\r\n              0.0\r\n            ],\r\n            \"latLong\": [\r\n             
-    8.119999885559082,\r\n              12.399999618530273\r\n            ],\r\n           
-    \"rawDataKeyTest\": \"duration\"\r\n          }\r\n        ]\r\n      }\r\n   
-    }\r\n  }\r\n]"
-  _environments: "[\r\n  {\r\n    \"projectId\": \"e96092a7-a929-44ae-91a1-4c7661d5136f\",\r\n   
-    \"name\": \"production\",\r\n    \"id\": \"fc9400ca-2183-45aa-b9b6-3885877ade7e\",\r\n   
-    \"isDefault\": true,\r\n    \"createdAt\": \"2022-02-10T07:10:25Z\",\r\n    \"updatedAt\":
-    \"2022-02-10T07:10:25Z\"\r\n  }\r\n]"
+  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"85f68510-8e54-4bea-a695-dc83013f1ab7\"\n   
+    },\n    \"rs\": {\n      \"key\": \"manifest\",\n      \"type\": \"json\",\n     
+    \"schemaId\": null,\n      \"value\": {\n        \"_version\": 0,\n        \"_items\":
+    [\n          {\n            \"_name\": \"Antarctica\",\n            \"_available\":
+    true,\n            \"duration\": 500,\n            \"borderColor\": [\n             
+    1.0,\n              1.0,\n              1.0,\n              1.0\n           
+    ],\n            \"latLong\": [\n              -76.274765014648438,\n             
+    22.772115707397461\n            ],\n            \"rawDataKeyTest\": \"duration\"\n         
+    },\n          {\n            \"_name\": \"Borneo\",\n            \"_available\":
+    true,\n            \"duration\": 500,\n            \"borderColor\": [\n             
+    0.5,\n              1.0,\n              0.5,\n              1.0\n           
+    ],\n            \"latLong\": [\n              -1.6898059844970703,\n             
+    113.38179016113281\n            ],\n            \"rawDataKeyTest\": \"duration\"\n         
+    },\n          {\n            \"_name\": \"Costa Rica\",\n            \"_available\":
+    true,\n            \"duration\": 500,\n            \"borderColor\": [\n             
+    0.5,\n              0.5,\n              1.0,\n              1.0\n           
+    ],\n            \"latLong\": [\n              10.453800201416016,\n             
+    -84.75909423828125\n            ],\n            \"rawDataKeyTest\": \"duration\"\n         
+    }\n        ]\n      }\n    }\n  }\n]"
+  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"85f68510-8e54-4bea-a695-dc83013f1ab7\"\n   
+    },\n    \"rs\": {\n      \"key\": \"manifest\",\n      \"type\": \"json\",\n     
+    \"schemaId\": null,\n      \"value\": {\n        \"_version\": 0,\n        \"_items\":
+    [\n          {\n            \"_name\": \"Antarctica\",\n            \"_available\":
+    true,\n            \"duration\": 500,\n            \"borderColor\": [\n             
+    1.0,\n              1.0,\n              1.0,\n              1.0\n           
+    ],\n            \"latLong\": [\n              -76.274765014648438,\n             
+    22.772115707397461\n            ],\n            \"rawDataKeyTest\": \"duration\"\n         
+    },\n          {\n            \"_name\": \"Borneo\",\n            \"_available\":
+    true,\n            \"duration\": 500,\n            \"borderColor\": [\n             
+    0.5,\n              1.0,\n              0.5,\n              1.0\n           
+    ],\n            \"latLong\": [\n              -1.6898059844970703,\n             
+    113.38179016113281\n            ],\n            \"rawDataKeyTest\": \"duration\"\n         
+    },\n          {\n            \"_name\": \"Costa Rica\",\n            \"_available\":
+    true,\n            \"duration\": 500,\n            \"borderColor\": [\n             
+    0.5,\n              0.5,\n              1.0,\n              1.0\n           
+    ],\n            \"latLong\": [\n              10.453800201416016,\n             
+    -84.75909423828125\n            ],\n            \"rawDataKeyTest\": \"duration\"\n         
+    }\n        ]\n      }\n    }\n  }\n]"
+  _environments: "[\n  {\n    \"projectId\": \"e96092a7-a929-44ae-91a1-4c7661d5136f\",\n   
+    \"name\": \"production\",\n    \"id\": \"fc9400ca-2183-45aa-b9b6-3885877ade7e\",\n   
+    \"isDefault\": true,\n    \"createdAt\": \"2022-02-10T07:10:25Z\",\n    \"updatedAt\":
+    \"2022-02-10T07:10:25Z\"\n  }\n]"

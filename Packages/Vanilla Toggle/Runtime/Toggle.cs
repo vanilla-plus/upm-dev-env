@@ -10,19 +10,19 @@ namespace Vanilla
     {
 
         [SerializeField]
-        private bool _true;
-        public bool True
+        private bool _state;
+        public bool State
         {
-            get => _true;
+            get => _state;
             set
             {
-                if (_true == value) return;
+                if (_state == value) return;
 
-                _true = value;
+                _state = value;
 
-                onChange?.Invoke(_true);
+                onChange?.Invoke(_state);
 
-                if (_true)
+                if (_state)
                 {
                     onTrue?.Invoke();
                 }
@@ -38,13 +38,16 @@ namespace Vanilla
         public Action onTrue;
         public Action onFalse;
 
-        public Toggle(bool startingState) => _true = startingState;
+        public Toggle(bool startingState) => _state = startingState;
 
 
         public static implicit operator bool(Toggle toggle) => toggle is
                                                                {
-                                                                   True: true
+                                                                   State: true
                                                                };
+
+
+        public void Flip() => State = !_state;
 
     }
 
