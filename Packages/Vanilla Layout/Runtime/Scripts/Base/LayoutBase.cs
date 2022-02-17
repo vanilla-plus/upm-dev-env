@@ -10,7 +10,7 @@ namespace Vanilla.Layout
 
 	[Serializable]
 	public abstract class LayoutBase<I, T, P> : ILayout<I, T, P>
-		where I : Component, ILayoutItem<T>
+		where I : LayoutItem<T>
 		where T : Transform
 		where P : struct
 	{
@@ -49,26 +49,8 @@ namespace Vanilla.Layout
 			set => _onArrangeComplete = value;
 		}
 
-//
-//		public LayoutBase() => OnArrangeComplete += () =>
-//		                                            {
-//			                                            foreach (var t in _transforms)
-//			                                            {
-//				                                            t.hasChanged = false;
-//			                                            }
-//		                                            };
-
-
 		public void Populate(Transform parent)
 		{
-			OnArrangeComplete += () =>
-			                     {
-				                     foreach (var t in _transforms)
-				                     {
-					                     t.hasChanged = false;
-				                     }
-			                     };
-			
 			var count = parent.childCount;
 
 			_items      = new I[count];
@@ -82,24 +64,23 @@ namespace Vanilla.Layout
 
 				_items[i]      = t.GetComponent<I>();
 				_transforms[i] = t as T;
-				
-//				_items[i].Transform = parent.GetChild(index: i) as T;
+
+				_items[i].Dirty.onTrue += AttemptArrange;
 			}
 		}
-
 
 		public void ArrangeItems()
 		{
 			if (_transforms        == null
 			 || _transforms.Length == 0) return;
 
-			ArrangeItem(target: _transforms[0],
+			T prev    = _transforms[0];
+			T current = prev;
+			
+			ArrangeItem(target: current,
 			            position: GetInitialPosition());
 
 			if (_transforms.Length == 1) return;
-
-			T current = null;
-			T prev    = _transforms[0];
 
 			for (var i = 1;
 			     i < _transforms.Length;
@@ -125,7 +106,7 @@ namespace Vanilla.Layout
 			ArrangeAsync();
 		}
 		
-		public async UniTask ArrangeAsync()
+		protected async UniTask ArrangeAsync()
 		{
 			OnArrangeBegun?.Invoke();
 
@@ -137,30 +118,13 @@ namespace Vanilla.Layout
 			}
 			while (ArrangementRequired());
 
-			await UniTask.Yield();
-
-			await UniTask.Delay(500);
-
-			foreach (var t in Transforms) t.hasChanged = false;
-
 			OnArrangeComplete?.Invoke();
 
 			_arrangementInProgress = false;
 		}
 
 
-//		public bool ArrangementRequired() => _items.Any(i => i.IsDirty);
-		public bool ArrangementRequired() => _transforms.Any(t => t.hasChanged); // Does this work the same as a dirty flag but automatically?
-
-		/* From Catlike
-		Transform has a hasChanged property which is set to true whenever one of its values is changed.
-		So it is useful to check whether the position, rotation, or scale has been modified since the last time you checked.
-
-		However, nobody sets hasChanged back to false, because there is no universal moment when this should happen. It is up to you to reset it.
-		*/
-		
-		// ToDo - swap back to your own custom IsDirty flag, or mess around trying to understand hasChanged. It doesn't actually seem to work,
-		// ToDo - even if you do follow the above advice.
+		public bool ArrangementRequired() => _items.Any(i => i.Dirty);
 
 		public abstract void ArrangeItem(T target,
 		                                 P position);

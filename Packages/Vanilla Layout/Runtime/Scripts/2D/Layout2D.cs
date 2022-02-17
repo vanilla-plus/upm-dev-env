@@ -24,26 +24,7 @@ namespace Vanilla.Layout
 
 
 
-		public async UniTask AnimateTest()
-		{
-			var i = 0.0f;
 
-			while (i < 1.0f)
-			{
-				i += Time.deltaTime * 0.25f;
-
-				_transforms[1].sizeDelta = new Vector2(x: Mathf.Lerp(a: 0,
-				                                                     b: 100,
-				                                                     t: i),
-				                                       y: 100);
-
-				await UniTask.Yield();
-			}
-
-			i = 1.0f;
-
-
-		}
 
 	}
 

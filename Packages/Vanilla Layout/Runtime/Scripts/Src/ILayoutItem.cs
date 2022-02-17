@@ -10,17 +10,26 @@ namespace Vanilla.Layout
 		where T : Transform
 	{
 
-		bool IsDirty
+		T Transform
 		{
 			get;
 		}
 
+		Toggle Dirty
+		{
+			get;
+		}
 
-//		T Transform
-//		{
-//			get;
-//			set;
-//		}
+		Toggle Hover
+		{
+			get;
+		}
+
+		Toggle Selected
+		{
+			get;
+		}
+
 
 	}
 

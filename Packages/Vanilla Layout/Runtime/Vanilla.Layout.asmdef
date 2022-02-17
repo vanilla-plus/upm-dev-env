@@ -4,6 +4,7 @@
     "references": [
         "Vanilla.Toggle",
         "Vanilla.Normal",
+        "Vanilla.Easing",
         "UniTask"
     ],
     "includePlatforms": [],
