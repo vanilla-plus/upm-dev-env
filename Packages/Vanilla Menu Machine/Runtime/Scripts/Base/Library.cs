@@ -11,7 +11,7 @@ namespace Vanilla.MediaLibrary
 
 	[Serializable]
 	public abstract class Library<C, CI, LI, L, LOI, P, T, S> : MonoBehaviour,
-	                                                       ILibrary<C, CI, LI, L, LOI, P, T, S>
+		                                                       ILibrary<C, CI, LI, L, LOI, P, T, S>
 		where C : Catalogue<CI>
 		where CI : CatalogueItem
 		where LI : LibraryItem<CI, T>, LOI, IPoolItem
@@ -22,8 +22,10 @@ namespace Vanilla.MediaLibrary
 		where S : struct
 	{
 
-		[SerializeField] private   C _catalogue;
-		[SerializeField] private   L _layout;
+		public string fallbackJson;
+
+		[SerializeField] protected C _catalogue;
+		[SerializeField] protected L _layout;
 		[SerializeField] protected P _pool;
 
 		public C Catalogue
@@ -35,10 +37,29 @@ namespace Vanilla.MediaLibrary
 		public L Layout    => _layout;
 		public P Pool      => _pool;
 
+		/*
+		Okay! Got some good ideas here. This Library class should have a couple of extra permutations:
+
+		- Ecosphere-like
+			- LibraryItem places itself (based on latlong)
+			- Doesn't require arranging / dirty flag / 
+			- Solution? Library shouldn't assume theres a layout. ArrangedLibrary should be a subclass/interface?
+
+		- Non-GameObject based
+			- LibraryItems arent represented with individual GameObjects
+			- Also doesn't require arranging
+			- Solution? Library shouldn't assume theres a pool. PooledLibrary should be a subclass/interface?
+
+		- 
+
+		*/
 
 		protected virtual void Awake()
 		{
 			CatalogueBuilder.OnCatalogueFetchSuccess += HandleNewCatalogue;
+			
+			CatalogueBuilder.FetchViaRemoteConfig<C,CI>(Catalogue,
+														fallbackJson);
 
 			// The CatalogueBuilder should probably have already run by this point.
 			// It should be one of the first things that happens.
@@ -53,12 +74,10 @@ namespace Vanilla.MediaLibrary
 		protected virtual async void HandleNewCatalogue()
 		{
 			foreach (var i in Catalogue.Items)
-			{
-				Debug.LogError("What");
-				
+			{				
 				var item = await _pool.Get();
 
-				item.CatalogueItem = i;
+				await item.Populate(i);
 			}
 
 			_layout.Populate(parent: _pool.ActiveParent);
