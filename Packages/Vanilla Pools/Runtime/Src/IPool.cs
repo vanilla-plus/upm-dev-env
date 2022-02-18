@@ -15,11 +15,6 @@ namespace Vanilla.Pools
 		int Total
 		{
 			get;
-		}
-
-		GameObject Prefab
-		{
-			get;
 			set;
 		}
 
@@ -28,7 +23,7 @@ namespace Vanilla.Pools
 			get;
 			set;
 		}
-		
+
 		Transform ActiveParent
 		{
 			get;
@@ -48,14 +43,14 @@ namespace Vanilla.Pools
 		UniTask<PI> Get();
 
 		UniTask Retire(PI item);
-		
-		PI Create();
 
-		void Destroy(PI item);
-		
-		void Fill();
+		UniTask<PI> CreateNewItem();
 
-		void Drain();
+		void DestroyItem(PI item);
+
+		UniTask CreateAll();
+
+		void DestroyAll();
 
 		UniTask RetireAll();
 

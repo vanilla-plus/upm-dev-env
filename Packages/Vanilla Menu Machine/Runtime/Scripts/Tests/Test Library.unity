@@ -1300,6 +1300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5989fd6b075d471998c1077036487c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fallbackJson: 
   _catalogue:
     _version: 0
     _items: []

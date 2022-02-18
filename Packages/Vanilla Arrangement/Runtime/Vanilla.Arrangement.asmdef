@@ -1,0 +1,19 @@
+{
+    "name": "Vanilla.Arrangement",
+    "rootNamespace": "Vanilla.Arrangement",
+    "references": [
+        "Vanilla.Toggle",
+        "Vanilla.Normal",
+        "Vanilla.Easing",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

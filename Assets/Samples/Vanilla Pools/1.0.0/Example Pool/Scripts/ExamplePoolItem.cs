@@ -55,8 +55,8 @@ namespace Vanilla.Pools.Samples
 
 
 		[ContextMenu("Retire Self")]
-		public void RetireSelf() => Retire();
-		
+		public void RetireSelfImp() => RetireSelf();
+
 	}
 
 }

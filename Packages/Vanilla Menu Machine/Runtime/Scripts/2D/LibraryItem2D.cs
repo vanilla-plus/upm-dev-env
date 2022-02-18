@@ -18,14 +18,6 @@ namespace Vanilla.MediaLibrary
 
 	{
 
-		public override UniTask OnGet() => default;
-
-		public override UniTask OnRetire() => default;
-
-
-		public override UniTask Retire() => default;
-
-
 		protected override void Awake()
 		{
 			base.Awake();

@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-
 using Cysharp.Threading.Tasks;
-
-using UnityEngine;
 
 namespace Vanilla.Pools
 {
@@ -11,6 +6,12 @@ namespace Vanilla.Pools
 	public interface IPoolItem
 	{
 
+		bool LeasedFromPool
+		{
+			get;
+			set;
+		}
+		
 		IPool<IPoolItem> Pool
 		{
 			get;
@@ -21,7 +22,7 @@ namespace Vanilla.Pools
 
 		UniTask OnRetire();
 
-		UniTask Retire();
+		UniTask RetireSelf();
 
 	}
 

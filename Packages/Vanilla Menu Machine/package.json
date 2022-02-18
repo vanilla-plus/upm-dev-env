@@ -23,5 +23,8 @@
       "description": "Demonstrates a basic transform-based menu",
       "path": "Samples~/Sample 3D Menu"
     }
-  ]
+  ],
+  "dependencies": {
+    "vanilla.arrangement": "1.0.0"
+  }
 }

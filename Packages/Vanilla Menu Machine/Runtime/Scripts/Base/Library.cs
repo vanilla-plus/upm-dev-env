@@ -1,41 +1,33 @@
 using System;
 
+using Cysharp.Threading.Tasks;
+
 using UnityEngine;
 
 using Vanilla.Catalogue;
-using Vanilla.Layout;
 using Vanilla.Pools;
 
 namespace Vanilla.MediaLibrary
 {
 
 	[Serializable]
-	public abstract class Library<C, CI, LI, L, LOI, P, T, S> : MonoBehaviour,
-		                                                       ILibrary<C, CI, LI, L, LOI, P, T, S>
+	public abstract class Library<C, CI, PO, LI, T> : MonoBehaviour,
+	                                                 ILibrary<C, CI, PO, LI, T>
+
 		where C : Catalogue<CI>
 		where CI : CatalogueItem
-		where LI : LibraryItem<CI, T>, LOI, IPoolItem
-		where L : Layout<LOI, T, S>
-		where LOI : ILayoutItem
-		where P : Pool<LI>
+		where PO : Pool<LI>
+		where LI : LibraryItem<CI, T>, IPoolItem
 		where T : Transform
-		where S : struct
 	{
 
 		public string fallbackJson;
 
 		[SerializeField] protected C _catalogue;
-		[SerializeField] protected L _layout;
-		[SerializeField] protected P _pool;
+		[SerializeField] protected PO _pool;
 
-		public C Catalogue
-		{
-			get => _catalogue;
-			set => _catalogue = value;
-		}
-
-		public L Layout    => _layout;
-		public P Pool      => _pool;
+		public C Catalogue => _catalogue;
+		public PO Pool      => _pool;
 
 		/*
 		Okay! Got some good ideas here. This Library class should have a couple of extra permutations:
@@ -54,12 +46,13 @@ namespace Vanilla.MediaLibrary
 
 		*/
 
+
 		protected virtual void Awake()
 		{
-			CatalogueBuilder.OnCatalogueFetchSuccess += HandleNewCatalogue;
-			
-			CatalogueBuilder.FetchViaRemoteConfig<C,CI>(Catalogue,
-														fallbackJson);
+			CatalogueBuilder.OnCatalogueFetchSuccess += HandleCatalogueFetchSuccess;
+
+			CatalogueBuilder.FetchViaRemoteConfig<C, CI>(Catalogue,
+			                                             fallbackJson);
 
 			// The CatalogueBuilder should probably have already run by this point.
 			// It should be one of the first things that happens.
@@ -71,18 +64,17 @@ namespace Vanilla.MediaLibrary
 		}
 
 
-		protected virtual async void HandleNewCatalogue()
+		public virtual void HandleCatalogueFetchSuccess() => Construct();
+
+
+		public virtual async UniTask Construct()
 		{
 			foreach (var i in Catalogue.Items)
-			{				
+			{
 				var item = await _pool.Get();
 
 				await item.Populate(i);
 			}
-
-			_layout.Populate(parent: _pool.ActiveParent);
-			
-			_layout.AttemptArrange();
 		}
 
 	}

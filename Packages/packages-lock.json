@@ -140,6 +140,12 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "vanilla.arrangement": {
+      "version": "file:Vanilla Arrangement",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "vanilla.ballistics": {
       "version": "file:Vanilla Ballistics",
       "depth": 0,
@@ -230,17 +236,13 @@
         "com.cysharp.unitask": "2.2.1"
       }
     },
-    "vanilla.layout": {
-      "version": "file:Vanilla Layout",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "vanilla.media-library": {
       "version": "file:Vanilla Menu Machine",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {}
+      "dependencies": {
+        "vanilla.arrangement": "1.0.0"
+      }
     },
     "vanilla.normal": {
       "version": "file:Vanilla Normal",
@@ -261,6 +263,12 @@
       "dependencies": {
         "vanilla.string-formatting": "1.0.0"
       }
+    },
+    "vanilla.pointer-redirect": {
+      "version": "file:Vanilla Pointer Redirect",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
     },
     "vanilla.pools": {
       "version": "file:Vanilla Pools",

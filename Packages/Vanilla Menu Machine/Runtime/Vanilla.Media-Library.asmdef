@@ -3,12 +3,13 @@
     "rootNamespace": "Vanilla.MediaLibrary",
     "references": [
         "Vanilla.Catalogue",
-        "Vanilla.Layout",
+        "Vanilla.Arrangement",
         "Vanilla.Toggle",
         "Vanilla.Normal",
         "Vanilla.Easing",
         "Vanilla.Pools",
-        "UniTask"
+        "UniTask",
+        "Vanilla.PointerRedirect"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
