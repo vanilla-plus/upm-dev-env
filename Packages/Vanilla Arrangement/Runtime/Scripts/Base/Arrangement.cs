@@ -35,6 +35,7 @@ namespace Vanilla.Arrangement
 		private bool _arrangementInProgress = false;
 		public bool ArrangementInProgress => _arrangementInProgress;
 
+		
 		private Action _onArrangeBegun;
 		public Action OnArrangeBegun
 		{
@@ -65,11 +66,17 @@ namespace Vanilla.Arrangement
 				_items[i]      = t.GetComponent<I>();
 				_transforms[i] = t as T;
 
-				_items[i].Dirty.onTrue += AttemptArrange;
+				// This is where the magic happens.
+				// When an arrangement item marks itself as dirty, the arrangement will automatically hear about it
+				// and start arranging until there isn't a single item marked dirty.
+				// In this way, the responsibility is on each item to flag itself as dirty if it does something that
+				// might disrupt the arrangement and unflag itself when it has stopped.
+				
+				_items[i].ArrangementDirty.onTrue += InvokeArrangement;
 			}
 		}
 
-		public void ArrangeItems()
+		public virtual void ArrangeFrame()
 		{
 			if (_transforms        == null
 			 || _transforms.Length == 0) return;
@@ -96,8 +103,7 @@ namespace Vanilla.Arrangement
 			}
 		}
 
-
-		public void AttemptArrange()
+		public void InvokeArrangement()
 		{
 			if (_arrangementInProgress) return;
 
@@ -106,13 +112,13 @@ namespace Vanilla.Arrangement
 			ArrangeAsync();
 		}
 		
-		protected async UniTask ArrangeAsync()
+		private async UniTask ArrangeAsync()
 		{
 			OnArrangeBegun?.Invoke();
 
 			do
 			{
-				ArrangeItems();
+				ArrangeFrame();
 
 				await UniTask.Yield();
 			}
@@ -124,7 +130,8 @@ namespace Vanilla.Arrangement
 		}
 
 
-		public bool ArrangementRequired() => _items.Any(i => i.Dirty);
+		public bool ArrangementRequired() => _items.Any(i => i.ArrangementDirty);
+
 
 		public abstract void ArrangeItem(T target,
 		                                 P position);

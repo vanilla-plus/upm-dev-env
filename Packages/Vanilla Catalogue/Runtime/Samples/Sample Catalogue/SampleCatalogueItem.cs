@@ -39,7 +39,7 @@ namespace Vanilla.Catalogue.Samples
 
         public override async UniTask Initialize()
         {
-            await UniTask.Delay(500);
+//            await UniTask.Delay(500);
 
             Debug.Log($"{_name} Initialized! Here, have some adhoc data matching the key [{rawDataKeyTest}] => [{RawData[rawDataKeyTest]}]");
         }

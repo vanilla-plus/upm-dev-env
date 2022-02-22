@@ -12,16 +12,13 @@ namespace Vanilla.Pools
 {
 
 	[Serializable]
-	public abstract class DirectPrefabPool<PI> : Pool<PI>
-		where PI : PoolItem
+	public class DirectPrefabPool<PI> : Pool<PI>
+		where PI : MonoBehaviour, IPoolItem
 	{
 
 		[SerializeField] protected GameObject _prefab;
 		public                     GameObject Prefab => _prefab;
-
-		#if !UNITY_EDITOR
-
-		#else
+		
 		public override UniTask<PI> CreateNewItem()
 		{
 			#if UNITY_EDITOR
@@ -34,7 +31,6 @@ namespace Vanilla.Pools
 
 			return new UniTask<PI>(result: output.GetComponentInChildren<PI>(includeInactive: true));
 		}
-		#endif
 
 
 		public override void DestroyItem(PI item) { }

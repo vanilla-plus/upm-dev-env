@@ -17,7 +17,7 @@ namespace Vanilla.Catalogue
 		[Range(min: -1, 
 		       max: 100)]
 		[SerializeField]
-		private int _version;
+		private int _version = -1;
 		public int Version => _version;
 		
 		private JObject _rawData;

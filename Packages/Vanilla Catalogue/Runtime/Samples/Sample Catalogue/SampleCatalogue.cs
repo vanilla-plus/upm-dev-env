@@ -18,7 +18,7 @@ namespace Vanilla.Catalogue.Samples
         {
             Log(message: "Sample catalogue handling initialization...");
 
-            await UniTask.Delay(millisecondsDelay: 500);
+//            await UniTask.Delay(millisecondsDelay: 500);
 
             Log(message: "Done!");
         }
@@ -28,7 +28,7 @@ namespace Vanilla.Catalogue.Samples
         {
             Log(message: "Sample catalogue handling pre-fetch...");
 
-            await UniTask.Delay(millisecondsDelay: 500);
+//            await UniTask.Delay(millisecondsDelay: 500);
 
             Log(message: "Done!");
         }
@@ -38,7 +38,7 @@ namespace Vanilla.Catalogue.Samples
         {
             Log(message: "Sample catalogue handling post-fetch...");
 
-            await UniTask.Delay(millisecondsDelay: 500);
+//            await UniTask.Delay(millisecondsDelay: 500);
 
             Log(message: "Done!");
 

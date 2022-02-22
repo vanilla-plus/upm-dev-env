@@ -12,14 +12,13 @@ namespace Vanilla.MediaLibrary
 {
 
 	[Serializable]
-	public class ArrangedLibrary<C, CI, PO, LI, T, A, P> : Library<C, CI, PO, LI, T>,
-	                                                       IArrangedLibrary<C, CI, PO, LI, T, A, P>
+	public abstract class ArrangedLibrary<C, CI, LI, PO, T, A, P> : Library<C, CI, LI, PO, T>
 		where C : Catalogue<CI>
 		where CI : CatalogueItem
+		where LI : ArrangedLibraryItem<LI, CI, T>
 		where PO : Pool<LI>
-		where LI : LibraryItem<CI, T>, IPoolItem, IArrangementItem
 		where T : Transform
-		where A : IArrangement<LI, T, P>
+		where A : Arrangement<LI, T, P>
 		where P : struct
 	{
 
@@ -33,7 +32,7 @@ namespace Vanilla.MediaLibrary
 
 			_arrangement.Populate(parent: _pool.ActiveParent);
 
-			_arrangement.AttemptArrange();
+			_arrangement.InvokeArrangement();
 		}
 
 	}

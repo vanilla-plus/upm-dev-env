@@ -151,7 +151,7 @@ namespace Vanilla.Catalogue
 //				RawData ??= JObject.Parse(json: json);
 
 				var incomingData = JObject.Parse(json: json);
-
+				
 				if (!incomingData.HasValues)
 				{
 					OnCatalogueFetchFailed?.Invoke();
@@ -171,19 +171,22 @@ namespace Vanilla.Catalogue
 				}
 
 				Debug.Log($"Catalogue update available! [{_CurrentCatalogueVersion}] => [{incomingCatalogueVersion}]");
-					
+				
 				_CurrentCatalogueVersion = incomingCatalogueVersion;
 
-				RawData                  = incomingData;
+				RawData = JObject.Parse(json: json);
+
+//				RawData                  = incomingData;
 
 				await catalogue.PreFetch();
 
 				JsonUtility.FromJsonOverwrite(json: json,
 				                              objectToOverwrite: catalogue);
-
+				
 				var i = -1;
-
-				var items = RawData[propertyName: "_items"];
+				
+				var items                    = RawData[propertyName: "_items"];
+//				var items = RawData.Value<I[]>("_items");
 
 				if (items == null)
 				{

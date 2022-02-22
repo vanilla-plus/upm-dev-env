@@ -6,7 +6,8 @@ namespace Vanilla.Arrangement
 {
 
 	[Serializable]
-	public abstract class Arrangement3D : Arrangement<IArrangementItem, Transform, Vector3>
+	public abstract class Arrangement3D<I> : Arrangement<I, Transform, Vector3>
+		where I : IArrangementItem
 	{
 
 		public override void ArrangeItem(Transform target,

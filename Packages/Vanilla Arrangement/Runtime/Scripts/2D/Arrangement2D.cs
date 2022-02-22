@@ -1,14 +1,13 @@
 using System;
 
-using Cysharp.Threading.Tasks;
-
 using UnityEngine;
 
 namespace Vanilla.Arrangement
 {
 
 	[Serializable]
-	public abstract class Arrangement2D : Arrangement<IArrangementItem, RectTransform, Vector2>
+	public abstract class Arrangement2D<I> : Arrangement<I, RectTransform, Vector2>
+		where I : IArrangementItem
 	{
 
 		public override void ArrangeItem(RectTransform target,

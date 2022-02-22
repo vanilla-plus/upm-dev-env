@@ -12,12 +12,14 @@ namespace Vanilla.MediaLibrary
     {
 
         [SerializeField] private Toggle _toggle;
-        public                   Toggle toggle => _toggle;
 
         [SerializeField] private Normal _normal;
-        public                   Normal normal => _normal;
+        public                   Toggle Toggle => _toggle;
+        public                   Normal Normal => _normal;
+        
+        public                   float  seconds = 1.0f;
 
-        [SerializeField] public float speed = 2.0f;
+         private float _speed = 1.0f;
 
         public State(bool startingState,
                      float startingValue)
@@ -28,15 +30,18 @@ namespace Vanilla.MediaLibrary
         }
 
 
+        internal void OnValidate() => _speed = 1.0f / seconds;
+
+
         public void Init()
         {
             _toggle.onTrue += () => _normal.Fill(conditional: _toggle,
                                                  targetCondition: true,
-                                                 speed: speed);
+                                                 speed: _speed);
 
             _toggle.onFalse += () => _normal.Drain(conditional: _toggle,
                                                    targetCondition: false,
-                                                   speed: speed);
+                                                   speed: _speed);
         }
 
     }

@@ -9,7 +9,7 @@ namespace Vanilla.Arrangement
 	public interface IArrangementItem
 	{
 
-		Toggle Dirty
+		Toggle ArrangementDirty
 		{
 			get;
 		}

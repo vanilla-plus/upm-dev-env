@@ -32,13 +32,13 @@ namespace Vanilla.Arrangement
 
 		void Populate(Transform parent);
 
-		void AttemptArrange();
+		void InvokeArrangement();
 		
-		void ArrangeItems();
+		void ArrangeFrame();
 
 
-		void ArrangeItem(T target,
-		                 P position);
+		public void ArrangeItem(T target,
+		                        P position);
 
 
 		P GetInitialPosition() => default;
