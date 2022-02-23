@@ -7,18 +7,18 @@ namespace Vanilla.Arrangement
 
 	[Serializable]
 	public abstract class Arrangement3D<I> : Arrangement<I, Transform, Vector3>
-		where I : IArrangementItem
+		where I : class, IArrangementItem<Transform>
 	{
 
-		public override void ArrangeItem(Transform target,
-		                                 Vector3 position) => target.localPosition = position;
+		public override void ArrangeItem(I current,
+		                                 Vector3 position) => current.Transform.localPosition = position;
 
 
-		public override Vector3 GetInitialPosition() => _transforms[0].localPosition;
+		public override Vector3 GetInitialPosition(I current) => current.Transform.localPosition;
 
 
-		public override Vector3 GetNewPosition(Transform prev,
-		                                       Transform current) => prev.localPosition + GetPreviousOffset(prev: prev) + GetCurrentOffset(current: current);
+		public override Vector3 GetNewPosition(I prev,
+		                                       I current) => prev.Transform.localPosition + GetPreviousOffset(prev: prev) + GetCurrentOffset(current: current);
 
 
 

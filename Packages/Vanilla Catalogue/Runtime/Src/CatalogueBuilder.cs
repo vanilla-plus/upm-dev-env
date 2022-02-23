@@ -36,6 +36,8 @@ namespace Vanilla.Catalogue
 
 		#if RemoteConfigInstalled
 		public static async UniTask FetchViaRemoteConfig<C, I>(C catalogue,
+		                                                       string rootKey,
+		                                                       string itemArrayKey,
 		                                                       string fallback)
 			where C : class, ICatalogue<I>
 			where I : class, ICatalogueItem
@@ -58,10 +60,11 @@ namespace Vanilla.Catalogue
 
 				RawData = ConfigManager.appConfig.config.First as JObject;
 
-				var json = ConfigManager.appConfig.GetJson(key: "manifest",
+				var json = ConfigManager.appConfig.GetJson(key: rootKey,
 				                                           defaultValue: fallback);
 
 				await FetchViaJson<C, I>(catalogue: catalogue,
+				                         itemArrayKey: itemArrayKey,
 				                         json: json);
 			}
 			catch (Exception e)
@@ -75,6 +78,7 @@ namespace Vanilla.Catalogue
 
 
 		public static async UniTask FetchViaWebRequest<C, I>(C catalogue,
+		                                                     string itemArrayKey,
 		                                                     string url)
 			where C : class, ICatalogue<I>
 			where I : class, ICatalogueItem
@@ -100,6 +104,7 @@ namespace Vanilla.Catalogue
 				}
 
 				await FetchViaJson<C, I>(catalogue: catalogue,
+				                         itemArrayKey: itemArrayKey,
 				                         json: request.downloadHandler.text);
 			}
 			catch (Exception e)
@@ -112,6 +117,7 @@ namespace Vanilla.Catalogue
 
 
 		public static async UniTask FetchViaLocalFile<C, I>(C catalogue,
+		                                                    string itemArrayKey,
 		                                                    string path)
 			where C : class, ICatalogue<I>
 			where I : class, ICatalogueItem
@@ -121,6 +127,7 @@ namespace Vanilla.Catalogue
 				var json = await File.ReadAllTextAsync(path: path);
 
 				await FetchViaJson<C, I>(catalogue: catalogue,
+				                         itemArrayKey: itemArrayKey,
 				                         json: json);
 			}
 			catch (Exception e)
@@ -132,13 +139,16 @@ namespace Vanilla.Catalogue
 		}
 
 
-		public static async UniTask FetchViaEditor<C, I>(CatalogueEditor<C, I> editor)
+		public static async UniTask FetchViaEditor<C, I>(CatalogueEditor<C, I> editor,
+		                                                 string itemArrayKey)
 			where C : class, ICatalogue<I>
 			where I : class, ICatalogueItem => await FetchViaJson<C, I>(catalogue: editor.catalogue,
+			                                                            itemArrayKey: itemArrayKey,
 			                                                            json: editor.output);
 
 
 		public static async UniTask FetchViaJson<C, I>(C catalogue,
+		                                               string itemArrayKey,
 		                                               string json)
 			where C : class, ICatalogue<I>
 			where I : class, ICatalogueItem
@@ -147,11 +157,11 @@ namespace Vanilla.Catalogue
 			{
 
 				// This was preventing RawData from being populated a second time.
-				
+
 //				RawData ??= JObject.Parse(json: json);
 
 				var incomingData = JObject.Parse(json: json);
-				
+
 				if (!incomingData.HasValues)
 				{
 					OnCatalogueFetchFailed?.Invoke();
@@ -171,7 +181,7 @@ namespace Vanilla.Catalogue
 				}
 
 				Debug.Log($"Catalogue update available! [{_CurrentCatalogueVersion}] => [{incomingCatalogueVersion}]");
-				
+
 				_CurrentCatalogueVersion = incomingCatalogueVersion;
 
 				RawData = JObject.Parse(json: json);
@@ -182,10 +192,11 @@ namespace Vanilla.Catalogue
 
 				JsonUtility.FromJsonOverwrite(json: json,
 				                              objectToOverwrite: catalogue);
-				
+
 				var i = -1;
-				
-				var items                    = RawData[propertyName: "_items"];
+
+				var items = RawData[propertyName: itemArrayKey];
+
 //				var items = RawData.Value<I[]>("_items");
 
 				if (items == null)

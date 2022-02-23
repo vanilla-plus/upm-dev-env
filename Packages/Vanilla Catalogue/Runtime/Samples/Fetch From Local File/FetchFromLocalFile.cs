@@ -17,12 +17,10 @@ namespace Vanilla.Catalogue.Samples
 
         public SampleCatalogue catalogue;
 
-
-        //public async UniTask Init() => Fetch();
-	    
-        [ContextMenu("Fetch")]
+        [ContextMenu(itemName: "Fetch")]
         public async void Fetch() => await CatalogueBuilder.FetchViaLocalFile<SampleCatalogue, SampleCatalogueItem>(catalogue: Catalogue,
-                                                                                                                path: Application.dataPath + "/Samples/Vanilla Media Library/1.0.0/Sample Catalogue/manifest.json");
+                                                                                                                    itemArrayKey: "_items",
+                                                                                                                    path: Application.dataPath + "/Samples/Vanilla Media Library/1.0.0/Sample Catalogue/manifest.json");
 
         void Awake() => CatalogueBuilder.OnCatalogueFetchSuccess += () => catalogue = Catalogue;
 

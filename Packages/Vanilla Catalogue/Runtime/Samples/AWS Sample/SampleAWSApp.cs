@@ -15,8 +15,10 @@ namespace Vanilla.Catalogue.Samples.AWS
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         public async UniTask Initialize()
         {
-            await CatalogueBuilder.FetchViaRemoteConfig<SampleAWSCatalogue, SampleAWSCatalogueItem>(_catalogue,
-                                                                                                    "");
+            await CatalogueBuilder.FetchViaRemoteConfig<SampleAWSCatalogue, SampleAWSCatalogueItem>(catalogue: _catalogue,
+                                                                                                    rootKey: "manifest",
+                                                                                                    itemArrayKey: "_items",
+                                                                                                    fallback: "");
 
             CatalogueBuilder.OnCatalogueFetchBegun   += () => Debug.LogError("Fetch started :)");
             CatalogueBuilder.OnCatalogueFetchFailed  += () => Debug.LogError("Fetch failed :(");

@@ -8,21 +8,27 @@ namespace Vanilla.Arrangement
 {
 
 	public interface IArrangement<I, T, P>
-		where I : IArrangementItem
+		where I : class, IArrangementItem<T>
 		where T : Transform
 		where P : struct
 	{
 
-		I[] Items
+		T Parent
+		{
+			get;
+		}
+		
+		HashSet<I> Items
 		{
 			get;
 		}
 
-		T[] Transforms
+		public bool ForceArrangement
 		{
 			get;
+			set;
 		}
-
+		
 		bool ArrangementInProgress
 		{
 			get;
@@ -30,27 +36,27 @@ namespace Vanilla.Arrangement
 		
 		bool ArrangementRequired();
 
-		void Populate(Transform parent);
+		void Populate();
 
 		void InvokeArrangement();
 		
 		void ArrangeFrame();
 
 
-		public void ArrangeItem(T target,
+		public void ArrangeItem(I current,
 		                        P position);
 
 
-		P GetInitialPosition() => default;
+		P GetInitialPosition(I current) => default;
 
 
-		P GetNewPosition(T prev,
-		                 T current);
+		P GetNewPosition(I prev,
+		                 I current);
 
 
-		P GetPreviousOffset(T prev);
+		P GetPreviousOffset(I prev);
 
-		P GetCurrentOffset(T current);
+		P GetCurrentOffset(I current);
 
 		Action OnArrangeBegun
 		{

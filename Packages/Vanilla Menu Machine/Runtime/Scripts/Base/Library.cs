@@ -27,16 +27,34 @@ namespace Vanilla.MediaLibrary
 		[SerializeField] protected C        _catalogue;
 		[SerializeField] protected List<LI> _items;
 		[SerializeField] protected PO       _pool;
-//		[SerializeField] protected bool     _monoSelectable = true;
-		[SerializeField] protected bool _focusOnSelected = true;
+
+		[Header("Focus Settings")]
+		[SerializeField] protected bool _focusOnPointerHover;
+		[SerializeField] protected bool _focusOnPointerDown;
+		[SerializeField] protected bool _focusOnPointerSelect = true;
+
+		[Header("Focus State")]
 		[SerializeField] protected bool _focusInProgress = false;
+		[SerializeField] protected LI   _focusTarget;
+		[SerializeField] protected T   _focusTargetTransform;
+
+		[Header("Await Settings")]
+		[SerializeField] protected bool _awaitItemPopulation;
+		[SerializeField] protected bool _awaitHandleNewItem;
+
 
 		public C        Catalogue       => _catalogue;
 		public List<LI> Items           => _items;
 		public PO       Pool            => _pool;
-//		public bool     MonoSelectable  => _monoSelectable;
-		public bool FocusOnSelected => _focusOnSelected;
-		public bool FocusInProgress => _focusInProgress;
+
+		public bool FocusOnPointerHover  => _focusOnPointerHover;
+		public bool FocusOnPointerDown   => _focusOnPointerDown;
+		public bool FocusOnPointerSelect => _focusOnPointerSelect;
+		
+		public bool FocusInProgress      => _focusInProgress;
+		public LI   FocusTarget          => _focusTarget;
+		public T    FocusTargetTransform => _focusTargetTransform;
+
 
 //		public LI             Selected;
 //		public static Action<LI, LI> OnSelected;
@@ -67,101 +85,162 @@ namespace Vanilla.MediaLibrary
 			// Is there really no way to connect HandleMonoSelection to LI.OnSelected here..?
 			// As far as I can tell, it has to happen in the finalized class... how annoying!
 
-			SubscribeToMonoSelection();
+//			SubscribeToMonoSelection();
 		}
 
 
-		protected abstract void SubscribeToMonoSelection();
+//		protected abstract void SubscribeToMonoSelection();
 
 		public virtual void HandleCatalogueFetchSuccess() => Construct();
 
 
 		public virtual async UniTask Construct()
 		{
+
+			// ------------------------------------------------------- Retire items that are no longer present
+
 			Log(message: "Converting catalogue into pool items");
 
 			// Retire all current items here?
 			// Clear Item list?
 
 			_items.Clear();
+			
+			// ------------------------------------------------------- Add new items
 
 			foreach (var i in Catalogue.Items)
 			{
 				var item = await _pool.Get();
 
-				await item.Populate(item: i);
-
 				_items.Add(item: item);
+
+				if (ReferenceEquals(objA: _focusTarget,
+				                    objB: null))
+				{
+					_focusTarget          = item;
+					_focusTargetTransform = _focusTarget.Transform;
+				}
+
+				// Weird idea - could have a toggle here for flipping the order Populate and Handle happen in.
+				// It might come up that Populate needs to happen afterwards or vice versa?
+				
+				if (_awaitItemPopulation)
+				{
+					await item.Populate(item: i);
+				}
+				else
+				{
+					item.Populate(item: i);
+				}
+
+				if (_awaitHandleNewItem)
+				{
+					await HandleNewItem(item);
+				}
+				else
+				{
+					HandleNewItem(item);
+				}
 			}
 
-//			foreach (var i in _items)
+			// -------------------------------------------------------- Subscriptions
+
+//			if (_focusOnPointerHover)
+//				foreach (var i in Items)
+//					i.PointerHover.Toggle.onChange += b => InvokeFocus();
+//			
+//			if (_focusOnPointerDown)
+//				foreach (var i in Items)
+//					i.PointerDown.Toggle.onChange += b => InvokeFocus();
+//			
+//			if (_focusOnPointerSelect)
+//				foreach (var i in Items)
+//					i.PointerSelected.Toggle.onChange += b => InvokeFocus();
+//
+//			foreach (var i in Items) i.PointerSelected.Toggle.onTrue += () =>
+//			                                                            {
+//				                                                            _focusTarget          = i;
+//				                                                            _focusTargetTransform = _focusTarget.Transform;
+//			                                                            };
+
+//			if (_items.Count > 0)
 //			{
-//				i.PointerSelected.toggle.onTrue += () =>
-//				                                   {
-//					                                   if (!_monoSelectable) return;
-//
-//					                                   // If the thing that was just selected is the same as what is already selected,
-//					                                   // drop out early.
-//					                                   if (ReferenceEquals(objA: i,
-//					                                                       objB: Selected)) return;
-//
-//					                                   var outgoing = Selected;
-//					                                   
-//					                                   // If there is an outgoing Selected item, tell it it is no longer selected.
-//
-//					                                   if (!ReferenceEquals(objA: outgoing,
-//					                                                        objB: null)) outgoing.PointerSelected.toggle.State = false;
-//
-//					                                   Selected = i;
-//
-//					                                   OnSelected?.Invoke(arg1: outgoing,
-//					                                                      arg2: i);
-//				                                   };
+//				_focusTarget = _items[0];
+//				_focusTargetTransform = _items[0].Transform;
 //			}
 
 		}
 
 
-		protected virtual void HandleMonoSelection(LI outgoing,
-		                                           LI incoming)
+		public virtual async UniTask HandleNewItem(LI newItem)
 		{
-			if (!_focusOnSelected) return;
+			if (_focusOnPointerHover) newItem.PointerHover.Toggle.onChange     += b => InvokeFocus();
+			if (_focusOnPointerDown) newItem.PointerDown.Toggle.onChange       += b => InvokeFocus();
+			if (_focusOnPointerSelect) newItem.PointerSelected.Toggle.onChange += b => InvokeFocus();
 
-			if (ReferenceEquals(objA: incoming,
-			                    objB: null)) return;
-
-			FocusAsync(item: incoming,
-			           selectedToggle: incoming.PointerSelected.Toggle);
+			newItem.PointerSelected.Toggle.onTrue += () =>
+			                                         {
+				                                         _focusTarget          = newItem;
+				                                         _focusTargetTransform = _focusTarget.Transform;
+			                                         };
 		}
 
 
-		protected virtual async UniTask FocusAsync(LI item,
-		                                           Toggle selectedToggle)
+//		protected virtual void HandleMonoSelection(LI outgoing,
+//		                                           LI incoming)
+//		{
+//			if (!_focusOnSelected) return;
+//
+//			if (ReferenceEquals(objA: incoming,
+//			                    objB: null)) return;
+//
+//			InvokeFocus(incoming);
+//		}
+
+
+		protected virtual void InvokeFocus()
 		{
+			// Lets allow ourselves to swap target without needing to re-invoke the FocusAsync UniTask.
+			// If we use SmoothDamp to slide/move whatever we need to move, the transition will be nice and seamless.
+
+			
+//			_focusTarget          = newTarget;
+
+//			if (ReferenceEquals(objA: newTarget,
+//			                    objB: null))
+//			{
+//				_focusTargetTransform = null;
+//				
+//				return;
+//			}
+
+//			_focusTargetTransform = _focusTarget.Transform;
+
+			if (_focusInProgress) return;
+
 			_focusInProgress = true;
 			
-			while (FocusWhile(item: item,
-			                      selectedToggle: selectedToggle))
+			FocusAsync();
+		}
+
+
+		protected virtual async UniTask FocusAsync()
+		{
+			do
 			{
-				FocusFrame(item: item);
+				FocusFrame();
 
 				await UniTask.Yield();
 			}
+			while (FocusWhile());
 
-			// If the items selected toggle is still true by this point, it means that we got to focus all the way
-			// onto this item without interruption from another selection.
-			
-			if (selectedToggle.State)
-			{
-				_focusInProgress = false;
-			}
+			_focusInProgress = false;
 		}
 
-		protected abstract void FocusFrame(LI item);
+		protected abstract void FocusFrame();
 
 
-		protected abstract bool FocusWhile(LI item,
-		                                   Toggle selectedToggle);
+		protected abstract bool FocusWhile();
 
 	}
 

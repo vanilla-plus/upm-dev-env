@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Cysharp.Threading.Tasks;
@@ -10,25 +11,29 @@ namespace Vanilla.Arrangement
 
 	[Serializable]
 	public abstract class Arrangement<I, T, P> : IArrangement<I, T, P>
-		where I : IArrangementItem
+		where I : class, IArrangementItem<T>
 		where T : Transform
 		where P : struct
 	{
 
 		[SerializeField]
-		protected I[] _items;
-		public I[] Items
+		private T _parent;
+		public  T Parent => _parent;
+
+		[SerializeField]
+		protected HashSet<I> _items;
+		public HashSet<I> Items
 		{
 			get => _items;
 			set => _items = value;
 		}
-		
+
 		[SerializeField]
-		protected T[] _transforms;
-		public T[] Transforms
+		private bool _forceArrangement = false;
+		public bool ForceArrangement
 		{
-			get => _transforms;
-			set => _transforms = value;
+			get => _forceArrangement;
+			set => _forceArrangement = value;
 		}
 
 		[SerializeField]
@@ -50,56 +55,39 @@ namespace Vanilla.Arrangement
 			set => _onArrangeComplete = value;
 		}
 
-		public void Populate(Transform parent)
-		{
-			var count = parent.childCount;
 
-			_items      = new I[count];
-			_transforms = new T[count];
+		public void Populate()
+		{
+			if (_items == null) _items = new HashSet<I>(capacity: 64);
 
 			for (var i = 0;
-			     i < count;
+			     i < _parent.childCount;
 			     i++)
 			{
-				var t = parent.GetChild(index: i);
+				var c = _parent.GetChild(index: i).GetComponent<I>();
 
-				_items[i]      = t.GetComponent<I>();
-				_transforms[i] = t as T;
+				if (_items.Contains(item: c)) continue;
 
-				// This is where the magic happens.
-				// When an arrangement item marks itself as dirty, the arrangement will automatically hear about it
-				// and start arranging until there isn't a single item marked dirty.
-				// In this way, the responsibility is on each item to flag itself as dirty if it does something that
-				// might disrupt the arrangement and unflag itself when it has stopped.
-				
-				_items[i].ArrangementDirty.onTrue += InvokeArrangement;
+				_items.Add(item: c);
+
+				c.ArrangementDirty.onTrue += InvokeArrangement;
 			}
 		}
 
+
 		public virtual void ArrangeFrame()
 		{
-			if (_transforms        == null
-			 || _transforms.Length == 0) return;
-
-			T prev    = _transforms[0];
-			T current = prev;
+			I prev = null;
 			
-			ArrangeItem(target: current,
-			            position: GetInitialPosition());
-
-			if (_transforms.Length == 1) return;
-
-			for (var i = 1;
-			     i < _transforms.Length;
-			     i++)
+			foreach (var c in _items)
 			{
-				current = _transforms[i];
-
-				ArrangeItem(target: current,
-				            position: GetNewPosition(prev: prev,
-				                                     current: current));
-
-				prev = current;
+				ArrangeItem(current: c,
+				            position: prev == null ?
+					                      GetInitialPosition(c) :
+					                      GetNewPosition(prev: prev,
+					                                     current: c));
+				
+				prev = c;
 			}
 		}
 
@@ -130,23 +118,22 @@ namespace Vanilla.Arrangement
 		}
 
 
-		public bool ArrangementRequired() => _items.Any(i => i.ArrangementDirty);
+		public bool ArrangementRequired() => _forceArrangement || _items.Any(predicate: i => i.ArrangementDirty);
 
-
-		public abstract void ArrangeItem(T target,
+		public abstract void ArrangeItem(I current,
 		                                 P position);
 
 
-		public abstract P GetInitialPosition();
+		public abstract P GetInitialPosition(I current);
 
 
-		public abstract P GetNewPosition(T prev,
-		                                 T current);
+		public abstract P GetNewPosition(I prev,
+		                                 I current);
 
 
-		public abstract P GetPreviousOffset(T prev);
+		public abstract P GetPreviousOffset(I prev);
 
-		public abstract P GetCurrentOffset(T current);
+		public abstract P GetCurrentOffset(I current);
 
 	}
 

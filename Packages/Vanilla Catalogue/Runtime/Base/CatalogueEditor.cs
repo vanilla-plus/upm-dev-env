@@ -33,6 +33,7 @@ namespace Vanilla.Catalogue
         [SerializeField]
         public string escapedOutput;
 
+        public string itemArrayKey = "_items";
 
         private void OnValidate()
         {
@@ -80,7 +81,8 @@ namespace Vanilla.Catalogue
         {
             if (!Application.isPlaying) return;
 
-            await CatalogueBuilder.FetchViaEditor(editor: this);
+            await CatalogueBuilder.FetchViaEditor(editor: this,
+                                                  itemArrayKey: itemArrayKey);
         }
 
     }

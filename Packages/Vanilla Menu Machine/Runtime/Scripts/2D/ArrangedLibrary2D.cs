@@ -24,30 +24,62 @@ namespace Vanilla.MediaLibrary
 
 		public RectTransform focusParent;
 
-		public Vector2 focusTargetPosition;
+		public Vector2 focusTargetDelta;
 
 		private Vector2 focusVelocity;
 
-		public float focusDuration = 0.1666f;
+		public bool  useDynamicSmoothStepTime = true;
 
-		public float focusDistanceThreshold = 0.01f;
+		public float focusTimeMin             = 0.01f;
+		public float focusTimeMax             = 0.1666f;
+		
+		public float focusTimeDistanceCheckScalar = 0.001f;
+		public float focusWhileDistanceThreshold  = 0.01f;
 
-		protected override void FocusFrame(LI item)
+		[Header("Debug")]
+		public float distSqrMag;
+		public float smoothStepTimeLerp;
+
+
+		protected override void FocusFrame()
 		{
-			focusTargetPosition = SmoothDamp(current: focusTargetPosition,
-			                                         target: item.Transform.anchoredPosition,
-			                                         currentVelocity: ref focusVelocity,
-			                                         smoothTime: focusDuration);
+			if (useDynamicSmoothStepTime)
+			{
+				var dest = _focusTargetTransform.anchoredPosition;
 
-			focusParent.anchoredPosition = -focusTargetPosition;
+				distSqrMag = (dest - focusTargetDelta).sqrMagnitude;
+
+				smoothStepTimeLerp = Mathf.Lerp(a: focusTimeMin,
+				                                b: focusTimeMax,
+				                                t: distSqrMag * focusTimeDistanceCheckScalar);
+
+				focusTargetDelta = SmoothDamp(current: focusTargetDelta,
+				                              target: dest,
+				                              currentVelocity: ref focusVelocity,
+				                              smoothTime: smoothStepTimeLerp);
+			}
+			else
+			{
+				focusTargetDelta = SmoothDamp(current: focusTargetDelta,
+				                              target: _focusTargetTransform.anchoredPosition,
+				                              currentVelocity: ref focusVelocity,
+				                              smoothTime: focusTimeMax);
+			}
+
+			focusParent.anchoredPosition = -focusTargetDelta;
 		}
 
 
-		protected override bool FocusWhile(LI item,
-		                                   Toggle selectedToggle) => selectedToggle.State
-		                                                          && Distance(a: focusTargetPosition,
-		                                                                      b: item.Transform.anchoredPosition)
-		                                                           > focusDistanceThreshold;
+//		protected override bool FocusWhile(LI item,
+//		                                   Toggle selectedToggle) => selectedToggle.State
+//		                                                          && Distance(a: focusTargetDelta,
+//		                                                                      b: item.Transform.anchoredPosition)
+//		                                                           > focusDistanceThreshold;
+
+
+		protected override bool FocusWhile() => Distance(a: focusTargetDelta,
+		                                                 b: _focusTargetTransform.anchoredPosition)
+		                                      > focusWhileDistanceThreshold;
 
 	}
 

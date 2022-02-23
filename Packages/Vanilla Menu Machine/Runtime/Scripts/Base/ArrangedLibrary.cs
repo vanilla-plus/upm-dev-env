@@ -30,7 +30,7 @@ namespace Vanilla.MediaLibrary
 		{
 			await base.Construct();
 
-			_arrangement.Populate(parent: _pool.ActiveParent);
+			_arrangement.Populate();
 
 			_arrangement.InvokeArrangement();
 		}

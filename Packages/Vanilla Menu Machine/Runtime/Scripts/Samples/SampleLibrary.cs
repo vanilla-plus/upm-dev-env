@@ -16,16 +16,16 @@ namespace Vanilla.MediaLibrary.Samples
         
         [ContextMenu("Fill")]
         private void FillPool() => _pool.CreateAll();
-
-
-        [ContextMenu("Force Arrange")]
-        private void ForceArrange() => Arrangement.InvokeArrangement();
-
-        protected override void SubscribeToMonoSelection() => SampleLibraryItem.OnSelectedChange += HandleMonoSelection;
+        
+//        protected override void SubscribeToMonoSelection() => SampleLibraryItem.OnSelectedChange += HandleMonoSelection;
 
         public override async UniTask Construct()
         {
             _catalogue = SampleApp.catalogue;
+
+//            Arrangement.ForceArrangement = true;
+            
+//            Arrangement.InvokeArrangement();
 
             await base.Construct();
         }

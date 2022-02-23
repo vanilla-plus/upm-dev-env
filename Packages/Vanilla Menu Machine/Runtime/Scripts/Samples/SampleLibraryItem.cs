@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Networking;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 using Vanilla.Easing;
@@ -28,18 +29,34 @@ namespace Vanilla.MediaLibrary.Samples
 		public float selectExpansion = 1.0f;
 
 		public float imageSlideEffect = 1.0f;
+
+		public CanvasRenderer[] slideInElements = new CanvasRenderer[0];
+		
+		public float slideInSeconds  = 0.5f;
+		public float slideInDistance = 20.0f;
+
+		public float slideInWaitBetweenElements = 0.1f;
+		
+		private Vector2 originalSize;
 		
 		protected override void Awake()
 		{
 			base.Awake();
+			
+//			var canvasRenderers = GetComponentsInChildren<CanvasRenderer>();
+
+			foreach (var c in slideInElements)
+			{
+				c.SetAlpha(alpha: 0.0f);
+			}
+
+			originalSize = Transform.sizeDelta;
 
 			PointerHover.Normal.Empty.onFalse += () => ArrangementDirty.State = true;
 			PointerHover.Normal.Full.onFalse  += () => ArrangementDirty.State = true;
 
 			PointerHover.Normal.Full.onTrue  += () => ArrangementDirty.State = false;
 			PointerHover.Normal.Empty.onTrue += () => ArrangementDirty.State = false;
-
-			var originalSize = Transform.sizeDelta;
 
 			PointerHover.Toggle.onTrue += SlideImageAround;
 
@@ -50,6 +67,10 @@ namespace Vanilla.MediaLibrary.Samples
 //			
 //			PointerSelected.Normal.OnChange += n => Transform.sizeDelta = new Vector2(x: originalSize.x + (originalSize.x * selectExpansion) * n.InOutPower(power: 1.25f),
 //			                                                                          y: originalSize.y);
+			
+			PointerHover.Normal.OnChange += n => UpdateSize(n: n);
+
+			PointerSelected.Normal.OnChange += n => UpdateSize(n: n);
 
 			PointerHover.Normal.OnChange += n => image.color = Color.Lerp(a: Color.white,
 			                                                              b: new Color(r: 0.9f,
@@ -72,7 +93,7 @@ namespace Vanilla.MediaLibrary.Samples
 
 		public override UniTask OnGet()
 		{
-			Debug.Log("[SampleLibraryItem] I was plucked out of the ether!");
+			Debug.Log(message: "[SampleLibraryItem] I was plucked out of the ether!");
 
 			return default;
 		}
@@ -80,7 +101,7 @@ namespace Vanilla.MediaLibrary.Samples
 
 		public override UniTask OnRetire()
 		{
-			Debug.Log("[SampleLibraryItem] I'm outta here");
+			Debug.Log(message: "[SampleLibraryItem] I'm outta here");
 
 			return default;
 		}
@@ -90,19 +111,19 @@ namespace Vanilla.MediaLibrary.Samples
 		{
 			base.Populate(item: item);
 			
-			Debug.Log($"[SampleLibraryItem] I've been populated with [{item.Name}]");
+			Debug.LogWarning(message: $"[SampleLibraryItem] I've been populated with [{item.Name}]");
 
 //			nameText.text       = item.Name;
 //			durationText.text   = $"{item.duration}s";
 //			latLongText.text    = $"[{item.latLong[0]}, {item.latLong[1]}]";
 
-			using var uwr = UnityWebRequestTexture.GetTexture($"https://vanilla-plus.neocities.org/unity/{item.Name.ToLower()}.jpeg");
+			using var uwr = UnityWebRequestTexture.GetTexture(uri: $"https://vanilla-plus.neocities.org/unity/{item.Name.ToLower()}.jpeg");
 
 			await uwr.SendWebRequest();
 
 			if (uwr.result != UnityWebRequest.Result.Success)
 			{
-				Debug.Log(uwr.error);
+				Debug.Log(message: uwr.error);
 			}
 			else
 			{
@@ -118,8 +139,44 @@ namespace Vanilla.MediaLibrary.Samples
 				                             extrude: 0,
 				                             meshType: SpriteMeshType.FullRect);
 			}
+
+//			var canvasRenderers = GetComponentsInChildren<CanvasRenderer>();
+
+			foreach (var c in slideInElements)
+			{
+				await SlideElementIn(c);
+
+//				await UniTask.Delay(millisecondsDelay: (int) (slideInWaitBetweenElements * 100));
+			}
 		}
 
+
+		private async UniTask SlideElementIn(CanvasRenderer c)
+		{
+			Debug.Log($"Sliding in element [{c.gameObject.name}]");
+			
+			var rect   = c.transform as RectTransform;
+			var endPos = rect.anchoredPosition;
+
+			var startPos = endPos;
+			startPos.x -= slideInDistance;
+
+			var i    = 0.0f;
+			var rate = 1.0f / slideInSeconds;
+
+			while (i < 1.0f)
+			{
+				i += Time.deltaTime * rate;
+
+				rect.anchoredPosition = Vector2.Lerp(a: startPos,
+				                                     b: endPos,
+				                                     t: i);
+					
+				c.SetAlpha(alpha: i);
+					
+				await UniTask.Yield();
+			}
+		}
 
 		private async void SlideImageAround()
 		{
@@ -127,21 +184,26 @@ namespace Vanilla.MediaLibrary.Samples
 
 			while (hoverState.State)
 			{
-				var mouseDir = Transform.position - Input.mousePosition;
-
-//				Vector3.ClampMagnitude(vector: mouseDir,
-//				                       maxLength: imageSlideEffect);
-
 				image.rectTransform.anchoredPosition = Vector2.Lerp(a: Vector2.zero,
-				                                                    b: mouseDir,
+				                                                    b: Transform.position - Input.mousePosition,
 				                                                    t: imageSlideEffect);
-
-//				image.rectTransform.anchoredPosition = Vector2.Lerp(a: Vector2.zero,
-//				                                                    b: -Input.mousePosition,
-//				                                                    t: imageSlideEffect);
 				
 				await UniTask.Yield();
 			}
+		}
+
+
+		private void UpdateSize(float n)
+		{
+			var newSize = originalSize;
+
+			newSize.x += originalSize.x * PointerHover.Normal.Value    * hoverExpansion.InOutPower(power: 1.25f);
+			newSize.x += originalSize.x * PointerSelected.Normal.Value * selectExpansion.InOutPower(power: 1.25f);
+
+			Transform.sizeDelta = newSize;
+			
+//			Transform.sizeDelta = new Vector2(x: originalSize.x + (originalSize.x * selectExpansion) * n.InOutPower(power: 1.25f),
+//			                                  y: originalSize.y);
 		}
 
 	}

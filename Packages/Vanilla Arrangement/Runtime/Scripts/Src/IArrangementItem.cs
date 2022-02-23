@@ -6,8 +6,14 @@ using UnityEngine;
 namespace Vanilla.Arrangement
 {
 
-	public interface IArrangementItem
+	public interface IArrangementItem<T>
+		where T : Transform
 	{
+
+		T Transform
+		{
+			get;
+		}
 
 		Toggle ArrangementDirty
 		{

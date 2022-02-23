@@ -7,7 +7,7 @@ namespace Vanilla.Arrangement
 
 	[Serializable]
 	public class Arrangement3DFlush<I> : Arrangement3D<I>
-		where I : IArrangementItem
+		where I : class, IArrangementItem<Transform>
 	{
 
 		[SerializeField] public float topMargin = 0.5f;
@@ -32,9 +32,9 @@ namespace Vanilla.Arrangement
 		public float depthOffsetScalar = 1.0f;
 
 
-		public override Vector3 GetPreviousOffset(Transform prev)
+		public override Vector3 GetPreviousOffset(I prev)
 		{
-			var size = prev.localScale;
+			var size = prev.Transform.localScale;
 
 			return new Vector3(x: horizontalOffsetScalar * (size.x * 0.5f + rightMargin),
 			                   y: verticalOffsetScalar   * (size.y * 0.5f + bottomMargin),
@@ -42,9 +42,9 @@ namespace Vanilla.Arrangement
 		}
 
 
-		public override Vector3 GetCurrentOffset(Transform current)
+		public override Vector3 GetCurrentOffset(I current)
 		{
-			var size = current.localScale;
+			var size = current.Transform.localScale;
 
 			return new Vector3(x: horizontalOffsetScalar * (size.x * 0.5f + leftMargin),
 			                   y: verticalOffsetScalar   * (size.y * 0.5f + topMargin),

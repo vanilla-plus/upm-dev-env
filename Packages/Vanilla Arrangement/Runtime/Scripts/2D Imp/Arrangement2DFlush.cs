@@ -7,7 +7,7 @@ namespace Vanilla.Arrangement
 
 	[Serializable]
 	public class Arrangement2DFlush<I> : Arrangement2D<I>
-		where I : IArrangementItem
+		where I : class, IArrangementItem<RectTransform>
 	{
 
 		[SerializeField] public float topMargin = 25.0f;
@@ -25,18 +25,18 @@ namespace Vanilla.Arrangement
 		public float verticalOffsetScalar = 1.0f;
 
 
-		public override Vector2 GetPreviousOffset(RectTransform prev)
+		public override Vector2 GetPreviousOffset(I prev)
 		{
-			var size = prev.sizeDelta;
+			var size = prev.Transform.sizeDelta;
 
 			return new Vector2(x: horizontalOffsetScalar * (size.x * 0.5f + rightMargin),
 			                   y: verticalOffsetScalar   * (size.y * 0.5f + bottomMargin));
 		}
 
 
-		public override Vector2 GetCurrentOffset(RectTransform current)
+		public override Vector2 GetCurrentOffset(I current)
 		{
-			var size = current.sizeDelta;
+			var size = current.Transform.sizeDelta;
 
 			return new Vector2(x: horizontalOffsetScalar * (size.x * 0.5f + leftMargin),
 			                   y: verticalOffsetScalar   * (size.y * 0.5f + topMargin));

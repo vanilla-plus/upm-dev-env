@@ -8,8 +8,7 @@
         "Vanilla.Normal",
         "Vanilla.Easing",
         "Vanilla.Pools",
-        "UniTask",
-        "Vanilla.PointerRedirect"
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
