@@ -144,7 +144,7 @@ namespace Vanilla.MediaLibrary.Samples
 
 			foreach (var c in slideInElements)
 			{
-				await SlideElementIn(c);
+				await SlideElementIn(c: c);
 
 //				await UniTask.Delay(millisecondsDelay: (int) (slideInWaitBetweenElements * 100));
 			}
@@ -153,7 +153,7 @@ namespace Vanilla.MediaLibrary.Samples
 
 		private async UniTask SlideElementIn(CanvasRenderer c)
 		{
-			Debug.Log($"Sliding in element [{c.gameObject.name}]");
+			Debug.Log(message: $"Sliding in element [{c.gameObject.name}]");
 			
 			var rect   = c.transform as RectTransform;
 			var endPos = rect.anchoredPosition;

@@ -39,11 +39,16 @@ namespace Vanilla.MediaLibrary.Samples
 
 		public string rawDataKeyTest = "duration";
 
+		[SerializeField]
+		public int _hash = -1;
+		
 		public override async UniTask Initialize()
 		{
+			_hash = GetHashCode();
+			
 //            await UniTask.Delay(500);
 
-			Debug.Log($"{_name} Initialized! Here, have some adhoc data matching the key [{rawDataKeyTest}] => [{RawData[rawDataKeyTest]}]");
+			Debug.Log(message: $"{_name} Initialized! Here, have some adhoc data matching the key [{rawDataKeyTest}] => [{RawData[key: rawDataKeyTest]}]");
 		}
 
 

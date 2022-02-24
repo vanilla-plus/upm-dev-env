@@ -14,7 +14,7 @@ namespace Vanilla.MediaLibrary.Samples
     public class SampleLibrary : ArrangedLibrary2D<SampleCatalogue, SampleCatalogueItem, SampleLibraryItem, DirectPrefabPool<SampleLibraryItem>, Arrangement2DFlush<SampleLibraryItem>>
     {
         
-        [ContextMenu("Fill")]
+        [ContextMenu(itemName: "Fill")]
         private void FillPool() => _pool.CreateAll();
         
 //        protected override void SubscribeToMonoSelection() => SampleLibraryItem.OnSelectedChange += HandleMonoSelection;

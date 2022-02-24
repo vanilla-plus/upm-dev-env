@@ -461,6 +461,7 @@ MonoBehaviour:
     - 10
     - 20
     rawDataKeyTest: duration
+    _hash: -1
   _pointerHover:
     _toggle:
       _state: 0
@@ -503,8 +504,8 @@ MonoBehaviour:
     _state: 0
   image: {fileID: 5846530329803951688}
   thumbnail: {fileID: 0}
-  hoverExpansion: 0.25
-  selectExpansion: 0.5
+  hoverExpansion: 0.1
+  selectExpansion: 0.6
   imageSlideEffect: 0.05
   slideInElements:
   - {fileID: 1764975314497656952}

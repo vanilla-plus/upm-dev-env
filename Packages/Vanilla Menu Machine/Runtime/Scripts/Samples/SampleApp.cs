@@ -13,7 +13,7 @@ namespace Vanilla.MediaLibrary.Samples
 		public static SampleCatalogue catalogue = new();
 
 
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+		[RuntimeInitializeOnLoadMethod(loadType: RuntimeInitializeLoadType.AfterSceneLoad)]
 		public static async UniTask Init() => await CatalogueBuilder.FetchViaRemoteConfig<SampleCatalogue, SampleCatalogueItem>(catalogue: catalogue,
 		                                                                                                                        rootKey: "manifest",
 		                                                                                                                        itemArrayKey: "_items",
