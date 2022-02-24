@@ -1,3 +1,7 @@
+#if DEBUG && TOGGLE
+#define debug
+#endif
+
 using System;
 
 using UnityEngine;
@@ -18,6 +22,10 @@ namespace Vanilla
             {
                 if (_state == value) return;
 
+                #if debug
+                Debug.Log($"Toggle state changed from [{_state}] to [{value}]");
+                #endif
+                
                 _state = value;
 
                 onChange?.Invoke(_state);

@@ -30,30 +30,53 @@ namespace Vanilla.MediaLibrary
 
 			if (arrangementIsDirtiedByPointerHover)
 			{
-				PointerHover.Normal.Empty.onFalse += () => ArrangementDirty.State = true;
-				PointerHover.Normal.Full.onFalse  += () => ArrangementDirty.State = true;
+				PointerHover.Normal.Empty.onFalse += () => ArrangementDirty.State = AssessIfDirty();
+				PointerHover.Normal.Full.onFalse  += () => ArrangementDirty.State = AssessIfDirty();
 
-				PointerHover.Normal.Full.onTrue  += () => ArrangementDirty.State = false;
-				PointerHover.Normal.Empty.onTrue += () => ArrangementDirty.State = false;
+				PointerHover.Normal.Full.onTrue  += () => ArrangementDirty.State = AssessIfDirty();
+				PointerHover.Normal.Empty.onTrue += () => ArrangementDirty.State = AssessIfDirty();
 			}
 
 			if (arrangementIsDirtiedByPointerDown)
 			{
-				PointerDown.Normal.Empty.onFalse += () => ArrangementDirty.State = true;
-				PointerDown.Normal.Full.onFalse  += () => ArrangementDirty.State = true;
+				PointerDown.Normal.Empty.onFalse += () => ArrangementDirty.State = AssessIfDirty();
+				PointerDown.Normal.Full.onFalse  += () => ArrangementDirty.State = AssessIfDirty();
 
-				PointerDown.Normal.Full.onTrue  += () => ArrangementDirty.State = false;
-				PointerDown.Normal.Empty.onTrue += () => ArrangementDirty.State = false;
+				PointerDown.Normal.Full.onTrue  += () => ArrangementDirty.State = AssessIfDirty();
+				PointerDown.Normal.Empty.onTrue += () => ArrangementDirty.State = AssessIfDirty();
 			}
-			
+
 			if (arrangementIsDirtiedByPointerSelect)
 			{
-				PointerSelected.Normal.Empty.onFalse += () => ArrangementDirty.State = true;
-				PointerSelected.Normal.Full.onFalse  += () => ArrangementDirty.State = true;
+				PointerSelected.Normal.Empty.onFalse += () => ArrangementDirty.State = AssessIfDirty();
+				PointerSelected.Normal.Full.onFalse  += () => ArrangementDirty.State = AssessIfDirty();
 
-				PointerSelected.Normal.Full.onTrue  += () => ArrangementDirty.State = false;
-				PointerSelected.Normal.Empty.onTrue += () => ArrangementDirty.State = false;
+				PointerSelected.Normal.Full.onTrue  += () => ArrangementDirty.State = AssessIfDirty();
+				PointerSelected.Normal.Empty.onTrue += () => ArrangementDirty.State = AssessIfDirty();
 			}
+		}
+
+
+		protected virtual bool AssessIfDirty()
+		{
+//			return true;
+			
+			if (arrangementIsDirtiedByPointerHover)
+			{
+				if (!PointerHover.Normal.IsFullOrEmpty()) return true;
+			}
+
+			if (arrangementIsDirtiedByPointerDown)
+			{
+				if (!PointerDown.Normal.IsFullOrEmpty()) return true;
+			}
+
+			if (arrangementIsDirtiedByPointerSelect)
+			{
+				if (!PointerSelected.Normal.IsFullOrEmpty()) return true;
+			}
+
+			return false;
 		}
 
 	}

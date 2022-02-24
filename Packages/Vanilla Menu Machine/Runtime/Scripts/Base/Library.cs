@@ -28,32 +28,32 @@ namespace Vanilla.MediaLibrary
 		[SerializeField] protected List<LI> _items;
 		[SerializeField] protected PO       _pool;
 
-		[Header("Focus Settings")]
+		[Header(header: "Focus Settings")]
 		[SerializeField] protected bool _focusOnPointerHover;
 		[SerializeField] protected bool _focusOnPointerDown;
 		[SerializeField] protected bool _focusOnPointerSelect = true;
 
-		[Header("Focus State")]
-		[SerializeField] protected bool _focusInProgress = false;
-		[SerializeField] protected LI   _focusTarget;
-		[SerializeField] protected T   _focusTargetTransform;
+		[Header(header: "Focus State")]
+		[SerializeField] protected Toggle _focusInProgress = new(startingState: false);
+		[SerializeField] protected LI     _focusTarget;
+		[SerializeField] protected T      _focusTargetTransform;
 
-		[Header("Await Settings")]
+		[Header(header: "Await Settings")]
 		[SerializeField] protected bool _awaitItemPopulation;
-		[SerializeField] protected bool _awaitHandleNewItem;
+		[SerializeField] protected int _awaitItemPopulationStaticDelay = 500;
+		[SerializeField] protected bool  _awaitHandleNewItem;
+		[SerializeField] protected int _awaitHandleNewItemStaticDelay = 500;
 
 
-		public C        Catalogue       => _catalogue;
-		public List<LI> Items           => _items;
-		public PO       Pool            => _pool;
-
-		public bool FocusOnPointerHover  => _focusOnPointerHover;
-		public bool FocusOnPointerDown   => _focusOnPointerDown;
-		public bool FocusOnPointerSelect => _focusOnPointerSelect;
-		
-		public bool FocusInProgress      => _focusInProgress;
-		public LI   FocusTarget          => _focusTarget;
-		public T    FocusTargetTransform => _focusTargetTransform;
+		public C        Catalogue            => _catalogue;
+		public List<LI> Items                => _items;
+		public PO       Pool                 => _pool;
+		public bool     FocusOnPointerHover  => _focusOnPointerHover;
+		public bool     FocusOnPointerDown   => _focusOnPointerDown;
+		public bool     FocusOnPointerSelect => _focusOnPointerSelect;
+		public Toggle   FocusInProgress      => _focusInProgress;
+		public LI       FocusTarget          => _focusTarget;
+		public T        FocusTargetTransform => _focusTargetTransform;
 
 
 //		public LI             Selected;
@@ -86,6 +86,8 @@ namespace Vanilla.MediaLibrary
 			// As far as I can tell, it has to happen in the finalized class... how annoying!
 
 //			SubscribeToMonoSelection();
+
+			FocusInProgress.onTrue += () => FocusAsync();
 		}
 
 
@@ -130,16 +132,31 @@ namespace Vanilla.MediaLibrary
 				}
 				else
 				{
+					// It may be that we don't want to wait for items to populate, but we still want an artificial
+					// delay between each population anyway. This amount is _awaitItemPopulateStaticDelay in milliseconds.
+					
+					// The same is true for _awaitItemHandleStaticDelay below.
+
 					item.Populate(item: i);
+					
+					if (_awaitItemPopulationStaticDelay > 0)
+					{
+						await UniTask.Delay(millisecondsDelay: _awaitItemPopulationStaticDelay);
+					}
 				}
 
 				if (_awaitHandleNewItem)
 				{
-					await HandleNewItem(item);
+					await HandleNewItem(newItem: item);
 				}
 				else
 				{
-					HandleNewItem(item);
+					HandleNewItem(newItem: item);
+
+					if (_awaitHandleNewItemStaticDelay > 0)
+					{
+						await UniTask.Delay(millisecondsDelay: _awaitHandleNewItemStaticDelay);
+					}
 				}
 			}
 
@@ -174,12 +191,35 @@ namespace Vanilla.MediaLibrary
 
 		public virtual async UniTask HandleNewItem(LI newItem)
 		{
-			if (_focusOnPointerHover) newItem.PointerHover.Toggle.onChange     += b => InvokeFocus();
-			if (_focusOnPointerDown) newItem.PointerDown.Toggle.onChange       += b => InvokeFocus();
-			if (_focusOnPointerSelect) newItem.PointerSelected.Toggle.onChange += b => InvokeFocus();
+			if (_focusOnPointerHover)
+			{
+				newItem.PointerHover.Normal.Empty.onChange += _ => FocusInProgress.State = true;
+				newItem.PointerHover.Normal.Full.onChange  += _ => FocusInProgress.State = true;
+				
+//				newItem.PointerHover.Normal.OnChange += f => InvokeFocus();
+			}
+
+			if (_focusOnPointerDown)
+			{
+				newItem.PointerDown.Normal.Empty.onChange += _ => FocusInProgress.State = true;
+				newItem.PointerDown.Normal.Full.onChange  += _ => FocusInProgress.State = true;
+				
+//				newItem.PointerDown.Normal.OnChange += f => InvokeFocus();
+			}
+
+			if (_focusOnPointerSelect)
+			{
+				newItem.PointerSelected.Normal.Empty.onChange += _ => FocusInProgress.State = true;
+				newItem.PointerSelected.Normal.Full.onChange  += _ => FocusInProgress.State = true;
+
+//				newItem.PointerSelected.Normal.OnChange += f => InvokeFocus();
+			}
 
 			newItem.PointerSelected.Toggle.onTrue += () =>
 			                                         {
+				                                         if (ReferenceEquals(objA: _focusTarget,
+				                                                             objB: newItem)) return;
+				                                         
 				                                         _focusTarget          = newItem;
 				                                         _focusTargetTransform = _focusTarget.Transform;
 			                                         };
@@ -198,8 +238,8 @@ namespace Vanilla.MediaLibrary
 //		}
 
 
-		protected virtual void InvokeFocus()
-		{
+//		protected virtual void InvokeFocus()
+//		{
 			// Lets allow ourselves to swap target without needing to re-invoke the FocusAsync UniTask.
 			// If we use SmoothDamp to slide/move whatever we need to move, the transition will be nice and seamless.
 
@@ -216,12 +256,12 @@ namespace Vanilla.MediaLibrary
 
 //			_focusTargetTransform = _focusTarget.Transform;
 
-			if (_focusInProgress) return;
+//			if (_focusInProgress) return;
 
-			_focusInProgress = true;
+//			_focusInProgress = true;
 			
-			FocusAsync();
-		}
+//			FocusAsync();
+//		}
 
 
 		protected virtual async UniTask FocusAsync()
@@ -233,8 +273,12 @@ namespace Vanilla.MediaLibrary
 				await UniTask.Yield();
 			}
 			while (FocusWhile());
+			
+//			Debug.LogError(message: $"FocusWhile is now false? [{FocusWhile()}]");
 
-			_focusInProgress = false;
+			FocusInProgress.State   = false;
+
+//			_focusInProgress = false;
 		}
 
 		protected abstract void FocusFrame();

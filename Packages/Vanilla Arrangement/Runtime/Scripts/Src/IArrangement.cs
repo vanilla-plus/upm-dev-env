@@ -29,7 +29,7 @@ namespace Vanilla.Arrangement
 			set;
 		}
 		
-		bool ArrangementInProgress
+		Toggle ArrangementInProgress
 		{
 			get;
 		}
@@ -38,7 +38,7 @@ namespace Vanilla.Arrangement
 
 		void Populate();
 
-		void InvokeArrangement();
+//		void InvokeArrangement();
 		
 		void ArrangeFrame();
 

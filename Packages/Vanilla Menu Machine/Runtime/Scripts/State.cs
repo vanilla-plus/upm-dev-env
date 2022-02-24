@@ -1,6 +1,8 @@
+#if DEBUG && MEDIA_LIBRARY
+#define debug
+#endif
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -43,6 +45,7 @@ namespace Vanilla.MediaLibrary
                                                    targetCondition: false,
                                                    speed: _speed);
         }
+
 
     }
 

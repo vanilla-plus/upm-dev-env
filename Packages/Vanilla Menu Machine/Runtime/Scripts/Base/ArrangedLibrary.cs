@@ -26,13 +26,27 @@ namespace Vanilla.MediaLibrary
 		public                   A Arrangement => _arrangement;
 
 
+		protected override void Awake()
+		{
+			base.Awake();
+			
+			_arrangement.Initialize();
+		}
+
+
 		public override async UniTask Construct()
 		{
+			_arrangement.ForceArrangement = true;
+
+			_arrangement.ArrangementInProgress.State = true;
+			
 			await base.Construct();
 
 			_arrangement.Populate();
 
-			_arrangement.InvokeArrangement();
+			_arrangement.ForceArrangement = false;
+			
+//			_arrangement.InvokeArrangement();
 		}
 
 	}

@@ -52,11 +52,11 @@ namespace Vanilla.MediaLibrary.Samples
 
 			originalSize = Transform.sizeDelta;
 
-			PointerHover.Normal.Empty.onFalse += () => ArrangementDirty.State = true;
-			PointerHover.Normal.Full.onFalse  += () => ArrangementDirty.State = true;
-
-			PointerHover.Normal.Full.onTrue  += () => ArrangementDirty.State = false;
-			PointerHover.Normal.Empty.onTrue += () => ArrangementDirty.State = false;
+//			PointerHover.Normal.Empty.onFalse += () => ArrangementDirty.State = true;
+//			PointerHover.Normal.Full.onFalse  += () => ArrangementDirty.State = true;
+//
+//			PointerHover.Normal.Full.onTrue  += () => ArrangementDirty.State = false;
+//			PointerHover.Normal.Empty.onTrue += () => ArrangementDirty.State = false;
 
 			PointerHover.Toggle.onTrue += SlideImageAround;
 
@@ -197,8 +197,8 @@ namespace Vanilla.MediaLibrary.Samples
 		{
 			var newSize = originalSize;
 
-			newSize.x += originalSize.x * PointerHover.Normal.Value    * hoverExpansion.InOutPower(power: 1.25f);
-			newSize.x += originalSize.x * PointerSelected.Normal.Value * selectExpansion.InOutPower(power: 1.25f);
+			newSize.x += originalSize.x * hoverExpansion  * PointerHover.Normal.Value.InOutPower(power: 3f);
+			newSize.x += originalSize.x * selectExpansion * PointerSelected.Normal.Value.InOutPower(power: 3f);
 
 			Transform.sizeDelta = newSize;
 			

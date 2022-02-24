@@ -1,3 +1,7 @@
+#if DEBUG && NORMAL
+#define debug
+#endif
+
 using System;
 
 using Cysharp.Threading.Tasks;
@@ -32,6 +36,10 @@ namespace Vanilla
 
                 if (Mathf.Abs(f: _value - value) < Mathf.Epsilon) return;
 
+                #if debug
+                Debug.Log($"Normal value has changed from [{_value}] to [{value}]")
+                #endif
+                
                 var outgoing = _value;
 
                 _value = value;
@@ -40,6 +48,10 @@ namespace Vanilla
                 {
                     if (outgoing < Mathf.Epsilon)
                     {
+                        #if debug
+                        Debug.Log("Normal is no longer empty");
+                        #endif
+                        
                         empty.State = false;
                     }
 
@@ -49,6 +61,10 @@ namespace Vanilla
 
                     if (1.0f - _value < Mathf.Epsilon)
                     {
+                        #if debug
+                        Debug.Log("Normal is full");
+                        #endif
+                        
                         full.State = true;
                     }
                 }
@@ -56,6 +72,10 @@ namespace Vanilla
                 {
                     if (1.0f - outgoing < Mathf.Epsilon)
                     {
+                        #if debug
+                        Debug.Log("Normal is no longer full");
+                        #endif
+                        
                         full.State = false;
                     }
 
@@ -65,6 +85,10 @@ namespace Vanilla
 
                     if (_value < Mathf.Epsilon)
                     {
+                        #if debug
+                        Debug.Log("Normal is now empty");
+                        #endif
+                        
                         empty.State = true;
                     }
                 }
@@ -105,11 +129,14 @@ namespace Vanilla
         }
 
 
+        public bool IsFullOrEmpty() => empty.State || full.State;
+
+
         /// <summary>
         ///     This UniTask will 'fill' the normal, frame by frame, until it is full or the passed in toggle
         ///     evaluates false.
         ///
-        ///     If you need the drain to continue while the toggle is false, pass in false as the second parameter.
+        ///     If you need the drain to continue while the toggle is false, pass in 'false' as the second parameter.
         /// </summary>
         public async UniTask Fill(Toggle conditional,
                                   bool targetCondition = true,

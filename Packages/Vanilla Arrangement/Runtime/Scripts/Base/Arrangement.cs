@@ -6,6 +6,8 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
+using static UnityEngine.Debug;
+
 namespace Vanilla.Arrangement
 {
 
@@ -21,7 +23,7 @@ namespace Vanilla.Arrangement
 		public  T Parent => _parent;
 
 		[SerializeField]
-		protected HashSet<I> _items;
+		protected HashSet<I> _items = new(64);
 		public HashSet<I> Items
 		{
 			get => _items;
@@ -37,8 +39,8 @@ namespace Vanilla.Arrangement
 		}
 
 		[SerializeField]
-		private bool _arrangementInProgress = false;
-		public bool ArrangementInProgress => _arrangementInProgress;
+		private Toggle _arrangementInProgress = new Toggle(startingState:false);
+		public Toggle ArrangementInProgress => _arrangementInProgress;
 
 		
 		private Action _onArrangeBegun;
@@ -56,9 +58,13 @@ namespace Vanilla.Arrangement
 		}
 
 
+		public void Initialize()
+		{
+			ArrangementInProgress.onTrue += () => ArrangeAsync();
+		}
+
 		public void Populate()
 		{
-			if (_items == null) _items = new HashSet<I>(capacity: 64);
 
 			for (var i = 0;
 			     i < _parent.childCount;
@@ -70,8 +76,10 @@ namespace Vanilla.Arrangement
 
 				_items.Add(item: c);
 
-				c.ArrangementDirty.onTrue += InvokeArrangement;
+				c.ArrangementDirty.onTrue += () => ArrangementInProgress.State = true;
 			}
+			
+			
 		}
 
 
@@ -91,14 +99,14 @@ namespace Vanilla.Arrangement
 			}
 		}
 
-		public void InvokeArrangement()
-		{
-			if (_arrangementInProgress) return;
-
-			_arrangementInProgress = true;
-
-			ArrangeAsync();
-		}
+//		public void InvokeArrangement()
+//		{
+//			if (_arrangementInProgress) return;
+//
+//			_arrangementInProgress = true;
+//
+//			ArrangeAsync();
+//		}
 		
 		private async UniTask ArrangeAsync()
 		{
@@ -114,7 +122,7 @@ namespace Vanilla.Arrangement
 
 			OnArrangeComplete?.Invoke();
 
-			_arrangementInProgress = false;
+			ArrangementInProgress.State = false;
 		}
 
 

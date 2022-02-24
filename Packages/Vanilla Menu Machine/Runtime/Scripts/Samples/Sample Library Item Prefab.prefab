@@ -470,7 +470,7 @@ MonoBehaviour:
       full:
         _state: 0
       _value: 0
-    seconds: 0.25
+    seconds: 0.5
   _pointerDown:
     _toggle:
       _state: 0
