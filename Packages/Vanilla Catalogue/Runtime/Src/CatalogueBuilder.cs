@@ -208,12 +208,7 @@ namespace Vanilla.Catalogue
 					return;
 				}
 
-				foreach (var newItem in catalogue.Items)
-				{
-					newItem.RawData = items[key: ++i];
-
-					await newItem.Initialize();
-				}
+				foreach (var newItem in catalogue.Items) await newItem.Initialize(data: items[key: ++i]);
 
 				await catalogue.PostFetch();
 

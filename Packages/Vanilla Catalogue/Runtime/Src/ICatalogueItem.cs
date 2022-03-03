@@ -8,23 +8,12 @@ namespace Vanilla.Catalogue
 	public interface ICatalogueItem
 	{
 
-		JToken RawData
-		{
-			get;
-			set;
-		}
-		
-		string Name
-		{
-			get;
-		}
-
-		bool Available
+		JToken Data
 		{
 			get;
 		}
 		
-		UniTask Initialize();
+		UniTask Initialize(JToken data);
 
 	}
 

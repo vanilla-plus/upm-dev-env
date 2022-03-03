@@ -168,6 +168,12 @@
         "vanilla.ray-detectors": "1.0.0"
       }
     },
+    "vanilla.collection": {
+      "version": "file:Vanilla Collection",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "vanilla.context-menu-tools": {
       "version": "file:Vanilla Context Menu Tools",
       "depth": 0,

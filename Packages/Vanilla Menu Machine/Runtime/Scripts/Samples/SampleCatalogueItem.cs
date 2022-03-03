@@ -2,6 +2,8 @@ using System;
 
 using Cysharp.Threading.Tasks;
 
+using Newtonsoft.Json.Linq;
+
 using UnityEngine;
 
 using Vanilla.Catalogue;
@@ -13,6 +15,22 @@ namespace Vanilla.MediaLibrary.Samples
 	public class SampleCatalogueItem : CatalogueItem
 	{
 
+		[SerializeField]
+		protected string _name;
+		public string Name
+		{
+			get => _name;
+			private set => _name = value;
+		}
+
+		[SerializeField]
+		protected bool _available = true;
+		public bool Available
+		{
+			get => _available;
+			private set => _available = value;
+		}
+		
 		public int duration = 500;
 
 		public float[] borderColor = {
@@ -42,13 +60,15 @@ namespace Vanilla.MediaLibrary.Samples
 		[SerializeField]
 		public int _hash = -1;
 		
-		public override async UniTask Initialize()
+		public override async UniTask Initialize(JToken data)
 		{
+			base.Initialize(data: data);
+			
 			_hash = GetHashCode();
 			
 //            await UniTask.Delay(500);
 
-			Debug.Log(message: $"{_name} Initialized! Here, have some adhoc data matching the key [{rawDataKeyTest}] => [{RawData[key: rawDataKeyTest]}]");
+			Debug.Log(message: $"{_name} Initialized! Here, have some adhoc data matching the key [{rawDataKeyTest}] => [{Data[key: rawDataKeyTest]}]");
 		}
 
 

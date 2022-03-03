@@ -45,13 +45,14 @@ namespace Vanilla.Catalogue
             ExportToJson();
         }
 
-
-        private void Awake()
-        {
-            #if !UNITY_EDITOR
-            Destroy(this);
-            #endif
-        }
+        // FetchViaEditor might actually be useful to build with during development..
+        
+//        private void Awake()
+//        {
+//            #if !UNITY_EDITOR
+//            Destroy(this);
+//            #endif
+//        }
 
 
         private void ImportFromJson()

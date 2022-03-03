@@ -39,8 +39,9 @@ namespace Vanilla.MediaLibrary
 			[SerializeField]
 			private string key;
 
-			public void Populate(JToken data) => text.text = (string) data[key];
-
+//			public void Populate(JToken data) => text.text = (string) data[key];
+			public void Populate(CI item) => text.text = (string) item.Data[key];
+			
 			public void Populate(string dataString) => text.text = dataString;
 
 		}
@@ -149,7 +150,8 @@ namespace Vanilla.MediaLibrary
 
 		public virtual UniTask Populate(CI item)
 		{
-			foreach (var t in adhocTexts) t.Populate(data: item.RawData);
+//			foreach (var t in adhocTexts) t.Populate(data: item.RawData);
+			foreach (var t in adhocTexts) t.Populate(item);
 
 			return default;
 		}

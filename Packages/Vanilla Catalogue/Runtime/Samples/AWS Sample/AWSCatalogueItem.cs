@@ -8,6 +8,8 @@ using Amazon.S3.Transfer;
 
 using Cysharp.Threading.Tasks;
 
+using Newtonsoft.Json.Linq;
+
 using UnityEngine;
 
 using Vanilla.StringFormatting;
@@ -17,9 +19,26 @@ using static UnityEngine.Debug;
 namespace Vanilla.Catalogue
 {
 
+	[Serializable]
 	public class AWSCatalogueItem : CatalogueItem
 	{
 
+		[SerializeField]
+		protected string _name;
+		public string Name
+		{
+			get => _name;
+			private set => _name = value;
+		}
+
+		[SerializeField]
+		protected bool _available = true;
+		public bool Available
+		{
+			get => _available;
+			private set => _available = value;
+		}
+		
 		public Texture2D thumbnail = new(width: 1,
 		                                 height: 1);
 
@@ -32,8 +51,10 @@ namespace Vanilla.Catalogue
 		public string RemotePath;
 		public string ThumbnailPath;
 
-		public override UniTask Initialize()
+		public override UniTask Initialize(JToken data)
 		{
+			base.Initialize(data: data);
+			
 			nameLower     = _name.ToLower();
 			
 			RemotePath    = Path.DirectorySeparatorChar    + nameLower;

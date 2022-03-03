@@ -6,61 +6,25 @@ using UnityEngine;
 namespace Vanilla.MediaLibrary
 {
 
-	public class TileFocus : MonoBehaviour
+	public abstract class TileFocus<I,T> : ITileGroupModule<I,T>
+		where I : Tile<I,T>
+		where T : Transform
 	{
 
-		public RectTransform _rect;
-
-		public RectTransform target;
-
-		[Header(header: "Settings")]
-		public float smoothTime = 0.1666f;
-		public float smoothDistanceEpsilon = 0.001f;
-
-		[Header(header: "State")]
-		public Vector2 smoothPosition;
-		public Vector2 smoothPositionTarget;
-		public Vector2 smoothVelocity;
-
-		public float smoothDistance;
-
-		public bool lockedOn;
-
-
-		public void ChangeTarget(RectTransform newTarget)
+		private HashSet<I> _items;
+		public  HashSet<I> Items
 		{
-			target   = newTarget;
-
-			lockedOn = false;
+			get => _items;
+			set => _items = value;
 		}
 
+		public abstract void OnItemAdded(I item);
 
-		void LateUpdate()
-		{
-			smoothPositionTarget = _rect.InverseTransformPoint(position: target.position);
+		public abstract void OnItemRemoved(I item);
 
-			smoothDistance = Vector2.Distance(a: smoothPosition,
-			                                  b: smoothPositionTarget);
+		public abstract void Update();
 
-			if (smoothDistance < smoothDistanceEpsilon) lockedOn = true;
-
-			if (lockedOn)
-			{
-				_rect.anchoredPosition = -smoothPositionTarget;
-			}
-			else
-			{
-				smoothPosition = Vector2.SmoothDamp(current: smoothPosition,
-				                                    target: smoothPositionTarget,
-				                                    currentVelocity: ref smoothVelocity,
-				                                    smoothTime: smoothTime);
-
-				_rect.anchoredPosition = -smoothPosition;
-
-			}
-
-//			Canvas.ForceUpdateCanvases();
-		}
+		public abstract void LateUpdate();
 
 	}
 

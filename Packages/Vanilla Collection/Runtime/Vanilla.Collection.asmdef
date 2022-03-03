@@ -1,0 +1,23 @@
+{
+    "name": "Vanilla.Collection",
+    "rootNamespace": "Vanilla.Collection",
+    "references": [
+        "Unity.RemoteConfig",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.remote-config-runtime",
+            "expression": "2",
+            "define": "RemoteConfigInstalled"
+        }
+    ],
+    "noEngineReferences": false
+}

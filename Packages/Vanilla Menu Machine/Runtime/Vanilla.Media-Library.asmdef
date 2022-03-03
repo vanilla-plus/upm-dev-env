@@ -8,6 +8,7 @@
         "Vanilla.Normal",
         "Vanilla.Easing",
         "Vanilla.Pools",
+        "Vanilla.TypeMenu",
         "UniTask"
     ],
     "includePlatforms": [],

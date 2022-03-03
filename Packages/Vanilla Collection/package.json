@@ -1,0 +1,22 @@
+{
+  "name": "vanilla.collection",
+  "displayName": "Vanilla Collection",
+  "description": "An abstract and generic data class representing some kind of sub-item array - parsable through JSON. Super vague, sorry, but that's what it is! As an example... you could have a new Collection called Seasons containing winter, summer, etc. The reason it's this simple is so you can nest or chain them!",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-collection.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "0.1.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample",
+      "description": "Sample",
+      "path": "Samples~/Sample"
+    }
+  ]
+}

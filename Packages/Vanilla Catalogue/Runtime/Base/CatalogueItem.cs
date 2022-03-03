@@ -4,8 +4,6 @@ using Cysharp.Threading.Tasks;
 
 using Newtonsoft.Json.Linq;
 
-using UnityEngine;
-
 namespace Vanilla.Catalogue
 {
 
@@ -13,30 +11,16 @@ namespace Vanilla.Catalogue
 	public abstract class CatalogueItem : ICatalogueItem
 	{
 
-		protected JToken _rawData;
-		public JToken RawData
-		{
-			get => _rawData;
-			set => _rawData = value;
-		}
+		[NonSerialized]
+		protected JToken _data;
+		public    JToken Data => _data;
 
-		[SerializeField]
-		protected string _name;
-		public string Name
+		public virtual UniTask Initialize(JToken data)
 		{
-			get => _name;
-			private set => _name = value;
-		}
+			_data = data;
 
-		[SerializeField]
-		protected bool _available = true;
-		public bool Available
-		{
-			get => _available;
-			private set => _available = value;
+			return default;
 		}
-
-		public abstract UniTask Initialize();
 
 	}
 

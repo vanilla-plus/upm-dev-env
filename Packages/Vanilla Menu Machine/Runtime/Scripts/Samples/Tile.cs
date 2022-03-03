@@ -1,47 +1,35 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-using Vanilla.Easing;
-
 namespace Vanilla.MediaLibrary
 {
 
-    public class Tile : MonoBehaviour,
-                            IPointerEnterHandler,
-                            IPointerExitHandler,
-                            IPointerDownHandler,
-                            IPointerUpHandler
+    public abstract class Tile<I, T> : MonoBehaviour,
+                           IPointerEnterHandler,
+                           IPointerExitHandler,
+                           IPointerDownHandler,
+                           IPointerUpHandler
+        where I : Tile<I,T>
+        where T : Transform
     {
 
-        private RectTransform _rect;
-
-        public TileFocus focusPanel;
-
+        public T Transform;
+        
         public State hover;
         public State down;
         public State selected;
+        
+        public static I Current;
 
-        private Vector2 originalSize;
-
-        public float hoverScalar  = 1.0f;
-        public float selectScalar = 1.0f;
-
-
-        void Awake()
+        public abstract bool MonoSelectable();
+        
+        protected virtual void Awake()
         {
-            _rect        = (RectTransform) transform;
-            originalSize = _rect.sizeDelta;
+            Transform = transform as T;
             
             hover.Init();
             down.Init();
             selected.Init();
-
-            focusPanel = GetComponentInParent<TileFocus>();
-
-            selected.Toggle.onTrue += () => focusPanel.ChangeTarget(newTarget: _rect);
-
-            hover.Normal.OnChange    += _ => Resize();
-            selected.Normal.OnChange += _ => Resize();
         }
 
 
@@ -68,32 +56,32 @@ namespace Vanilla.MediaLibrary
 
         public void OnPointerUp(PointerEventData eventData)
         {
-//            if (down.Toggle.State) selected.Toggle.Flip();
-            if (down.Toggle.State) focusPanel.ChangeTarget(newTarget: _rect);
+            if (down.Toggle.State)
+            {
+                selected.Toggle.State = true;
+
+                if (MonoSelectable())
+                {
+                    if (Current)
+                    {
+                        Debug.Log("Outgoing " + Current.name);
+                        
+                        Current.selected.Toggle.State = false;
+                    }
+                    
+                    selected.Toggle.State = true;
+
+                    Current = this as I;
+                }
+                else
+                {
+                    selected.Toggle.Flip();
+                }
+            }
 
             down.Toggle.State = false;
         }
 
-
-        public void Resize()
-        {
-            // Hovering over elements inside the tile count as de-hover.
-            // We should only factor in the hover normal if the tile isn't selected.
-            var hoverPadding = (selected.Toggle.State ?
-                                    hoverScalar :
-                                    hover.Normal.Value.InOutPower(2.0f) * hoverScalar)
-                             * originalSize;
-            
-            var selectPadding = selected.Normal.Value.InOutPower(2.0f) * selectScalar * originalSize;
-
-            var finalSize = originalSize + hoverPadding + selectPadding;
-
-            finalSize.y = originalSize.y;
-            
-            _rect.sizeDelta = finalSize;
-            
-            Canvas.ForceUpdateCanvases();
-        }
 
     }
 
