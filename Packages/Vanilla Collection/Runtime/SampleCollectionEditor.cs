@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Vanilla.Collection
+namespace Vanilla.JNode
 {
     [Serializable]
-    public class SampleCollectionEditor : CollectionEditor<TestPayload>
+    public class SampleCollectionEditor : CollectionEditor<TestLocation>
     {
 
         

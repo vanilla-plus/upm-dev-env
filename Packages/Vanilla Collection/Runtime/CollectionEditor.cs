@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 using UnityEngine;
 
-namespace Vanilla.Collection
+namespace Vanilla.JNode
 {
 
     public class CollectionEditor<I> : MonoBehaviour
