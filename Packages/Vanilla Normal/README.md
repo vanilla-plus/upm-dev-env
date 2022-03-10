@@ -1,8 +1,8 @@
-# Vanilla Package Template
+# Vanilla Normal
 
-Vanilla Package Template is part of the Vanilla For Unity SDK.
+Normal is part of the Vanilla UPM SDK.
 
-Vanilla Package Template is a template for Vanilla Unity SDK packages.
+Normal is a basic tool class for driving things with a float clamped between 0-1, i.e. a one-dimensional normal. Normal features a Toggle for being 'empty' (0f) and 'full' (1.0f) which can be subscribed to, as well as when the value increases or decreases or changes at all.
 
 ---
 
@@ -26,18 +26,25 @@ Then add:
 Instead of beginning new classes from MonoBehaviour, you can try the inherited default class VanillaBehaviour.
 
 ```csharp
-public class MyNewClass : MonoBehaviour 
+public class Bomb : MonoBehaviour 
 {
 
-	public Text tapCountText;
-
-	void Start() => tapCountText = GetComponentDynamic<Text>(GetComponentStyle.InParent);
-
-	void Update() 
+	public Normal normal = new Normal(0.0f);
+    
+	async void Start()
 	{
-		if (!AnyTouchBegan()) return;
+		normal.Empty.onFalse += () => Debug.Log("What's that hissing noise...?");
+        
+		normal.OnChange += n => transform.localScale = Vector3.one * Mathf.Lerp(1.0f, 2.0f, n);
 
-		Log("Can't you hear me knockin'?");
+		normal.Full.onTrue += () =>
+		                      {
+			                      Debug.Log("Shes gonna blow!!");
+
+			                      Destroy(gameObject);
+		                      };
+
+		await normal.Fill(null);
 	}
 
 }

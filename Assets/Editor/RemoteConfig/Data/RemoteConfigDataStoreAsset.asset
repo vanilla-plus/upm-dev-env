@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"cd2d616c-58cd-491d-aed1-5ec662d3c443\"\n   
+  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"54f98583-5f7a-4978-8352-39f46db144e1\"\n   
     },\n    \"rs\": {\n      \"key\": \"manifest\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"_version\": 0,\n        \"_items\":
     [\n          {\n            \"_name\": \"Antarctica\",\n            \"_available\":
@@ -31,7 +31,7 @@ MonoBehaviour:
     ],\n            \"latLong\": [\n              10.453800201416016,\n             
     -84.75909423828125\n            ],\n            \"rawDataKeyTest\": \"duration\"\n         
     }\n        ]\n      }\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\":
-    \"1c12b725-d72b-4eac-8cb1-0f3b647b32bf\"\n    },\n    \"rs\": {\n      \"key\":
+    \"65cec4ef-0518-4b5c-8dd7-0ea061b1ec72\"\n    },\n    \"rs\": {\n      \"key\":
     \"catalogueA\",\n      \"type\": \"json\",\n      \"schemaId\": null,\n     
     \"value\": {\n        \"_items\": [\n          {\n            \"_name\": \"Antarctica\",\n           
     \"_available\": true,\n            \"_index\": 0,\n            \"_borderColor\":
@@ -46,7 +46,7 @@ MonoBehaviour:
     \"_borderColor\": [\n              0.5,\n              0.5,\n              1.0,\n             
     1.0\n            ],\n            \"_latLong\": [\n              10.453800201416016,\n             
     -84.75909423828125\n            ]\n          }\n        ]\n      }\n    }\n 
-    },\n  {\n    \"metadata\": {\n      \"entityId\": \"b780a719-e4f9-470b-bd2c-b13d2012ed9d\"\n   
+    },\n  {\n    \"metadata\": {\n      \"entityId\": \"80283d89-b667-453c-a6cd-82724eaf11f5\"\n   
     },\n    \"rs\": {\n      \"key\": \"antarctica\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"_items\": [\n          {\n           
     \"_name\": \"Penguins\",\n            \"_available\": true,\n            \"_duration\":
@@ -57,7 +57,7 @@ MonoBehaviour:
     \"Brown bears that have undergone the Napisan challenge\",\n            \"_thumbnailName\":
     \"polar-bears.jpg\",\n            \"_videoPath\": \"polar-bears.mp4\",\n           
     \"_index\": 1\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"metadata\":
-    {\n      \"entityId\": \"16ae01c7-09d2-45e2-b3c1-afc840fc162f\"\n    },\n   
+    {\n      \"entityId\": \"0dfc31de-8e47-44ac-9d20-54679db32450\"\n    },\n   
     \"rs\": {\n      \"key\": \"borneo\",\n      \"type\": \"json\",\n      \"schemaId\":
     null,\n      \"value\": {\n        \"_items\": [\n          {\n            \"_name\":
     \"Snakes\",\n            \"_available\": true,\n            \"_duration\": 500,\n           
@@ -68,7 +68,7 @@ MonoBehaviour:
     \"Behind the scenes at the Vanilla internship program\",\n            \"_thumbnailName\":
     \"orangutans.jpg\",\n            \"_videoPath\": \"orangutans.mp4\",\n           
     \"_index\": 1\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"metadata\":
-    {\n      \"entityId\": \"d0e72a45-77ae-46a7-bca2-081ea90dc79a\"\n    },\n   
+    {\n      \"entityId\": \"96ce1504-e420-44c1-ae40-a484ca669468\"\n    },\n   
     \"rs\": {\n      \"key\": \"costa rica\",\n      \"type\": \"json\",\n      \"schemaId\":
     null,\n      \"value\": {\n        \"_items\": [\n          {\n            \"_name\":
     \"Manta Rays\",\n            \"_available\": true,\n            \"_duration\":
@@ -79,18 +79,18 @@ MonoBehaviour:
     \"I don't know what else lives in Costa Rica\",\n            \"_thumbnailName\":
     \"thespians.jpg\",\n            \"_videoPath\": \"thespians.mp4\",\n           
     \"_index\": 1\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"metadata\":
-    {\n      \"entityId\": \"42378ee2-6369-4454-b398-81b761bb1586\"\n    },\n   
+    {\n      \"entityId\": \"d7c7af21-d588-419c-8683-aeacc25a94bc\"\n    },\n   
     \"rs\": {\n      \"key\": \"something\",\n      \"type\": \"json\",\n      \"schemaId\":
     null,\n      \"value\": {\n        \"_name\": \"Mars\",\n        \"_available\":
     true,\n        \"_index\": 3,\n        \"_borderColor\": [\n          1.0,\n         
     1.0,\n          1.0,\n          1.0\n        ],\n        \"_latLong\": [\n         
     -76.274765014648438,\n          22.772115707397461\n        ]\n      }\n    }\n 
-    },\n  {\n    \"metadata\": {\n      \"entityId\": \"f12e6140-dfbc-4048-a442-763b6fee76ce\"\n   
+    },\n  {\n    \"metadata\": {\n      \"entityId\": \"c5f9bd7b-3bbe-4f98-8519-7e1ff59618ee\"\n   
     },\n    \"rs\": {\n      \"key\": \"dumb\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"stuff\": [\n          {\n           
     \"name\": \"Henry\",\n            \"age\": 20\n          },\n          {\n           
     \"name\": \"Archibald\",\n            \"age\": 34\n          }\n        ]\n     
-    }\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"3248f36b-a49b-4543-9ed7-ec7511831c18\"\n   
+    }\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"702d7ef6-dc48-40da-ae63-3596cf696b4f\"\n   
     },\n    \"rs\": {\n      \"key\": \"catalogueB\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"_items\": [\n          {\n           
     \"_name\": \"Mars\",\n            \"_available\": true,\n            \"_index\":
@@ -102,7 +102,7 @@ MonoBehaviour:
     0.5,\n              0.5,\n              1.0,\n              1.0\n           
     ],\n            \"_latLong\": [\n              10.453800201416016,\n             
     -84.75909423828125\n            ]\n          }\n        ]\n      }\n    }\n 
-    },\n  {\n    \"metadata\": {\n      \"entityId\": \"5838725e-6323-44fe-aaa8-6c0910b3b33d\"\n   
+    },\n  {\n    \"metadata\": {\n      \"entityId\": \"b9869c7d-98d9-4929-9c43-565bbe688587\"\n   
     },\n    \"rs\": {\n      \"key\": \"mars\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"_items\": [\n          {\n           
     \"_name\": \"Ants\",\n            \"_available\": true,\n            \"_duration\":
@@ -112,7 +112,7 @@ MonoBehaviour:
     \"_available\": false,\n            \"_duration\": 500,\n            \"_description\":
     \"The cool kind\",\n            \"_thumbnailName\": \"dwarves.jpg\",\n           
     \"_videoPath\": \"dwarves.mp4\",\n            \"_index\": 1\n          }\n       
-    ]\n      }\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"f4327807-526c-4a63-b501-37ed9c9743a1\"\n   
+    ]\n      }\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"9dd2e7d4-e894-4adb-91f6-c2cd6eb6e1bd\"\n   
     },\n    \"rs\": {\n      \"key\": \"jupiter\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"_items\": [\n          {\n           
     \"_name\": \"Fish\",\n            \"_available\": true,\n            \"_duration\":
@@ -123,7 +123,7 @@ MonoBehaviour:
     \"Mostly Huskies and Corgies\",\n            \"_thumbnailName\": \"dogs.jpg\",\n           
     \"_videoPath\": \"dogs.mp4\",\n            \"_index\": 1\n          }\n       
     ]\n      }\n    }\n  }\n]"
-  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"cd2d616c-58cd-491d-aed1-5ec662d3c443\"\n   
+  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"54f98583-5f7a-4978-8352-39f46db144e1\"\n   
     },\n    \"rs\": {\n      \"key\": \"manifest\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"_version\": 0,\n        \"_items\":
     [\n          {\n            \"_name\": \"Antarctica\",\n            \"_available\":
@@ -142,7 +142,7 @@ MonoBehaviour:
     ],\n            \"latLong\": [\n              10.453800201416016,\n             
     -84.75909423828125\n            ],\n            \"rawDataKeyTest\": \"duration\"\n         
     }\n        ]\n      }\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\":
-    \"1c12b725-d72b-4eac-8cb1-0f3b647b32bf\"\n    },\n    \"rs\": {\n      \"key\":
+    \"65cec4ef-0518-4b5c-8dd7-0ea061b1ec72\"\n    },\n    \"rs\": {\n      \"key\":
     \"catalogueA\",\n      \"type\": \"json\",\n      \"schemaId\": null,\n     
     \"value\": {\n        \"_items\": [\n          {\n            \"_name\": \"Antarctica\",\n           
     \"_available\": true,\n            \"_index\": 0,\n            \"_borderColor\":
@@ -157,7 +157,7 @@ MonoBehaviour:
     \"_borderColor\": [\n              0.5,\n              0.5,\n              1.0,\n             
     1.0\n            ],\n            \"_latLong\": [\n              10.453800201416016,\n             
     -84.75909423828125\n            ]\n          }\n        ]\n      }\n    }\n 
-    },\n  {\n    \"metadata\": {\n      \"entityId\": \"b780a719-e4f9-470b-bd2c-b13d2012ed9d\"\n   
+    },\n  {\n    \"metadata\": {\n      \"entityId\": \"80283d89-b667-453c-a6cd-82724eaf11f5\"\n   
     },\n    \"rs\": {\n      \"key\": \"antarctica\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"_items\": [\n          {\n           
     \"_name\": \"Penguins\",\n            \"_available\": true,\n            \"_duration\":
@@ -168,7 +168,7 @@ MonoBehaviour:
     \"Brown bears that have undergone the Napisan challenge\",\n            \"_thumbnailName\":
     \"polar-bears.jpg\",\n            \"_videoPath\": \"polar-bears.mp4\",\n           
     \"_index\": 1\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"metadata\":
-    {\n      \"entityId\": \"16ae01c7-09d2-45e2-b3c1-afc840fc162f\"\n    },\n   
+    {\n      \"entityId\": \"0dfc31de-8e47-44ac-9d20-54679db32450\"\n    },\n   
     \"rs\": {\n      \"key\": \"borneo\",\n      \"type\": \"json\",\n      \"schemaId\":
     null,\n      \"value\": {\n        \"_items\": [\n          {\n            \"_name\":
     \"Snakes\",\n            \"_available\": true,\n            \"_duration\": 500,\n           
@@ -179,7 +179,7 @@ MonoBehaviour:
     \"Behind the scenes at the Vanilla internship program\",\n            \"_thumbnailName\":
     \"orangutans.jpg\",\n            \"_videoPath\": \"orangutans.mp4\",\n           
     \"_index\": 1\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"metadata\":
-    {\n      \"entityId\": \"d0e72a45-77ae-46a7-bca2-081ea90dc79a\"\n    },\n   
+    {\n      \"entityId\": \"96ce1504-e420-44c1-ae40-a484ca669468\"\n    },\n   
     \"rs\": {\n      \"key\": \"costa rica\",\n      \"type\": \"json\",\n      \"schemaId\":
     null,\n      \"value\": {\n        \"_items\": [\n          {\n            \"_name\":
     \"Manta Rays\",\n            \"_available\": true,\n            \"_duration\":
@@ -190,18 +190,18 @@ MonoBehaviour:
     \"I don't know what else lives in Costa Rica\",\n            \"_thumbnailName\":
     \"thespians.jpg\",\n            \"_videoPath\": \"thespians.mp4\",\n           
     \"_index\": 1\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"metadata\":
-    {\n      \"entityId\": \"42378ee2-6369-4454-b398-81b761bb1586\"\n    },\n   
+    {\n      \"entityId\": \"d7c7af21-d588-419c-8683-aeacc25a94bc\"\n    },\n   
     \"rs\": {\n      \"key\": \"something\",\n      \"type\": \"json\",\n      \"schemaId\":
     null,\n      \"value\": {\n        \"_name\": \"Mars\",\n        \"_available\":
     true,\n        \"_index\": 3,\n        \"_borderColor\": [\n          1.0,\n         
     1.0,\n          1.0,\n          1.0\n        ],\n        \"_latLong\": [\n         
     -76.274765014648438,\n          22.772115707397461\n        ]\n      }\n    }\n 
-    },\n  {\n    \"metadata\": {\n      \"entityId\": \"f12e6140-dfbc-4048-a442-763b6fee76ce\"\n   
+    },\n  {\n    \"metadata\": {\n      \"entityId\": \"c5f9bd7b-3bbe-4f98-8519-7e1ff59618ee\"\n   
     },\n    \"rs\": {\n      \"key\": \"dumb\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"stuff\": [\n          {\n           
     \"name\": \"Henry\",\n            \"age\": 20\n          },\n          {\n           
     \"name\": \"Archibald\",\n            \"age\": 34\n          }\n        ]\n     
-    }\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"3248f36b-a49b-4543-9ed7-ec7511831c18\"\n   
+    }\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"702d7ef6-dc48-40da-ae63-3596cf696b4f\"\n   
     },\n    \"rs\": {\n      \"key\": \"catalogueB\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"_items\": [\n          {\n           
     \"_name\": \"Mars\",\n            \"_available\": true,\n            \"_index\":
@@ -213,7 +213,7 @@ MonoBehaviour:
     0.5,\n              0.5,\n              1.0,\n              1.0\n           
     ],\n            \"_latLong\": [\n              10.453800201416016,\n             
     -84.75909423828125\n            ]\n          }\n        ]\n      }\n    }\n 
-    },\n  {\n    \"metadata\": {\n      \"entityId\": \"5838725e-6323-44fe-aaa8-6c0910b3b33d\"\n   
+    },\n  {\n    \"metadata\": {\n      \"entityId\": \"b9869c7d-98d9-4929-9c43-565bbe688587\"\n   
     },\n    \"rs\": {\n      \"key\": \"mars\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"_items\": [\n          {\n           
     \"_name\": \"Ants\",\n            \"_available\": true,\n            \"_duration\":
@@ -223,7 +223,7 @@ MonoBehaviour:
     \"_available\": false,\n            \"_duration\": 500,\n            \"_description\":
     \"The cool kind\",\n            \"_thumbnailName\": \"dwarves.jpg\",\n           
     \"_videoPath\": \"dwarves.mp4\",\n            \"_index\": 1\n          }\n       
-    ]\n      }\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"f4327807-526c-4a63-b501-37ed9c9743a1\"\n   
+    ]\n      }\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"9dd2e7d4-e894-4adb-91f6-c2cd6eb6e1bd\"\n   
     },\n    \"rs\": {\n      \"key\": \"jupiter\",\n      \"type\": \"json\",\n     
     \"schemaId\": null,\n      \"value\": {\n        \"_items\": [\n          {\n           
     \"_name\": \"Fish\",\n            \"_available\": true,\n            \"_duration\":

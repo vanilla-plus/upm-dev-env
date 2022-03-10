@@ -1,3 +1,13 @@
+#if DEBUG && NORMAL
+#define debug
+#endif
+
+#if VanillaDanger
+#define danger
+
+using static Vanilla.Danger.Danger;
+#endif
+
 using System;
 
 using Cysharp.Threading.Tasks;
@@ -37,7 +47,11 @@ namespace Vanilla
             {
                 value = Mathf.Clamp01(value: value);
 
+                #if danger
+                if (BitwiseEquals(a: _value, b: value)) return;
+                #else
                 if (Mathf.Abs(f: _value - value) < Mathf.Epsilon) return;
+                #endif
 
                 var outgoing = _value;
 
@@ -47,7 +61,11 @@ namespace Vanilla
                 
                 if (outgoing < value)
                 {
+                    #if danger
+                    if (BitwiseEquals(a: outgoing, b: 0.0f))
+                    #else
                     if (outgoing < Mathf.Epsilon)
+                    #endif
                     {
                         empty.State = false;
                     }
@@ -56,14 +74,22 @@ namespace Vanilla
 
                     onIncrease?.Invoke(obj: e);
 
+                    #if danger
+                    if (BitwiseEquals(a: _value, b: 1.0f))
+                    #else
                     if (1.0f - _value < Mathf.Epsilon)
+                    #endif
                     {
                         full.State = true;
                     }
                 }
                 else
                 {
+                    #if danger
+                    if (BitwiseEquals(a: outgoing, b: 1.0f))
+                    #else
                     if (1.0f - outgoing < Mathf.Epsilon)
+                    #endif
                     {
                         full.State = false;
                     }
@@ -72,7 +98,11 @@ namespace Vanilla
 
                     onDecrease?.Invoke(obj: e);
 
+                    #if danger
+                    if (BitwiseEquals(a: _value, b: 0.0f))
+                    #else
                     if (_value < Mathf.Epsilon)
+                    #endif
                     {
                         empty.State = true;
                     }

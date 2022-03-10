@@ -1,6 +1,6 @@
 {
-    "name": "Vanilla.Collection",
-    "rootNamespace": "Vanilla.Collection",
+    "name": "Vanilla.JNode",
+    "rootNamespace": "Vanilla.JNode",
     "references": [
         "Unity.RemoteConfig",
         "UniTask"

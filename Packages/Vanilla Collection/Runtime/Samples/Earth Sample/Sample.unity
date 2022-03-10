@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 132296978}
   - component: {fileID: 132296977}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: App
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,8 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74fdf3a57108549dbb257f20493c29f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catalogue:
-    _items: []
+  earth:
+    _name: 
+    _radius: 0
+    _continents: []
   adhocIndex: 0
   adhocKey: _name
 --- !u!4 &132296978
@@ -170,4 +172,90 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1089320657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1089320659}
+  - component: {fileID: 1089320658}
+  m_Layer: 0
+  m_Name: Earth Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1089320658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089320657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6faa5f15e764dd0881f1ff2e86965e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 
+  data:
+    _name: Earth
+    _radius: 6371
+    _continents:
+    - _name: Asia
+      _population: 4.6e+9
+      _surfaceAreaKm: 44614000
+    - _name: Africa
+      _population: 1.3e+9
+      _surfaceAreaKm: 30365000
+    - _name: Europe
+      _population: 750000000
+      _surfaceAreaKm: 10000000
+    - _name: North America
+      _population: 580000000
+      _surfaceAreaKm: 24230000
+    - _name: South America
+      _population: 420000000
+      _surfaceAreaKm: 17814000
+    - _name: Oceania
+      _population: 42000000
+      _surfaceAreaKm: 8510900
+    - _name: Antarctica
+      _population: 0
+      _surfaceAreaKm: 14200000
+  prettyPrint: 1
+  stringOutput: "{\n    \"_name\": \"Earth\",\n    \"_radius\": 6371.0,\n    \"_continents\":
+    [\n        {\n            \"_name\": \"Asia\",\n            \"_population\":
+    4600000000.0,\n            \"_surfaceAreaKm\": 44614000.0\n        },\n       
+    {\n            \"_name\": \"Africa\",\n            \"_population\": 1300000000.0,\n           
+    \"_surfaceAreaKm\": 30365000.0\n        },\n        {\n            \"_name\":
+    \"Europe\",\n            \"_population\": 750000000.0,\n            \"_surfaceAreaKm\":
+    10000000.0\n        },\n        {\n            \"_name\": \"North America\",\n           
+    \"_population\": 580000000.0,\n            \"_surfaceAreaKm\": 24230000.0\n       
+    },\n        {\n            \"_name\": \"South America\",\n            \"_population\":
+    420000000.0,\n            \"_surfaceAreaKm\": 17814000.0\n        },\n       
+    {\n            \"_name\": \"Oceania\",\n            \"_population\": 42000000.0,\n           
+    \"_surfaceAreaKm\": 8510900.0\n        },\n        {\n            \"_name\":
+    \"Antarctica\",\n            \"_population\": 0.0,\n            \"_surfaceAreaKm\":
+    14200000.0\n        }\n    ]\n}"
+  app: {fileID: 132296977}
+--- !u!4 &1089320659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089320657}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -2,6 +2,12 @@
 #define debug
 #endif
 
+#if VanillaDanger
+#define danger
+
+using static Vanilla.Danger.Danger;
+#endif
+
 using System;
 
 using Cysharp.Threading.Tasks;
@@ -23,7 +29,7 @@ namespace Vanilla
         private Toggle full = new(startingState: false);
         public Toggle Full => full;
 
-        [Range(min: 0,
+       [Range(min: 0,
                max: 1)]
         [SerializeField]
         private float _value = 0.0f;
@@ -34,48 +40,48 @@ namespace Vanilla
             {
                 value = Mathf.Clamp01(value: value);
 
+                #if danger
+                if (BitwiseEquals(a: _value, b: value)) return;
+                #else
                 if (Mathf.Abs(f: _value - value) < Mathf.Epsilon) return;
-
-                #if debug
-                Debug.Log($"Normal value has changed from [{_value}] to [{value}]")
                 #endif
-                
+
                 var outgoing = _value;
 
                 _value = value;
 
                 if (outgoing < value)
                 {
+                    #if danger
+                    if (BitwiseEquals(a: outgoing, b: 0.0f))
+                    #else
                     if (outgoing < Mathf.Epsilon)
+                    #endif
                     {
-                        #if debug
-                        Debug.Log("Normal is no longer empty");
-                        #endif
-                        
                         empty.State = false;
                     }
-
+                    
                     onChange?.Invoke(obj: _value);
 
                     onIncrease?.Invoke(obj: _value);
 
+                    #if danger
+                    if (BitwiseEquals(a: _value, b: 1.0f))
+                    #else
                     if (1.0f - _value < Mathf.Epsilon)
+                    #endif
                     {
-                        #if debug
-                        Debug.Log("Normal is full");
-                        #endif
-                        
                         full.State = true;
                     }
                 }
                 else
                 {
+                    #if danger
+                    if (BitwiseEquals(a: outgoing, b: 1.0f))
+                    #else
                     if (1.0f - outgoing < Mathf.Epsilon)
+                    #endif
                     {
-                        #if debug
-                        Debug.Log("Normal is no longer full");
-                        #endif
-                        
                         full.State = false;
                     }
 
@@ -83,12 +89,12 @@ namespace Vanilla
 
                     onDecrease?.Invoke(obj: _value);
 
+                    #if danger
+                    if (BitwiseEquals(a: _value, b: 0.0f))
+                    #else
                     if (_value < Mathf.Epsilon)
+                    #endif
                     {
-                        #if debug
-                        Debug.Log("Normal is now empty");
-                        #endif
-                        
                         empty.State = true;
                     }
                 }

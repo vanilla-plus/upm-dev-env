@@ -9,7 +9,9 @@ using Cysharp.Threading.Tasks;
 
 using Newtonsoft.Json.Linq;
 
+#if RemoteConfigInstalled
 using Unity.RemoteConfig;
+#endif
 
 using UnityEngine;
 using UnityEngine.Networking;
@@ -22,45 +24,34 @@ namespace Vanilla.JNode
 	{
 
 		[NonSerialized]
-		protected JToken _data;
-		public JToken Data => _data;
+		protected internal bool _initialized = false;
+		
+		[NonSerialized]
+		protected JToken _token;
+		public JToken Token => _token;
 
 		public string ToJson(bool prettyPrint = false) => JsonUtility.ToJson(obj: this,
 		                                                                     prettyPrint: prettyPrint);
-
 
 		internal abstract void OnValidate();
 
 		public abstract bool AutoUpdateJToken();
 
-		internal abstract UniTask AddedToCollection();
+//		internal abstract UniTask Initialize<C, N>(C collection) where C : JnodeCollection<N>
+//		                                                         where N : Jnode;
 
-		internal abstract UniTask RemovedFromCollection();
+//		internal abstract UniTask Initialize<I>(JnodeCollection<I> collection) where I : Jnode;
+		
+		internal abstract UniTask Initialize();
+
+		internal abstract UniTask Refresh();
+
+		internal abstract UniTask Deinitialize();
 
 
 		#if RemoteConfigInstalled
 		public struct userAttributes { }
 		public struct appAttributes { }
-
-
-		public async static UniTask FetchRemCon()
-		{
-			ConfigManager.FetchConfigs(userAttributes: new userAttributes(),
-			                           appAttributes: new appAttributes());
-
-			while (ConfigManager.requestStatus == ConfigRequestStatus.Pending) await UniTask.Yield();
-
-			#if debug
-			if (ConfigManager.requestStatus == ConfigRequestStatus.Failed)
-			{
-				Debug.LogError(message: $"Remote config fetch [{ConfigManager.requestStatus}]");
-			}
-			else
-			{
-				Debug.Log(message: $"Remote config fetch [{ConfigManager.requestStatus}]");
-			}
-			#endif
-		}
 
 		public async UniTask FromRemoteConfig(string rootKey,
 		                                      string fallback)
@@ -101,7 +92,9 @@ namespace Vanilla.JNode
 
 			if (ConfigManager.requestStatus == ConfigRequestStatus.Failed)
 			{
+				#if debug
 				Debug.LogError(message: "Fetch from remote config failed.");
+				#endif
 
 				return;
 			}
@@ -143,18 +136,27 @@ namespace Vanilla.JNode
 			await FromJson(json: json);
 		}
 
-
-		public virtual UniTask FromJson(string json)
+		public virtual async UniTask FromJson(string json)
 		{
 			JsonUtility.FromJsonOverwrite(json: json,
 			                              objectToOverwrite: this);
-			
+
 			if (AutoUpdateJToken()) UpdateJToken();
 
-			return default;
+			if (!_initialized)
+			{
+				_initialized = true;
+
+				await Initialize();
+			}
+			else
+			{
+				await Refresh();
+			}
 		}
-		
-		public void UpdateJToken() => _data = JToken.Parse(ToJson());
+
+
+		public void UpdateJToken() => _token = JToken.Parse(ToJson());
 
 
 	}

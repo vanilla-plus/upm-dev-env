@@ -254,7 +254,12 @@
       "version": "file:Vanilla Normal",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {}
+      "dependencies": {
+        "vanilla.easing": "1.0.0",
+        "vanilla.toggle": "1.0.0",
+        "vanilla.type-menu": "1.0.0",
+        "com.cysharp.unitask": "2.2.1"
+      }
     },
     "vanilla.package-template": {
       "version": "file:Vanilla Package Template",

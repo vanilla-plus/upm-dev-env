@@ -3,26 +3,25 @@ using System.Linq;
 
 using Cysharp.Threading.Tasks;
 
-using Newtonsoft.Json.Linq;
-
 using UnityEngine;
+
+using Vanilla.JNode.Samples;
 
 namespace Vanilla.JNode
 {
 
 	[Serializable]
 	public abstract class JNodeCollection<I> : JNode
-		where I : JNode
+		where I : JNode, IEquatable<I>
 	{
 
-		protected const string c_DefaultCollectionName = "_items";
+		public abstract I[] Items
+		{
+			get;
+		}
 
-		[SerializeField]
-		protected I[] _items = Array.Empty<I>();
-		public   I[] Items => _items;
-
-		public abstract UniTask ItemAdded(I item);
-		public abstract UniTask ItemRemoved(I item);
+		protected abstract UniTask ItemAdded(I item);
+		protected abstract UniTask ItemRemoved(I item);
 
 		public Action<I> OnItemAdded;
 
@@ -45,70 +44,204 @@ namespace Vanilla.JNode
 				                 Items.Clone() as I[] :
 				                 Array.Empty<I>();
 
+//			if (this is Earth)
+//			{
+//				Debug.Log(Items.Length);
+//				Debug.Log(itemsCache.Length);
+//
+//				Debug.Log(ReferenceEquals(Items,
+//				                          itemsCache));
+//			}
+
 			JsonUtility.FromJsonOverwrite(json: json,
 			                              objectToOverwrite: this);
-			
-			if (AutoUpdateJToken()) UpdateJToken();
 
+//			if (this is Earth)
+//			{
+//				Debug.Log(Items.Length);
+//				Debug.Log(itemsCache.Length);
+//
+//				Debug.Log(ReferenceEquals(Items,
+//				                          itemsCache));
+//			}
+
+			if (AutoUpdateJToken()) UpdateJToken();
+			
 			if (someItemsAlreadyPresent)
 			{
-				foreach (var @old in itemsCache.Except(Items))
+//				foreach (var @old in itemsCache.Except(Items))
+//				{
+//					await ItemRemovedInternal(removedItem: @old);
+//				}
+//				
+//				foreach (var @new in Items.Except(itemsCache))
+//				{
+//					await ItemAddedInternal(newItem: @new);
+//				}
+
+//				Debug.Log(Items[0].Token);
+//				Debug.Log(itemsCache[0].Token);
+
+//				Debug.Log(ReferenceEquals(Items[0],
+//				                          itemsCache[0]));
+
+				foreach (var o in itemsCache)
 				{
-					await HandleRemovedItem(removedItem: @old);
+					if (Items.Contains(o)) continue;
+					
+					await ItemRemovedInternal(removedItem: o);
 				}
 				
-				foreach (var @new in _items.Except(itemsCache))
+				foreach (var n in Items)
 				{
-					await HandleNewItem(newItem: @new);
+					if (itemsCache.Contains(n)) continue;
+					
+					await ItemAddedInternal(newItem: n);
 				}
+
+
+//				if (this is Earth)
+//				{
+//					foreach (var @old in itemsCache)
+//					{
+//						Debug.LogWarning($"Regarding @old [{@old}]...");
+//						
+//						Debug.Log("Array.Contains?");
+//						Debug.LogError(Items.Contains(@old));
+//						
+//						foreach (var @new in Items)
+//						{
+//							Debug.Log($"Does {@old} .Equals {@new}?");
+//
+//							Debug.LogError(@old.Equals(@new));
+//
+//							Debug.Log("==");
+//							Debug.LogError(@old == @new);
+//						}
+//					}
+//				}
+
+//				var i = -1;
+
+//				++i;
+
+//				foreach (var @old in itemsCache)
+//				{
+//					if (!Items.Contains(@old))
+//					{
+////						if (this is Earth)
+////						{
+////							try
+////							{
+////								Debug.Log($"Is the cached version [{itemsCache[i]}] the same object reference as the new version? [{Items[i]}]");
+////							}
+////							catch (Exception e)
+////							{
+////								Debug.LogException(e);
+////							}
+//
+////							Debug.LogError(itemsCache[i].Equals(Items[i]));
+//
+////							Debug.LogWarning($"DEBUG Removing [{@old.Token}]");
+////						}
+//
+//						await ItemRemovedInternal(removedItem: @old);
+//					}
+//				}
+
+//				i = -1;
+
+//				foreach (var @new in Items)
+//				{
+////					++i;
+//
+//					if (!itemsCache.Contains(@new))
+//					{
+//						if (this is Earth)
+//						{
+////							try
+////							{
+////								Debug.Log($"Is the cached version [{itemsCache[i]}] the same object reference as the new version? [{Items[i]}]");
+////							}
+////							catch (Exception e)
+////							{
+////								Debug.LogException(e);
+////							}
+//
+////							Debug.LogError(ReferenceEquals(itemsCache[i],
+////							                               Items[i]));
+//							
+////							Debug.LogWarning($"DEBUG Adding [{@new.Token}]");
+//						}
+//
+//						await ItemAddedInternal(newItem: @new);
+//					}
+//				}
 			}
 			else
 			{
 				foreach (var @new in Items)
 				{
-					await HandleNewItem(newItem: @new);
+					await ItemAddedInternal(newItem: @new);
 				}
+			}
+			
+			if (!_initialized)
+			{
+				_initialized = true;
+
+				await Initialize();
 			}
 		}
 
-
-//		public async UniTask FromJsonButItsJustTheItemArrayPlz(string json) => _items = JsonUtility.FromJson<I[]>(json: json); // Doesn't work..?
-//		public async UniTask FromJsonButItsJustTheItemArrayPlz(string json) => _items = (I[]) JsonUtility.FromJson(json: json,
-//		                                                                                                           type: typeof(I[])); // Also doesn't work
-
-
-		protected virtual async UniTask HandleNewItem(I newItem)
+		protected virtual async UniTask ItemAddedInternal(I newItem)
 		{
 			if (newItem.AutoUpdateJToken()) newItem.UpdateJToken();
 
-			await newItem.AddedToCollection();
+			if (!newItem._initialized)
+			{
+				newItem._initialized = true;
+				
+				await newItem.Initialize();
+			}
+			else
+			{
+				await newItem.Refresh();
+			}
 
 			await ItemAdded(item: newItem);
 
 			OnItemAdded?.Invoke(obj: newItem);
 		}
-
-
-		protected virtual async UniTask HandleRemovedItem(I removedItem)
+		
+		protected virtual async UniTask ItemRemovedInternal(I removedItem)
 		{
-			await removedItem.RemovedFromCollection();
+			OnItemRemoved?.Invoke(obj: removedItem);
+
+			if (removedItem._initialized)
+			{
+				removedItem._initialized = false;
+				
+				await removedItem.Deinitialize();
+			}
+			else
+			{
+				#if debug
+				Debug.LogError(message: "A Jnode has been de-initialized twice in a row. This shouldn't be possible - how did you let this happen!?");
+				#endif
+			}
 
 			await ItemRemoved(item: removedItem);
-
-			OnItemRemoved?.Invoke(obj: removedItem);
 		}
 
 
-		internal override async UniTask RemovedFromCollection()
+		internal override async UniTask Deinitialize()
 		{
-			if (_items != null)
+			if (Items != null)
 			{
-				foreach (var i in _items) await HandleRemovedItem(removedItem: i);
+				foreach (var i in Items) await ItemRemovedInternal(removedItem: i);
 			}
 		}
-
-
-		protected virtual string GetCollectionName() => c_DefaultCollectionName;
 
 	}
 
