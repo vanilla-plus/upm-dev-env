@@ -1,9 +1,9 @@
 {
-    "name": "Vanilla.Normal",
-    "rootNamespace": "Vanilla",
+    "name": "Vanilla.State",
+    "rootNamespace": "Vanilla.State",
     "references": [
-        "Vanilla.Danger",
         "Vanilla.Toggle",
+        "Vanilla.Normal",
         "UniTask"
     ],
     "includePlatforms": [],
@@ -13,12 +13,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [
-        {
-            "name": "vanilla.danger",
-            "expression": "0.1.0",
-            "define": "VanillaDanger"
-        }
-    ],
+    "versionDefines": [],
     "noEngineReferences": false
 }

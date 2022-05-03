@@ -10,7 +10,7 @@
   "repository": "github:vanilla-plus/upm-normal.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "type": "template",
   "samples": [
     {
@@ -20,9 +20,7 @@
     }
   ],
   "dependencies": {
-    "vanilla.easing": "1.0.0",
     "vanilla.toggle": "1.0.0",
-    "vanilla.type-menu": "1.0.0",
     "com.cysharp.unitask": "2.2.1"
   }
 }

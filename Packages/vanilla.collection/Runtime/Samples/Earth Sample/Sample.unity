@@ -1,0 +1,937 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.37311915, g: 0.3807396, b: 0.35872662, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 0}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &132296976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 132296978}
+  - component: {fileID: 132296977}
+  m_Layer: 0
+  m_Name: App
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &132296977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132296976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74fdf3a57108549dbb257f20493c29f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  earth:
+    _name: 
+    _radius: 0
+    _continents: []
+  adhocIndex: 0
+  adhocKey: _name
+--- !u!4 &132296978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132296976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &218881000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 218881002}
+  - component: {fileID: 218881001}
+  m_Layer: 0
+  m_Name: North America Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &218881001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218881000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd35e2b8380d74854bb44fda5b72f969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 
+  data:
+    _name: North America
+    _population: 580000000
+    _surfaceAreaKm: 24230000
+    _countries:
+    - _name: Canada
+      _population: 0
+      _surfaceAreaKm: 0
+    - _name: United States of America
+      _population: 0
+      _surfaceAreaKm: 0
+    - _name: Mexico
+      _population: 0
+      _surfaceAreaKm: 0
+  parseInput: 1
+  parseOutput: 0
+  prettyPrint: 1
+  stringOutput: "{\n    \"_name\": \"North America\",\n    \"_population\": 580000000.0,\n   
+    \"_surfaceAreaKm\": 24230000.0,\n    \"_countries\": [\n        {\n           
+    \"_name\": \"Canada\"\n        },\n        {\n            \"_name\": \"United
+    States of America\"\n        },\n        {\n            \"_name\": \"Mexico\"\n       
+    }\n    ]\n}"
+--- !u!4 &218881002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218881000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &218989760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 218989762}
+  - component: {fileID: 218989761}
+  m_Layer: 0
+  m_Name: Earth Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &218989761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218989760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6faa5f15e764dd0881f1ff2e86965e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 
+  data:
+    _name: Earth
+    _radius: 6371
+    _continents:
+    - _name: Asia
+      _population: 4.6e+9
+      _surfaceAreaKm: 44614000
+      _countries:
+      - _name: China
+        _population: 20
+        _surfaceAreaKm: 10
+      - _name: Korea
+        _population: 20
+        _surfaceAreaKm: 10
+      - _name: India
+        _population: 20
+        _surfaceAreaKm: 10
+    - _name: Africa
+      _population: 1.3e+9
+      _surfaceAreaKm: 30365000
+      _countries:
+      - _name: Zimbabwe
+        _population: 0
+        _surfaceAreaKm: 0
+      - _name: Rawanda
+        _population: 0
+        _surfaceAreaKm: 0
+      - _name: Ethiopia
+        _population: 0
+        _surfaceAreaKm: 0
+    - _name: Europe
+      _population: 750000000
+      _surfaceAreaKm: 10000000
+      _countries:
+      - _name: Italy
+        _population: 20
+        _surfaceAreaKm: 10
+      - _name: France
+        _population: 20
+        _surfaceAreaKm: 10
+      - _name: Germany
+        _population: 20
+        _surfaceAreaKm: 10
+    - _name: North America
+      _population: 580000000
+      _surfaceAreaKm: 24230000
+      _countries:
+      - _name: Canada
+        _population: 20
+        _surfaceAreaKm: 10
+      - _name: United States of America
+        _population: 20
+        _surfaceAreaKm: 10
+      - _name: Mexico
+        _population: 20
+        _surfaceAreaKm: 10
+    - _name: South America
+      _population: 420000000
+      _surfaceAreaKm: 17814000
+      _countries: []
+    - _name: Oceania
+      _population: 42000000
+      _surfaceAreaKm: 8510900
+      _countries:
+      - _name: Australia
+        _population: 20
+        _surfaceAreaKm: 10
+      - _name: Papua New Guinea
+        _population: 20
+        _surfaceAreaKm: 10
+      - _name: Fiji
+        _population: 20
+        _surfaceAreaKm: 10
+    - _name: Antarctica
+      _population: 0
+      _surfaceAreaKm: 14200000
+      _countries:
+      - _name: Antarctica
+        _population: 0
+        _surfaceAreaKm: 14200000
+  parseInput: 1
+  parseOutput: 0
+  prettyPrint: 1
+  stringOutput: "{\n    \"_name\": \"Earth\",\n    \"_continents\": [\n        {\n           
+    \"_name\": \"Asia\",\n            \"_countries\": [\n                {\n                   
+    \"_name\": \"China\",\n                    \"_population\": 20.0,\n                   
+    \"_surfaceAreaKm\": 10.0\n                },\n                {\n                   
+    \"_name\": \"Korea\",\n                    \"_population\": 20.0,\n                   
+    \"_surfaceAreaKm\": 10.0\n                },\n                {\n                   
+    \"_name\": \"India\",\n                    \"_population\": 20.0,\n                   
+    \"_surfaceAreaKm\": 10.0\n                }\n            ]\n        },\n       
+    {\n            \"_name\": \"Africa\",\n            \"_countries\": [\n               
+    {\n                    \"_name\": \"Zimbabwe\",\n                    \"_population\":
+    0.0,\n                    \"_surfaceAreaKm\": 0.0\n                },\n               
+    {\n                    \"_name\": \"Rawanda\",\n                    \"_population\":
+    0.0,\n                    \"_surfaceAreaKm\": 0.0\n                },\n               
+    {\n                    \"_name\": \"Ethiopia\",\n                    \"_population\":
+    0.0,\n                    \"_surfaceAreaKm\": 0.0\n                }\n           
+    ]\n        },\n        {\n            \"_name\": \"Europe\",\n            \"_countries\":
+    [\n                {\n                    \"_name\": \"Italy\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    },\n                {\n                    \"_name\": \"France\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    },\n                {\n                    \"_name\": \"Germany\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    }\n            ]\n        },\n        {\n            \"_name\": \"North America\",\n           
+    \"_countries\": [\n                {\n                    \"_name\": \"Canada\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    },\n                {\n                    \"_name\": \"United States of America\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    },\n                {\n                    \"_name\": \"Mexico\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    }\n            ]\n        },\n        {\n            \"_name\": \"South America\",\n           
+    \"_countries\": [\n                {\n                    \"_name\": \"Chile\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    },\n                {\n                    \"_name\": \"Argentina\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    },\n                {\n                    \"_name\": \"Brazil\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    }\n            ]        \n        },\n        {\n            \"_name\": \"Oceania\",\n           
+    \"_countries\": [\n                {\n                    \"_name\": \"Australia\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    },\n                {\n                    \"_name\": \"Papua New Guinea\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    },\n                {\n                    \"_name\": \"Fiji\",\n                   
+    \"_population\": 20.0,\n                    \"_surfaceAreaKm\": 10.0\n               
+    }\n            ]\n        },\n        {\n            \"_name\": \"Antarctica\",\n           
+    \"_countries\": [\n                {\n                    \"_name\": \"Antarctica\",\n                   
+    \"_population\": 0.0,\n                    \"_surfaceAreaKm\": 14200000.0\n               
+    }\n            ]\n        }\n    ]\n}"
+  app: {fileID: 132296977}
+  key: 98
+--- !u!4 &218989762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218989760}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &656847613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 656847615}
+  - component: {fileID: 656847614}
+  m_Layer: 0
+  m_Name: Earth Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &656847614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656847613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6faa5f15e764dd0881f1ff2e86965e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 
+  data:
+    _name: Earth
+    _radius: 6371
+    _continents:
+    - _name: Asia
+      _population: 0
+      _surfaceAreaKm: 0
+      _countries: []
+    - _name: Africa
+      _population: 0
+      _surfaceAreaKm: 0
+      _countries: []
+    - _name: Oceania
+      _population: 0
+      _surfaceAreaKm: 0
+      _countries: []
+    - _name: North America
+      _population: 0
+      _surfaceAreaKm: 0
+      _countries: []
+    - _name: South America
+      _population: 0
+      _surfaceAreaKm: 0
+      _countries: []
+    - _name: Antarctica
+      _population: 0
+      _surfaceAreaKm: 0
+      _countries: []
+    - _name: Europe
+      _population: 0
+      _surfaceAreaKm: 0
+      _countries: []
+  parseInput: 1
+  parseOutput: 0
+  prettyPrint: 1
+  stringOutput: "{\n    \"_name\": \"Earth\",\n    \"_radius\": 6371.0,\n    \"_continents\":
+    [\n        {\n            \"_name\": \"Asia\"\n        },\n        {\n           
+    \"_name\": \"Africa\"\n        },\n        {\n            \"_name\": \"Oceania\"\n       
+    },\n        {\n            \"_name\": \"North America\"\n        },\n       
+    {\n            \"_name\": \"South America\"\n        },\n        {\n           
+    \"_name\": \"Antarctica\"\n        },\n        {\n            \"_name\": \"Europe\"\n       
+    }\n    ]\n}"
+  app: {fileID: 0}
+  key: 0
+--- !u!4 &656847615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656847613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &700140928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 700140930}
+  - component: {fileID: 700140929}
+  m_Layer: 0
+  m_Name: Europe Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &700140929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700140928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd35e2b8380d74854bb44fda5b72f969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 
+  data:
+    _name: Europe
+    _population: 750000000
+    _surfaceAreaKm: 10000000
+    _countries:
+    - _name: Italy
+      _population: 0
+      _surfaceAreaKm: 0
+    - _name: France
+      _population: 0
+      _surfaceAreaKm: 0
+    - _name: Germany
+      _population: 0
+      _surfaceAreaKm: 0
+  parseInput: 1
+  parseOutput: 0
+  prettyPrint: 1
+  stringOutput: "{\n    \"_name\": \"Europe\",\n    \"_population\": 750000000.0,\n   
+    \"_surfaceAreaKm\": 10000000.0,\n    \"_countries\": [\n        {\n           
+    \"_name\": \"Italy\"\n        },\n        {\n            \"_name\": \"France\"\n       
+    },\n        {\n            \"_name\": \"Germany\"\n        }\n    ]\n}"
+--- !u!4 &700140930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700140928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &941626587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 941626589}
+  - component: {fileID: 941626588}
+  m_Layer: 0
+  m_Name: Africa Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &941626588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941626587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd35e2b8380d74854bb44fda5b72f969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 
+  data:
+    _name: Africa
+    _population: 1.3e+9
+    _surfaceAreaKm: 30365000
+    _countries:
+    - _name: Zimbabwe
+      _population: 0
+      _surfaceAreaKm: 0
+    - _name: Rwanda
+      _population: 0
+      _surfaceAreaKm: 0
+    - _name: Ethiopia
+      _population: 0
+      _surfaceAreaKm: 0
+  parseInput: 1
+  parseOutput: 0
+  prettyPrint: 1
+  stringOutput: "{\n    \"_name\": \"Africa\",\n    \"_population\": 1300000000.0,\n   
+    \"_surfaceAreaKm\": 30365000.0,\n    \"_countries\": [\n        {\n           
+    \"_name\": \"Zimbabwe\"\n        },\n        {\n            \"_name\": \"Rwanda\"\n       
+    },\n        {\n            \"_name\": \"Ethiopia\"\n        }\n    ]\n}"
+--- !u!4 &941626589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941626587}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1089320657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1089320659}
+  - component: {fileID: 1089320658}
+  m_Layer: 0
+  m_Name: Earth Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1089320658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089320657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6faa5f15e764dd0881f1ff2e86965e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 
+  data:
+    _name: Earth
+    _radius: 6371
+    _continents:
+    - _name: Asia
+      _population: 4.6e+9
+      _surfaceAreaKm: 44614000
+      _countries: []
+    - _name: Africa
+      _population: 1.3e+9
+      _surfaceAreaKm: 30365000
+      _countries: []
+    - _name: Europe
+      _population: 750000000
+      _surfaceAreaKm: 10000000
+      _countries: []
+    - _name: North America
+      _population: 580000000
+      _surfaceAreaKm: 24230000
+      _countries: []
+    - _name: South America
+      _population: 420000000
+      _surfaceAreaKm: 17814000
+      _countries: []
+    - _name: Oceania
+      _population: 42000000
+      _surfaceAreaKm: 8510900
+      _countries: []
+    - _name: Antarctica
+      _population: 0
+      _surfaceAreaKm: 14200000
+      _countries: []
+  parseInput: 1
+  parseOutput: 0
+  prettyPrint: 1
+  stringOutput: "{\n    \"_name\": \"Earth\",\n    \"_radius\": 6371.0,\n    \"_continents\":
+    [\n        {\n            \"_name\": \"Asia\",\n            \"_population\":
+    4600000000.0,\n            \"_surfaceAreaKm\": 44614000.0\n        },\n       
+    {\n            \"_name\": \"Africa\",\n            \"_population\": 1300000000.0,\n           
+    \"_surfaceAreaKm\": 30365000.0\n        },\n        {\n            \"_name\":
+    \"Europe\",\n            \"_population\": 750000000.0,\n            \"_surfaceAreaKm\":
+    10000000.0\n        },\n        {\n            \"_name\": \"North America\",\n           
+    \"_population\": 580000000.0,\n            \"_surfaceAreaKm\": 24230000.0\n       
+    },\n        {\n            \"_name\": \"South America\",\n            \"_population\":
+    420000000.0,\n            \"_surfaceAreaKm\": 17814000.0\n        },\n       
+    {\n            \"_name\": \"Oceania\",\n            \"_population\": 42000000.0,\n           
+    \"_surfaceAreaKm\": 8510900.0\n        },\n        {\n            \"_name\":
+    \"Antarctica\",\n            \"_population\": 0.0,\n            \"_surfaceAreaKm\":
+    14200000.0\n        }\n    ]\n}"
+  app: {fileID: 132296977}
+  key: 97
+--- !u!4 &1089320659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089320657}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1421678632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1421678634}
+  - component: {fileID: 1421678633}
+  m_Layer: 0
+  m_Name: Asia Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1421678633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421678632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd35e2b8380d74854bb44fda5b72f969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 
+  data:
+    _name: Asia
+    _population: 4.6e+9
+    _surfaceAreaKm: 44614000
+    _countries:
+    - _name: China
+      _population: 0
+      _surfaceAreaKm: 0
+    - _name: South Korea
+      _population: 0
+      _surfaceAreaKm: 0
+    - _name: India
+      _population: 0
+      _surfaceAreaKm: 0
+  parseInput: 1
+  parseOutput: 0
+  prettyPrint: 1
+  stringOutput: "{\n    \"_name\": \"Asia\",\n    \"_population\": 4600000000.0,\n   
+    \"_surfaceAreaKm\": 44614000.0,\n    \"_countries\": [\n        {\n           
+    \"_name\": \"China\"\n        {\n            \"_name\": \"South Korea\"\n       
+    },\n        {\n            \"_name\": \"India\"\n        }\n    ]\n}"
+--- !u!4 &1421678634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421678632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1708394373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1708394375}
+  - component: {fileID: 1708394374}
+  m_Layer: 0
+  m_Name: Earth Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1708394374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708394373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6faa5f15e764dd0881f1ff2e86965e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 
+  data:
+    _name: Earth
+    _radius: 6371
+    _continents: []
+  parseInput: 1
+  parseOutput: 0
+  prettyPrint: 1
+  stringOutput: "{\n    \"_name\": \"Earth\",\n    \"_radius\": 6371.0,\n    \"_continents\":
+    [\n        {\n            \"_name\": \"Asia\",\n            \"_population\":
+    4600000000.0,\n            \"_surfaceAreaKm\": 44614000.0\n        },\n       
+    {\n            \"_name\": \"Africa\",\n            \"_population\": 1300000000.0,\n           
+    \"_surfaceAreaKm\": 30365000.0\n        },\n        {\n            \"_name\":
+    \"Europe\",\n            \"_population\": 750000000.0,\n            \"_surfaceAreaKm\":
+    10000000.0\n        },\n        {\n            \"_name\": \"North America\",\n           
+    \"_population\": 580000000.0,\n            \"_surfaceAreaKm\": 24230000.0\n       
+    },\n        {\n            \"_name\": \"South America\",\n            \"_population\":
+    420000000.0,\n            \"_surfaceAreaKm\": 17814000.0\n        },\n       
+    {\n            \"_name\": \"Oceania\",\n            \"_population\": 42000000.0,\n           
+    \"_surfaceAreaKm\": 8510900.0\n        },\n        {\n            \"_name\":
+    \"Antarctica\",\n            \"_population\": 0.0,\n            \"_surfaceAreaKm\":
+    14200000.0\n        }\n    ]\n}"
+  app: {fileID: 132296977}
+  key: 99
+--- !u!4 &1708394375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708394373}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1739833903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1739833905}
+  - component: {fileID: 1739833904}
+  m_Layer: 0
+  m_Name: South America Editor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1739833904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739833903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd35e2b8380d74854bb44fda5b72f969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 
+  data:
+    _name: South America
+    _population: 420000000
+    _surfaceAreaKm: 17814000
+    _countries:
+    - _name: Chile
+      _population: 0
+      _surfaceAreaKm: 0
+    - _name: Argentina
+      _population: 0
+      _surfaceAreaKm: 0
+    - _name: Brazil
+      _population: 0
+      _surfaceAreaKm: 0
+  parseInput: 1
+  parseOutput: 0
+  prettyPrint: 1
+  stringOutput: "{\n    \"_name\": \"North America\",\n    \"_population\": 580000000.0,\n   
+    \"_surfaceAreaKm\": 24230000.0,\n    \"_countries\": [\n        {\n           
+    \"_name\": \"Canada\"\n        },\n        {\n            \"_name\": \"United
+    States of America\"\n        },\n        {\n            \"_name\": \"Mexico\"\n       
+    }\n    ]\n}"
+--- !u!4 &1739833905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739833903}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

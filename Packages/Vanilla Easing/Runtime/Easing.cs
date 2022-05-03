@@ -166,13 +166,16 @@ namespace Vanilla.Easing
 		/// <summary>
 		///     Ease out with a bounce-like animation.
 		/// </summary>
-		public static float OutBounce(this float t) => t switch
-		                                               {
-			                                               < A => L0 * t * t,
-			                                               < B => L0 * (t -= X) * t + 0.75f,
-			                                               < C => L0 * (t -= Y) * t + 0.9375f,
-			                                               _   => L0 * (t -= Z) * t + 0.984375f
-		                                               };
+		public static float OutBounce(this float t)
+		{
+			switch (t)
+			{
+				case < A: return L0 * t * t;
+				case < B: return L0 * (t -= X) * t + 0.75f;
+				case < C: return L0 * (t -= Y) * t + 0.9375f;
+				default:  return L0 * (t -= Z) * t + 0.984375f;
+			}
+		}
 
 
 		/// <summary>

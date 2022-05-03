@@ -1,6 +1,4 @@
-#if DEBUG && NORMAL
-#define debug
-#endif
+//#define debug
 
 #if VanillaDanger
 #define danger
@@ -18,15 +16,15 @@ namespace Vanilla
 {
 
     [Serializable]
-    public class Normal : INormal
+    public class Normal
     {
 
         [SerializeField]
-        private Toggle empty = new(startingState: true);
+        private Toggle empty = new Toggle(startingState: true);
         public Toggle Empty => empty;
 
         [SerializeField]
-        private Toggle full = new(startingState: false);
+        private Toggle full = new Toggle(startingState: false);
         public Toggle Full => full;
 
        [Range(min: 0,

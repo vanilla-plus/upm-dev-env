@@ -20,6 +20,8 @@ namespace Vanilla.JNode
         public I data = new();
 
         [Header("Output Json")]
+        public bool parseInput = true;
+        public bool parseOutput = true;
         public bool prettyPrint = true;
 
         [TextArea(10,
@@ -29,15 +31,23 @@ namespace Vanilla.JNode
 
         protected virtual void OnValidate()
         {
-            if (!string.IsNullOrEmpty(value: input))
+            if (parseInput && !string.IsNullOrEmpty(value: input))
             {
                 data.FromJson(json: input);
             }
 
+            gameObject.name = GetName() + " Editor";
+
             data.OnValidate();
 
-            stringOutput = data.ToJson(prettyPrint: prettyPrint);
+            if (parseOutput)
+            {
+                stringOutput = data.ToJson(prettyPrint: prettyPrint);
+            }
         }
+
+
+        protected abstract string GetName();
 
     }
 

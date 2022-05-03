@@ -15,6 +15,10 @@ namespace Vanilla.JNode
 		where I : JNode, IEquatable<I>
 	{
 
+		// We only enforce a getter for the item collection here so that the real name of
+		// the collection can difference depending on the context.
+		// If we included the real array here, it would have to take a specific name like "_items"
+		// which would be a strict convention for JSON layouts.
 		public abstract I[] Items
 		{
 			get;

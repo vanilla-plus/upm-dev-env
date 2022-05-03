@@ -168,12 +168,6 @@
         "vanilla.ray-detectors": "1.0.0"
       }
     },
-    "vanilla.collection": {
-      "version": "file:Vanilla Collection",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "vanilla.context-menu-tools": {
       "version": "file:Vanilla Context Menu Tools",
       "depth": 0,
@@ -242,6 +236,14 @@
         "com.cysharp.unitask": "2.2.1"
       }
     },
+    "vanilla.jnode": {
+      "version": "file:Vanilla JNode",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "vanilla.type-menu": "1.0.0"
+      }
+    },
     "vanilla.media-library": {
       "version": "file:Vanilla Menu Machine",
       "depth": 0,
@@ -255,9 +257,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "vanilla.easing": "1.0.0",
         "vanilla.toggle": "1.0.0",
-        "vanilla.type-menu": "1.0.0",
         "com.cysharp.unitask": "2.2.1"
       }
     },
@@ -305,6 +305,16 @@
       "source": "embedded",
       "dependencies": {
         "vanilla.type-menu": "1.0.0"
+      }
+    },
+    "vanilla.state": {
+      "version": "file:Vanilla State",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "vanilla.toggle": "1.0.0",
+        "vanilla.normal": "1.2.1",
+        "com.cysharp.unitask": "2.2.1"
       }
     },
     "vanilla.string-formatting": {

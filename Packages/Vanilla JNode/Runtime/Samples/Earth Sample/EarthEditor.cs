@@ -10,15 +10,14 @@ namespace Vanilla.JNode.Samples
 	{
 
 		public SampleApp app;
+
+		public KeyCode key;
+
+		protected override string GetName() => data.Name;
 		
-		protected override void OnValidate()
+		void Update()
 		{
-			base.OnValidate();
-			
-			if (Application.isPlaying && app != null)
-			{
-				app.earth.FromJson(json: stringOutput);
-			}
+			if (Input.GetKeyDown(key)) app.earth.FromJson(stringOutput);
 		}
 
 	}
