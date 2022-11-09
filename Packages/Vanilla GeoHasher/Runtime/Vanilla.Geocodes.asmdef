@@ -1,6 +1,6 @@
 {
-    "name": "Vanilla.Geodetics",
-    "rootNamespace": "Vanilla.Geodetics",
+    "name": "Vanilla.Geocodes",
+    "rootNamespace": "Vanilla.Geocodes",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

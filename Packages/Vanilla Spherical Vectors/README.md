@@ -1,8 +1,8 @@
-# Geodetics
+# Spherical Vectors
 
-Geodetics is part of the Vanilla Unity SDK.
+Spherical Vectors is part of the Vanilla Unity SDK.
 
-Geodetics provides two simple methods for easily converting between traditional cartesian positions (x/y/z) and geodetic positions (longitude/latitude/radius).
+Spherical Vectors provides two simple methods for easily converting between traditional cartesian positions (x/y/z) and spherical positions (longitude/latitude/radius).
 
 It doesn't even introduce any new kinds of data, just use Vector3s! Each component maps directly to its axis equivalent - for example, x maps to longitude.
 
@@ -30,7 +30,7 @@ Then add:
 ```csharp
 using UnityEngine;
 
-using Vanilla.Geodetics;
+using Vanilla.SphericalVectors;
 
 public class RotateAroundTarget : MonoBehaviour
 {

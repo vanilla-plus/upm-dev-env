@@ -35,6 +35,7 @@ namespace Vanilla.JNode
 
 		internal abstract void OnValidate();
 
+		[Tooltip("JTokens allow us to access weakly-typed properties and fields, JavaScript style.")]
 		public abstract bool AutoUpdateJToken();
 
 //		internal abstract UniTask Initialize<C, N>(C collection) where C : JnodeCollection<N>
@@ -53,28 +54,47 @@ namespace Vanilla.JNode
 		public struct userAttributes { }
 		public struct appAttributes { }
 
-		public async UniTask FromRemoteConfig(string rootKey,
-		                                      string fallback)
+
+		public async UniTask<bool> FetchRemoteConfig()
 		{
 			ConfigManager.FetchConfigs(userAttributes: new userAttributes(),
 			                           appAttributes: new appAttributes());
 
 			while (ConfigManager.requestStatus == ConfigRequestStatus.Pending) await UniTask.Yield();
 
-			if (ConfigManager.requestStatus == ConfigRequestStatus.Failed)
-			{
-				#if debug
-				Debug.LogError(message: "Fetch from remote config failed.");
-				#endif
+			#if debug
+			Debug.LogError(message: $"Remote config fetch result [{ConfigManager.requestStatus}].");
+			#endif
+			
+			return ConfigManager.requestStatus != ConfigRequestStatus.Failed;
+		}
+		
+		public async UniTask<bool> FetchRemoteConfig<U,A>(U userAttributes,
+		                                                  A appAttributes)
+			where U : struct
+			where A : struct
+		{
+			ConfigManager.FetchConfigs(userAttributes: userAttributes,
+			                           appAttributes: appAttributes);
 
-				return;
-			}
+			while (ConfigManager.requestStatus == ConfigRequestStatus.Pending) await UniTask.Yield();
+
+			#if debug
+			Debug.LogError(message: $"Remote config fetch result [{ConfigManager.requestStatus}].");
+			#endif
+			
+			return ConfigManager.requestStatus != ConfigRequestStatus.Failed;
+		}
+
+		public async UniTask FromRemoteConfig(string rootKey,
+		                                      string fallback)
+		{
+			if (!await FetchRemoteConfig()) return;
 
 			var json = ConfigManager.appConfig.GetJson(key: rootKey,
 			                                           defaultValue: fallback);
 
 			await FromJson(json: json);
-
 		}
 
 
@@ -88,16 +108,8 @@ namespace Vanilla.JNode
 			ConfigManager.FetchConfigs(userAttributes: userAttributes,
 			                           appAttributes: appAttributes);
 
-			while (ConfigManager.requestStatus == ConfigRequestStatus.Pending) await UniTask.Yield();
-
-			if (ConfigManager.requestStatus == ConfigRequestStatus.Failed)
-			{
-				#if debug
-				Debug.LogError(message: "Fetch from remote config failed.");
-				#endif
-
-				return;
-			}
+			if (!await FetchRemoteConfig(userAttributes: userAttributes,
+			                             appAttributes: appAttributes)) return;
 
 			var json = ConfigManager.appConfig.GetJson(key: rootKey,
 			                                           defaultValue: fallback);
@@ -111,7 +123,7 @@ namespace Vanilla.JNode
 		{
 			var request = new UnityWebRequest(url: url,
 			                                  method: UnityWebRequest.kHttpVerbGET,
-			                                  downloadHandler: new DownloadHandlerBuffer(),
+			                                  downloadHandler: new DownloadHandlerBuffer(), // ToDo - could this be cached and re-used instead of new'd?
 			                                  uploadHandler: null);
 
 			await request.SendWebRequest();

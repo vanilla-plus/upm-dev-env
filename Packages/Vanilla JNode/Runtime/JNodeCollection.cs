@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
-using Vanilla.JNode.Samples;
+//using Vanilla.JNode.Samples;
 
 namespace Vanilla.JNode
 {

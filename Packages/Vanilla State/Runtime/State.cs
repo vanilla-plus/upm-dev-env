@@ -10,6 +10,10 @@ namespace Vanilla.State
     {
 
         [SerializeField]
+        [HideInInspector]
+        private bool defaultActiveState;
+        
+        [SerializeField]
         public Toggle active;
 
         [SerializeField]
@@ -45,7 +49,14 @@ namespace Vanilla.State
         }
 
 
-        void OnValidate() => activeNormal.OnValidate();
+        public void OnValidate()
+        {
+            active.OnValidate();
+            activeNormal.OnValidate();
+
+            defaultActiveState = active.State;
+        }
+
 
         public void Init()
         {
@@ -78,6 +89,20 @@ namespace Vanilla.State
             active.onTrue -= Fill;
 
             active.onFalse -= Drain;
+        }
+
+
+        public void Reset()
+        {
+            active.State = defaultActiveState;
+            
+            activeNormal.Value = defaultActiveState ? 1.0f : 0.0f;
+            
+            active.SilentSet(defaultActiveState);
+
+            activeNormal.SilentSet(defaultActiveState ?
+                                       1.0f :
+                                       0.0f);
         }
 
 

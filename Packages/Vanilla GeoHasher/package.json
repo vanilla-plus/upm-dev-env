@@ -1,0 +1,22 @@
+{
+  "name": "vanilla.geocodes",
+  "displayName": "Vanilla Geocodes",
+  "description": "This package supports the creation and conversion of latitude/longitude to geohashes and vice versa.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-geohasher.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "0.1.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample A",
+      "description": "Sample to demonstrate system A",
+      "path": "Samples~/Sample A"
+    }
+  ]
+}

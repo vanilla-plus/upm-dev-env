@@ -2,9 +2,9 @@
     "name": "Vanilla.JNode",
     "rootNamespace": "Vanilla.JNode",
     "references": [
-        "Unity.RemoteConfig",
         "UniTask",
-        "Vanilla.TypeMenu"
+        "Vanilla.TypeMenu",
+        "Unity.Services.RemoteConfig"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -53,9 +53,12 @@ namespace Vanilla
                                                                {
                                                                    State: true
                                                                };
-
-
+        
         public void Flip() => State = !_state;
+
+        public void SilentSet(bool state) => _state = state;
+
+        public void OnValidate() { }
 
     }
 

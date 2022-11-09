@@ -202,6 +202,13 @@ namespace Vanilla
 
         }
 
+        public void SilentSet(float value)
+        {
+            _value = value;
+            
+            
+        }
+
     }
 
 }
