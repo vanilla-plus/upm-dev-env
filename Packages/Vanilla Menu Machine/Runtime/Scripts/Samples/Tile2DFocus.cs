@@ -37,7 +37,7 @@ namespace Vanilla.MediaLibrary
 		}
 
 
-		public override void OnItemAdded(Tile2D item) => item.selected.Toggle.onTrue += () => ChangeTarget(newTarget: item.Transform);
+		public override void OnItemAdded(Tile2D item) => item.selected.Active.onTrue += () => ChangeTarget(newTarget: item.Transform);
 
 		public override void OnItemRemoved(Tile2D item) { }
 

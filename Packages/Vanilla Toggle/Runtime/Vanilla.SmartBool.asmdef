@@ -1,11 +1,7 @@
 {
-    "name": "Vanilla.State",
-    "rootNamespace": "Vanilla.State",
-    "references": [
-        "Vanilla.Toggle",
-        "Vanilla.Normal",
-        "UniTask"
-    ],
+    "name": "Vanilla.SmartBool",
+    "rootNamespace": "Vanilla",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

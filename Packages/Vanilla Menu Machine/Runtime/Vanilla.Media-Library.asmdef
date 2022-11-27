@@ -4,12 +4,13 @@
     "references": [
         "Vanilla.Catalogue",
         "Vanilla.Arrangement",
-        "Vanilla.Toggle",
-        "Vanilla.Normal",
         "Vanilla.Easing",
         "Vanilla.Pools",
         "Vanilla.TypeMenu",
-        "UniTask"
+        "UniTask",
+        "Vanilla.SmartBool",
+        "Vanilla.SmartFloat",
+        "Vanilla.SmartState"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -9,13 +9,13 @@ namespace Vanilla.MediaLibrary.Samples
     {
 
         public SampleLibrary library;
-        public Toggle        arrangementInProgress;
+        public SmartBool        arrangementInProgress;
 
         public RectTransform _rect;
 
-        public Toggle focusInProgress = new(startingState: false);
+        public SmartBool focusInProgress = new(startingValue: false);
 
-        public Toggle lockedOn = new(startingState: false);
+        public SmartBool lockedOn = new(startingValue: false);
 
         [Header(header: "Settings")]
         public float smoothTime = 0.1666f;
@@ -65,7 +65,7 @@ namespace Vanilla.MediaLibrary.Samples
             if (targetRect                 != null
              || SampleLibraryItem.Selected != null)
             {
-                focusInProgress.State = true;
+                focusInProgress.Value = true;
             }
         }
 
@@ -97,7 +97,7 @@ namespace Vanilla.MediaLibrary.Samples
 
                 if (smoothDistance < smoothDistanceEpsilon)
                 {
-                    lockedOn.State = true;
+                    lockedOn.Value = true;
                 }
 
                 // We only want to smoothly transition over to the target position if we're far away; not after we've arrived.
@@ -117,10 +117,10 @@ namespace Vanilla.MediaLibrary.Samples
                 _rect.anchoredPosition = new Vector2(x: -smoothPosition,
                                                      y: 0.0f);
             }
-            while (arrangementInProgress.State
-                || !lockedOn.State);
+            while (arrangementInProgress.Value
+                || !lockedOn.Value);
 
-            focusInProgress.State = false;
+            focusInProgress.Value = false;
         }
 
         private void SelectedItemChanged(SampleLibraryItem outgoing,
@@ -133,11 +133,11 @@ namespace Vanilla.MediaLibrary.Samples
                 return;
             }
 
-            lockedOn.State = false;
+            lockedOn.Value = false;
 
             targetRect = incoming.Transform;
 
-            focusInProgress.State = true;
+            focusInProgress.Value = true;
         }
 
     }

@@ -58,7 +58,7 @@ namespace Vanilla.MediaLibrary.Samples
 //			PointerHover.Normal.Full.onTrue  += () => ArrangementDirty.State = false;
 //			PointerHover.Normal.Empty.onTrue += () => ArrangementDirty.State = false;
 
-			PointerHover.Toggle.onTrue += SlideImageAround;
+			PointerHover.Active.onTrue += SlideImageAround;
 
 //			PointerHover.Toggle.onFalse += () => image.rectTransform.anchoredPosition = Vector2.zero;
 			
@@ -68,26 +68,26 @@ namespace Vanilla.MediaLibrary.Samples
 //			PointerSelected.Normal.OnChange += n => Transform.sizeDelta = new Vector2(x: originalSize.x + (originalSize.x * selectExpansion) * n.InOutPower(power: 1.25f),
 //			                                                                          y: originalSize.y);
 			
-			PointerHover.Normal.OnChange += n => UpdateSize(n: n);
+			PointerHover.Progress.OnChange += n => UpdateSize(n: n);
 
-			PointerSelected.Normal.OnChange += n => UpdateSize(n: n);
+			PointerSelected.Progress.OnChange += n => UpdateSize(n: n);
 
-			PointerHover.Normal.OnChange += n => image.color = Color.Lerp(a: Color.white,
-			                                                              b: new Color(r: 0.9f,
-			                                                                           g: 0.9f,
-			                                                                           b: 0.9f,
-			                                                                           a: 1.0f),
-			                                                              t: n.InOutPower(power: 1.25f));
+			PointerHover.Progress.OnChange += n => image.color = Color.Lerp(a: Color.white,
+			                                                                b: new Color(r: 0.9f,
+			                                                                             g: 0.9f,
+			                                                                             b: 0.9f,
+			                                                                             a: 1.0f),
+			                                                                t: n.InOutPower(power: 1.25f));
 
-			PointerDown.Normal.OnChange += n => image.color = Color.Lerp(a: new Color(r: 0.9f,
-			                                                                          g: 0.9f,
-			                                                                          b: 0.9f,
-			                                                                          a: 1.0f),
-			                                                             b: new Color(r: 0.8f,
-			                                                                          g: 0.8f,
-			                                                                          b: 0.8f,
-			                                                                          a: 1.0f),
-			                                                             t: n.InOutPower(power: 1.25f));
+			PointerDown.Progress.OnChange += n => image.color = Color.Lerp(a: new Color(r: 0.9f,
+			                                                                            g: 0.9f,
+			                                                                            b: 0.9f,
+			                                                                            a: 1.0f),
+			                                                               b: new Color(r: 0.8f,
+			                                                                            g: 0.8f,
+			                                                                            b: 0.8f,
+			                                                                            a: 1.0f),
+			                                                               t: n.InOutPower(power: 1.25f));
 		}
 
 
@@ -180,9 +180,9 @@ namespace Vanilla.MediaLibrary.Samples
 
 		private async void SlideImageAround()
 		{
-			var hoverState = PointerHover.Toggle;
+			var hoverState = PointerHover.Active;
 
-			while (hoverState.State)
+			while (hoverState.Value)
 			{
 				image.rectTransform.anchoredPosition = Vector2.Lerp(a: Vector2.zero,
 				                                                    b: Transform.position - Input.mousePosition,
@@ -197,8 +197,8 @@ namespace Vanilla.MediaLibrary.Samples
 		{
 			var newSize = originalSize;
 
-			newSize.x += originalSize.x * hoverExpansion  * PointerHover.Normal.Value.InOutPower(power: 3f);
-			newSize.x += originalSize.x * selectExpansion * PointerSelected.Normal.Value.InOutPower(power: 3f);
+			newSize.x += originalSize.x * hoverExpansion  * PointerHover.Progress.Value.InOutPower(power: 3f);
+			newSize.x += originalSize.x * selectExpansion * PointerSelected.Progress.Value.InOutPower(power: 3f);
 
 			Transform.sizeDelta = newSize;
 			

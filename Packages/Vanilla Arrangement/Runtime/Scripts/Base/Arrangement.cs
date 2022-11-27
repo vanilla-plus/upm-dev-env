@@ -39,8 +39,8 @@ namespace Vanilla.Arrangement
 		}
 
 		[SerializeField]
-		private Toggle _arrangementInProgress = new Toggle(startingState:false);
-		public Toggle ArrangementInProgress => _arrangementInProgress;
+		private SmartBool _arrangementInProgress = new SmartBool(startingValue:false);
+		public SmartBool ArrangementInProgress => _arrangementInProgress;
 
 		
 		private Action _onArrangeBegun;
@@ -76,7 +76,7 @@ namespace Vanilla.Arrangement
 
 				_items.Add(item: c);
 
-				c.ArrangementDirty.onTrue += () => ArrangementInProgress.State = true;
+				c.ArrangementDirty.onTrue += () => ArrangementInProgress.Value = true;
 			}
 			
 			
@@ -122,7 +122,7 @@ namespace Vanilla.Arrangement
 
 			OnArrangeComplete?.Invoke();
 
-			ArrangementInProgress.State = false;
+			ArrangementInProgress.Value = false;
 		}
 
 

@@ -29,7 +29,7 @@ namespace Vanilla.Arrangement
 			set;
 		}
 		
-		Toggle ArrangementInProgress
+		SmartBool ArrangementInProgress
 		{
 			get;
 		}

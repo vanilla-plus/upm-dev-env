@@ -32,13 +32,13 @@ namespace Vanilla.MediaLibrary
 		
 		public void Track()
 		{
-			foreach (var t in _items) t.selected.Toggle.onTrue += () => HandleCandidateSelection(selected: t);
+			foreach (var t in _items) t.selected.Active.onTrue += () => HandleCandidateSelection(selected: t);
 		}
 
 
 		public void StopTracking()
 		{
-			foreach (var t in _items) t.selected.Toggle.onTrue -= () => HandleCandidateSelection(selected: t);
+			foreach (var t in _items) t.selected.Active.onTrue -= () => HandleCandidateSelection(selected: t);
 		}
 
 
@@ -46,7 +46,7 @@ namespace Vanilla.MediaLibrary
 		{
 			if (_current)
 			{
-				_current.selected.Toggle.State = false;
+				_current.selected.Active.Value = false;
 			}
 
 			_current = selected;

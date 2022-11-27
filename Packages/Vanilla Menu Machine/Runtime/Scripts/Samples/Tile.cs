@@ -15,9 +15,9 @@ namespace Vanilla.MediaLibrary
 
         public T Transform;
         
-        public State hover;
-        public State down;
-        public State selected;
+        public SmartState.SmartState hover;
+        public SmartState.SmartState down;
+        public SmartState.SmartState selected;
         
         public static I Current;
 
@@ -41,24 +41,24 @@ namespace Vanilla.MediaLibrary
         }
 
 
-        public void OnPointerEnter(PointerEventData eventData) => hover.Toggle.State = true;
+        public void OnPointerEnter(PointerEventData eventData) => hover.Active.Value = true;
 
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            hover.Toggle.State = false;
-            down.Toggle.State  = false;
+            hover.Active.Value = false;
+            down.Active.Value  = false;
         }
 
 
-        public void OnPointerDown(PointerEventData eventData) => down.Toggle.State = true;
+        public void OnPointerDown(PointerEventData eventData) => down.Active.Value = true;
 
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            if (down.Toggle.State)
+            if (down.Active.Value)
             {
-                selected.Toggle.State = true;
+                selected.Active.Value = true;
 
                 if (MonoSelectable())
                 {
@@ -66,20 +66,20 @@ namespace Vanilla.MediaLibrary
                     {
                         Debug.Log("Outgoing " + Current.name);
                         
-                        Current.selected.Toggle.State = false;
+                        Current.selected.Active.Value = false;
                     }
                     
-                    selected.Toggle.State = true;
+                    selected.Active.Value = true;
 
                     Current = this as I;
                 }
                 else
                 {
-                    selected.Toggle.Flip();
+                    selected.Active.Flip();
                 }
             }
 
-            down.Toggle.State = false;
+            down.Active.Value = false;
         }
 
 

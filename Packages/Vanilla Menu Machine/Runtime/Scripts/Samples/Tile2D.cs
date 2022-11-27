@@ -26,8 +26,8 @@ namespace Vanilla.MediaLibrary
 
 //            focusPanel = GetComponentInParent<TileFocus>();
 
-            hover.Normal.OnChange    += _ => Resize();
-            selected.Normal.OnChange += _ => Resize();
+            hover.Progress.OnChange    += _ => Resize();
+            selected.Progress.OnChange += _ => Resize();
 
 //            selected.Toggle.onTrue   += () => focusPanel.ChangeTarget(newTarget: _rect);
         }
@@ -37,12 +37,12 @@ namespace Vanilla.MediaLibrary
         {
             // Hovering over elements inside the tile count as de-hover.
             // We should only factor in the hover normal if the tile isn't selected.
-            var hoverPadding = (selected.Toggle.State ?
+            var hoverPadding = (selected.Active.Value ?
                                     hoverScalar :
-                                    hover.Normal.Value.InOutPower(2.0f) * hoverScalar)
+                                    hover.Progress.Value.InOutPower(2.0f) * hoverScalar)
                              * originalSize;
 
-            var selectPadding = selected.Normal.Value.InOutPower(2.0f) * selectScalar * originalSize;
+            var selectPadding = selected.Progress.Value.InOutPower(2.0f) * selectScalar * originalSize;
 
             var finalSize = originalSize + hoverPadding + selectPadding;
 

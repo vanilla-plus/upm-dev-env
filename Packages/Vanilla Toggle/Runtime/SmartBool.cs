@@ -10,27 +10,27 @@ namespace Vanilla
 {
 
     [Serializable]
-    public class Toggle
+    public class SmartBool
     {
 
         [SerializeField]
-        private bool _state;
-        public bool State
+        private bool _value;
+        public bool Value
         {
-            get => _state;
+            get => _value;
             set
             {
-                if (_state == value) return;
+                if (_value == value) return;
 
                 #if debug
-                Debug.Log($"Toggle state changed from [{_state}] to [{value}]");
+                Debug.Log($"Toggle state changed from [{_value}] to [{value}]");
                 #endif
                 
-                _state = value;
+                _value = value;
 
-                onChange?.Invoke(_state);
+                onChange?.Invoke(_value);
 
-                if (_state)
+                if (_value)
                 {
                     onTrue?.Invoke();
                 }
@@ -46,17 +46,17 @@ namespace Vanilla
         public Action onTrue;
         public Action onFalse;
 
-        public Toggle(bool startingState) => _state = startingState;
+        public SmartBool(bool startingValue) => _value = startingValue;
 
 
-        public static implicit operator bool(Toggle toggle) => toggle is
+        public static implicit operator bool(SmartBool smartBool) => smartBool is
                                                                {
-                                                                   State: true
+                                                                   Value: true
                                                                };
         
-        public void Flip() => State = !_state;
+        public void Flip() => Value = !_value;
 
-        public void SilentSet(bool state) => _state = state;
+        public void SilentSet(bool state) => _value = state;
 
         public void OnValidate() { }
 

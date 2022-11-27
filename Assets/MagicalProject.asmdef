@@ -14,10 +14,10 @@
         "Vanilla.Pools",
         "Vanilla.Ballistics",
         "UniTask",
-        "Vanilla.State",
-        "Vanilla.Toggle",
-        "Vanilla.Normal",
-        "Vanilla.SphericalVectors"
+        "Vanilla.SphericalVectors",
+        "Vanilla.SmartBool",
+        "Vanilla.SmartState",
+        "Vanilla.SmartFloat"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

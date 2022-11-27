@@ -2,10 +2,10 @@
     "name": "Vanilla.Arrangement",
     "rootNamespace": "Vanilla.Arrangement",
     "references": [
-        "Vanilla.Toggle",
-        "Vanilla.Normal",
         "Vanilla.Easing",
-        "UniTask"
+        "UniTask",
+        "Vanilla.SmartBool",
+        "Vanilla.SmartFloat"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

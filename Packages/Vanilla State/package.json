@@ -1,6 +1,6 @@
 {
-  "name": "vanilla.state",
-  "displayName": "Vanilla State",
+  "name": "vanilla.smartstate",
+  "displayName": "Vanilla SmartState",
   "description": "A small data class for handling when something is considered active or not, complete with normalized transitions.",
   "author": {
     "name": "Lucas Hehir",
@@ -13,8 +13,8 @@
   "version": "1.1.1",
   "type": "template",
   "dependencies": {
-    "vanilla.toggle": "1.0.0",
-    "vanilla.normal": "1.2.1",
+    "vanilla.smartbool": "2.0.0",
+    "vanilla.smartfloat": "2.0.0",
     "com.cysharp.unitask": "2.2.1"
   }
 }

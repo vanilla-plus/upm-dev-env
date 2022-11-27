@@ -1,7 +1,7 @@
 {
-  "name": "vanilla.toggle",
-  "displayName": "Vanilla Toggle",
-  "description": "Toggle is a simple native class for guarding and subscribing to changes in boolean logic. It's often the case that a class may only be interested in changes to a bool - and that's all Toggle does!",
+  "name": "vanilla.smartbool",
+  "displayName": "Vanilla SmartBool",
+  "description": "SmartBool is a simple native class for guarding and subscribing to changes in boolean logic. It's often the case that a class may only be interested in changes to a bool - and that's all Toggle does!",
   "author": {
     "name": "Lucas Hehir",
     "email": "lucas@vanilla.com",
@@ -10,7 +10,7 @@
   "repository": "github:vanilla-plus/upm-toggle.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "template",
   "samples": [
     {

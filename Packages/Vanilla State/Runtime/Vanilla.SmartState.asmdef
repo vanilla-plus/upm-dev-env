@@ -1,7 +1,11 @@
 {
-    "name": "Vanilla.Toggle",
+    "name": "Vanilla.SmartState",
     "rootNamespace": "Vanilla",
-    "references": [],
+    "references": [
+        "UniTask",
+        "Vanilla.SmartBool",
+        "Vanilla.SmartFloat"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

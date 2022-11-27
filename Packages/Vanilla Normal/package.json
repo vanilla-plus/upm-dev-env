@@ -1,26 +1,26 @@
 {
-  "name": "vanilla.normal",
-  "displayName": "Vanilla Normal",
-  "description": "Normal is a collection of simple native classes that work with a normalized float (0.0 - 1.0). It features a number of event Actions for when it has become 0 ('empty') or 1 ('full') and several variants for specialized reasons.\n\nAny 'eased' normal modifies the float with an easing algorithm before being invoked.\n\nAny 'unsafe' normal does it's thing twice as fast as 'safe' variants - it achieves this by being sneaky with comparisons.",
+  "name": "vanilla.smartfloat",
+  "displayName": "Vanilla SmartFloat",
+  "description": "SmartFloat is a class-based representation of a primitive float value. This allows it to be accessed by reference rather than value such that it acts more like a classic C++ pointer.\n\nAlso, it has a number of validation values and behaviour built in such as same-value-set protection, min/max range and change detection events.",
   "author": {
     "name": "Lucas Hehir",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },
-  "repository": "github:vanilla-plus/upm-normal.git",
+  "repository": "github:vanilla-plus/upm-smartfloat.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "type": "template",
   "samples": [
     {
-      "displayName": "Normal Sample",
-      "description": "Demonstrates some very basic implementations of Normal classes.",
-      "path": "Samples~/Normal Sample"
+      "displayName": "SmartFloat Sample",
+      "description": "Demonstrates some very basic implementations of SmartFloat.",
+      "path": "Samples~/SmartFloat Sample"
     }
   ],
   "dependencies": {
-    "vanilla.toggle": "1.0.0",
+    "vanilla.smartbool": "2.0.0",
     "com.cysharp.unitask": "2.2.1"
   }
 }

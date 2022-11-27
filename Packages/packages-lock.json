@@ -287,15 +287,6 @@
         "vanilla.arrangement": "1.0.0"
       }
     },
-    "vanilla.normal": {
-      "version": "file:Vanilla Normal",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "vanilla.toggle": "1.0.0",
-        "com.cysharp.unitask": "2.2.1"
-      }
-    },
     "vanilla.package-template": {
       "version": "file:Vanilla Package Template",
       "depth": 0,
@@ -342,21 +333,36 @@
         "vanilla.type-menu": "1.0.0"
       }
     },
+    "vanilla.smartbool": {
+      "version": "file:Vanilla Toggle",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "vanilla.smartfloat": {
+      "version": "file:Vanilla Normal",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "vanilla.smartbool": "2.0.0",
+        "com.cysharp.unitask": "2.2.1"
+      }
+    },
+    "vanilla.smartstate": {
+      "version": "file:Vanilla State",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "vanilla.smartbool": "2.0.0",
+        "vanilla.smartfloat": "2.0.0",
+        "com.cysharp.unitask": "2.2.1"
+      }
+    },
     "vanilla.spherical-vectors": {
       "version": "file:Vanilla Spherical Vectors",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
-    },
-    "vanilla.state": {
-      "version": "file:Vanilla State",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "vanilla.toggle": "1.0.0",
-        "vanilla.normal": "1.2.1",
-        "com.cysharp.unitask": "2.2.1"
-      }
     },
     "vanilla.string-formatting": {
       "version": "file:Vanilla String Formatting",
@@ -371,12 +377,6 @@
       "dependencies": {
         "vanilla.type-menu": "1.0.0"
       }
-    },
-    "vanilla.toggle": {
-      "version": "file:Vanilla Toggle",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
     },
     "vanilla.type-menu": {
       "version": "file:Vanilla Type Menu",

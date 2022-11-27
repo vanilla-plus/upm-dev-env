@@ -9,15 +9,15 @@ namespace MagicalProject
     public class DeleteMe : MonoBehaviour
     {
 
-        public Normal chapter1 = new Normal(0.0f);
-        public Normal chapter2 = new Normal(0.0f);
-        public Normal chapter3 = new Normal(0.0f);
+        public SmartFloat chapter1 = new SmartFloat(0.0f);
+        public SmartFloat chapter2 = new SmartFloat(0.0f);
+        public SmartFloat chapter3 = new SmartFloat(0.0f);
 
 
         void Start()
         {
-            chapter1.Full.onTrue += () => chapter2.Fill(null);
-            chapter2.Full.onTrue += () => chapter3.Fill(null);
+            chapter1.AtMax.onTrue += () => chapter2.Fill(null);
+            chapter2.AtMax.onTrue += () => chapter3.Fill(null);
 
             Play();
         }

@@ -38,7 +38,7 @@ namespace Vanilla.MediaLibrary
 		{
 			_arrangement.ForceArrangement = true;
 
-			_arrangement.ArrangementInProgress.State = true;
+			_arrangement.ArrangementInProgress.Value = true;
 			
 			await base.Construct();
 

@@ -68,7 +68,7 @@ namespace Vanilla.MediaLibrary
 			_pointerDown.Init();
 			_pointerSelected.Init();
 
-			_pointerSelected.Toggle.onTrue += () =>
+			_pointerSelected.Active.onTrue += () =>
 			                                  {
 				                                  if (!IsMonoSelectable()) return;
 
@@ -82,7 +82,7 @@ namespace Vanilla.MediaLibrary
 				                                  // If the old guy exists, tell him he's fired
 
 				                                  if (!ReferenceEquals(objA: outgoing,
-				                                                       objB: null)) outgoing.PointerSelected.Toggle.State = false;
+				                                                       objB: null)) outgoing.PointerSelected.Active.Value = false;
 
 				                                  Selected = (LI) this;
 
@@ -128,14 +128,11 @@ namespace Vanilla.MediaLibrary
 
 		[SerializeField] private CI _payload;
 
-		[SerializeField] private State _pointerHover = new(startingState: false,
-		                                                   startingValue: 0.0f);
+		[SerializeField] private SmartState.SmartState _pointerHover = new(startingState: false);
 
-		[SerializeField] private State _pointerDown = new(startingState: false,
-		                                                  startingValue: 0.0f);
+		[SerializeField] private SmartState.SmartState _pointerDown = new(startingState: false);
 
-		[SerializeField] private State _pointerSelected = new(startingState: false,
-		                                                      startingValue: 0.0f);
+		[SerializeField] private SmartState.SmartState _pointerSelected = new(startingState: false);
 
 		public CI Payload
 		{
@@ -143,9 +140,9 @@ namespace Vanilla.MediaLibrary
 			set => _payload = value;
 		}
 
-		public State PointerHover    => _pointerHover;
-		public State PointerDown     => _pointerDown;
-		public State PointerSelected => _pointerSelected;
+		public SmartState.SmartState PointerHover    => _pointerHover;
+		public SmartState.SmartState PointerDown     => _pointerDown;
+		public SmartState.SmartState PointerSelected => _pointerSelected;
 
 
 		public virtual UniTask Populate(CI item)
@@ -191,21 +188,21 @@ namespace Vanilla.MediaLibrary
 //
 //		}
 
-		public void OnPointerEnter(PointerEventData eventData) => _pointerHover.Toggle.State = true;
+		public void OnPointerEnter(PointerEventData eventData) => _pointerHover.Active.Value = true;
 
-		public void OnPointerExit(PointerEventData eventData) => _pointerHover.Toggle.State = _pointerDown.Toggle.State = false;
+		public void OnPointerExit(PointerEventData eventData) => _pointerHover.Active.Value = _pointerDown.Active.Value = false;
 
-		public void OnPointerDown(PointerEventData eventData) => _pointerDown.Toggle.State = true;
+		public void OnPointerDown(PointerEventData eventData) => _pointerDown.Active.Value = true;
 
 		public void OnPointerUp(PointerEventData eventData)
 		{
-			if (!_pointerDown.Toggle) return;
+			if (!_pointerDown.Active) return;
 
-			_pointerDown.Toggle.State = false;
+			_pointerDown.Active.Value = false;
 
 			if (IsMonoSelectable())
 			{
-				_pointerSelected.Toggle.State = true;
+				_pointerSelected.Active.Value = true;
 
 				// Can't unselect the same item by clicking on it?
 				// Wouldn't that insinuate that 'nothing' has become selected in that case?
@@ -213,7 +210,7 @@ namespace Vanilla.MediaLibrary
 			}
 			else
 			{
-				_pointerSelected.Toggle.Flip();
+				_pointerSelected.Active.Flip();
 			}
 		}
 

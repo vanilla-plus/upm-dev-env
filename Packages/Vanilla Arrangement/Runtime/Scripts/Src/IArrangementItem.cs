@@ -15,7 +15,7 @@ namespace Vanilla.Arrangement
 			get;
 		}
 
-		Toggle ArrangementDirty
+		SmartBool ArrangementDirty
 		{
 			get;
 		}

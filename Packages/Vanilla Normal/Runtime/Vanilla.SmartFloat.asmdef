@@ -1,10 +1,10 @@
 {
-    "name": "Vanilla.Normal",
+    "name": "Vanilla.SmartFloat",
     "rootNamespace": "Vanilla",
     "references": [
         "Vanilla.Danger",
-        "Vanilla.Toggle",
-        "UniTask"
+        "UniTask",
+        "Vanilla.SmartBool"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

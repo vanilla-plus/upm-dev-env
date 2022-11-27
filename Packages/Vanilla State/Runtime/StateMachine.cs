@@ -8,24 +8,24 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
-namespace Vanilla.State
+namespace Vanilla.SmartState
 {
     [Serializable]
-    public class StateMachine : State
+    public class StateMachine : SmartState
     {
 
-        public StateMachine(Toggle activeCondition) : base(activeCondition) { }
+        public StateMachine(SmartBool activeCondition) : base(activeCondition) { }
 
         public StateMachine(bool startingState) : base(startingState) { }
         
         [SerializeField]
-        public State previous;
+        public SmartState previous;
         [SerializeField]
-        public State current;
+        public SmartState current;
         [SerializeField]
-        public State next;
+        public SmartState next;
 
-        public async UniTask Request(State incomingState)
+        public async UniTask Request(SmartState incomingState)
         {
             if (ReferenceEquals(incomingState,
                                 current))
@@ -41,9 +41,9 @@ namespace Vanilla.State
 
             if (current != null)
             {
-                current.active.State = false;
+                current.Active.Value = false;
 
-                while (!current.activeNormal.Empty) await UniTask.Yield();
+                while (!current.Progress.AtMin) await UniTask.Yield();
             }
 
             previous = current;
@@ -54,7 +54,7 @@ namespace Vanilla.State
 
             if (current != null)
             {
-                current.active.State = true;
+                current.Active.Value = true;
             }
         }
 

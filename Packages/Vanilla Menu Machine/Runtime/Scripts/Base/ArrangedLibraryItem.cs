@@ -20,8 +20,8 @@ namespace Vanilla.MediaLibrary
 		public bool arrangementIsDirtiedByPointerDown;
 		public bool arrangementIsDirtiedByPointerSelect = true;
 		
-		[SerializeField] private Toggle _arrangementDirty = new(startingState: false);
-		public                   Toggle ArrangementDirty => _arrangementDirty;
+		[SerializeField] private SmartBool _arrangementDirty = new(startingValue: false);
+		public                   SmartBool ArrangementDirty => _arrangementDirty;
 
 
 		protected override void Awake()
@@ -30,29 +30,29 @@ namespace Vanilla.MediaLibrary
 
 			if (arrangementIsDirtiedByPointerHover)
 			{
-				PointerHover.Normal.Empty.onFalse += () => ArrangementDirty.State = AssessIfDirty();
-				PointerHover.Normal.Full.onFalse  += () => ArrangementDirty.State = AssessIfDirty();
+				PointerHover.Progress.AtMin.onFalse += () => ArrangementDirty.Value = AssessIfDirty();
+				PointerHover.Progress.AtMax.onFalse += () => ArrangementDirty.Value = AssessIfDirty();
 
-				PointerHover.Normal.Full.onTrue  += () => ArrangementDirty.State = AssessIfDirty();
-				PointerHover.Normal.Empty.onTrue += () => ArrangementDirty.State = AssessIfDirty();
+				PointerHover.Progress.AtMax.onTrue  += () => ArrangementDirty.Value = AssessIfDirty();
+				PointerHover.Progress.AtMin.onTrue += () => ArrangementDirty.Value = AssessIfDirty();
 			}
 
 			if (arrangementIsDirtiedByPointerDown)
 			{
-				PointerDown.Normal.Empty.onFalse += () => ArrangementDirty.State = AssessIfDirty();
-				PointerDown.Normal.Full.onFalse  += () => ArrangementDirty.State = AssessIfDirty();
+				PointerDown.Progress.AtMin.onFalse += () => ArrangementDirty.Value = AssessIfDirty();
+				PointerDown.Progress.AtMax.onFalse  += () => ArrangementDirty.Value = AssessIfDirty();
 
-				PointerDown.Normal.Full.onTrue  += () => ArrangementDirty.State = AssessIfDirty();
-				PointerDown.Normal.Empty.onTrue += () => ArrangementDirty.State = AssessIfDirty();
+				PointerDown.Progress.AtMax.onTrue  += () => ArrangementDirty.Value = AssessIfDirty();
+				PointerDown.Progress.AtMin.onTrue += () => ArrangementDirty.Value = AssessIfDirty();
 			}
 
 			if (arrangementIsDirtiedByPointerSelect)
 			{
-				PointerSelected.Normal.Empty.onFalse += () => ArrangementDirty.State = AssessIfDirty();
-				PointerSelected.Normal.Full.onFalse  += () => ArrangementDirty.State = AssessIfDirty();
+				PointerSelected.Progress.AtMin.onFalse += () => ArrangementDirty.Value = AssessIfDirty();
+				PointerSelected.Progress.AtMax.onFalse  += () => ArrangementDirty.Value = AssessIfDirty();
 
-				PointerSelected.Normal.Full.onTrue  += () => ArrangementDirty.State = AssessIfDirty();
-				PointerSelected.Normal.Empty.onTrue += () => ArrangementDirty.State = AssessIfDirty();
+				PointerSelected.Progress.AtMax.onTrue  += () => ArrangementDirty.Value = AssessIfDirty();
+				PointerSelected.Progress.AtMin.onTrue += () => ArrangementDirty.Value = AssessIfDirty();
 			}
 		}
 
@@ -63,17 +63,17 @@ namespace Vanilla.MediaLibrary
 			
 			if (arrangementIsDirtiedByPointerHover)
 			{
-				if (!PointerHover.Normal.IsFullOrEmpty()) return true;
+				if (!PointerHover.Progress.AtMinOrMax()) return true;
 			}
 
 			if (arrangementIsDirtiedByPointerDown)
 			{
-				if (!PointerDown.Normal.IsFullOrEmpty()) return true;
+				if (!PointerDown.Progress.AtMinOrMax()) return true;
 			}
 
 			if (arrangementIsDirtiedByPointerSelect)
 			{
-				if (!PointerSelected.Normal.IsFullOrEmpty()) return true;
+				if (!PointerSelected.Progress.AtMinOrMax()) return true;
 			}
 
 			return false;
