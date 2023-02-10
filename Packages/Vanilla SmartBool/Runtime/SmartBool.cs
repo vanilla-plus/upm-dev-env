@@ -10,7 +10,7 @@ namespace Vanilla
 {
 
     [Serializable]
-    public class SmartBool
+    public class SmartBool : ISerializationCallbackReceiver
     {
 
         [SerializeField]
@@ -28,15 +28,36 @@ namespace Vanilla
                 
                 _value = value;
 
-                onChange?.Invoke(_value);
+                #if UNITY_EDITOR
+                    if (Application.isPlaying) // We don't want to invoke this Action if in the Editor and outside play mode
+                    {
+                        onChange?.Invoke(_value);
+                    }
+                #else
+                    onChange?.Invoke(_value);
+                #endif
 
                 if (_value)
                 {
-                    onTrue?.Invoke();
+                    #if UNITY_EDITOR
+                        if (Application.isPlaying) // We don't want to invoke this Action if in the Editor and outside play mode
+                        {
+                            onTrue?.Invoke();
+                        }
+                    #else
+                        onTrue?.Invoke(_value);
+                    #endif
                 }
                 else
                 {
-                    onFalse?.Invoke();
+                    #if UNITY_EDITOR
+                        if (Application.isPlaying) // We don't want to invoke this Action if in the Editor and outside play mode
+                        {
+                            onFalse?.Invoke();
+                        }
+                    #else
+                        onFalse?.Invoke(_value);
+                    #endif
                 }
             }
         }
@@ -59,6 +80,10 @@ namespace Vanilla
         public void SilentSet(bool state) => _value = state;
 
         public void OnValidate() { }
+
+        public void OnBeforeSerialize() => OnValidate();
+
+        public void OnAfterDeserialize() { }
 
     }
 
