@@ -5,8 +5,6 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
-//using Vanilla.JNode.Samples;
-
 namespace Vanilla.JNode
 {
 
@@ -14,9 +12,8 @@ namespace Vanilla.JNode
 	public abstract class JNodeCollection<I> : JNode
 		where I : JNode, IEquatable<I>
 	{
-
 		// We only enforce a getter for the item collection here so that the real name of
-		// the collection can difference depending on the context.
+		// the collection can be different depending on the context.
 		// If we included the real array here, it would have to take a specific name like "_items"
 		// which would be a strict convention for JSON layouts.
 		public abstract I[] Items
@@ -47,15 +44,6 @@ namespace Vanilla.JNode
 			var itemsCache = someItemsAlreadyPresent ?
 				                 Items.Clone() as I[] :
 				                 Array.Empty<I>();
-
-//			if (this is Earth)
-//			{
-//				Debug.Log(Items.Length);
-//				Debug.Log(itemsCache.Length);
-//
-//				Debug.Log(ReferenceEquals(Items,
-//				                          itemsCache));
-//			}
 
 			JsonUtility.FromJsonOverwrite(json: json,
 			                              objectToOverwrite: this);
@@ -239,7 +227,7 @@ namespace Vanilla.JNode
 		}
 
 
-		internal override async UniTask Deinitialize()
+		public override async UniTask Deinitialize()
 		{
 			if (Items != null)
 			{

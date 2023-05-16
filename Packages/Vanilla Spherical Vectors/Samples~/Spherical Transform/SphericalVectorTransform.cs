@@ -2,10 +2,10 @@ using System;
 
 using UnityEngine;
 
-namespace Vanilla.Geodetics.Samples
+namespace Vanilla.SphericalVectors.Samples
 {
 
-	public class GeodeticTransform : MonoBehaviour
+	public class SphericalVectorTransform : MonoBehaviour
 	{
 
 		[Header(header: "Target")]
@@ -66,7 +66,7 @@ namespace Vanilla.Geodetics.Samples
 
 		private void Start()
 		{
-			destination = transform.position.CartesianToGeodetic();
+			destination = transform.position.ToSpherical();
 
 			delta = destination;
 		}
@@ -124,13 +124,13 @@ namespace Vanilla.Geodetics.Samples
 				
 				if (target)
 				{
-					transform.position = target.TransformPoint(position: delta.GeodeticToCartesian());
+					transform.position = target.TransformPoint(position: delta.ToCartesian());
 
 					transform.LookAt(worldPosition: target.position);
 				}
 				else
 				{
-					transform.position = delta.GeodeticToCartesian();
+					transform.position = delta.ToCartesian();
 
 					transform.LookAt(worldPosition: Vector3.zero);
 				}
@@ -143,13 +143,13 @@ namespace Vanilla.Geodetics.Samples
 
 				if (target)
 				{
-					transform.position = target.TransformPoint(position: destination.GeodeticToCartesian());
+					transform.position = target.TransformPoint(position: destination.ToCartesian());
 
 					transform.LookAt(worldPosition: target.position);
 				}
 				else
 				{
-					transform.position = destination.GeodeticToCartesian();
+					transform.position = destination.ToCartesian();
 
 					transform.LookAt(worldPosition: Vector3.zero);
 				}

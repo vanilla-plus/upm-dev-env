@@ -1,11 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
 
 using Newtonsoft.Json.Linq;
 
-using Unity.RemoteConfig;
+using Unity.Services.RemoteConfig;
 
 using UnityEditor;
 
@@ -87,6 +84,7 @@ namespace Vanilla.JNode
 	        var keyString = keyPropInfo.GetValue(data).ToString();		// Use me for naming stuff
 	        var keyLower  = keyString.ToLower();							// Use me as a key
 
+	        #if UNITY_EDITOR
 	        if (autoNameAsset)
 	        {
 		        var assetPath = AssetDatabase.GetAssetPath(GetInstanceID());
@@ -96,6 +94,7 @@ namespace Vanilla.JNode
 
 		        AssetDatabase.SaveAssets();
 	        }
+	        #endif
 
 //	        if (autoUpdateRemoteConfig)
 //	        {
@@ -112,7 +111,8 @@ namespace Vanilla.JNode
 	        
 	        if (autoUpdateRemoteConfig)
 	        {
-		        var temp = new JObject(ConfigManager.appConfig.config);
+//		        var temp = new JObject(ConfigManager.appConfig.config);
+		        var temp = new JObject(RemoteConfigService.Instance.appConfig.config);
 
 		        Debug.Log(temp);
 

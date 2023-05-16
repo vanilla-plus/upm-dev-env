@@ -19,13 +19,13 @@ namespace Vanilla.JNode.Samples
 		public          float       Radius => _radius;
 		public override Continent[] Items  => _continents;
 
-		internal override void OnValidate() { }
+		public override void OnValidate() { }
 
 		public override bool AutoUpdateJToken() => true;
 
-		internal override async UniTask Initialize() => Debug.Log("Earth initialized (parsed for the first time).");
+		public override async UniTask Initialize() => Debug.Log("Earth initialized (parsed for the first time).");
 
-		internal override async UniTask Refresh() => Debug.Log("Earth refreshed (parsed again).");
+		public override async UniTask Refresh() => Debug.Log("Earth refreshed (parsed again).");
 
 		protected override async UniTask ItemAdded(Continent item)
 		{
@@ -57,13 +57,13 @@ namespace Vanilla.JNode.Samples
 
 		public override string ToString() => _name;
 
-		internal override void OnValidate() { }
+		public override void OnValidate() { }
 
 		public override bool AutoUpdateJToken() => true;
 
-		internal override UniTask Initialize() => default;
+		public override UniTask Initialize() => default;
 
-		internal override UniTask Refresh() => default;
+		public override UniTask Refresh() => default;
 
 		protected override async UniTask ItemAdded(Country item)
 		{
@@ -121,15 +121,15 @@ namespace Vanilla.JNode.Samples
 		public float  Population    => _population;
 		public float  SurfaceAreaKm => _surfaceAreaKm;
 
-		internal override void OnValidate() { }
+		public override void OnValidate() { }
 
 		public override bool AutoUpdateJToken() => true;
 
-		internal override UniTask Initialize() => default;
+		public override UniTask Initialize() => default;
 
-		internal override UniTask Refresh() => default;
+		public override UniTask Refresh() => default;
 
-		internal override UniTask Deinitialize() => default;
+		public override UniTask Deinitialize() => default;
 
 		public override string ToString() => _name;
 

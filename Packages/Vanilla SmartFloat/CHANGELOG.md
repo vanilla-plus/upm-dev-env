@@ -1,9 +1,15 @@
-# Vanilla Normal Changelog
+# SmartFloat Changelog
 
 All notable changes to this package will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+
+## [2.0.4] - 15-02-2023
+
+### Changed
+- Epsilon has been split into MinMaxEpsilon and ChangeEpsilon. ChangeEpsilon is only used for set comparisons, while MinMaxEpsilon is used for determining AtMin and AtMax.
 
 ## [1.2.0] - 21-04-2022
 

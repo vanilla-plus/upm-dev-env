@@ -22,6 +22,8 @@ namespace Vanilla.Easing.Samples
 
 		public float floatPower = 2.0f;
 
+		public int numberOfBounces = 4;
+
 		private void Update()
 		{
 			var t = Mathf.PingPong(t: Time.time * speed,
@@ -47,9 +49,9 @@ namespace Vanilla.Easing.Samples
 			                               UnityEasing.InPower      => t.InPower(power: floatPower),
 			                               UnityEasing.OutPower     => t.OutPower(power: floatPower),
 			                               UnityEasing.InOutPower   => t.InOutPower(power: floatPower),
-			                               UnityEasing.InBounce     => t.InBounce(),
-			                               UnityEasing.OutBounce    => t.OutBounce(),
-			                               UnityEasing.InOutBounce  => t.InOutBounce(),
+			                               UnityEasing.InBounce     => t.InBounce(numberOfBounces),
+			                               UnityEasing.OutBounce    => t.OutBounce(numberOfBounces),
+			                               UnityEasing.InOutBounce  => t.InOutBounce(numberOfBounces),
 			                               UnityEasing.InElastic    => t.InElastic(),
 			                               UnityEasing.OutElastic   => t.OutElastic(),
 			                               UnityEasing.InOutElastic => t.InOutElastic(),

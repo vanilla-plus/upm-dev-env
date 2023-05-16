@@ -30,7 +30,7 @@ namespace Vanilla
         {
             base.OnValidate();
 
-            Epsilon = Mathf.Clamp(value: Epsilon,
+            MinMaxEpsilon = Mathf.Clamp(value: MinMaxEpsilon,
                                   min: Mathf.Epsilon,
                                   max: Scale);
         }

@@ -10,7 +10,7 @@
   "repository": "github:vanilla-plus/upm-smartfloat.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "2.0.1",
+  "version": "2.0.5",
   "type": "template",
   "samples": [
     {
@@ -20,7 +20,7 @@
     }
   ],
   "dependencies": {
-    "vanilla.smartbool": "2.0.0",
+    "vanilla.smartbool": "2.0.5",
     "com.cysharp.unitask": "2.2.1"
   }
 }

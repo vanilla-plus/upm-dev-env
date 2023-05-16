@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 
 namespace Vanilla.Easing
 {
@@ -160,34 +162,63 @@ namespace Vanilla.Easing
 		/// <summary>
 		///     Ease in with a bounce-like animation.
 		/// </summary>
-		public static float InBounce(this float t) => 1f - OutBounce(t: 1f - t);
+		public static float InBounce(this float t, int numberOfBounces) => 1f - OutBounce(t: t, numberOfBounces);
 
 
 		/// <summary>
 		///     Ease out with a bounce-like animation.
 		/// </summary>
-		public static float OutBounce(this float t)
+//		public static float OutBounce(this float t)
+//		{
+//			switch (t)
+//			{
+//				case < A: return L0 * t * t;
+//				case < B: return L0 * (t -= X) * t + 0.75f;
+//				case < C: return L0 * (t -= Y) * t + 0.9375f;
+//				default:  return L0 * (t -= Z) * t + 0.984375f;
+//			}
+//		}
+		
+		public static float OutBounce(this float t, int bounces = 5)
 		{
-			switch (t)
-			{
-				case < A: return L0 * t * t;
-				case < B: return L0 * (t -= X) * t + 0.75f;
-				case < C: return L0 * (t -= Y) * t + 0.9375f;
-				default:  return L0 * (t -= Z) * t + 0.984375f;
-			}
+			if (bounces < 2) bounces = 2;
+			if (bounces > 8) bounces = 8;
+
+			float totalDuration  = 1.0f;
+			float bounceDuration = totalDuration / bounces;
+
+			// Adjust the bounceHeight formula to make the first bounce reach the specified amplitude
+//			float bounceHeight = amplitude / (1.0f - Mathf.Pow(0.5f, bounces - 1));
+			float bounceHeight = 1.0f - Mathf.Pow(0.5f, bounces - 1);
+
+			int currentBounce = Mathf.FloorToInt(t / bounceDuration);
+			float timeInBounce  = (t - currentBounce * bounceDuration) / bounceDuration;
+
+			float currentBounceHeight = bounceHeight * Mathf.Pow(0.5f, currentBounce);
+
+			// Use a parabolic function to calculate the vertical position of the bounce
+			float bouncePosition = currentBounceHeight * (1.0f - Mathf.Pow(2 * timeInBounce - 1, 2));
+
+			float maxBounceHeight          = bounceHeight;
+			float normalizedBouncePosition = bouncePosition / maxBounceHeight;
+
+			return Math.Abs(t - 1) < Mathf.Epsilon ? 1 : normalizedBouncePosition;
 		}
+
+
+
 
 
 		/// <summary>
 		///     Ease in and out with a bounce-like animation.
 		/// </summary>
-		public static float InOutBounce(this float t)
+		public static float InOutBounce(this float t, int numberOfBounces)
 		{
 			var p = t * 2f;
 
 			return p < 1f ?
-				       0.5f - 0.5f * OutBounce(t: 1f - p) :
-				       0.5f + 0.5f * OutBounce(t: p  - 1f);
+				       0.5f - 0.5f * OutBounce(t: 1f - p,  numberOfBounces) :
+				       0.5f + 0.5f * OutBounce(t: p  - 1f, numberOfBounces);
 		}
 
 

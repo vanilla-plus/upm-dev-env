@@ -7,7 +7,9 @@ namespace Vanilla.TypeMenu
 	public interface IPortable
 	{
 		
+		#if UNITY_EDITOR
 		void Port(SerializedProperty previousInstance);
+		#endif
 
 	}
 }

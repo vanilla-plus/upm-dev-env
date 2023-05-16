@@ -28,36 +28,15 @@ namespace Vanilla
                 
                 _value = value;
 
-                #if UNITY_EDITOR
-                    if (Application.isPlaying) // We don't want to invoke this Action if in the Editor and outside play mode
-                    {
-                        onChange?.Invoke(_value);
-                    }
-                #else
-                    onChange?.Invoke(_value);
-                #endif
+                onChange?.Invoke(_value);
 
                 if (_value)
                 {
-                    #if UNITY_EDITOR
-                        if (Application.isPlaying) // We don't want to invoke this Action if in the Editor and outside play mode
-                        {
-                            onTrue?.Invoke();
-                        }
-                    #else
-                        onTrue?.Invoke(_value);
-                    #endif
+                    onTrue?.Invoke();
                 }
                 else
                 {
-                    #if UNITY_EDITOR
-                        if (Application.isPlaying) // We don't want to invoke this Action if in the Editor and outside play mode
-                        {
-                            onFalse?.Invoke();
-                        }
-                    #else
-                        onFalse?.Invoke(_value);
-                    #endif
+                    onFalse?.Invoke();
                 }
             }
         }

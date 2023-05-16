@@ -10,11 +10,13 @@ using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 #if RemoteConfigInstalled
-using Unity.RemoteConfig;
+using Unity.Services.RemoteConfig;
 #endif
 
 using UnityEngine;
 using UnityEngine.Networking;
+
+using static Unity.Services.RemoteConfig.ConfigRequestStatus;
 
 namespace Vanilla.JNode
 {
@@ -33,7 +35,8 @@ namespace Vanilla.JNode
 		public string ToJson(bool prettyPrint = false) => JsonUtility.ToJson(obj: this,
 		                                                                     prettyPrint: prettyPrint);
 
-		internal abstract void OnValidate();
+
+		public abstract void OnValidate();
 
 		[Tooltip("JTokens allow us to access weakly-typed properties and fields, JavaScript style.")]
 		public abstract bool AutoUpdateJToken();
@@ -42,12 +45,12 @@ namespace Vanilla.JNode
 //		                                                         where N : Jnode;
 
 //		internal abstract UniTask Initialize<I>(JnodeCollection<I> collection) where I : Jnode;
-		
-		internal abstract UniTask Initialize();
 
-		internal abstract UniTask Refresh();
+		public abstract UniTask Initialize();
 
-		internal abstract UniTask Deinitialize();
+		public abstract UniTask Refresh();
+
+		public abstract UniTask Deinitialize();
 
 
 		#if RemoteConfigInstalled
@@ -57,16 +60,19 @@ namespace Vanilla.JNode
 
 		public async UniTask<bool> FetchRemoteConfig()
 		{
-			ConfigManager.FetchConfigs(userAttributes: new userAttributes(),
-			                           appAttributes: new appAttributes());
+			RemoteConfigService.Instance.FetchConfigs(userAttributes: new userAttributes(),
+			                                          appAttributes: new appAttributes());
+			
+//			ConfigManager.FetchConfigs(userAttributes: new userAttributes(),
+//			                           appAttributes: new appAttributes());
 
-			while (ConfigManager.requestStatus == ConfigRequestStatus.Pending) await UniTask.Yield();
+			while (RemoteConfigService.Instance.requestStatus == Pending) await UniTask.Yield();
 
 			#if debug
 			Debug.LogError(message: $"Remote config fetch result [{ConfigManager.requestStatus}].");
 			#endif
 			
-			return ConfigManager.requestStatus != ConfigRequestStatus.Failed;
+			return RemoteConfigService.Instance.requestStatus != Failed;
 		}
 		
 		public async UniTask<bool> FetchRemoteConfig<U,A>(U userAttributes,
@@ -74,16 +80,16 @@ namespace Vanilla.JNode
 			where U : struct
 			where A : struct
 		{
-			ConfigManager.FetchConfigs(userAttributes: userAttributes,
-			                           appAttributes: appAttributes);
+			RemoteConfigService.Instance.FetchConfigs(userAttributes: userAttributes,
+			                                          appAttributes: appAttributes);
 
-			while (ConfigManager.requestStatus == ConfigRequestStatus.Pending) await UniTask.Yield();
+			while (RemoteConfigService.Instance.requestStatus == Failed) await UniTask.Yield();
 
 			#if debug
 			Debug.LogError(message: $"Remote config fetch result [{ConfigManager.requestStatus}].");
 			#endif
 			
-			return ConfigManager.requestStatus != ConfigRequestStatus.Failed;
+			return RemoteConfigService.Instance.requestStatus != Failed;
 		}
 
 		public async UniTask FromRemoteConfig(string rootKey,
@@ -91,8 +97,11 @@ namespace Vanilla.JNode
 		{
 			if (!await FetchRemoteConfig()) return;
 
-			var json = ConfigManager.appConfig.GetJson(key: rootKey,
-			                                           defaultValue: fallback);
+//			var json = ConfigManager.appConfig.GetJson(key: rootKey,
+//			                                           defaultValue: fallback);
+
+			var json = RemoteConfigService.Instance.appConfig.GetJson(key: rootKey,
+			                                                          defaultValue: fallback);
 
 			await FromJson(json: json);
 		}
@@ -105,14 +114,14 @@ namespace Vanilla.JNode
 			where U : struct
 			where A : struct
 		{
-			ConfigManager.FetchConfigs(userAttributes: userAttributes,
-			                           appAttributes: appAttributes);
+			RemoteConfigService.Instance.FetchConfigs(userAttributes: userAttributes,
+			                                          appAttributes: appAttributes);
 
 			if (!await FetchRemoteConfig(userAttributes: userAttributes,
 			                             appAttributes: appAttributes)) return;
 
-			var json = ConfigManager.appConfig.GetJson(key: rootKey,
-			                                           defaultValue: fallback);
+			var json = RemoteConfigService.Instance.appConfig.GetJson(key: rootKey,
+			                                                          defaultValue: fallback);
 
 			await FromJson(json: json);
 

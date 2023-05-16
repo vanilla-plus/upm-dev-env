@@ -15,9 +15,9 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "vanilla.danger",
-            "expression": "0.1.0",
-            "define": "VanillaDanger"
+            "name": "vanilla.smartfloat",
+            "expression": "2.0.0",
+            "define": "SmartFloat"
         }
     ],
     "noEngineReferences": false

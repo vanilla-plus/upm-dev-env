@@ -59,11 +59,29 @@ namespace Vanilla.Easing
     
     [Serializable] public class EasingSlot_Sine_InOut : IEasingSlot { public float Ease(float normal) => normal.InOutSine(); }
     
-    [Serializable] public class EasingSlot_Bounce_In : IEasingSlot { public float Ease(float normal) => normal.InBounce(); }
+    [Serializable] public class EasingSlot_Bounce_In : IEasingSlot 
+    {
+        [SerializeField]
+        public int numberOfBounces = 3;
+     
+        public float Ease(float normal) => normal.InBounce(numberOfBounces); 
+    }
     
-    [Serializable] public class EasingSlot_Bounce_Out : IEasingSlot { public float Ease(float normal) => normal.OutBounce(); }
+    [Serializable] public class EasingSlot_Bounce_Out : IEasingSlot 
+    {
+        [SerializeField]
+        public int numberOfBounces = 3;
+     
+        public float Ease(float normal) => normal.OutBounce(numberOfBounces); 
+    }
     
-    [Serializable] public class EasingSlot_Bounce_InOut : IEasingSlot { public float Ease(float normal) => normal.InOutBounce(); }
+    [Serializable] public class EasingSlot_Bounce_InOut : IEasingSlot 
+    {
+        [SerializeField]
+        public int numberOfBounces = 3;
+     
+        public float Ease(float normal) => normal.InOutBounce(numberOfBounces); 
+    }
     
     [Serializable] public class EasingSlot_Elastic_In : IEasingSlot { public float Ease(float normal) => normal.InElastic(); }
     

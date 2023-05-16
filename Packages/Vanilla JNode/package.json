@@ -10,7 +10,7 @@
   "repository": "github:vanilla-plus/upm-collection.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "template",
   "samples": [
     {
@@ -20,6 +20,7 @@
     }
   ],
   "dependencies": {
-    "vanilla.type-menu": "1.0.0"
+    "vanilla.type-menu": "1.0.1",
+    "com.unity.remote-config": "3.1.3"
   }
 }
