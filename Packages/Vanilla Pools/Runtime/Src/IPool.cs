@@ -1,58 +1,38 @@
-using System.Collections;
+#if DEBUG_VANILLA_POOLS
+#define debug
+#endif
+
 using System.Collections.Generic;
 
 using Cysharp.Threading.Tasks;
 
-using UnityEngine;
-
 namespace Vanilla.Pools
 {
 
-	public interface IPool<PI>
-		where PI : IPoolItem
+	public interface IPool<P, PI>
+		where P : class, IPool<P,PI>
+		where PI : class, IPoolItem<P,PI>
 	{
 
-		int Total
+		public int Total
 		{
 			get;
 			set;
 		}
 
-		Transform InactiveParent
-		{
-			get;
-			set;
-		}
+		PI CreateItem();
 
-		Transform ActiveParent
-		{
-			get;
-			set;
-		}
-
-		List<PI> Inactive
-		{
-			get;
-		}
-
-		List<PI> Active
-		{
-			get;
-		}
-
-		UniTask<PI> Get();
-
-		UniTask Retire(PI item);
-
-		UniTask<PI> CreateNewItem();
+		void CreateAll();
 
 		void DestroyItem(PI item);
 
-		UniTask CreateAll();
-
 		void DestroyAll();
 
-		UniTask RetireAll();
+		PI Get();
+
+		void Retire(PI item);
+
+		void RetireAll();
 
 	}
 
