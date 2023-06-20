@@ -29,8 +29,8 @@ namespace Vanilla.SmartValues
 			get => _Value;
 			set
 			{
-				if (ValueEquals(_Value,
-				                value)) return;
+				if (ValueEquals(a: _Value,
+				                b: value)) return;
 
 				var old = _Value;
 
@@ -40,8 +40,8 @@ namespace Vanilla.SmartValues
 				Debug.Log($"[{Name}] changed from [{old}] to [{value}]");
 				#endif
 
-				OnValueChanged?.Invoke(old,
-				                       value);
+				OnValueChanged?.Invoke(arg1: old,
+				                       arg2: value);
 			}
 		}
 
