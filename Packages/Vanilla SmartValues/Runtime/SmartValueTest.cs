@@ -1,6 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#define debug
+#endif
+
 using UnityEngine;
 
 namespace Vanilla.SmartValues
@@ -23,6 +24,10 @@ namespace Vanilla.SmartValues
 //	                                            1.0f,
 //	                                            Mathf.Epsilon,
 //	                                            0.05f);
+
+	    [SerializeField]
+	    public SmartFloat test = new SmartFloat("Serialized SmartFloat",
+	                                            0.1f);
         
 //        [NonSerialized]
 //        public SmartFloat nonSerializedSmartFloat = new SmartFloat("NonSerialized SmartFloat",
@@ -32,18 +37,15 @@ namespace Vanilla.SmartValues
 //                                                                                       Mathf.Epsilon);
 //        
 //
-	    [SerializeField]
-	    public SmartSinWave test = new SmartSinWave("Smart SinWave",
-	                                                   0.0f,
-	                                                   -1.0f,
-	                                                   1.0f,
-	                                                   Mathf.Epsilon);
+//	    [SerializeField]
+//	    public SmartSinWave test = new SmartSinWave("Smart SinWave",
+//	                                                   0.0f,
+//	                                                   -1.0f,
+//	                                                   1.0f,
+//	                                                   Mathf.Epsilon);
 
 //	    [SerializeField]
-//	    public SmartInt test = new SmartInt("SmartInt",
-//	                                        5,
-//	                                        50,
-//	                                        100);
+//	    public SmartInt test = new SmartInt("SmartInt");
 
 //	    [SerializeField]
 //	    public SmartByte test = new("SmartByte",
@@ -74,8 +76,8 @@ namespace Vanilla.SmartValues
         
         void Update()
         {
-	        test.Update(Time.deltaTime);
-//	        test.Value += Time.deltaTime;
+//	        test.Update(Time.deltaTime);
+	        test.Value += Time.deltaTime;
 //	        test.Value += 1;
         }
 
