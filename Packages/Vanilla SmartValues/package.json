@@ -1,0 +1,22 @@
+{
+  "name": "vanilla.smart-values",
+  "displayName": "Vanilla SmartValues",
+  "description": "SmartValues is an react-like library for C# in Unity that relies on change-only event invocations. Subscriptions will only hear when their observables value has changed.",
+  "author": {
+    "name": "Lucas Hehir",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/smart-values.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "0.1.0",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample A",
+      "description": "Sample to demonstrate system A",
+      "path": "Samples~/Sample A"
+    }
+  ]
+}
