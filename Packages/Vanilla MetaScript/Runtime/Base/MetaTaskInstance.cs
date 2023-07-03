@@ -20,10 +20,17 @@ namespace Vanilla.MetaScript
 		[NonSerialized] private CancellationTokenSource _cancellationTokenSource;
 
 		[SerializeField]
-		public bool RunOnStart = true;
+		public SmartBool Running = new SmartBool("MetaTaskInstance Running",
+		                                         false);
+		
+		[SerializeField]
+		public bool RunOnStart = false;
 
 		[SerializeField]
-		public KeyCode debugKey = KeyCode.Space;
+		public KeyCode debugCancelKey = KeyCode.Alpha1;
+
+		[SerializeField]
+		public KeyCode debugRunKey = KeyCode.Alpha2;
 
 		[SerializeReference]
 		[TypeMenu]
@@ -31,9 +38,6 @@ namespace Vanilla.MetaScript
 		private MetaTaskSet taskSet;
 		public MetaTaskSet TaskSet => taskSet;
 
-		[SerializeField]
-		public SmartBool Running = new SmartBool("MetaTaskInstance Running", false);
-		
 		void OnValidate()
 		{
 			#if UNITY_EDITOR
@@ -64,7 +68,8 @@ namespace Vanilla.MetaScript
 
 			taskSet.Run(_cancellationTokenSource).ContinueWith(FinalizeTask);
 		}
-		
+
+
 //		private void FinalizeTask()
 //		{
 //			if (_cancellationTokenSource.IsCancellationRequested)
@@ -86,6 +91,7 @@ namespace Vanilla.MetaScript
 //
 //			DisposeCancellationTokenSource();
 //		}
+
 
 		[ContextMenu("Cancel")]
 		public void Cancel()
@@ -110,6 +116,7 @@ namespace Vanilla.MetaScript
 			}
 		}
 
+
 		private void FinalizeTask()
 		{
 //			Debug.Log("Finalize!");
@@ -126,22 +133,24 @@ namespace Vanilla.MetaScript
 			{
 				Debug.Log("Task execution chain completed successfully!");
 			}
-			
+
 //			Debug.LogWarning("Dispose..?");
 
 //			DisposeCancellationTokenSource();
 		}
+
 
 		private void DisposeCancellationTokenSource()
 		{
 			if (_cancellationTokenSource == null) return; // Check if it's already disposed.
 
 			Debug.LogWarning("Dispose..?");
-    
+
 //			_cancellationTokenSource.Dispose();
 //			_cancellationTokenSource = null;
 		}
-		
+
+
 //		private void DisposeCancellationTokenSource()
 //		{
 //			Debug.LogWarning("Disposing!");
@@ -151,23 +160,11 @@ namespace Vanilla.MetaScript
 //			_cancellationTokenSource = null;
 //		}
 
+
 		void Update()
 		{
-			if (!Input.GetKeyDown(debugKey)) return;
-
-			if (_cancellationTokenSource == null)
-			{
-				Run();
-			}
-			else
-			{
-				Cancel();
-			}
-//
-//		Cancel();
-//
-//		Run();
-
+			if (Input.GetKeyDown(debugCancelKey)) Cancel();
+			if (Input.GetKeyDown(debugRunKey)) Run();
 		}
 
 	}

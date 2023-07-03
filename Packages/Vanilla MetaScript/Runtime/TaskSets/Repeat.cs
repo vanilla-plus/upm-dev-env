@@ -35,7 +35,8 @@ namespace Vanilla.MetaScript.TaskSets
 				iteration++;
 
 				#if debug
-				if (!cancellationTokenSource.IsCancellationRequested) Debug.Log($"Beginning iteration [{iteration}]");
+//				if (!cancellationTokenSource.IsCancellationRequested) Debug.Log($"Beginning iteration [{iteration}]");
+				if (!cancellationTokenSource.IsCancellationRequested) LogIteration(iteration);
 				#endif
 
 				foreach (var task in _tasks)
@@ -47,6 +48,10 @@ namespace Vanilla.MetaScript.TaskSets
 				}
 			}
 		}
+		
+		//    Begun        
+		public void LogIteration(int i) => Debug.Log($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    i:{i:0000}       {ExecutionType,LongestExecutionType}    {Name}");
+
 
 	}
 

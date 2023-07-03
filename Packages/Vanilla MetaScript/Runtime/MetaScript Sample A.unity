@@ -123,6 +123,155 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &307734109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 307734111}
+  - component: {fileID: 307734110}
+  m_Layer: 0
+  m_Name: MetaScript Lottery Turn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &307734110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307734109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06a882ef6dd14af8b2cef9cc023da58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Running:
+    _Name: MetaScript Lottery Running
+    _Value: 0
+  RunOnStart: 0
+  debugCancelKey: 49
+  debugRunKey: 50
+  taskSet:
+    rid: 7507079543311302708
+  references:
+    version: 2
+    RefIds:
+    - rid: 7507079543311302708
+      type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript}
+      data:
+        _Name: Run tasks in order [Print [Ready to play?] to the console...]
+        _executionType: 0
+        _tasks:
+        - rid: 7507079543311302719
+        - rid: 7507079543311302720
+        - rid: 7507079543311302709
+        - rid: 7507079543311302710
+        - rid: 7507079543311302711
+    - rid: 7507079543311302709
+      type: {class: Log, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [Drum roll...] to the console
+        _executionType: 0
+        Message: Drum roll...
+    - rid: 7507079543311302710
+      type: {class: Wait, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Wait for 1 seconds
+        _executionType: 0
+        secondsToTake: 1
+    - rid: 7507079543311302711
+      type: {class: RandomWeighted, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript}
+      data:
+        _Name: Run one of the tasks at random
+        _executionType: 0
+        _tasks:
+        - rid: 7507079543311302713
+        - rid: 7507079543311302716
+        Table:
+          totalProbability: 5
+          items:
+          - _probability: 4
+          - _probability: 1
+    - rid: 7507079543311302713
+      type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript}
+      data:
+        _Name: Run tasks in order [Print [Sorry kiddo :(] to the console...]
+        _executionType: 0
+        _tasks:
+        - rid: 7507079543311302714
+        - rid: 7507079543311302715
+    - rid: 7507079543311302714
+      type: {class: Log, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [Sorry kiddo :(] to the console
+        _executionType: 0
+        Message: Sorry kiddo :(
+    - rid: 7507079543311302715
+      type: {class: Wait, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Wait for 1 seconds
+        _executionType: 0
+        secondsToTake: 1
+    - rid: 7507079543311302716
+      type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript}
+      data:
+        _Name: Run tasks in order [Print [Lucky!] to the console...]
+        _executionType: 0
+        _tasks:
+        - rid: 7507079543311302717
+        - rid: 7507079543311302718
+        - rid: 7507079543311302725
+    - rid: 7507079543311302717
+      type: {class: Log, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [Lucky!] to the console
+        _executionType: 0
+        Message: Lucky!
+    - rid: 7507079543311302718
+      type: {class: Cancel, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Cancel the current thread
+        _executionType: 0
+    - rid: 7507079543311302719
+      type: {class: Log, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [Ready to play?] to the console
+        _executionType: 0
+        Message: Ready to play?
+    - rid: 7507079543311302720
+      type: {class: Wait, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Wait for 1 seconds
+        _executionType: 0
+        secondsToTake: 1
+    - rid: 7507079543311302725
+      type: {class: Log, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [You win :D] to the console
+        _executionType: 0
+        Message: You win :D
+--- !u!4 &307734111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307734109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2135209031
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +283,7 @@ GameObject:
   - component: {fileID: 2135209032}
   - component: {fileID: 2135209033}
   m_Layer: 0
-  m_Name: Sequence
+  m_Name: MetaScript Lottery Loop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,73 +316,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06a882ef6dd14af8b2cef9cc023da58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RunOnStart: 1
-  debugKey: 32
-  taskSet:
-    rid: 7507079543311302698
   Running:
-    _Name: MetaTaskInstance Running
+    _Name: Intro Animation Running
     _Value: 0
+  RunOnStart: 1
+  debugCancelKey: 49
+  debugRunKey: 50
+  taskSet:
+    rid: 7507079543311302721
   references:
     version: 2
     RefIds:
-    - rid: 7507079543311302698
+    - rid: 7507079543311302721
+      type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript}
+      data:
+        _Name: Run tasks in order [Repeat tasks [5] times...]
+        _executionType: 0
+        _tasks:
+        - rid: 7507079543311302722
+        - rid: 7507079543311302724
+    - rid: 7507079543311302722
       type: {class: Repeat, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript}
       data:
-        _Name: Repeat tasks [10] times
+        _Name: Repeat tasks [5] times
         _executionType: 0
         _tasks:
-        - rid: 7507079543311302699
-        iterations: 10
-    - rid: 7507079543311302699
-      type: {class: RandomWeighted, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript}
+        - rid: 7507079543311302723
+        iterations: 5
+    - rid: 7507079543311302723
+      type: {class: Detour, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
       data:
-        _Name: Run one of the tasks at random
+        _Name: Divert to [Run tasks in order [Print [Ready to play?] to the console...]]
         _executionType: 0
-        _tasks:
-        - rid: 7507079543311302701
-        - rid: 7507079543311302702
-        Table:
-          totalProbability: 10
-          items:
-          - _probability: 9
-          - _probability: 1
-    - rid: 7507079543311302701
-      type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript}
-      data:
-        _Name: Run tasks in order [Print [Bummer...] to the console...]
-        _executionType: 0
-        _tasks:
-        - rid: 7507079543311302703
-        - rid: 7507079543311302706
-    - rid: 7507079543311302702
-      type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript}
-      data:
-        _Name: Run tasks in order [Print [Lucky!] to the console...]
-        _executionType: 0
-        _tasks:
-        - rid: 7507079543311302704
-        - rid: 7507079543311302705
-    - rid: 7507079543311302703
+        target: {fileID: 307734110}
+    - rid: 7507079543311302724
       type: {class: Log, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
       data:
-        _Name: Print [Bummer...] to the console
+        _Name: Print [You're all out of tries. Thanks for playing!] to the console
         _executionType: 0
-        Message: Bummer...
-    - rid: 7507079543311302704
-      type: {class: Log, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
-      data:
-        _Name: Print [Lucky!] to the console
-        _executionType: 0
-        Message: Lucky!
-    - rid: 7507079543311302705
-      type: {class: Cancel, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
-      data:
-        _Name: Cancel the current thread
-        _executionType: 0
-    - rid: 7507079543311302706
-      type: {class: Wait, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
-      data:
-        _Name: Wait for 1 seconds
-        _executionType: 0
-        secondsToTake: 1
+        Message: You're all out of tries. Thanks for playing!

@@ -65,7 +65,7 @@ namespace Vanilla.MetaScript
 						if (!cancellationTokenSource.IsCancellationRequested) LogRunComplete();
 						break;
 					
-					case TaskExecutionType.FireAndForget:
+					case TaskExecutionType.Parallel:
 						LogRunBegin();
 
 //						_Run(cancellationTokenSource)
@@ -101,18 +101,18 @@ namespace Vanilla.MetaScript
 		}
 
 
-		private const int LongestExecutionType = -13;
-		private const int LongestTaskName = -36;
+		protected const   int LongestExecutionType = -8;
+		protected const int LongestTaskName      = -14;
 
 		protected abstract UniTask _Run(CancellationTokenSource cancellationTokenSource);
 
 		#if debug
-		public void LogRunBegin()     => Debug.Log($"[{Time.frameCount:0000000}] Task Begun     [{ExecutionType,LongestExecutionType}] [{GetType(),LongestTaskName}] [{Name}]");
-		public void LogRunSkipped()   => Debug.LogWarning($"[{Time.frameCount:0000000}] Task Skipped   [{ExecutionType,LongestExecutionType}] [{GetType(),LongestTaskName}] [{Name}]");
-		public void LogRunComplete()  => Debug.Log($"[{Time.frameCount:0000000}] Task Complete  [{ExecutionType,LongestExecutionType}] [{GetType(),LongestTaskName}] [{Name}]");
-		public void LogRunCancelled() => Debug.LogWarning($"[{Time.frameCount:0000000}] Task Cancelled [{ExecutionType,LongestExecutionType}] [{GetType(),LongestTaskName}] [{Name}]");
-		public void LogTaskError()    => Debug.LogError($"[{Time.frameCount:0000000}] Task Error     [{ExecutionType,LongestExecutionType}] [{GetType(),LongestTaskName}] [{Name}]");
-		public void LogTaskIdentity() => Debug.LogWarning($"[{Time.frameCount:0000000}] Task Identity  [{ExecutionType,LongestExecutionType}] [{GetType(),LongestTaskName}] [{Name}]");
+		public void LogRunBegin()     => Debug.Log($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Begun        {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogRunSkipped()   => Debug.LogWarning($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Skipped      {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogRunComplete()  => Debug.Log($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Complete     {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogRunCancelled() => Debug.LogWarning($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Cancelled    {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogTaskError()    => Debug.LogError($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Error        {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogTaskIdentity() => Debug.LogWarning($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Identity     {ExecutionType,LongestExecutionType}    {Name}");
 		#else
 		public void LogRunBegin()     { }
 		public void LogRunSkipped()   { }
