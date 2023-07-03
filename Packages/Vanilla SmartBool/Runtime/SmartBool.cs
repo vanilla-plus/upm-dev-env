@@ -1,4 +1,4 @@
-#if DEBUG && TOGGLE
+#if DEBUG && SMARTBOOL
 #define debug
 #endif
 
@@ -14,7 +14,10 @@ namespace Vanilla
     {
 
         [SerializeField]
-        private bool _value;
+        public string name = "Unknown SmartBool";
+        
+        [SerializeField]
+        public bool _value;
         public bool Value
         {
             get => _value;
@@ -23,7 +26,7 @@ namespace Vanilla
                 if (_value == value) return;
 
                 #if debug
-                Debug.Log($"Toggle state changed from [{_value}] to [{value}]");
+                Debug.Log($"[{name}] changed from [{_value}] to [{value}]");
                 #endif
                 
                 _value = value;
@@ -55,6 +58,14 @@ namespace Vanilla
                                                                };
         
         public void Flip() => Value = !_value;
+
+
+        public void Invoke()
+        {
+            _value = !_value;
+
+            Value = !_value;
+        }
 
         public void SilentSet(bool state) => _value = state;
 

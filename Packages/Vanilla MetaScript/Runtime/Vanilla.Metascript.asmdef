@@ -2,11 +2,10 @@
     "name": "Vanilla.MetaScript",
     "rootNamespace": "Vanilla.MetaScript",
     "references": [
-        "Vanilla.DataAssets.Two",
-        "Vanilla.DotNetExtensions",
-        "Vanilla.StringFormatting",
+        "UniTask",
         "Vanilla.TypeMenu",
-        "UniTask"
+        "Vanilla.Roulette",
+        "Vanilla.SmartValues"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

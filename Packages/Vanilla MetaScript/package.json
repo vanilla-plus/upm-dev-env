@@ -1,0 +1,22 @@
+{
+  "name": "vanilla.metascript",
+  "displayName": "MetaScript",
+  "description": "MetaScript is a sequencing toolkit for serializing behaviour into your Unity scenes.",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.plus",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-metascript.git",
+  "unity": "2021.1",
+  "unityRelease": "1f1",
+  "version": "2.2.2",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Sample A",
+      "description": "Sample to demonstrate system A",
+      "path": "Samples~/Sample A"
+    }
+  ]
+}

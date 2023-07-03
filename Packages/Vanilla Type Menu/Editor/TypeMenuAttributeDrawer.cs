@@ -434,9 +434,9 @@ public class TypeMenuAttributeDrawer : PropertyDrawer
 
 		menu.ShowAsContext();
 
-		var target = property.serializedObject.targetObject as IValidatable;
-
-		target?.Validate();
+//		var target = property.serializedObject.targetObject as IValidatable;
+//
+//		target?.Validate();
 		
 	}
 

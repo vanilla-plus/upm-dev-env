@@ -20,7 +20,7 @@ namespace Vanilla
         
         public void Update(float deltaTime)
         {
-            t = (t + deltaTime);
+            t += deltaTime;
             
             Value = Offset + Mathf.Sin(t * Speed) * Scale;
         }

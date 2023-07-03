@@ -31,12 +31,32 @@ namespace Vanilla.SmartValues
 
 
 
-		public SmartFloat(string defaultName) : base(name: defaultName) { }
+		public SmartFloat(string defaultName) : base(name: defaultName)
+		{
+			_Min = float.MinValue;
+			_Max = float.MaxValue;
+			
+			Min = _Min;
+			Max = _Max;
+			
+			ChangeEpsilon = float.Epsilon;
+			MinMaxEpsilon = 0.01f;
+		}
 
 
 		public SmartFloat(string defaultName,
 		                  float defaultValue) : base(defaultName: defaultName,
-		                                             defaultValue: defaultValue) { }
+		                                             defaultValue: defaultValue)
+		{
+			_Min = float.MinValue;
+			_Max = float.MaxValue;
+			
+			Min = _Min;
+			Max = _Max;
+			
+			ChangeEpsilon = float.Epsilon;
+			MinMaxEpsilon = 0.01f;
+		}
 
 
 		public SmartFloat(string defaultName,
@@ -44,7 +64,14 @@ namespace Vanilla.SmartValues
 		                  float defaultChangeEpsilon) : base(defaultName: defaultName,
 		                                                     defaultValue: defaultValue)
 		{
+			_Min = float.MinValue;
+			_Max = float.MaxValue;
+			
+			Min = _Min;
+			Max = _Max;
+			
 			ChangeEpsilon = defaultChangeEpsilon;
+			MinMaxEpsilon = 0.01f;
 		}
 
 
@@ -54,7 +81,11 @@ namespace Vanilla.SmartValues
 		                  float defaultMax) : base(defaultName: defaultName,
 		                                           defaultValue: defaultValue,
 		                                           defaultMin: defaultMin,
-		                                           defaultMax: defaultMax) { }
+		                                           defaultMax: defaultMax)
+		{
+			ChangeEpsilon = float.Epsilon;
+			MinMaxEpsilon = 0.01f;
+		}
 
 
 		public SmartFloat(string defaultName,
@@ -67,6 +98,7 @@ namespace Vanilla.SmartValues
 		                                              defaultMax: defaultMax)
 		{
 			ChangeEpsilon = changeEpsilon;
+			MinMaxEpsilon = 0.01f;
 		}
 
 

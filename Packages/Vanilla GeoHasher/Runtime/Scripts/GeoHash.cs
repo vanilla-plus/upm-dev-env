@@ -29,13 +29,13 @@ namespace Vanilla.Geocodes
         }
         
         [SerializeField]
-        private string _geocode;
-        public string Geocode
+        private string _hash;
+        public string Hash
         {
-            get => _geocode;
+            get => _hash;
             set
             {
-                var (latitude, longitude) = HashToLatLong(value);
+                var (latitude, longitude) = HashToCoordinate(value);
 
                 if (InvalidLatLong(latitude: latitude,
                                    longitude: longitude))
@@ -50,8 +50,28 @@ namespace Vanilla.Geocodes
                 Latitude  = latitude;
                 Longitude = longitude;
             
-                _geocode = value;
+                _hash = value;
             }
+        }
+
+
+        public string Encode(double latitude,
+                             double longitude)
+        {
+            _latitude  = latitude;
+            _longitude = longitude;
+            
+            return CoordinateToHash(_latitude,
+                                    _longitude,
+                                    Precision);
+        }
+
+
+        public (double, double) Decode(string hash)
+        {
+            _hash = hash;
+
+            return HashToCoordinate(_hash);
         }
 
 
@@ -64,11 +84,11 @@ namespace Vanilla.Geocodes
                                      GeoHash south,
                                      GeoHash southEast)
         {
-            var hashLength = _geocode.Length;
+            var hashLength = _hash.Length;
 
-            var lastCh = _geocode[index: hashLength - 1];
+            var lastCh = _hash[index: hashLength - 1];
 
-            var parent = _geocode.Substring(startIndex: 0,
+            var parent = _hash.Substring(startIndex: 0,
                                             length: hashLength - 1);
 
             string n; // cache the north result for later use with north-west and north-east
@@ -85,43 +105,43 @@ namespace Vanilla.Geocodes
                 {
                     // North
 
-                    n = north.Geocode = Base32[index: Neighbour_A.IndexOf(value: lastCh)].ToString();
+                    n = north.Hash = Base32[index: Neighbour_A.IndexOf(value: lastCh)].ToString();
                 
                     // West
                 
-                    west.Geocode = Base32[index: Neighbour_D.IndexOf(value: lastCh)].ToString();
+                    west.Hash = Base32[index: Neighbour_D.IndexOf(value: lastCh)].ToString();
                 
                     // East
 
-                    east.Geocode = Base32[index: Neighbour_C.IndexOf(value: lastCh)].ToString();
+                    east.Hash = Base32[index: Neighbour_C.IndexOf(value: lastCh)].ToString();
                 
                     // South
 
-                    s = south.Geocode = Base32[index: Neighbour_B.IndexOf(value: lastCh)].ToString();
+                    s = south.Hash = Base32[index: Neighbour_B.IndexOf(value: lastCh)].ToString();
                 }
                 else
                 {
                     // North
 
-                    n = north.Geocode = Border_A.IndexOf(value: lastCh) != -1 ?
+                    n = north.Hash = Border_A.IndexOf(value: lastCh) != -1 ?
                                             GetNeighbour(geohash: parent, direction: N) + Base32[index: Neighbour_A.IndexOf(value: lastCh)] :
                                             parent                                      + Base32[index: Neighbour_A.IndexOf(value: lastCh)];
                 
                     // West
 
-                    west.Geocode = Border_D.IndexOf(value: lastCh) != -1 ?
+                    west.Hash = Border_D.IndexOf(value: lastCh) != -1 ?
                                        GetNeighbour(geohash: parent, direction: W) + Base32[index: Neighbour_D.IndexOf(value: lastCh)] :
                                        parent                                      + Base32[index: Neighbour_D.IndexOf(value: lastCh)];
                 
                     // East
 
-                    east.Geocode = Border_C.IndexOf(value: lastCh) != -1 ?
+                    east.Hash = Border_C.IndexOf(value: lastCh) != -1 ?
                                        GetNeighbour(geohash: parent, direction: E) + Base32[index: Neighbour_C.IndexOf(value: lastCh)] :
                                        parent                                      + Base32[index: Neighbour_C.IndexOf(value: lastCh)];
                 
                     // South
 
-                    s = south.Geocode = Border_B.IndexOf(value: lastCh) != -1 ?
+                    s = south.Hash = Border_B.IndexOf(value: lastCh) != -1 ?
                                             GetNeighbour(geohash: parent, direction: S) + Base32[index: Neighbour_B.IndexOf(value: lastCh)] :
                                             parent                                      + Base32[index: Neighbour_B.IndexOf(value: lastCh)];
                 }
@@ -135,43 +155,43 @@ namespace Vanilla.Geocodes
                 {
                     // North
 
-                    n = north.Geocode = Base32[index: Neighbour_C.IndexOf(value: lastCh)].ToString();
+                    n = north.Hash = Base32[index: Neighbour_C.IndexOf(value: lastCh)].ToString();
 
                     // West
                 
-                    west.Geocode = Base32[index: Neighbour_B.IndexOf(value: lastCh)].ToString();
+                    west.Hash = Base32[index: Neighbour_B.IndexOf(value: lastCh)].ToString();
                 
                     // East
 
-                    east.Geocode = Base32[index: Neighbour_A.IndexOf(value: lastCh)].ToString();
+                    east.Hash = Base32[index: Neighbour_A.IndexOf(value: lastCh)].ToString();
                 
                     // South
 
-                    s = south.Geocode = Base32[index: Neighbour_D.IndexOf(value: lastCh)].ToString();
+                    s = south.Hash = Base32[index: Neighbour_D.IndexOf(value: lastCh)].ToString();
                 }
                 else
                 {
                     // North
 
-                    n = north.Geocode = Border_C.IndexOf(value: lastCh) != -1 ?
+                    n = north.Hash = Border_C.IndexOf(value: lastCh) != -1 ?
                                       GetNeighbour(geohash: parent, direction: N) + Base32[index: Neighbour_C.IndexOf(value: lastCh)] :
                                       parent                                      + Base32[index: Neighbour_C.IndexOf(value: lastCh)];
                 
                     // West
 
-                    west.Geocode = Border_B.IndexOf(value: lastCh) != -1 ?
+                    west.Hash = Border_B.IndexOf(value: lastCh) != -1 ?
                                      GetNeighbour(geohash: parent, direction: W) + Base32[index: Neighbour_B.IndexOf(value: lastCh)] :
                                      parent                                      + Base32[index: Neighbour_B.IndexOf(value: lastCh)];
                 
                     // East
 
-                    east.Geocode = Border_A.IndexOf(value: lastCh) != -1 ?
+                    east.Hash = Border_A.IndexOf(value: lastCh) != -1 ?
                                      GetNeighbour(geohash: parent, direction: E) + Base32[index: Neighbour_A.IndexOf(value: lastCh)] :
                                      parent                                      + Base32[index: Neighbour_A.IndexOf(value: lastCh)];
                 
                     // South
 
-                    s = south.Geocode = Border_D.IndexOf(value: lastCh) != -1 ?
+                    s = south.Hash = Border_D.IndexOf(value: lastCh) != -1 ?
                                             GetNeighbour(geohash: parent, direction: S) + Base32[index: Neighbour_D.IndexOf(value: lastCh)] :
                                             parent                                      + Base32[index: Neighbour_D.IndexOf(value: lastCh)];
                 }
@@ -197,23 +217,23 @@ namespace Vanilla.Geocodes
                 {
                     // ...West
                 
-                    northWest.Geocode = Base32[index: Neighbour_D.IndexOf(value: n_LastCh)].ToString();
+                    northWest.Hash = Base32[index: Neighbour_D.IndexOf(value: n_LastCh)].ToString();
                 
                     // ...East
                 
-                    northEast.Geocode = Base32[index: Neighbour_C.IndexOf(value: n_LastCh)].ToString();
+                    northEast.Hash = Base32[index: Neighbour_C.IndexOf(value: n_LastCh)].ToString();
                 }
                 else
                 {
                     // ...West
                 
-                    northWest.Geocode = Border_D.IndexOf(value: n_LastCh) != -1 ?
+                    northWest.Hash = Border_D.IndexOf(value: n_LastCh) != -1 ?
                                      GetNeighbour(geohash: n_Parent, direction: W) + Base32[index: Neighbour_D.IndexOf(value: n_LastCh)] :
                                      n_Parent                                      + Base32[index: Neighbour_D.IndexOf(value: n_LastCh)];
                 
                     // ...East
                 
-                    northEast.Geocode = Border_C.IndexOf(value: n_LastCh) != -1 ?
+                    northEast.Hash = Border_C.IndexOf(value: n_LastCh) != -1 ?
                                             GetNeighbour(geohash: n_Parent, direction: E) + Base32[index: Neighbour_C.IndexOf(value: n_LastCh)] :
                                             n_Parent                                      + Base32[index: Neighbour_C.IndexOf(value: n_LastCh)];
                 }
@@ -224,23 +244,23 @@ namespace Vanilla.Geocodes
                 {
                     // ...West
                 
-                    northWest.Geocode = Base32[index: Neighbour_B.IndexOf(value: n_LastCh)].ToString();
+                    northWest.Hash = Base32[index: Neighbour_B.IndexOf(value: n_LastCh)].ToString();
                 
                     // ...East
                 
-                    northEast.Geocode = Base32[index: Neighbour_A.IndexOf(value: n_LastCh)].ToString();
+                    northEast.Hash = Base32[index: Neighbour_A.IndexOf(value: n_LastCh)].ToString();
                 }
                 else
                 {
                     // ...West
                 
-                    northWest.Geocode = Border_B.IndexOf(value: n_LastCh) != -1 ?
+                    northWest.Hash = Border_B.IndexOf(value: n_LastCh) != -1 ?
                                      GetNeighbour(geohash: n_Parent, direction: W) + Base32[index: Neighbour_B.IndexOf(value: n_LastCh)] :
                                      n_Parent                                      + Base32[index: Neighbour_B.IndexOf(value: n_LastCh)];
                 
                     // ...East
                 
-                    northEast.Geocode = Border_A.IndexOf(value: n_LastCh) != -1 ?
+                    northEast.Hash = Border_A.IndexOf(value: n_LastCh) != -1 ?
                                      GetNeighbour(geohash: n_Parent, direction: E) + Base32[index: Neighbour_A.IndexOf(value: n_LastCh)] :
                                      n_Parent                                      + Base32[index: Neighbour_A.IndexOf(value: n_LastCh)];
                 }
@@ -264,23 +284,23 @@ namespace Vanilla.Geocodes
                 {
                     // ...West
                 
-                    southWest.Geocode = Base32[index: Neighbour_D.IndexOf(value: s_LastCh)].ToString();
+                    southWest.Hash = Base32[index: Neighbour_D.IndexOf(value: s_LastCh)].ToString();
                 
                     // ...East
                 
-                    southEast.Geocode = Base32[index: Neighbour_C.IndexOf(value: s_LastCh)].ToString();
+                    southEast.Hash = Base32[index: Neighbour_C.IndexOf(value: s_LastCh)].ToString();
                 }
                 else
                 {
                     // ...West
                 
-                    southWest.Geocode = Border_D.IndexOf(value: s_LastCh) != -1 ?
+                    southWest.Hash = Border_D.IndexOf(value: s_LastCh) != -1 ?
                                      GetNeighbour(geohash: s_Parent, direction: W) + Base32[index: Neighbour_D.IndexOf(value: s_LastCh)] :
                                      s_Parent                                      + Base32[index: Neighbour_D.IndexOf(value: s_LastCh)];
                 
                     // ...East
                 
-                    southEast.Geocode = Border_C.IndexOf(value: s_LastCh) != -1 ?
+                    southEast.Hash = Border_C.IndexOf(value: s_LastCh) != -1 ?
                                             GetNeighbour(geohash: s_Parent, direction: E) + Base32[index: Neighbour_C.IndexOf(value: s_LastCh)] :
                                             s_Parent                                      + Base32[index: Neighbour_C.IndexOf(value: s_LastCh)];
                 }
@@ -291,23 +311,23 @@ namespace Vanilla.Geocodes
                 {
                     // ...West
                 
-                    southWest.Geocode = Base32[index: Neighbour_B.IndexOf(value: s_LastCh)].ToString();
+                    southWest.Hash = Base32[index: Neighbour_B.IndexOf(value: s_LastCh)].ToString();
                 
                     // ...East
                 
-                    southEast.Geocode = Base32[index: Neighbour_A.IndexOf(value: s_LastCh)].ToString();
+                    southEast.Hash = Base32[index: Neighbour_A.IndexOf(value: s_LastCh)].ToString();
                 }
                 else
                 {
                     // ...West
                 
-                    southWest.Geocode = Border_B.IndexOf(value: s_LastCh) != -1 ?
+                    southWest.Hash = Border_B.IndexOf(value: s_LastCh) != -1 ?
                                      GetNeighbour(geohash: s_Parent, direction: W) + Base32[index: Neighbour_B.IndexOf(value: s_LastCh)] :
                                      s_Parent                                      + Base32[index: Neighbour_B.IndexOf(value: s_LastCh)];
                 
                     // ...East
                 
-                    southEast.Geocode = Border_A.IndexOf(value: s_LastCh) != -1 ?
+                    southEast.Hash = Border_A.IndexOf(value: s_LastCh) != -1 ?
                                             GetNeighbour(geohash: s_Parent, direction: E) + Base32[index: Neighbour_A.IndexOf(value: s_LastCh)] :
                                             s_Parent                                      + Base32[index: Neighbour_A.IndexOf(value: s_LastCh)];
                 }
@@ -337,19 +357,19 @@ namespace Vanilla.Geocodes
 //        private string[] _neighbours = new string[9];
 //        public string[] Neighbours => _neighbours;
 
-        public override void OnValidate()
+        public override void OnAfterDeserialize()
         {
-            base.OnValidate();
+            base.OnAfterDeserialize();
             
             Precision = _precision;
 
-            UpdateCode();
+            UpdateHash();
         }
 
 
-        public void UpdateCode()
+        public void UpdateHash()
         {
-            _geocode = CoordinateToHash(latitude: _latitude,
+            _hash = CoordinateToHash(latitude: _latitude,
                                   longitude: _longitude,
                                   precision: _precision);
 
@@ -370,11 +390,11 @@ namespace Vanilla.Geocodes
             Latitude  = latitude;
             Longitude = longitude;
 
-            UpdateCode();
+            UpdateHash();
         }
 
 
-        public GeoHash(string geohash) => Geocode = geohash;
+        public GeoHash(string geohash) => Hash = geohash;
 
 
         public GeoHash(Coordinate coordinate)
@@ -382,7 +402,7 @@ namespace Vanilla.Geocodes
             Latitude  = coordinate.Latitude;
             Longitude = coordinate.Longitude;
 
-            UpdateCode();
+            UpdateHash();
         }
         
         public GeoHash() { }
@@ -508,7 +528,7 @@ namespace Vanilla.Geocodes
             return new string(value: buffer);
         }
 
-        public static(double, double) HashToLatLong(string input)
+        public static (double, double) HashToCoordinate(string input)
         {
             // Get the boxing bounds of the hash
             

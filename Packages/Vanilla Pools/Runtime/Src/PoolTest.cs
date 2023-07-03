@@ -16,36 +16,22 @@ using UnityEngine;
 namespace Vanilla.Pools
 {
 
-//
-//
-    using Vanilla.Pools;
-
-//
-//    [Serializable]
-//    public class TestStockAsyncPool : IPrefabStockAsyncPool<TestStockAsyncPool,PoolItemTest>
-//    {
-//
-//
-//
-//    }
-////
     [Serializable]
     public class PoolTest : MonoBehaviour
     {
 
         [SerializeField]
-        public TestPool Pool = new TestPool();
+        public RingPool Pool = new ();
 
         [SerializeField]
         public PoolItemTest current;
-
 
         [ContextMenu("Fill")]
         public void Fill() => Pool.CreateAll();
 
 
         [ContextMenu("Get All")]
-        public async void GetAll()
+        public void GetAll()
         {
 //            while (Pool.Inactive.TryPeek(out var item)) current = await Pool.Get();
 
@@ -53,8 +39,10 @@ namespace Vanilla.Pools
                  i < Pool.Total;
                  i++)
             {
-                current = Pool.Get();
+                current = Pool.Get() as PoolItemTest;
             }
+            
+            ((IPoolItem)current)?.Retire();
         }
 
 
@@ -63,15 +51,12 @@ namespace Vanilla.Pools
 
 
         [ContextMenu("Get")]
-        public void TestGet() => current = Pool.Get();
+        public void TestGet() => current = Pool.Get() as PoolItemTest;
 
 
         [ContextMenu("Retire")]
         public void TestRetire() => Pool.Retire(current);
 
     }
-
-    [Serializable]
-    public class TestPool : StockPool<TestPool, PoolItemTest> { }
 
 }

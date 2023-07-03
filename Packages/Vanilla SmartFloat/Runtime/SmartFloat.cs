@@ -1,4 +1,6 @@
-//#define debug
+//#if DEVELOPMENT_BUILD
+#define debug
+//#endif
 
 using System;
 

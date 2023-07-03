@@ -20,9 +20,10 @@ namespace Vanilla.Pools
 {
 
 	[Serializable]
-	public class StockPool<P, PI> : IPool<P,PI>
-		where P : class, IPool<P,PI>
-		where PI : MonoBehaviour, IPoolItem<P,PI>
+//	public class StockPool<P, PI> : IPool<P,PI>
+//		where P : class, IPool<P,PI>
+//		where PI : MonoBehaviour, IPoolItem<P,PI>
+	public class StockPool : IPool
 	{
 		
 		[SerializeField] protected Transform _inactiveParent;
@@ -49,11 +50,11 @@ namespace Vanilla.Pools
 			set => _total = value;
 		}
 
-		[SerializeField] protected Stack<PI>   _inactive = new();
-		public                     Stack<PI>   Inactive => _inactive ??= new Stack<PI>(capacity: Total);
+		[SerializeField] protected Stack<IPoolItem> _inactive = new();
+		public                     Stack<IPoolItem> Inactive => _inactive ??= new Stack<IPoolItem>(capacity: Total);
 		
-		[SerializeField] protected HashSet<PI> _active = new();
-		public                     HashSet<PI> Active => _active ??= new HashSet<PI>(capacity: Total);
+		[SerializeField] protected HashSet<IPoolItem> _active = new();
+		public                     HashSet<IPoolItem> Active => _active ??= new HashSet<IPoolItem>(capacity: Total);
 
 
 		public void CreateAll()
@@ -67,7 +68,7 @@ namespace Vanilla.Pools
 
 //				newItem.gameObject.name = $"{typeof(PI).Name} [{Inactive.Count}]";
 
-				newItem.Pool = this as P;
+				newItem.Pool = this;
 
 				Inactive.Push(item: newItem);
 			}
@@ -90,17 +91,17 @@ namespace Vanilla.Pools
 		}
 
 
-		public PI CreateItem()
+		public IPoolItem CreateItem()
 		{
 //			#if UNITY_EDITOR
 //			var output = PrefabUtility.InstantiatePrefab(assetComponentOrGameObject: Prefab,
 //			                                             parent: InactiveParent) as GameObject;
 //			#else
-			var output = UnityEngine.Object.Instantiate(original: _prefab,
+			var output = Object.Instantiate(original: _prefab,
 			                                            parent: InactiveParent);
 //			#endif
 
-			var result = output.GetComponentInChildren<PI>(includeInactive: true);
+			var result = output.GetComponentInChildren<IPoolItem>(includeInactive: true);
 
 			if (ReferenceEquals(result,
 			                    null))
@@ -111,15 +112,15 @@ namespace Vanilla.Pools
 			}
 			else
 			{
-				result.Pool = this as P;
+				result.Pool = this;
 			}
 
 			return result;
 		}
 
-		public void DestroyItem(PI item) => Object.Destroy(item.gameObject);
+		public void DestroyItem(IPoolItem item) => Object.Destroy(item.gameObject);
 
-		public PI Get()
+		public IPoolItem Get()
 		{
 			if (!Inactive.TryPop(out var item))
 			{
@@ -130,14 +131,14 @@ namespace Vanilla.Pools
 				return null;
 			}
 
-			if (item.Leased)
-			{
-				#if debug
-				LogWarning($"[{item}] was not returned to its [{typeof(PI).Name}] pool correctly.");
-				#endif
-			}
+//			if (item.Leased)
+//			{
+//				#if debug
+//				LogWarning($"[{item}] was not returned to its [{typeof(PI).Name}] pool correctly.");
+//				#endif
+//			}
 
-			item.Leased = true;
+//			item.Leased = true;
 
 			Active.Add(item: item);
 
@@ -145,16 +146,16 @@ namespace Vanilla.Pools
 
 			item.gameObject.SetActive(true);
 
-			item.HandleGet();
+//			item.HandleGet();
 
 			return item;
 		}
 
-		public void Retire(PI item)
+		public void Retire(IPoolItem item)
 		{
-			if (!item.Leased) return;
+//			if (!item.Leased) return;
 
-			item.Leased = false;
+//			item.Leased = false;
 			
 			Active.Remove(item);
 
@@ -164,7 +165,7 @@ namespace Vanilla.Pools
 			
 			item.gameObject.SetActive(false);
 
-			item.HandleRetire();
+//			item.HandleRetire();
 		}
 
 

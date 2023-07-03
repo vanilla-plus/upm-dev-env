@@ -11,7 +11,7 @@ namespace Vanilla.Geocodes
     ///     It acts as a universal point of conversion between different kinds of geocode.
     /// </summary>
     [Serializable]
-    public class Coordinate
+    public class Coordinate : ISerializationCallbackReceiver
     {
         
         // Dynamic
@@ -47,11 +47,11 @@ namespace Vanilla.Geocodes
         public Coordinate() { }
 
 
-        public virtual void OnValidate()
-        {
-            Longitude = _longitude;
-            Latitude  = _latitude;
-        }
+//        public virtual void OnValidate()
+//        {
+//            Longitude = _longitude;
+//            Latitude  = _latitude;
+//        }
         
         // Static
 
@@ -60,6 +60,16 @@ namespace Vanilla.Geocodes
 
         public const double Min_Longitude = -180;
         public const double Max_Longitude = 180;
+
+        public void OnBeforeSerialize() { }
         
+        public virtual void OnAfterDeserialize()
+        {
+            #if UNITY_EDITOR
+            Longitude = _longitude;
+            Latitude  = _latitude;
+            #endif
+        }
+
     }
 }

@@ -10,39 +10,39 @@ using UnityEngine;
 
 namespace Vanilla.Pools
 {
-	
-	public interface IPoolItem<P,PI>
-		where P : class, IPool<P, PI>
-		where PI : class, IPoolItem<P, PI>
+//	public interface IPoolItem<P,PI>
+//		where P : class, IPool<P, PI>
+//		where PI : class, IPoolItem<P, PI>
+	public interface IPoolItem
 	{
 
-		public bool Leased
-		{
-			get;
-			set;
-		}
+//		public bool Leased
+//		{
+//			get;
+//			set;
+//		}
 
-		public P Pool
+		public IPool Pool
 		{
 			get;
 			set;
 		}
 		
-//		GameObject gameObject
-//		{
-//			get;
-//		}
+		GameObject gameObject
+		{
+			get;
+		}
 		
-//		Transform transform
-//		{
-//			get;
-//		}
+		Transform transform
+		{
+			get;
+		}
 
-		void HandleGet();
+//		void HandleGet();
 
-		void HandleRetire();
+//		void HandleRetire();
 
-		public void Retire() => Pool.Retire(item: this as PI);
+		void Retire() => Pool.Retire(item: this);
 
 	}
 

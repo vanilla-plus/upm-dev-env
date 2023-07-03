@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 using Vanilla.Geocodes;
@@ -9,21 +8,34 @@ using Vanilla.Geocodes;
 public class GeocodeTest : MonoBehaviour
 {
 
-    [SerializeField]
-    public Coordinate coordinate = new Coordinate();
+	[SerializeField]
+	public Coordinate coordinate = new Coordinate();
 
-    [SerializeField]
-    public GeoHash geohash = new GeoHash();
+	[SerializeField]
+	public string CorrectAnswer = "CWC8+Q9W";
 
-    [SerializeField]
-    public GeoHashMap geoHashMap = new GeoHashMap();
+	[SerializeField]
+	public GeoHash geohash = new GeoHash();
 
-    private void OnValidate()
-    {
-        coordinate.OnValidate();
-        
-        geohash.OnValidate();
-        geoHashMap.OnValidate();
-    }
+	[SerializeField]
+	public Geoji Geoji;
 
+	[SerializeField]
+	public OpenLocationCode OpenLocationCode = new OpenLocationCode(0.0,
+	                                        0.0);
+	
+
+//    [SerializeField]
+//    public GeoHashMap geoHashMap = new GeoHashMap();
+
+	[SerializeField]
+	public GeocodeMap<GeoHash> geoHashMap;
+
+	//-37.780120, 144.892915
+
+	[ContextMenu("Geoji - Hash To Lat Long")]
+	public void GeojiHashToLatLong() => Geoji.Hash = Geoji.Hash;
+
+	[ContextMenu("Geoji - Lat Long To Hash")]
+	public void GeojiLatLongToHash() => Geoji.Validate();
 }

@@ -10,27 +10,22 @@ namespace Vanilla.Pools
 {
     
     [Serializable]
-    public class PoolItemTest : MonoBehaviour, IPoolItem<TestPool, PoolItemTest>
+    public class PoolItemTest : MonoBehaviour, IPoolItem
     {
-
-        [SerializeField] private bool _leased;
-        public bool Leased
-        {
-            get => _leased;
-            set => _leased = value;
-        }
-
+       
         [NonSerialized] 
-        private TestPool _pool;
-        public TestPool Pool
+        private IPool _pool;
+        public IPool Pool
         {
             get => _pool;
             set => _pool = value;
         }
 
-        public void HandleGet()    => Debug.Log("Argh, somebody got me!");
+        public void OnEnable() => Debug.Log("Activated!");
         
-        public void HandleRetire() => Debug.Log("Argh, somebody... retired me!");
+        public void OnDisable() => Debug.Log("Deactivated, resetting myself");
+
+//        public void RetireSelf() => this.Retire();
 
     }
 }

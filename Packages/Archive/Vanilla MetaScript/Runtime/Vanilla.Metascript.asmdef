@@ -1,0 +1,20 @@
+{
+    "name": "Vanilla.MetaScript",
+    "rootNamespace": "Vanilla.MetaScript",
+    "references": [
+        "Vanilla.DataAssets.Two",
+        "Vanilla.DotNetExtensions",
+        "Vanilla.StringFormatting",
+        "Vanilla.TypeMenu",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

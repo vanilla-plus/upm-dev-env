@@ -9,9 +9,10 @@ using Cysharp.Threading.Tasks;
 namespace Vanilla.Pools
 {
 
-	public interface IPool<P, PI>
-		where P : class, IPool<P,PI>
-		where PI : class, IPoolItem<P,PI>
+//	public interface IPool<P, PI>
+//		where P : class, IPool<P,PI>
+//		where PI : class, IPoolItem<P,PI>
+	public interface IPool
 	{
 
 		public int Total
@@ -20,17 +21,17 @@ namespace Vanilla.Pools
 			set;
 		}
 
-		PI CreateItem();
+		IPoolItem CreateItem();
 
 		void CreateAll();
 
-		void DestroyItem(PI item);
+		void DestroyItem(IPoolItem item);
 
 		void DestroyAll();
 
-		PI Get();
+		IPoolItem Get();
 
-		void Retire(PI item);
+		void Retire(IPoolItem item);
 
 		void RetireAll();
 

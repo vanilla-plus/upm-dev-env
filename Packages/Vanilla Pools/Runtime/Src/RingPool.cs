@@ -22,9 +22,10 @@ namespace Vanilla.Pools
 {
 
 	[Serializable]
-	public class RingPool<P, PI> : IPool<P,PI>
-		where P : class, IPool<P,PI>
-		where PI : MonoBehaviour, IPoolItem<P,PI>
+//	public class RingPool<P, PI> : IPool<P,PI>
+//		where P : class, IPool<P,PI>
+//		where PI : MonoBehaviour, IPoolItem<P,PI>
+	public class RingPool : IPool
 	{
 		
 		[SerializeField] protected Transform _inactiveParent;
@@ -54,8 +55,8 @@ namespace Vanilla.Pools
 		[NonSerialized] private int _index = -1;
 		public                   int Index => _index;
 
-		[NonSerialized] private PI[] _items;
-		public                   PI[] Items => _items ??= new PI[Total];
+		[NonSerialized] private IPoolItem[] _items;
+		public                  IPoolItem[] Items => _items ??= new IPoolItem[Total];
 		
 		public void CreateAll()
 		{
@@ -77,7 +78,7 @@ namespace Vanilla.Pools
 			}
 		}
 
-		public PI CreateItem()
+		public IPoolItem CreateItem()
 		{
 //			#if UNITY_EDITOR
 //			var output = PrefabUtility.InstantiatePrefab(assetComponentOrGameObject: Prefab,
@@ -87,7 +88,7 @@ namespace Vanilla.Pools
 			                                            parent: InactiveParent);
 //			#endif
 
-			var result = output.GetComponentInChildren<PI>(includeInactive: true);
+			var result = output.GetComponentInChildren<IPoolItem>(includeInactive: true);
 
 			if (ReferenceEquals(result,
 			                    null))
@@ -98,47 +99,49 @@ namespace Vanilla.Pools
 			}
 			else
 			{
-				result.Pool = this as P;
+				result.Pool = this;
 			}
 
 			return result;
 		}
 
 
-		public void DestroyItem(PI item) => Object.Destroy(item.gameObject);
+		public void DestroyItem(IPoolItem item) => Object.Destroy(item.gameObject);
 
 
 
-		public PI Get()
+		public IPoolItem Get()
 		{
 			if (++_index >= _total) _index = 0;
 
 			var item = _items[_index];
 
-			item.Retire();
+			Retire(item);
+			
+//			item.Retire();
 
-			item.Leased = true;
+//			item.Leased = true;
 			
 			item.transform.SetParent(_activeParent);
 			
 			item.gameObject.SetActive(true);
 
-			item.HandleGet();
+//			item.HandleGet();
 
 			return item;
 		}
 
-		public void Retire(PI item)
+		public void Retire(IPoolItem item)
 		{
-			if (!item.Leased) return;
+//			if (!item.Leased) return;
 
-			item.Leased = false;
+//			item.Leased = false;
 			
 			item.transform.SetParent(_inactiveParent);
 
 			item.gameObject.SetActive(false);
 
-			item.HandleRetire();
+//			item.HandleRetire();
 		}
 
 

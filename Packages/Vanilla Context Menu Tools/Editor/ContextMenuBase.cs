@@ -3,7 +3,7 @@ namespace Vanilla.ContextMenuTools.Editor
     public abstract class ContextMenuBase
     {
 
-        protected const string VanillaPackageKeyword = "vanilla.plus.";
+        protected const string VanillaPackageKeyword = "vanilla.";
 
         protected const string PackagesKeyword   = "Packages";
         protected const string PackagesSubPath = PackagesKeyword + "/";

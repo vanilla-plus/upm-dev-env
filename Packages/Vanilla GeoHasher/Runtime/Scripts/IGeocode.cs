@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
-
 namespace Vanilla.Geocodes
 {
     public interface IGeocode<G>
@@ -20,22 +15,16 @@ namespace Vanilla.Geocodes
             get;
             set;
         }
-
-        void OnValidate()
-        {
-            
-        }
         
-        string Geocode
+        string Hash
         {
             get;
             set;
         }
 
+        string Encode(double latitude, double longitude);
 
-//        void UpdateNeighbours(G input,
-//                              ref G[] results);
-
+        (double, double) Decode(string hash);
 
         void UpdateNeighbours(G northWest,
                               G north,
