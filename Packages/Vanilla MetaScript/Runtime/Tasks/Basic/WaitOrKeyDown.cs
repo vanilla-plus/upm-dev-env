@@ -11,9 +11,9 @@ namespace Vanilla.MetaScript
 	public class WaitOrKeyDown : MetaTask
 	{
 
-		protected override bool CanDescribe() => true;
+		protected override bool CanAutoName() => true;
 
-		protected override string DescribeTask() => $"Wait for {secondsToTake} seconds or {key} key press";
+		protected override string CreateAutoName() => $"Wait for {secondsToTake} seconds or {key} key press";
 		
 		[SerializeField]
 		public float secondsToTake = 1.0f;

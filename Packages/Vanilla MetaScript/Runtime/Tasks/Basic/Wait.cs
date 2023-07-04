@@ -12,9 +12,9 @@ namespace Vanilla.MetaScript
 	public class Wait : MetaTask
 	{
 
-		protected override bool CanDescribe() => true;
+		protected override bool CanAutoName() => true;
 
-		protected override string DescribeTask() => $"Wait for {secondsToTake} seconds";
+		protected override string CreateAutoName() => $"Wait for {secondsToTake} seconds";
 
 		public float secondsToTake = 1.0f;
 		

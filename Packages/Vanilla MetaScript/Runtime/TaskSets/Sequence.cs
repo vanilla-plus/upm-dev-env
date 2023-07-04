@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.TaskSets
 	public class Sequence : MetaTaskSet
 	{
 
-		protected override string DescribeTask() => $"Run tasks in order [{Tasks[0].Name}...]";
+		protected override string CreateAutoName() => "Run the following in order:";
 
 
 		protected override async UniTask<Tracer> _Run(Tracer tracer)

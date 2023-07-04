@@ -12,8 +12,7 @@ namespace Vanilla.MetaScript.TaskSets
 
 		public abstract bool Evaluate();
 
-		protected override string DescribeTask() => "Repeat tasks while Evaluate returns false";
-
+//		protected override string CreateAutoName() => "Repeat the following tasks while...";
 
 		protected override async UniTask<Tracer> _Run(Tracer tracer)
 		{

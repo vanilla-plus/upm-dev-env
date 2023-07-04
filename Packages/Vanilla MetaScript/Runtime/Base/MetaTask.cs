@@ -17,34 +17,35 @@ namespace Vanilla.MetaScript
 	{
 
 		[SerializeField]
-		[HideInInspector]
+//		[HideInInspector]
 		private string _Name;
 		public string Name => _Name;
-
-//		[TextArea(1,4)]
-//		[SerializeField]
-//		private string Description;
+		
+		[SerializeField]
+		public string AutoName;
 
 		[SerializeField]
 		private TaskExecutionType _executionType = TaskExecutionType.Await;
 		public TaskExecutionType ExecutionType => _executionType;
 
-		private const string c_TaskDefiesDescription = "[Task can't be described]";
+		private const string DefaultAutoName = "This task can't be auto-named yet.";
 
 		public virtual void OnValidate()
 		{
 			#if UNITY_EDITOR
-			_Name = CanDescribe() ?
-				        DescribeTask() :
-				        c_TaskDefiesDescription;
+			AutoName = CanAutoName() ?
+				              CreateAutoName() :
+				              DefaultAutoName;
+
+			if (string.IsNullOrEmpty(Name)) _Name = AutoName;
 			#endif
 		}
 		
 		
 
-		protected abstract bool CanDescribe();
+		protected abstract bool CanAutoName();
 
-		protected abstract string DescribeTask();
+		protected abstract string CreateAutoName();
 
 
 		public async UniTask<Tracer> Run(Tracer tracer)
@@ -53,7 +54,7 @@ namespace Vanilla.MetaScript
 
 			if (tracer.Cancelled(this)) return tracer;
 
-			tracer.EnterMethod(GetType().Name);
+			tracer.EnterMethod($"{Name} [{GetType().Name}]");
 
 			try
 			{

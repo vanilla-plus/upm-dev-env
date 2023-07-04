@@ -11,10 +11,11 @@ namespace Vanilla.MetaScript.TaskSets
 	public class All : MetaTaskSet
 	{
 
-		protected override string DescribeTask() => Tasks.Aggregate(seed: "Proceed when all of the following complete ",
-		                                                            func: (current,
-		                                                                   t) => current[..^1] + $", {t.Name}");
+//		protected override string CreateAutoName() => Tasks.Aggregate(seed: "Proceed when all of the following complete ",
+//		                                                            func: (current,
+//		                                                                   t) => current[..^1] + $", {t.Name}");
 
+		protected override string CreateAutoName() => "Proceed when all of the following complete:";
 
 		protected override async UniTask<Tracer> _Run(Tracer tracer)
 		{

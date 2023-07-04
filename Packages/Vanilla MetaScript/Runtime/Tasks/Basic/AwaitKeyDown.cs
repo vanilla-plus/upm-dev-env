@@ -16,10 +16,10 @@ namespace Vanilla.MetaScript
         [SerializeField]
         public KeyCode key = KeyCode.Alpha1;
 
-        protected override bool CanDescribe() => true;
+        protected override bool CanAutoName() => true;
 
 
-        protected override string DescribeTask() => $"Wait for [{key}] key press";
+        protected override string CreateAutoName() => $"Wait for [{key}] key press";
 
 
         protected override async UniTask<Tracer> _Run(Tracer tracer)

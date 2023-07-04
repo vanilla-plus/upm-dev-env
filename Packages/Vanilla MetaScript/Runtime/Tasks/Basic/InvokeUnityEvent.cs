@@ -15,7 +15,7 @@ namespace Vanilla.MetaScript
 		public UnityEvent unityEvent = new UnityEvent();
 
 
-		protected override bool CanDescribe()
+		protected override bool CanAutoName()
 		{
 			var count = unityEvent.GetPersistentEventCount();
 
@@ -36,7 +36,7 @@ namespace Vanilla.MetaScript
 		}
 
 
-		protected override string DescribeTask()
+		protected override string CreateAutoName()
 		{
 			var output = "Call";
 

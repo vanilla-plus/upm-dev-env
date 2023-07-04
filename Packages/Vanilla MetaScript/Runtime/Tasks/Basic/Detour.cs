@@ -15,10 +15,10 @@ namespace Vanilla.MetaScript
         [SerializeField]
         public MetaTaskInstance target;
         
-        protected override bool CanDescribe() => target;
+        protected override bool CanAutoName() => target;
 
 
-        protected override string DescribeTask() => $"Divert to [{target.Task.Name}]";
+        protected override string CreateAutoName() => $"Divert to [{target.Task.Name}]";
 
 
 //        protected override async UniTask<Tracer> _Run(Tracer tracer) => await target.Task.Run(tracer);

@@ -20,7 +20,7 @@ namespace Vanilla.MetaScript.TaskSets
 		[SerializeField]
 		public int iterations = 1;
 
-		protected override string DescribeTask() => $"Repeat tasks [{iterations}] times";
+		protected override string CreateAutoName() => $"Repeat the following [{iterations}] times:";
 
 
 		protected override async UniTask<Tracer> _Run(Tracer tracer)

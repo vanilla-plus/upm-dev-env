@@ -29,7 +29,7 @@ namespace Vanilla.MetaScript.TaskSets
 		}
 
 
-		protected override bool CanDescribe() => Tasks != null && Tasks.Length > 0 && Tasks.All(task => task != null);
+		protected override bool CanAutoName() => Tasks != null && Tasks.Length > 0 && Tasks.All(task => task != null);
 
 	}
 

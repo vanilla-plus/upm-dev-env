@@ -12,9 +12,9 @@ namespace Vanilla.MetaScript
 	public class Log : MetaTask
 	{
 
-		protected override bool CanDescribe() => !string.IsNullOrEmpty(Message);
+		protected override bool CanAutoName() => !string.IsNullOrEmpty(Message);
 
-		protected override string DescribeTask() => $"Print [{Message}] to the console";
+		protected override string CreateAutoName() => $"Print [{Message}] to the console";
 
 		[SerializeField]
 		public string Message;

@@ -33,7 +33,7 @@ namespace Vanilla.MetaScript.TaskSets
 	    }
 
 
-	    protected override string DescribeTask() => "Run one of the tasks at random";
+	    protected override string CreateAutoName() => "Run one of the following at random:";
 
 
         protected override async UniTask<Tracer> _Run(Tracer tracer)

@@ -9,9 +9,9 @@ namespace Vanilla.MetaScript
     public class Cancel : MetaTask
     {
 
-        protected override bool CanDescribe() => true;
+        protected override bool CanAutoName() => true;
         
-        protected override string DescribeTask() => "Cancel the current thread";
+        protected override string CreateAutoName() => "Cancel the current thread";
 
         protected override UniTask<Tracer> _Run(Tracer tracer)
         {

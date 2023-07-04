@@ -14,10 +14,10 @@ namespace Vanilla.MetaScript
 	public class QuitApplication : MetaTask
 	{
 
-		protected override bool CanDescribe() => true;
+		protected override bool CanAutoName() => true;
 
 
-		protected override string DescribeTask() => "Quit the entire application";
+		protected override string CreateAutoName() => "Quit the entire application";
 
 
 		protected override UniTask<Tracer> _Run(Tracer tracer)

@@ -29,12 +29,6 @@ namespace Vanilla.MetaScript
 		[SerializeField]
 		public KeyCode debugRunKey = KeyCode.None;
 
-//		[SerializeReference]
-//		[TypeMenu]
-//		[Only(typeof(MetaTaskSet))]
-//		private MetaTaskSet taskSet;
-//		public MetaTaskSet TaskSet => taskSet;
-
 		[NonSerialized]
 		internal Tracer _tracer = null;
 
@@ -48,6 +42,8 @@ namespace Vanilla.MetaScript
 		{
 			#if UNITY_EDITOR
 			task?.OnValidate();
+
+			if (string.IsNullOrEmpty(Running.Name)) Running.Name = $"[{Task.Name}] Running";
 			#endif
 		}
 

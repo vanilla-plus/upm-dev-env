@@ -35,21 +35,27 @@ namespace Vanilla.MetaScript
 				
 				_depth = value;
 				
-				OnDepthChange?.Invoke();
+//				OnDepthChange?.Invoke();
 				
 //				Debug.LogWarning($"Tracer Depth [{old} => {_depth}]");
 			}
 		}
 
-		public Action OnDepthChange;
+//		public Action OnDepthChange;
+
+		public Action OnCallStackChange;
 		
-		public Stack<string> CallStack { get; private set; } = new Stack<string>();
+		public Stack<(int,string)> CallStack { get; private set; } = new();
 		
 		public void EnterMethod(string methodName)
 		{
 			Depth++;
 			
-			CallStack.Push(methodName);
+			Debug.LogWarning($"Adding [{_depth},{methodName}] to CallStack");
+			
+			CallStack.Push((_depth, methodName));
+			
+			OnCallStackChange?.Invoke();
 		}
 
 		public void ExitMethod()
@@ -58,7 +64,11 @@ namespace Vanilla.MetaScript
 			{
 				Depth--;
 				
-				CallStack.Pop();
+				var outgoing = CallStack.Pop();
+				
+				OnCallStackChange?.Invoke();
+
+				Debug.LogWarning($"Removing [{outgoing.Item1},{outgoing.Item2}] from CallStack");
 			}
 		}
 

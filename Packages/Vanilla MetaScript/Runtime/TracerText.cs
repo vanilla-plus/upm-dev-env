@@ -52,7 +52,7 @@ namespace Vanilla.MetaScript
         {
             tracer = instance._tracer;
 
-            tracer.OnDepthChange += HandleDepthChange;
+            tracer.OnCallStackChange += HandleDepthChange;
         }
 
 
@@ -63,13 +63,13 @@ namespace Vanilla.MetaScript
 
             text.text = "";
             
-            var depth = -1;
+//            var depth = -1;
             
-            foreach (var s in tracer.CallStack)
+            foreach (var entry in tracer.CallStack)
             {
-                depth++;
+//                depth++;
 
-                for (var indent = tracer.CallStack.Count;
+                for (var indent = entry.Item1;
                      indent > 0;
                      indent--)
                 {
@@ -78,14 +78,14 @@ namespace Vanilla.MetaScript
                 }
 
 //                text.text += $"• {s}\n";
-                text.text = $"• {s}\n" + text.text;
+                text.text = $"• {entry.Item2}\n" + text.text;
             }
         }
         
         [ContextMenu("Disconnect")]
         void Disconnect()
         {
-            tracer.OnDepthChange -= HandleDepthChange;
+            tracer.OnCallStackChange -= HandleDepthChange;
 
             tracer = null;
         }
