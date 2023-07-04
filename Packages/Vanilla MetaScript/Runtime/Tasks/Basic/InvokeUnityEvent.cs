@@ -53,7 +53,12 @@ namespace Vanilla.MetaScript
 		}
 
 
-		protected override UniTask _Run(CancellationTokenSource cancellationTokenSource) => default;
+		protected override UniTask<Tracer> _Run(Tracer tracer)
+		{
+			unityEvent.Invoke();
+
+			return UniTask.FromResult(tracer);
+		}
 
 	}
 

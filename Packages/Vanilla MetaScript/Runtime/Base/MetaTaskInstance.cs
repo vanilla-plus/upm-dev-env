@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 
 using Cysharp.Threading.Tasks;
 
@@ -7,7 +6,6 @@ using UnityEngine;
 
 using Vanilla.TypeMenu;
 
-using Vanilla.MetaScript.TaskSets;
 using Vanilla.SmartValues;
 
 namespace Vanilla.MetaScript
@@ -17,7 +15,6 @@ namespace Vanilla.MetaScript
 	public class MetaTaskInstance : MonoBehaviour
 	{
 
-		[NonSerialized] private CancellationTokenSource _cancellationTokenSource;
 
 		[SerializeField]
 		public SmartBool Running = new SmartBool("MetaTaskInstance Running",
@@ -27,70 +24,69 @@ namespace Vanilla.MetaScript
 		public bool RunOnStart = false;
 
 		[SerializeField]
-		public KeyCode debugCancelKey = KeyCode.Alpha1;
+		public KeyCode debugCancelKey = KeyCode.None;
 
 		[SerializeField]
-		public KeyCode debugRunKey = KeyCode.Alpha2;
+		public KeyCode debugRunKey = KeyCode.None;
+
+//		[SerializeReference]
+//		[TypeMenu]
+//		[Only(typeof(MetaTaskSet))]
+//		private MetaTaskSet taskSet;
+//		public MetaTaskSet TaskSet => taskSet;
+
+		[NonSerialized]
+		internal Tracer _tracer = null;
 
 		[SerializeReference]
 		[TypeMenu]
-		[Only(typeof(MetaTaskSet))]
-		private MetaTaskSet taskSet;
-		public MetaTaskSet TaskSet => taskSet;
-
+		[Only(typeof(MetaTask))]
+		private MetaTask task;
+		public MetaTask Task => task;
+		
 		void OnValidate()
 		{
 			#if UNITY_EDITOR
-			taskSet?.OnValidate();
+			task?.OnValidate();
 			#endif
 		}
 
 
 		void Start()
 		{
-			if (RunOnStart) Run();
+			if (RunOnStart) RunSelf();
 		}
 
-
 		[ContextMenu("Run")]
-		public void Run()
+		public void RunSelf()
 		{
 			Cancel();
 
-			_cancellationTokenSource = new CancellationTokenSource();
+//			_tracer       = new Tracer();
 
-//			taskSet.Run(_cancellationTokenSource).ContinueWith(DisposeCancellationTokenSource);
-//			taskSet.Run(_cancellationTokenSource).Forget();
+//			Running.Value = true;
 
-//			taskSet.Run(_cancellationTokenSource).ContinueWith(FinalizeTask).Forget();
+			if (_tracer != null)
+			{
+				
+			}
 
-			Running.Value = true;
+			Detour(_tracer = new Tracer()).ContinueWith(FinalizeTask);
 
-			taskSet.Run(_cancellationTokenSource).ContinueWith(FinalizeTask);
+//			task.Run(_tracer).Forget();
 		}
 
 
-//		private void FinalizeTask()
-//		{
-//			if (_cancellationTokenSource.IsCancellationRequested)
-//			{
-////				taskSet.LogRunCancelled();
-////				Debug.LogWarning("Task was cancelled!");
-//			}
-//			
-//			DisposeCancellationTokenSource();
-//		}
+		public async UniTask<Tracer> Detour(Tracer tracer)
+		{
+			Running.Value = true;
 
+			var Tracer = await task.Run(tracer);
 
-//		[ContextMenu("Cancel")]
-//		public void Cancel()
-//		{
-//			Debug.Log("Cancel!");
-//			
-//			_cancellationTokenSource?.Cancel();
-//
-//			DisposeCancellationTokenSource();
-//		}
+			Running.Value = false;
+
+			return Tracer;
+		}
 
 
 		[ContextMenu("Cancel")]
@@ -98,73 +94,36 @@ namespace Vanilla.MetaScript
 		{
 			Debug.Log("Cancel attempt!");
 
-//			_cancellationTokenSource?.Cancel();
-
-			if (_cancellationTokenSource != null)
+			if (_tracer is
+			    {
+				    Continue: true
+			    })
 			{
 				Debug.Log("Cancel approved!");
 
-				if (!_cancellationTokenSource.IsCancellationRequested)
-				{
-					_cancellationTokenSource.Cancel();
-				}
-
-				_cancellationTokenSource.Dispose();
-				_cancellationTokenSource = null;
+				_tracer.Continue = false;
 
 				Running.Value = false;
 			}
 		}
 
 
-		private void FinalizeTask()
+		private void FinalizeTask(Tracer tracer)
 		{
-//			Debug.Log("Finalize!");
-
-//			if (_cancellationTokenSource == null) return; // Check if it's already disposed.
-
-			Running.Value = false;
-
-			if (_cancellationTokenSource.IsCancellationRequested)
+			if (tracer.Continue)
 			{
-				Debug.LogWarning("Task was cancelled!");
+				Debug.Log("Execution chain finalised - Completed successfully!");
 			}
 			else
 			{
-				Debug.Log("Task execution chain completed successfully!");
+				Debug.LogWarning("Execution chain finalised - Cancelled!");
 			}
-
-//			Debug.LogWarning("Dispose..?");
-
-//			DisposeCancellationTokenSource();
 		}
-
-
-		private void DisposeCancellationTokenSource()
-		{
-			if (_cancellationTokenSource == null) return; // Check if it's already disposed.
-
-			Debug.LogWarning("Dispose..?");
-
-//			_cancellationTokenSource.Dispose();
-//			_cancellationTokenSource = null;
-		}
-
-
-//		private void DisposeCancellationTokenSource()
-//		{
-//			Debug.LogWarning("Disposing!");
-//			
-//			_cancellationTokenSource?.Dispose();
-//
-//			_cancellationTokenSource = null;
-//		}
-
 
 		void Update()
 		{
 			if (Input.GetKeyDown(debugCancelKey)) Cancel();
-			if (Input.GetKeyDown(debugRunKey)) Run();
+			if (Input.GetKeyDown(debugRunKey)) RunSelf();
 		}
 
 	}

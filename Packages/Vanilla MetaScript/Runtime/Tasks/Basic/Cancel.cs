@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 
 using Cysharp.Threading.Tasks;
 
@@ -14,11 +13,11 @@ namespace Vanilla.MetaScript
         
         protected override string DescribeTask() => "Cancel the current thread";
 
-        protected override UniTask _Run(CancellationTokenSource cancellationTokenSource)
+        protected override UniTask<Tracer> _Run(Tracer tracer)
         {
-            cancellationTokenSource?.Cancel();
+            tracer.Continue = false;
 
-            return default;
+            return UniTask.FromResult(tracer);
         }
 
     }

@@ -47,72 +47,76 @@ namespace Vanilla.MetaScript
 		protected abstract string DescribeTask();
 
 
-		public async UniTask Run(CancellationTokenSource cancellationTokenSource)
+		public async UniTask<Tracer> Run(Tracer tracer)
 		{
-			if (cancellationTokenSource == null) throw new Exception("Run call with a null cancellationTokenSource - How did that happen?");
+			if (tracer == null) throw new Exception("Run call with a null tracer - how did that happen?");
 
-//			cancellationTokenSource.Token.ThrowIfCancellationRequested();
-			
+			if (tracer.Cancelled(this)) return tracer;
+
+			tracer.EnterMethod(GetType().Name);
+
 			try
 			{
 				switch (ExecutionType)
 				{
 					case TaskExecutionType.Await:
-						LogRunBegin();
-						
-						await _Run(cancellationTokenSource).AttachExternalCancellation(cancellationTokenSource.Token);
-						
-						if (!cancellationTokenSource.IsCancellationRequested) LogRunComplete();
-						break;
-					
-					case TaskExecutionType.Parallel:
-						LogRunBegin();
 
-//						_Run(cancellationTokenSource)
-//							.ContinueWith(() =>
-//							              {
-//								              if (!cancellationTokenSource.IsCancellationRequested) LogRunComplete();
-//							              });
-						
-						_Run(cancellationTokenSource).ContinueWith(LogRunComplete).Forget();
-						
+						LogRunBegin(tracer);
+
+//						var _tracer = await _Run(tracer);
+						await _Run(tracer);
+
+						if (tracer.Continue) LogRunComplete(tracer);
+
 						break;
-					
+
+//						return tracer;
+
+//					case TaskExecutionType.Parallel:
+//						LogRunBegin(tracer);
+//						_Run(tracer).ContinueWith(LogRunComplete).Forget();
+//						return tracer;
+
 					case TaskExecutionType.Skip:
-						LogRunSkipped();
-						return;
-				}
-			}
-			catch (OperationCanceledException)
-			{
-				LogRunCancelled();
+						LogRunSkipped(tracer);
 
-				return; // Stops execution of remaining tasks
+						break;
+
+//						return tracer;
+				}
 			}
 			catch (Exception ex)
 			{
-				LogTaskError();
-//				Debug.LogError("Task failed with exception:");
+				LogTaskError(tracer);
 
 				Debug.LogException(ex);
 
-				return;
+//				return tracer;
 			}
+			finally
+			{
+				tracer.ExitMethod();
+			}
+
+//			Debug.LogError("I don't think we should ever see this..?");
+			
+			return tracer;
 		}
 
 
 		protected const   int LongestExecutionType = -8;
 		protected const int LongestTaskName      = -14;
 
-		protected abstract UniTask _Run(CancellationTokenSource cancellationTokenSource);
+		protected abstract UniTask<Tracer> _Run(Tracer tracer);
 
 		#if debug
-		public void LogRunBegin()     => Debug.Log($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Begun        {ExecutionType,LongestExecutionType}    {Name}");
-		public void LogRunSkipped()   => Debug.LogWarning($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Skipped      {ExecutionType,LongestExecutionType}    {Name}");
-		public void LogRunComplete()  => Debug.Log($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Complete     {ExecutionType,LongestExecutionType}    {Name}");
-		public void LogRunCancelled() => Debug.LogWarning($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Cancelled    {ExecutionType,LongestExecutionType}    {Name}");
-		public void LogTaskError()    => Debug.LogError($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Error        {ExecutionType,LongestExecutionType}    {Name}");
-		public void LogTaskIdentity() => Debug.LogWarning($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Identity     {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogRunBegin(Tracer tracer)     => Debug.Log($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Begun        {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogRunSkipped(Tracer tracer)   => Debug.LogWarning($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Skipped      {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogRunComplete(Tracer tracer)  => Debug.Log($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Complete     {ExecutionType,LongestExecutionType}    {Name}");
+//		public void LogRunComplete(Tracer tracer)  => Debug.Log($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Complete     {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogRunCancelled(Tracer tracer) => Debug.LogWarning($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Cancelled    {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogTaskError(Tracer tracer)    => Debug.LogError($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Error        {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogTaskIdentity(Tracer tracer) => Debug.LogWarning($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Identity     {ExecutionType,LongestExecutionType}    {Name}");
 		#else
 		public void LogRunBegin()     { }
 		public void LogRunSkipped()   { }

@@ -23,34 +23,32 @@ namespace Vanilla.MetaScript.TaskSets
 		protected override string DescribeTask() => $"Repeat tasks [{iterations}] times";
 
 
-		protected override async UniTask _Run(CancellationTokenSource cancellationTokenSource)
+		protected override async UniTask<Tracer> _Run(Tracer tracer)
 		{
 			var iteration = 0;
-
+			
 			while (iteration < iterations)
 			{
-//				if (cancellationTokenSource.IsCancellationRequested) break;
-//				cancellationTokenSource.Token.ThrowIfCancellationRequested();
+//				if (tracer.Cancelled(this)) break;
 
 				iteration++;
 
 				#if debug
-//				if (!cancellationTokenSource.IsCancellationRequested) Debug.Log($"Beginning iteration [{iteration}]");
-				if (!cancellationTokenSource.IsCancellationRequested) LogIteration(iteration);
+				LogIteration(tracer, iteration);
 				#endif
 
 				foreach (var task in _tasks)
 				{
-//					if (cancellationTokenSource.IsCancellationRequested) break;
-					cancellationTokenSource.Token.ThrowIfCancellationRequested();
-					
-					await task.Run(cancellationTokenSource);
+					if (tracer.Cancelled(this)) return tracer;
+
+					await task.Run(tracer);
 				}
 			}
+
+			return tracer;
 		}
 		
-		//    Begun        
-		public void LogIteration(int i) => Debug.Log($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    i:{i:0000}       {ExecutionType,LongestExecutionType}    {Name}");
+		public void LogIteration(Tracer tracer, int i) => Debug.Log($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    i:{i:0000}       {ExecutionType,LongestExecutionType}    {Name}");
 
 
 	}

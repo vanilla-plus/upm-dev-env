@@ -18,10 +18,11 @@ namespace Vanilla.MetaScript
         protected override bool CanDescribe() => target;
 
 
-        protected override string DescribeTask() => $"Divert to [{target.TaskSet.Name}]";
+        protected override string DescribeTask() => $"Divert to [{target.Task.Name}]";
 
 
-        protected override UniTask _Run(CancellationTokenSource cancellationTokenSource) => target.TaskSet.Run(cancellationTokenSource);
+//        protected override async UniTask<Tracer> _Run(Tracer tracer) => await target.Task.Run(tracer);
+        protected override async UniTask<Tracer> _Run(Tracer tracer) => await target.Detour(tracer);
 
     }
 }

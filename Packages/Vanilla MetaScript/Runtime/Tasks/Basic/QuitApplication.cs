@@ -20,7 +20,7 @@ namespace Vanilla.MetaScript
 		protected override string DescribeTask() => "Quit the entire application";
 
 
-		protected override UniTask _Run(CancellationTokenSource cancellationTokenSource)
+		protected override UniTask<Tracer> _Run(Tracer tracer)
 		{
 			#if UNITY_EDITOR
 			EditorApplication.ExitPlaymode();
@@ -28,7 +28,7 @@ namespace Vanilla.MetaScript
 			Application.Quit();
 			#endif
 
-			return default;
+			return UniTask.FromResult(tracer);
 		}
 
 	}

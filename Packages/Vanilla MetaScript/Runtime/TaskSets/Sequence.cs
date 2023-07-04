@@ -13,15 +13,16 @@ namespace Vanilla.MetaScript.TaskSets
 		protected override string DescribeTask() => $"Run tasks in order [{Tasks[0].Name}...]";
 
 
-		protected override async UniTask _Run(CancellationTokenSource cancellationTokenSource)
+		protected override async UniTask<Tracer> _Run(Tracer tracer)
 		{
 			foreach (var task in _tasks)
 			{
-//				if (cancellationTokenSource.IsCancellationRequested) break;
-				cancellationTokenSource.Token.ThrowIfCancellationRequested();
+				if (tracer.Cancelled(this)) break;
 				
-				await task.Run(cancellationTokenSource);
+				await task.Run(tracer);
 			}
+
+			return tracer;
 		}
 
 	}

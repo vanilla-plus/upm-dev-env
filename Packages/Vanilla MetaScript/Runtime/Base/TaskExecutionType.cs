@@ -2,7 +2,7 @@ public enum TaskExecutionType
 {
 
 	Await,
-	Parallel,
+//	Parallel,
 	Skip
 //	AwaitBackgroundThread,
 //	FireAndForgetBackgroundThread

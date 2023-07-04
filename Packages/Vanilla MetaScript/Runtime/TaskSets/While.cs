@@ -15,19 +15,19 @@ namespace Vanilla.MetaScript.TaskSets
 		protected override string DescribeTask() => "Repeat tasks while Evaluate returns false";
 
 
-		protected override async UniTask _Run(CancellationTokenSource cancellationTokenSource)
+		protected override async UniTask<Tracer> _Run(Tracer tracer)
 		{
 			while (!Evaluate())
 			{
 				foreach (var task in _tasks)
 				{
-//					if (cancellationTokenSource.IsCancellationRequested) break;
+					if (tracer.Cancelled(this)) return tracer;
 
-					cancellationTokenSource.Token.ThrowIfCancellationRequested();
-					
-					await task.Run(cancellationTokenSource);
+					await task.Run(tracer);
 				}
 			}
+
+			return tracer;
 		}
 
 	}
