@@ -1,3 +1,7 @@
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#define debug
+#endif
+
 using System;
 
 using Cysharp.Threading.Tasks;
@@ -62,10 +66,12 @@ namespace Vanilla.MetaScript
 
 //			Running.Value = true;
 
-			if (_tracer != null)
-			{
-				
-			}
+			_tracer = null;
+
+//			if (_tracer != null)
+//			{
+				// Dispose..? Recycle?
+//			}
 
 			Detour(_tracer = new Tracer()).ContinueWith(FinalizeTask);
 
@@ -88,19 +94,26 @@ namespace Vanilla.MetaScript
 		[ContextMenu("Cancel")]
 		public void Cancel()
 		{
-			Debug.Log("Cancel attempt!");
+//			Debug.Log("Cancel attempt!");
 
 			if (_tracer is
 			    {
 				    Continue: true
 			    })
 			{
-				Debug.Log("Cancel approved!");
+//				Debug.Log("Cancel approved!");
 
 				_tracer.Continue = false;
 
 				Running.Value = false;
 			}
+		}
+
+
+		[ContextMenu("Eliminate Tracer")]
+		public void EliminateTracer()
+		{
+			_tracer = null;
 		}
 
 
@@ -114,6 +127,8 @@ namespace Vanilla.MetaScript
 			{
 				Debug.LogWarning("Execution chain finalised - Cancelled!");
 			}
+
+			EliminateTracer();
 		}
 
 		void Update()

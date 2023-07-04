@@ -37,7 +37,7 @@ namespace Vanilla.MetaScript
 				              CreateAutoName() :
 				              DefaultAutoName;
 
-			if (string.IsNullOrEmpty(Name)) _Name = AutoName;
+			if (string.IsNullOrEmpty(Name) || string.Equals(Name, DefaultAutoName)) _Name = AutoName;
 			#endif
 		}
 		

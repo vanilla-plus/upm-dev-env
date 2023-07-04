@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 
 using Cysharp.Threading.Tasks;
 
@@ -16,7 +15,7 @@ namespace Vanilla.MetaScript.TaskSets
 
 		protected override async UniTask<Tracer> _Run(Tracer tracer)
 		{
-			while (!Evaluate())
+			while (Evaluate())
 			{
 				foreach (var task in _tasks)
 				{

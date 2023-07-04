@@ -203,12 +203,6 @@
       "source": "embedded",
       "dependencies": {}
     },
-    "vanilla.danger": {
-      "version": "file:Vanilla Danger",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "vanilla.debug-cam": {
       "version": "file:Vanilla Debug Cam",
       "depth": 0,
@@ -245,14 +239,6 @@
       "source": "embedded",
       "dependencies": {}
     },
-    "vanilla.initializer": {
-      "version": "file:Vanilla Initializer",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.cysharp.unitask": "2.2.1"
-      }
-    },
     "vanilla.jnode": {
       "version": "file:Vanilla JNode",
       "depth": 0,
@@ -270,12 +256,6 @@
     },
     "vanilla.package-template": {
       "version": "file:Vanilla Package Template",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
-    "vanilla.pointer-redirect": {
-      "version": "file:Vanilla Pointer Redirect",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
@@ -304,36 +284,17 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "vanilla.s3-filesync": {
+      "version": "file:Vanilla S3 FileSync",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "vanilla.smart-values": {
       "version": "file:Vanilla SmartValues",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
-    },
-    "vanilla.smartbool": {
-      "version": "file:Vanilla SmartBool",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
-    "vanilla.smartfloat": {
-      "version": "file:Vanilla SmartFloat",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "vanilla.smartbool": "2.0.5",
-        "com.cysharp.unitask": "2.2.1"
-      }
-    },
-    "vanilla.smartstate": {
-      "version": "file:Vanilla SmartState",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "vanilla.smartbool": "2.0.0",
-        "vanilla.smartfloat": "2.0.0",
-        "com.cysharp.unitask": "2.2.1"
-      }
     },
     "vanilla.spherical-vectors": {
       "version": "file:Vanilla Spherical Vectors",

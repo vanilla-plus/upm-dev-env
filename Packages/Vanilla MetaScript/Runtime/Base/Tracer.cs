@@ -1,3 +1,7 @@
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#define debug
+#endif
+
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +21,9 @@ namespace Vanilla.MetaScript
 		}
 
 		public static int TracerCount = 0;
+
+//		[NonSerialized]
+//		private bool DebugMode = false;
 		
 		[SerializeField]
 		public bool Continue = true;
@@ -24,68 +31,77 @@ namespace Vanilla.MetaScript
 		[SerializeField]
 		public int id = 0;
 
-		[SerializeField]
-		private int _depth = 0;
-		public int Depth
-		{
-			get => _depth;
-			set
-			{
-//				var old = _depth;
-				
-				_depth = value;
-				
-//				OnDepthChange?.Invoke();
-				
-//				Debug.LogWarning($"Tracer Depth [{old} => {_depth}]");
-			}
-		}
-
-//		public Action OnDepthChange;
-
-		public Action OnCallStackChange;
+		[NonSerialized]
+		public int Depth = 0;
 		
-		public Stack<(int,string)> CallStack { get; private set; } = new();
+		[NonSerialized]
+		public Action OnCallStackChange;
+
+		public Stack<(int, string)> CallStack;
 		
 		public void EnterMethod(string methodName)
 		{
 			Depth++;
 			
-			Debug.LogWarning($"Adding [{_depth},{methodName}] to CallStack");
+			#if debug
+			Debug.LogWarning($"Adding [{Depth},{methodName}] to CallStack");
+//			#endif
+
 			
-			CallStack.Push((_depth, methodName));
-			
-			OnCallStackChange?.Invoke();
+//			if (DebugMode)
+//			{
+				CallStack.Push((Depth, methodName));
+
+				OnCallStackChange?.Invoke();
+//			}
+			#endif
 		}
+
 
 		public void ExitMethod()
 		{
 			if (Depth > 0)
 			{
 				Depth--;
-				
-				var outgoing = CallStack.Pop();
-				
-				OnCallStackChange?.Invoke();
 
-				Debug.LogWarning($"Removing [{outgoing.Item1},{outgoing.Item2}] from CallStack");
+					#if debug
+//				if (DebugMode)
+//				{
+					var outgoing = CallStack.Pop();
+
+					OnCallStackChange?.Invoke();
+
+//					#if debug
+					Debug.LogWarning($"Removing [{outgoing.Item1},{outgoing.Item2}] from CallStack");
+					#endif
+//				}
 			}
 		}
 
 
-		public Tracer()
+		public Tracer(bool debugMode = false)
 		{
+//			DebugMode = debugMode;
+			
 			TracerCount++;
 
 			id = TracerCount;
 			
-			Debug.LogError($"Tracer Created\t[{id}]");
+			#if debug
+			CallStack = new Stack<(int, string)>();
+			
+			Debug.Log($"Tracer Created\t[{id}]");
+			#endif
 		}
 
 
 		~Tracer()
 		{
-			Debug.LogError($"Tracer Destroyed\t[{id}]");
+			#if debug
+			CallStack.Clear();
+
+			Debug.Log($"Tracer Destroyed\t[{id}]");
+			#endif
 
 			TracerCount--;
 		}

@@ -1,11 +1,11 @@
 {
-    "name": "Vanilla.MetaScript",
-    "rootNamespace": "Vanilla.MetaScript",
+    "name": "Vanilla.S3FileSync",
+    "rootNamespace": "Vanilla.S3FileSync",
     "references": [
         "UniTask",
-        "Vanilla.TypeMenu",
+        "Vanilla.MetaScript",
         "Vanilla.SmartValues",
-        "Vanilla.Roulette"
+        "Vanilla.TypeMenu"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

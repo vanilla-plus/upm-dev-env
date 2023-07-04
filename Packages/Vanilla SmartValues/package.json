@@ -11,12 +11,5 @@
   "unity": "2022.3",
   "unityRelease": "1f1",
   "version": "1.0.0",
-  "type": "template",
-  "samples": [
-    {
-      "displayName": "Sample A",
-      "description": "Sample to demonstrate system A",
-      "path": "Samples~/Sample A"
-    }
-  ]
+  "type": "template"
 }

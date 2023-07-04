@@ -3,8 +3,7 @@
 #endif
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace Vanilla.SmartValues
@@ -60,16 +59,14 @@ namespace Vanilla.SmartValues
 		public virtual void OnAfterDeserialize() { }
 
 
-		public SmartValue()
-		{
+		public SmartValue() => 
 			Name = $"Unknown {GetType().Name}";
-		}
 
-		public SmartValue(string name)
-		{
+
+		public SmartValue(string name) => 
 			Name  = !string.IsNullOrEmpty(name) ? name : $"Unknown {GetType().Name}";
-		}
-		
+
+
 		public SmartValue(string name, T defaultValue)
 		{
 			Name  = !string.IsNullOrEmpty(name) ? name : $"Unknown {GetType().Name}";

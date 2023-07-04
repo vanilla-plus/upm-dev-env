@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: af413de21bde243c0ab5ec064bf0baf8
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - PxPlus IBM VGA8
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 7d7897a4e614c4a33a709ddc84329815, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

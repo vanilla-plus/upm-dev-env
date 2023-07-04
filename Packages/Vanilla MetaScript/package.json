@@ -14,9 +14,14 @@
   "type": "template",
   "samples": [
     {
-      "displayName": "Sample A",
-      "description": "Sample to demonstrate system A",
-      "path": "Samples~/Sample A"
+      "displayName": "Basic Sequence",
+      "description": "A simple while loop example",
+      "path": "Samples~/Basic Sequence"
+    },
+    {
+      "displayName": "Debugger",
+      "description": "This sample demonstrates how to use the MetaScript Debugger.",
+      "path": "Samples~/Debugger"
     }
   ]
 }
