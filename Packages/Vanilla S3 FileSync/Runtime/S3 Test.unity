@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 72130936}
   - component: {fileID: 72130937}
+  - component: {fileID: 72130938}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -162,7 +163,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72130934}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b06a882ef6dd14af8b2cef9cc023da58, type: 3}
   m_Name: 
@@ -192,11 +193,11 @@ MonoBehaviour:
       type: {class: FetchS3Directories, ns: Vanilla.S3, asm: Vanilla.S3FileSync}
       data:
         _Name: Download specific directories
-        AutoName: Download specific directories
+        AutoName: Download everything
         _executionType: 0
         directories:
         - directory: 
-          includeSubdirectories: 0
+          includeSubdirectories: 1
         ProgressSinWave:
           _Name: S3 Directory Fetch Progress
           _Value: 0
@@ -247,3 +248,19 @@ MonoBehaviour:
         _executionType: 0
         region: ap-southeast-2
         bucket: vanilla-plus-test
+--- !u!114 &72130938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72130934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d89ffdd743c44407a86cbc0d89bffc67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  region: ap-southeast-2
+  bucket: vanilla-plus-test
+  testFiles: []
+  testDirectories: []

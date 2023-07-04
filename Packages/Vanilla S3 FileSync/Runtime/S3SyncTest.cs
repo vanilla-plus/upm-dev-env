@@ -19,22 +19,35 @@ namespace Vanilla.S3
 		                                           bucket);
 
 
-		[ContextMenu("Fetch File")]
-		public void FetchFile() => FileSync.FetchRelativeFile(testFiles[0]).Forget();
+//		[ContextMenu("Fetch File")]
+//		public void FetchFile() => FileSync.FetchRelativeFile(testFiles[0]).Forget();
 
 
-		[ContextMenu("Fetch Files")]
-		public void FetchFiles() => FileSync.FetchRelativeFiles(testFiles).Forget();
+//		[ContextMenu("Fetch Files")]
+//		public void FetchFiles() => FileSync.FetchRelativeFiles(testFiles).Forget();
+//
+//
+//		[ContextMenu("Fetch Directory")]
+//		public void FetchDirectory() => FileSync.FetchDirectory(testDirectories[0].directory,
+//		                                                        testDirectories[0].includeSubdirectories)
+//		                                        .Forget();
+//
+//
+//		[ContextMenu("Fetch Directories")]
+//		public void FetchDirectories() => FileSync.FetchDirectories(testDirectories).Forget();
 
 
-		[ContextMenu("Fetch Directory")]
-		public void FetchDirectory() => FileSync.FetchDirectory(testDirectories[0].directory,
-		                                                        testDirectories[0].includeSubdirectories)
-		                                        .Forget();
+		[ContextMenu("Test FileMap Sync")]
+		public void TestFileMapSync() => FileMapSync().Forget();
 
 
-		[ContextMenu("Fetch Directories")]
-		public void FetchDirectories() => FileSync.FetchDirectories(testDirectories).Forget();
+		public async UniTask FileMapSync()
+		{
+			var fileMap = await FileSync.GetFileMap(testDirectories,
+			                                        testFiles);
+			
+			await FileSync.SynchronizeFileMap(fileMap);
+		}
 
 	}
 

@@ -1,3 +1,7 @@
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#define debug
+#endif
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,9 +13,11 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
+using Vanilla.SmartValues;
+
 namespace Vanilla.S3
 {
-    
+
     [Serializable]
     public struct FetchableDirectory
     {
@@ -20,9 +26,9 @@ namespace Vanilla.S3
         public bool   includeSubdirectories;
 
     }
-    
+
     // Another step is required to make the bucket truly public on S3.
-    
+
     // Enter your public bucket, go to the Permissions tab and paste in the following:
     // Don't forget to replace the bucket name!
 
@@ -54,15 +60,16 @@ namespace Vanilla.S3
         private static string Remote_List_URL = null;
 
         public static string LocalSubDirectory = "fetch";
-        
+
         private const string XML_Namespace_Uri    = "http://s3.amazonaws.com/doc/2006-03-01/";
         private const string XML_Namespace_Prefix = "s3";
-        
+
         private const string XML_Namespace_XPath = "//s3:Contents";
-        
+
         private const string XML_Node_Key          = "s3:Key";
         private const string XML_Node_Size         = "s3:Size";
         private const string XML_Node_LastModified = "s3:LastModified";
+
 //        private const string XML_Node_Etag         = "s3:ETag";
 //        private const string XML_Node_StorageClass = "s3:StorageClass";
 
@@ -77,6 +84,60 @@ namespace Vanilla.S3
         }
 
 
+        public static async UniTask<HashSet<RemoteS3Object>> GetFileMap(IEnumerable<FetchableDirectory> directories,
+                                                                        IEnumerable<string> files)
+        {
+            var fileMap = new HashSet<RemoteS3Object>();
+
+            foreach (var entry in directories)
+            {
+                var remoteObjects = await GetRemoteObjects(entry.directory,
+                                                     entry.includeSubdirectories);
+                
+                foreach (var o in remoteObjects)
+                {
+                    if (!fileMap.Contains(o)) fileMap.Add(o);
+                }
+            }
+
+            foreach (var entry in files)
+            {
+                var o = await GetRemoteObject(entry);
+
+                if (!fileMap.Contains(o)) fileMap.Add(o);
+            }
+            
+            #if debug
+            Debug.Log("FileMap results:");
+            foreach (var f in fileMap) Debug.Log(f.RemoteFilePath);
+            #endif
+
+            return fileMap;
+        }
+
+
+        public static async UniTask SynchronizeFileMap(HashSet<RemoteS3Object> fileMap)
+        {
+            foreach (var entry in fileMap)
+            {
+                if (entry.IsAFile)
+                {
+                    if (entry.DownloadRequired())
+                    {
+                        await entry.Download();
+                    }
+                }
+                else
+                {
+                    if (!Directory.Exists(entry.LocalFilePath))
+                    {
+                        Directory.CreateDirectory(entry.LocalFilePath);
+                    }
+                }
+            }
+        }
+
+
         public static async UniTask FetchDirectories(IEnumerable<FetchableDirectory> directories)
         {
             foreach (var d in directories)
@@ -88,25 +149,13 @@ namespace Vanilla.S3
         public static async UniTask FetchDirectory(string s3Directory,
                                                    bool includeSubdirectories = false)
         {
-//            Debug.LogError(s3Directory);
-//            if (s3Directory.Length == 0 || s3Directory[^1] != '/') s3Directory += '/';
-
             // The root directory can't feature a lone '/' apparently, but all subdirectories require one.
             // So if this isn't the root directory and it's missing it's slash, add one
-            if (s3Directory.Length > 0 && s3Directory[^1] != '/') s3Directory += '/';
-
-//            Debug.LogError("You should see this once per-serialized-path");
+            if (s3Directory.Length > 0 &&
+                s3Directory[^1]    != '/') s3Directory += '/';
 
             var remoteObjects = await GetRemoteObjects(s3Directory,
-                                                   includeSubdirectories);
-
-//            Debug.LogError(remoteObjects.Count);
-            foreach (var o in remoteObjects) Debug.LogError(o.ToString());
-//            Debug.LogError(s3Directory);
-
-            // If the last character isn't a /, add one.
-//            if (s3Directory.Length == 0 || s3Directory[^1] != '/') s3Directory += '/';
-//            Debug.LogError(s3Directory);
+                                                       includeSubdirectories);
 
             foreach (var remoteObject in remoteObjects)
             {
@@ -116,20 +165,10 @@ namespace Vanilla.S3
                                   remoteObject.RemoteFilePath,
                                   StringComparison.Ordinal)) continue;
 
-//            Debug.Log($"{s3Directory} is not {key}");
-
-                // If the key ends with /, it's a subdirectory.
-                // In that case, recurse down.
-//            if (key.EndsWith('/'))
-//                if (Path.HasExtension(remoteObject.RemoteFilePath))
                 if (remoteObject.IsAFile)
                 {
-//                    Debug.Log($"{remoteObject.RemoteFilePath} is a File!");
-
                     if (remoteObject.DownloadRequired())
                     {
-//                        await FetchRelativeFile(remoteObject.RemoteFilePath);
-
                         await remoteObject.Download();
                     }
                     else
@@ -139,59 +178,14 @@ namespace Vanilla.S3
                 }
                 else
                 {
-//                Debug.Log($"{key} is a Subdirectory!");
-
                     if (includeSubdirectories)
                     {
-//                    Debug.LogWarning("Recursion allowed!");
-
                         await FetchDirectory(remoteObject.RemoteFilePath,
                                              includeSubdirectories);
-                    }
-                    else
-                    {
-//                    Debug.LogWarning("Recursion blocked");
                     }
                 }
             }
         }
-
-//
-//        public static async UniTask<string[]> ListDirectoryContents(FetchableDirectory fetchableDirectory) => await ListDirectoryContents(fetchableDirectory.directory,
-//                                                                                                                                          fetchableDirectory.includeSubdirectories);
-
-//
-//        public static async UniTask<string[]> ListDirectoryContents(string s3Directory,
-//                                                                    bool includeSubdirectories = false)
-//        {
-//            var listUrl = $"{Remote_List_URL}{UnityWebRequest.EscapeURL(s3Directory)}";
-//
-//            using var listRequest = UnityWebRequest.Get(listUrl);
-//
-//            await listRequest.SendWebRequest();
-//
-//            if (listRequest.result is not UnityWebRequest.Result.Success or UnityWebRequest.Result.InProgress)
-//            {
-//                Debug.LogError($"Error listing objects: {listRequest.error}");
-//
-//                return null;
-//            }
-//
-//            var xml = new XmlDocument();
-//
-//            xml.LoadXml(listRequest.downloadHandler.text);
-//
-//            var xmlNamespaceManager = new XmlNamespaceManager(xml.NameTable);
-//
-//            xmlNamespaceManager.AddNamespace(XML_Namespace_Prefix,
-//                                             XML_Namespace_Uri);
-//
-//            var keys = xml.SelectNodes(XML_Namespace_XPath,
-//                                       xmlNamespaceManager);
-//
-//            return keys?.Cast<XmlNode>().Select(keyNode => keyNode.InnerText).Where(key => includeSubdirectories || key.LastIndexOf('/') == s3Directory.Length - 1).ToArray();
-//        }
-
 
         public static async UniTask<RemoteS3Object> GetRemoteObject(string relativePath)
         {
@@ -240,7 +234,8 @@ namespace Vanilla.S3
         }
 
 
-        public static async UniTask<List<RemoteS3Object>> GetRemoteObjects(string s3Directory, bool includeSubdirectories = false)
+        public static async UniTask<List<RemoteS3Object>> GetRemoteObjects(string s3Directory,
+                                                                           bool includeSubdirectories = false)
         {
             // Where you're putting s3Directory here, you can put anything! including a specific relative file path.
             // It's treated as a prefix, i.e. flower_ would return flower_shield, flower_whatever, etc
@@ -270,33 +265,8 @@ namespace Vanilla.S3
             var contentsNodes = xml.SelectNodes(XML_Namespace_XPath,
                                                 xmlNamespaceManager);
 
-            // This is the point where we should filter using includeSubdirectories...
-//            var nodes2 = contentsNodes?.Cast<XmlNode>().Select(keyNode => keyNode.InnerText).Where(key => includeSubdirectories || key.LastIndexOf('/') == s3Directory.Length - 1);
-
             if (contentsNodes == null) return null;
-//
-//            var result = new List<RemoteS3Object>(contentsNodes.Count);
-//
-//            result.AddRange(
-//                            from XmlNode contentsNode in contentsNodes
-//                            let keyNode = contentsNode.SelectSingleNode(XML_Node_Key,
-//                                                                        xmlNamespaceManager)
-////                            let lastModifiedNode = contentsNode.SelectSingleNode(XML_Node_LastModified,
-////                                                                                 xmlNamespaceManager)
-////                            let eTagNode = contentsNode.SelectSingleNode(XML_Node_Etag,
-////                                                                         xmlNamespaceManager)
-//                            let sizeNode = contentsNode.SelectSingleNode(XML_Node_Size,
-//                                                                         xmlNamespaceManager)
-////                            let storageClassNode = contentsNode.SelectSingleNode(XML_Node_StorageClass,
-////                                                                                 xmlNamespaceManager)
-//                            select new RemoteS3Object(key: keyNode.InnerText,
-//
-////                                                      lastModified: DateTime.Parse(lastModifiedNode.InnerText),
-////                                                      eTag: eTagNode.InnerText.Trim('"'),
-////                                                      size: long.Parse(sizeNode.InnerText),
-//                                                      size: long.Parse(sizeNode.InnerText)));
-////                                                      storageClass: storageClassNode.InnerText));
-////
+
             var result = new List<RemoteS3Object>(contentsNodes.Count);
 
             result.AddRange(
@@ -314,142 +284,22 @@ namespace Vanilla.S3
                                                                                  xmlNamespaceManager)
                             select new RemoteS3Object(key: key,
                                                       lastModified: DateTime.Parse(lastModifiedNode.InnerText),
-//                                                      eTag: eTagNode.InnerText.Trim('"'),
-//                                                      size: long.Parse(sizeNode.InnerText),
-                                                      size: long.Parse(sizeNode.InnerText)
-//                                                      storageClass: storageClassNode.InnerText
-                                                     ));
+                                                      size: long.Parse(sizeNode.InnerText)));
 
             return result;
         }
 
 
-        public static async UniTask FetchAbsoluteFiles(string[] urls)
+        public static async UniTask FetchRelativeFiles(string[] relativePaths)
         {
-            foreach (var url in urls) await FetchAbsoluteFile(url);
-        }
-
-
-        public static async UniTask FetchAbsoluteFile(string absolute)
-        {
-            var relative = AbsoluteToRelative(absolute);
-
-            var localFilePath = Path.Combine(Application.persistentDataPath,
-                                             LocalSubDirectory,
-                                             relative);
-
-            if (File.Exists(localFilePath))
+            foreach (var relativePath in relativePaths)
             {
-                Debug.LogWarning($"File already exists [{localFilePath}]");
+                var remoteObject = await GetRemoteObject(relativePath);
 
-                return;
-            }
-
-//        Debug.Log($"Attempting download:\n[{absolute}]\n[{localFilePath}]");
-
-            using var fileRequest = UnityWebRequest.Get(absolute);
-
-            fileRequest.downloadHandler = new DownloadHandlerFile(localFilePath);
-
-            await fileRequest.SendWebRequest();
-
-//        Debug.Log($"{fileRequest.result.ToString()}");
-        }
-
-
-        public static async UniTask FetchRelativeFiles(string[] urls)
-        {
-            foreach (var url in urls) await FetchRelativeFile(url);
-        }
-
-
-//    public static async UniTask FetchRelativeFile(string relative)
-//    {
-//        var remoteFilePath = RelativeToAbsolute(relative);
-//
-//        var localFilePath = Path.Combine(Application.persistentDataPath,
-//                                         relative);
-//
-//        if (File.Exists(localFilePath))
-//        {
-//            Debug.LogWarning($"File already exists [{localFilePath}]");
-//
-//            return;
-//        }
-//
-//        Debug.Log($"Attempting download:\n[{remoteFilePath}]\n[{localFilePath}]");
-//
-//        using var fileRequest = UnityWebRequest.Get(remoteFilePath);
-//
-//        fileRequest.downloadHandler = new DownloadHandlerFile(localFilePath);
-//
-//        await fileRequest.SendWebRequest();
-//
-//        Debug.Log($"{fileRequest.result.ToString()}");
-//    }
-
-
-        public static async UniTask FetchRelativeFile(string relative)
-        {
-            var remoteFilePath = RelativeToAbsolute(relative);
-
-            var localFilePath = Path.Combine(Application.persistentDataPath,
-                                             LocalSubDirectory,
-                                             relative);
-
-            if (File.Exists(localFilePath))
-            {
-//                FileInfo localFileInfo = new FileInfo(localFilePath);
-//                long     localFileSize = localFileInfo.Length; // Size in bytes
-//
-//                // Compare the sizes
-//                return localFileSize == remoteFileSize;
-                
-                Debug.LogWarning($"File already exists [{localFilePath}]");
-
-                return;
-            }
-
-//        Debug.Log($"Attempting download:\n[{remoteFilePath}]\n[{localFilePath}]");
-
-            using var fileRequest = UnityWebRequest.Get(remoteFilePath);
-
-            fileRequest.downloadHandler = new DownloadHandlerBuffer();
-
-            // We can't simply await this because it can't handle errors properly.
-            //        await fileRequest.SendWebRequest();
-
-            var op = fileRequest.SendWebRequest();
-
-            while (!op.isDone)
-            {
-                await UniTask.Yield();
-            }
-
-            if (fileRequest.result == UnityWebRequest.Result.Success)
-            {
-                // If the directory this file would exist in doesn't exist yet, create it.
-
-                var targetDirectory = Path.GetDirectoryName(localFilePath);
-
-                if (targetDirectory != null) Directory.CreateDirectory(targetDirectory);
-
-                if (fileRequest.downloadHandler.data == null)
-                {
-                    Debug.LogError("Fetched data was null. Did you accidentally try to download a directory using a file operation?");
-                }
-                else
-                {
-                    await File.WriteAllBytesAsync(localFilePath,
-                                                  fileRequest.downloadHandler.data);
-                }
-            }
-            else
-            {
-                Debug.LogError($"Error downloading file: {fileRequest.error}");
+                await remoteObject.Download();
             }
         }
-
+        
 
         private static string RelativeToAbsolute(string relative) => Path.Combine(Remote_Root,
                                                                                   relative)
@@ -462,106 +312,138 @@ namespace Vanilla.S3
                                                                          .Replace(oldChar: '+',
                                                                                   newChar: ' ');
 
-        
-    [Serializable]
-    public class RemoteS3Object
-    {
 
-        [SerializeField] public bool     IsAFile;
-        [SerializeField] public string   LocalFilePath;
-        [SerializeField] public string   RemoteFilePath;
-        [SerializeField] public DateTime RemoteLastModified;
-        [SerializeField] public long     RemoteFileSize;
-
-        public RemoteS3Object() { }
-
-
-        public RemoteS3Object(string key,
-                              DateTime lastModified,
-                              long size)
+        [Serializable]
+        public class RemoteS3Object
         {
-            IsAFile = key[^1] != '/';
 
-            LocalFilePath = Path.Combine(Application.persistentDataPath,
-                                         LocalSubDirectory,
-                                         key);
+            [SerializeField] public readonly bool     IsAFile;
+            [SerializeField] public readonly string   LocalFilePath;
+            [SerializeField] public readonly string   RemoteFilePath;
+            [SerializeField] public readonly DateTime RemoteLastModified;
+            [SerializeField] public readonly long     RemoteFileSize;
 
-            RemoteFilePath     = key;
-            RemoteLastModified = lastModified;
-            RemoteFileSize     = size;
-        }
+            public RemoteS3Object() { }
 
 
-//        public override string ToString() => $"RemoteS3Object Log\nIsAFile\t[{IsAFile}]\nKey\t[{Key}]\nLastModified\t[{LastModified}]\nETag\t[{ETag}]\nSize\t[{Size}]\nStorageClass\t[{StorageClass}]";
-//        public override string ToString() => $"RemoteS3Object Log\nIsAFile\t[{IsAFile}]\nKey\t[{Key}]\nSize\t[{RemoteFileSize}]";
-        public override string ToString() => $"RemoteS3Object Log\nIsAFile\t[{IsAFile}]\nKey\t[{RemoteFilePath}]\nLastModified\t[{RemoteLastModified}]\nSize\t[{RemoteFileSize}]";
-
-        public bool DownloadRequired()
-        {
-            if (!File.Exists(LocalFilePath)) return true;
-            
-            var localFileInfo = new FileInfo(LocalFilePath);
-
-            // Compare the file sizes
-            var isSizeDifferent = localFileInfo.Length != RemoteFileSize;
-
-            // Compare the last modified timestamps
-            var isLastModifiedDifferent = localFileInfo.LastWriteTimeUtc != RemoteLastModified.ToUniversalTime();
-
-            // File needs sync if either size or last modified timestamp is different
-            return isSizeDifferent || isLastModifiedDifferent;
-        }
-        
-        public async UniTask Download()
-        {
-            var absoluteRemotePath = RelativeToAbsolute(RemoteFilePath);
-
-//        Debug.Log($"Attempting download:\n[{remoteFilePath}]\n[{localFilePath}]");
-
-            using var fileRequest = UnityWebRequest.Get(absoluteRemotePath);
-
-            fileRequest.downloadHandler = new DownloadHandlerBuffer();
-
-            // We can't simply await this because it can't handle errors properly.
-//            try
-//            {
-//                await fileRequest.SendWebRequest();
-//            }
-//            catch (Exception e)
-//            {
-//                Debug.LogException(e);
-//            }
-
-            var op = fileRequest.SendWebRequest();
-
-            while (!op.isDone) await UniTask.Yield();
-
-            if (fileRequest.result == UnityWebRequest.Result.Success)
+            public RemoteS3Object(string key,
+                                  DateTime lastModified,
+                                  long size)
             {
-                // If the directory this file would exist in doesn't exist yet, create it.
+                IsAFile = key.Length > 0 && key[^1] != '/';
 
-                var targetDirectory = Path.GetDirectoryName(LocalFilePath);
+                LocalFilePath = Path.Combine(Application.persistentDataPath,
+                                             LocalSubDirectory,
+                                             key);
 
-                if (targetDirectory != null) Directory.CreateDirectory(targetDirectory);
-
-                if (fileRequest.downloadHandler.data == null)
+                RemoteFilePath     = key;
+                RemoteLastModified = lastModified;
+                RemoteFileSize     = size;
+            }
+            
+            public override bool Equals(object obj)
+            {
+                // Check if obj is null or not of type RemoteS3Object
+                if (obj is RemoteS3Object other)
                 {
-                    Debug.LogError("Fetched data was null. Did you accidentally try to download a directory using a file operation?");
+                    // Compare the RemoteFilePath properties for equality
+                    return RemoteFilePath == other.RemoteFilePath;
+                }
+                return false;
+            }
+
+            // Use the hash code of the RemoteFilePath property
+            public override int GetHashCode() => RemoteFilePath != null ? RemoteFilePath.GetHashCode() : 0;
+
+            public override string ToString() => $"RemoteS3Object Log\nIsAFile\t[{IsAFile}]\nKey\t[{RemoteFilePath}]\nLastModified\t[{RemoteLastModified}]\nSize\t[{RemoteFileSize}]";
+
+
+            public bool DownloadRequired()
+            {
+                if (!File.Exists(LocalFilePath))
+                {
+                    #if debug
+                    Debug.Log($"File [{RemoteFilePath}] doesn't exist locally - download approved");
+                    #endif
+                    
+                    return true;
+                }
+
+                var localFileInfo = new FileInfo(LocalFilePath);
+
+                // Compare the file sizes
+                var isSizeDifferent = localFileInfo.Length != RemoteFileSize;
+
+                if (isSizeDifferent)
+                {
+                    #if debug
+                    Debug.Log($"File size for [{RemoteFilePath}] doesn't match local file - download approved");
+                    #endif
+                    
+                    // File needs sync if either size or last modified timestamp is different
+                    return true;
+                }
+
+                // ToDo - This is unreliable and needs proper investigating (it's 5:45am gimme a break)
+                
+//                // Compare the last modified timestamps
+//                var isLastModifiedDifferent = localFileInfo.LastWriteTimeUtc != RemoteLastModified.ToUniversalTime();
+//                
+//                if (isLastModifiedDifferent)
+//                {
+//                    Debug.Log($"File modification date for [{RemoteFilePath}] doesn't match local file - download approved");
+//
+//                    Debug.Log(RemoteLastModified.ToUniversalTime().ToString());
+//                    Debug.Log(localFileInfo.LastWriteTimeUtc.ToString());
+//                    
+//                    // File needs sync if either size or last modified timestamp is different
+//                    return true;
+//                }
+
+                return false;
+            }
+
+
+            public async UniTask Download(SmartFloat DownloadProgress = null)
+            {
+                Debug.Log($"Download started for [{RemoteFilePath}]");
+                
+                var absoluteRemotePath = RelativeToAbsolute(RemoteFilePath);
+
+                using var fileRequest = UnityWebRequest.Get(absoluteRemotePath);
+
+                fileRequest.downloadHandler = new DownloadHandlerBuffer();
+
+                var op = fileRequest.SendWebRequest();
+
+                while (!op.isDone) await UniTask.Yield();
+
+                if (fileRequest.result == UnityWebRequest.Result.Success)
+                {
+                    // If the directory this file would exist in doesn't exist yet, create it.
+
+                    var targetDirectory = Path.GetDirectoryName(LocalFilePath);
+
+                    if (targetDirectory != null) Directory.CreateDirectory(targetDirectory);
+
+                    if (fileRequest.downloadHandler.data == null)
+                    {
+                        Debug.LogError("Fetched data was null. Did you accidentally try to download a directory using a file operation?");
+                    }
+                    else
+                    {
+                        await File.WriteAllBytesAsync(LocalFilePath,
+                                                      fileRequest.downloadHandler.data);
+                    }
                 }
                 else
                 {
-                    await File.WriteAllBytesAsync(LocalFilePath,
-                                                  fileRequest.downloadHandler.data);
+                    Debug.LogError($"Error downloading file: {fileRequest.error}");
                 }
             }
-            else
-            {
-                Debug.LogError($"Error downloading file: {fileRequest.error}");
-            }
+
         }
-        
-    }
-        
+
     }
 
 }
