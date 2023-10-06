@@ -1,0 +1,30 @@
+{
+  "name": "vanilla.metascript",
+  "displayName": "MetaScript",
+  "description": "MetaScript is a sequencing toolkit for serializing behaviour into your Unity scenes.",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.plus",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-metascript.git",
+  "version": "3.0.4",
+  "type": "template",
+  "samples": [
+    {
+      "displayName": "Basic Sequence",
+      "description": "A simple while loop example",
+      "path": "Samples~/Basic Sequence"
+    },
+    {
+      "displayName": "Debugger",
+      "description": "This sample demonstrates how to use the MetaScript Debugger.",
+      "path": "Samples~/Debugger"
+    }
+  ],
+  "dependencies": {
+    "com.cysharp.unitask": "2.3.3",
+    "vanilla.type-menu": "3.0.4",
+    "vanilla.delta-values": "3.0.4"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "vanilla.addressable-scene-manager",
+  "displayName": "Addressable Scene Manager",
+  "description": "A static manager for holding onto SceneInstances loaded through Addressables.",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-addressable-scene-manager.git",
+  "version": "3.0.4",
+  "type": "template",
+  "dependencies": {
+    "com.unity.addressables": "1.21.14",
+    "com.cysharp.unitask": "2.3.3"
+  }
+}

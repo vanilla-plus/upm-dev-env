@@ -1,0 +1,22 @@
+{
+    "name": "Vanilla.Roulette",
+    "rootNamespace": "Vanilla.Roulette",
+    "references": [
+        "Vanilla.TypeMenu"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "vanilla.type-menu",
+            "expression": "",
+            "define": "vanilla_type_menu"
+        }
+    ],
+    "noEngineReferences": false
+}

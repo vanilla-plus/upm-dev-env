@@ -1,0 +1,16 @@
+{
+  "name": "vanilla.filesync",
+  "displayName": "FileSync",
+  "description": "This package supports basic public file and directory downloading from a known S3 bucket.",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-s3-filesync.git",
+  "version": "3.0.4",
+  "type": "template",
+  "dependencies": {
+    "com.cysharp.unitask": "2.3.3"
+  }
+}

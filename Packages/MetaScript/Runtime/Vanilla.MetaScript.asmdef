@@ -1,0 +1,38 @@
+{
+    "name": "Vanilla.MetaScript",
+    "rootNamespace": "Vanilla.MetaScript",
+    "references": [
+        "Unity.ResourceManager",
+        "Unity.Addressables",
+        "UniTask",
+        "Vanilla.TypeMenu",
+        "Vanilla.Roulette",
+        "Vanilla.DeltaValues",
+        "Vanilla.AddressableSceneManager"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.addressables",
+            "expression": "1.21.14",
+            "define": "unity_addressables"
+        },
+        {
+            "name": "vanilla.roulette",
+            "expression": "3.0.3",
+            "define": "vanilla_roulette"
+        },
+        {
+            "name": "vanilla.addressable-scene-manager",
+            "expression": "3.0.3",
+            "define": "vanilla_addressable_scene_manager"
+        }
+    ],
+    "noEngineReferences": false
+}
