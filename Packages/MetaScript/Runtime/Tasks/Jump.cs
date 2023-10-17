@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 
 using Cysharp.Threading.Tasks;
 
@@ -19,10 +18,8 @@ namespace Vanilla.MetaScript
 
 
         protected override string CreateAutoName() => $"Jump to [{target.Task.Name}]";
-
-
-//        protected override async UniTask<Tracer> _Run(Tracer tracer) => await target.Task.Run(tracer);
-        protected override async UniTask<Tracer> _Run(Tracer tracer) => await target.HandleJump(tracer: tracer);
+        
+        protected override async UniTask<Tracer> _Run(Tracer tracer) => await target.Run(tracer: tracer);
 
     }
 }

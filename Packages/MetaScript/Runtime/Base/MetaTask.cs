@@ -13,11 +13,10 @@ namespace Vanilla.MetaScript
 {
 
 	[Serializable]
-	public abstract class MetaTask
+	public abstract class MetaTask : IRunnable
 	{
 
 		[SerializeField]
-//		[HideInInspector]
 		private string _Name;
 		public string Name => _Name;
 		
@@ -25,7 +24,7 @@ namespace Vanilla.MetaScript
 		public string AutoName;
 
 		[SerializeField]
-		private TaskExecutionType _executionType = TaskExecutionType.Await;
+		private TaskExecutionType _executionType = TaskExecutionType.RunAndWait;
 		public TaskExecutionType ExecutionType => _executionType;
 
 		private const string DefaultAutoName = "This task can't be auto-named yet.";
@@ -50,9 +49,9 @@ namespace Vanilla.MetaScript
 
 		public async UniTask<Tracer> Run(Tracer tracer)
 		{
-			if (tracer == null) throw new Exception("Run call with a null tracer - how did that happen?");
+//			if (tracer == null) throw new Exception("Run call with a null tracer - how did that happen?");
 
-			if (tracer.Cancelled(this)) return tracer;
+			if (tracer.HasBeenCancelled(this)) return tracer;
 
 			tracer.EnterMethod($"{Name} [{GetType().Name}]");
 
@@ -60,30 +59,30 @@ namespace Vanilla.MetaScript
 			{
 				switch (ExecutionType)
 				{
-					case TaskExecutionType.Await:
+					case TaskExecutionType.RunAndWait:
 
 						LogRunBegin(tracer);
 
-//						var _tracer = await _Run(tracer);
 						await _Run(tracer);
 
 						if (tracer.Continue) LogRunComplete(tracer);
 
 						break;
 
-//						return tracer;
-
-//					case TaskExecutionType.Parallel:
-//						LogRunBegin(tracer);
-//						_Run(tracer).ContinueWith(LogRunComplete).Forget();
-//						return tracer;
+					// ToDo - Parallel is bugged but I didn't document why! Woops...
+					// ToDo - Figure out why support for .Parallel was dropped last round
+					case TaskExecutionType.RunAndDontWait:
+						LogRunBegin(tracer);
+						_Run(tracer).ContinueWith(LogRunComplete).Forget();
+						break;
+					
+					case TaskExecutionType.Cancel:
+						tracer.Continue = false;
+						break;
 
 					case TaskExecutionType.Skip:
 						LogRunSkipped(tracer);
-
 						break;
-
-//						return tracer;
 				}
 			}
 			catch (Exception ex)
@@ -91,16 +90,17 @@ namespace Vanilla.MetaScript
 				LogTaskError(tracer);
 
 				Debug.LogException(ex);
-
-//				return tracer;
 			}
 			finally
 			{
+//				if (ExecutionType == TaskExecutionType.Cancel) Debug.LogError("Yep!");
+				
 				tracer.ExitMethod();
 			}
-
-//			Debug.LogError("I don't think we should ever see this..?");
 			
+			// Does execution make it this far...?
+			// Yes!
+
 			return tracer;
 		}
 
@@ -119,12 +119,12 @@ namespace Vanilla.MetaScript
 		public void LogTaskError(Tracer tracer)    => Debug.LogError($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Error        {ExecutionType,LongestExecutionType}    {Name}");
 		public void LogTaskIdentity(Tracer tracer) => Debug.LogWarning($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Identity     {ExecutionType,LongestExecutionType}    {Name}");
 		#else
-		public void LogRunBegin()     { }
-		public void LogRunSkipped()   { }
-		public void LogRunComplete()  { }
-		public void LogRunCancelled() { }
-		public void LogTaskError()    { }
-		public void LogTaskIdentity() { }
+		public void LogRunBegin(Tracer tracer)     { }
+		public void LogRunSkipped(Tracer tracer)   { }
+		public void LogRunComplete(Tracer tracer)  { }
+		public void LogRunCancelled(Tracer tracer) { }
+		public void LogTaskError(Tracer tracer)    { }
+		public void LogTaskIdentity(Tracer tracer) { }
 		#endif
 
 	}

@@ -1,4 +1,4 @@
-#if unity_addressables && vanilla_addressable_scene_manager
+#if unity_addressables && vanilla_metascript
 using System;
 
 using Cysharp.Threading.Tasks;
@@ -53,7 +53,7 @@ namespace Vanilla.MetaScript.Addressables
 
             while (operation.Status == UniTaskStatus.Pending)
             {
-                if (tracer.Cancelled(this)) return tracer;
+                if (tracer.HasBeenCancelled(this)) return tracer;
 
                 await UniTask.Yield();
             }

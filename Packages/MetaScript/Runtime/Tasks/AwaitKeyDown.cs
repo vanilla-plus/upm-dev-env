@@ -26,7 +26,7 @@ namespace Vanilla.MetaScript
         {
             do
             {
-                if (tracer.Cancelled(this)) return tracer;
+                if (tracer.HasBeenCancelled(this)) return tracer;
 
                 await UniTask.Yield();
             }

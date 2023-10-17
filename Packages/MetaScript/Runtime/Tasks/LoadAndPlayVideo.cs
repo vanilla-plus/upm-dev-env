@@ -43,11 +43,9 @@ namespace Vanilla.MetaScript
             
             videoPlayer.Prepare();
 
-            await UniTask.WaitUntil(() => videoPlayer.isPrepared);
-
             while (!videoPlayer.isPrepared)
             {
-                if (tracer.Cancelled(this)) return tracer;
+                if (tracer.HasBeenCancelled(this)) return tracer;
                 
                 await UniTask.Yield();
             }
@@ -56,7 +54,7 @@ namespace Vanilla.MetaScript
 
             while (videoPlayer.isPlaying)
             {
-                if (tracer.Cancelled(this)) return tracer;
+                if (tracer.HasBeenCancelled(this)) return tracer;
                 
                 await UniTask.Yield();
             }

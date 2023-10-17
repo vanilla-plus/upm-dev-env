@@ -1,9 +1,10 @@
 {
-    "name": "Vanilla.MetaScript",
-    "rootNamespace": "Vanilla.MetaScript",
+    "name": "Vanilla.MetaScript.TaskSets",
+    "rootNamespace": "Vanilla.MetaScript.TaskSets",
     "references": [
         "UniTask",
-        "Vanilla.TypeMenu"
+        "Vanilla.TypeMenu",
+        "Vanilla.MetaScript"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

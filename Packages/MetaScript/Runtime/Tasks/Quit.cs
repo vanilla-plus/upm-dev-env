@@ -5,13 +5,15 @@ using Cysharp.Threading.Tasks;
 
 #if UNITY_EDITOR
 using UnityEditor;
+
+using UnityEngine;
 #endif
 
 namespace Vanilla.MetaScript
 {
 
 	[Serializable]
-	public class QuitApplication : MetaTask
+	public class Quit : MetaTask
 	{
 
 		protected override bool CanAutoName() => true;

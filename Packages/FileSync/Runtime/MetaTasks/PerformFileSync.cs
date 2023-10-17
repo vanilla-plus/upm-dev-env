@@ -1,5 +1,6 @@
 #if vanilla_metascript
 using System;
+using System.Linq;
 
 using Cysharp.Threading.Tasks;
 
@@ -14,7 +15,12 @@ namespace Vanilla.FileSync
 	[Serializable]
 	public class PerformFileSync : MetaTask
 	{
-	
+
+		[SerializeField]
+		[Range(1,
+		       8)]
+		public int numberOfSimultaneousDownloads = 1;
+		
 		[SerializeField]
 		public FetchableDirectory[] directories = Array.Empty<FetchableDirectory>();
 
@@ -51,13 +57,13 @@ namespace Vanilla.FileSync
 			var fileMap = await FileSync.GetFileMap(directories,
 			                                        files);
 
-			var op = FileSync.SynchronizeFileMap(fileMap);
+			var op = FileSync.SynchronizeFileMap(fileMap, numberOfSimultaneousDownloads);
 			
 			// Run a sin-wave while we download
 
 			while (op.Status == UniTaskStatus.Pending)
 			{
-				if (tracer.Cancelled(this)) return tracer;
+				if (tracer.HasBeenCancelled(this)) return tracer;
 
 				t = Mathf.Repeat(t: t + Time.deltaTime * sinSpeed,
 				                 1.0f);
@@ -75,7 +81,7 @@ namespace Vanilla.FileSync
 			
 			while (t > 0.001f)
 			{
-				if (tracer.Cancelled(this)) return tracer;
+				if (tracer.HasBeenCancelled(this)) return tracer;
 
 				t = Mathf.SmoothDamp(t,
 				                     0.0f,

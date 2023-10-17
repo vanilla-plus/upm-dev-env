@@ -24,7 +24,7 @@ namespace Vanilla.MetaScript
 
 			while (timeRemaining > 0.0f)
 			{
-				if (tracer.Cancelled(this)) return tracer;
+				if (tracer.HasBeenCancelled(this)) return tracer;
 
 				timeRemaining -= Time.deltaTime;
 				

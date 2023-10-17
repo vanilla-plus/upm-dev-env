@@ -39,7 +39,7 @@ namespace Vanilla.MetaScript.TaskSets
 
 				foreach (var task in _tasks)
 				{
-					if (tracer.Cancelled(this)) return tracer;
+					if (tracer.HasBeenCancelled(this)) return tracer;
 
 					await task.Run(tracer);
 				}

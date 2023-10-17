@@ -67,7 +67,7 @@ namespace Vanilla.MetaScript
                 return tracer;
             }
 
-            await instance.HandleJump(tracer);
+            await instance.Run(tracer);
             
             return tracer;
         }

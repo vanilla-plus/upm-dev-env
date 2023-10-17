@@ -12,8 +12,7 @@ namespace Vanilla.FileSync
 	public class InitializeFileSync : MetaTask
 	{
 
-		public string region = "ap-southeast-2";
-		public string bucket = string.Empty;
+		public string remoteRoot = "https://{bucket}.s3.{region}.amazonaws.com/";
 
 		protected override bool CanAutoName() => true;
 
@@ -23,8 +22,7 @@ namespace Vanilla.FileSync
 
 		protected override UniTask<Tracer> _Run(Tracer tracer)
 		{
-			FileSync.Initialize(region,
-			                    bucket);
+			FileSync.Initialize(remoteRoot);
 
 			return UniTask.FromResult(tracer);
 		}

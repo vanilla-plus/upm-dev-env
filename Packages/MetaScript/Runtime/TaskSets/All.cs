@@ -15,12 +15,8 @@ namespace Vanilla.MetaScript.TaskSets
 
 		protected override async UniTask<Tracer> _Run(Tracer tracer)
 		{
-//			tracer.Depth++;
-			
 			await UniTask.WhenAll(tasks: Enumerable.Select(source: _tasks,
 			                                               selector: t => t.Run(tracer)));
-
-//			tracer.Depth--;
 
 			return tracer;
 		}

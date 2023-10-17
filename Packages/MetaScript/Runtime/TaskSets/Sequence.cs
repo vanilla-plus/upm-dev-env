@@ -17,7 +17,7 @@ namespace Vanilla.MetaScript.TaskSets
 		{
 			foreach (var task in _tasks)
 			{
-				if (tracer.Cancelled(this)) break;
+				if (tracer.HasBeenCancelled(this)) break;
 				
 				await task.Run(tracer);
 			}

@@ -1,9 +1,10 @@
 public enum TaskExecutionType
 {
 
-	Await,
-//	Parallel,
-	Skip
+	RunAndWait,
+	RunAndDontWait,
+	Skip,
+	Cancel
 //	AwaitBackgroundThread,
 //	FireAndForgetBackgroundThread
 	

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 using UnityEngine;
 
@@ -12,39 +13,44 @@ namespace Vanilla.MetaScript
 
 	[Serializable]
 	public class Tracer
+//	public struct Tracer
 	{
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-		public static void StaticReset()
-		{
-			TracerCount = 0;
-		}
+		public static void StaticReset() => TracerCount = 0;
 
-		public static int TracerCount = 0;
+		public static uint TracerCount = 0;
 
 //		[NonSerialized]
 //		private bool DebugMode = false;
 		
 		[SerializeField]
+		[NonSerialized]
 		public bool Continue = true;
+//		public bool Continue;
 
 		[SerializeField]
-		public int id = 0;
-
 		[NonSerialized]
-		public int Depth = 0;
-		
+		public uint id = 0;
+//		public uint id;
+
+		[SerializeField]
+		[NonSerialized]
+		public uint Depth = 0;
+//		public uint Depth;
+
 		[NonSerialized]
 		public Action OnCallStackChange;
-
-		public Stack<(int, string)> CallStack;
+		
+		[NonSerialized]
+		public Stack<(uint, string)> CallStack;
 		
 		public void EnterMethod(string methodName)
 		{
 			Depth++;
-			
+
 			#if debug
-			Debug.LogWarning($"Adding [{Depth},{methodName}] to CallStack");
+//			Debug.LogWarning($"Adding [{Depth},{methodName}] to CallStack");
 //			#endif
 
 			
@@ -64,50 +70,56 @@ namespace Vanilla.MetaScript
 			{
 				Depth--;
 
-					#if debug
+				#if debug
+
 //				if (DebugMode)
 //				{
-					var outgoing = CallStack.Pop();
+//					var outgoing = CallStack.Pop();
 
-					OnCallStackChange?.Invoke();
+				CallStack.Pop();
+
+				OnCallStackChange?.Invoke();
 
 //					#if debug
-					Debug.LogWarning($"Removing [{outgoing.Item1},{outgoing.Item2}] from CallStack");
-					#endif
+//					Debug.LogWarning($"Removing [{outgoing.Item1},{outgoing.Item2}] from CallStack");
+				#endif
+
 //				}
 			}
+			else { }
+
 		}
 
 
-		public Tracer(bool debugMode = false)
+		public Tracer()
 		{
-//			DebugMode = debugMode;
-			
+			id = TracerCount;
+
 			TracerCount++;
 
-			id = TracerCount;
-			
 			#if debug
-			CallStack = new Stack<(int, string)>();
-			
-			Debug.Log($"Tracer Created\t[{id}]");
+			CallStack = new Stack<(uint, string)>();
+
+			Debug.Log($"Tracer Created\n  • ID\t{id}\n  • Depth\t{Depth}\n  • TracerCount\t{TracerCount}");
 			#endif
 		}
 
 
 		~Tracer()
 		{
+			TracerCount--;
+
 			#if debug
 			CallStack.Clear();
 
-			Debug.Log($"Tracer Destroyed\t[{id}]");
-			#endif
+			CallStack = null;
 
-			TracerCount--;
+			Debug.Log($"Tracer Destroyed [{(Continue ? "Complete" : "Cancelled")}]\n  • ID\t{id}\n  • Depth\t{Depth}\n  • TracerCount\t{TracerCount}");
+			#endif
 		}
 
 
-		public bool Cancelled(MetaTask task)
+		public bool HasBeenCancelled(MetaTask task)
 		{
 			if (Continue) return false;
 
@@ -115,7 +127,30 @@ namespace Vanilla.MetaScript
 
 			return true;
 		}
-		
+
+//
+//		public void Dispose()
+//		{
+//			Debug.LogWarning("Bin time lil buddy");
+//
+//			if (Depth > 0)
+//			{
+//				Debug.LogError("UNLESS??");
+//				
+//				return;
+//			}
+//			
+//			TracerCount--;
+//
+//			#if debug
+//			CallStack.Clear();
+//
+//			CallStack = null;
+//
+//			Debug.Log($"Tracer Destroyed\n  • ID\t{id}\n  • Depth\t{Depth}\n  • TracerCount\t{TracerCount}");
+//			#endif
+//		}
+
 	}
 
 }

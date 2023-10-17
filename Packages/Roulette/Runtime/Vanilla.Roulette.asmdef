@@ -2,7 +2,10 @@
     "name": "Vanilla.Roulette",
     "rootNamespace": "Vanilla.Roulette",
     "references": [
-        "Vanilla.TypeMenu"
+        "UniTask",
+        "Vanilla.TypeMenu",
+        "Vanilla.MetaScript",
+        "Vanilla.MetaScript.TaskSets"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -14,8 +17,18 @@
     "versionDefines": [
         {
             "name": "vanilla.type-menu",
-            "expression": "",
+            "expression": "1.0.0",
             "define": "vanilla_type_menu"
+        },
+        {
+            "name": "vanilla.metascript",
+            "expression": "1.0.0",
+            "define": "vanilla_metascript"
+        },
+        {
+            "name": "com.cysharp.unitask",
+            "expression": "1.0.0",
+            "define": "cysharp_unitask"
         }
     ],
     "noEngineReferences": false
