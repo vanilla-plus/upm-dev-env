@@ -57,7 +57,20 @@ namespace Vanilla.MetaScript
             this.Depth  = (byte) (parent != null ? parent.Depth + 1 : 0);
             this._Name  = $"[{taskName}] ({taskType})";
 
-            var output = $"• Scope Created [{_Depth}] [{_Name}]";
+//            var output = $"• Scope Created [{_Depth}] [{_Name}]";
+//            
+//            for (var i = 0;
+//                 i < Depth;
+//                 i++)
+//            {
+//                output = "    " + output;
+//            }
+            
+//            Debug.LogWarning($"Scope Created [{Depth}] {_Name}");
+
+//            Debug.LogWarning(output);
+
+            var output = $"+ {_Name}";
             
             for (var i = 0;
                  i < Depth;
@@ -66,9 +79,7 @@ namespace Vanilla.MetaScript
                 output = "    " + output;
             }
             
-//            Debug.LogWarning($"Scope Created [{Depth}] {_Name}");
-
-            Debug.LogWarning(output);
+            Debug.Log(output);
 
             // Bummer, this seems to be the only (?) way to accurately check if the scope is ready for disposal.
             // The short version is that the perfect time is actually just checking when ActiveTasks == 0
@@ -138,19 +149,30 @@ namespace Vanilla.MetaScript
         {
             if (!disposed)
             {
+//                var output = $"• Scope Disposed [{_Depth}] [{_Name}]";
+//            
+//                for (var i = 0;
+//                     i < Depth;
+//                     i++)
+//                {
+//                    output = "    " + output;
+//                }
+//            
+//                Debug.LogError(output);
+
+                var output = $"- {_Name}";
+            
+                for (var i = 0;
+                     i < Depth;
+                     i++)
+                {
+                    output = "    " + output;
+                }
+            
+                Debug.LogError(output);
+
                 if (disposing)
                 {
-                    var output = $"• Scope Disposed [{_Depth}] [{_Name}]";
-            
-                    for (var i = 0;
-                         i < Depth;
-                         i++)
-                    {
-                        output = "    " + output;
-                    }
-            
-                    Debug.LogError(output);
-
                     // Dispose managed resources.
                 }
 

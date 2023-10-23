@@ -155,7 +155,7 @@ MonoBehaviour:
   RunOnStart: 0
   debugRunKey: 49
   targets:
-  - {fileID: 1823953490}
+  - {fileID: 490655694}
 --- !u!4 &8409826
 Transform:
   m_ObjectHideFlags: 0
@@ -458,7 +458,7 @@ MonoBehaviour:
     - rid: 4950889183078776924
       type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript.TaskSets}
       data:
-        _Name: Main Sequence
+        _Name: Main
         AutoName: 'Run the following in order:'
         taskOptions: 3
         _tasks:
@@ -627,7 +627,7 @@ MonoBehaviour:
     - rid: 4950889183078776851
       type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript.TaskSets}
       data:
-        _Name: B Sequence
+        _Name: B
         AutoName: 'Run the following in order:'
         taskOptions: 3
         _tasks:
@@ -828,7 +828,7 @@ MonoBehaviour:
     - rid: 4950889183078776851
       type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript.TaskSets}
       data:
-        _Name: C Sequence
+        _Name: C
         AutoName: 'Run the following in order:'
         taskOptions: 3
         _tasks:
@@ -1029,7 +1029,7 @@ MonoBehaviour:
     - rid: 4950889183078776851
       type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript.TaskSets}
       data:
-        _Name: A Sequence
+        _Name: A
         AutoName: 'Run the following in order:'
         taskOptions: 3
         _tasks:

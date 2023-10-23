@@ -19,8 +19,6 @@ namespace Vanilla.MetaScript.TaskSets
 
 			var newScope = new Scope(scope, Name, GetType().Name);
 
-//			var tempTrace = tempScope.GetNewTrace();
-			
 			await UniTask.WhenAll(tasks: Enumerable.Select(source: _tasks,
 			                                               selector: t => t.Run(newScope)));
 

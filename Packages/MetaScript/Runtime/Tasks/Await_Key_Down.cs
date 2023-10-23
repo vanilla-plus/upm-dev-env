@@ -26,7 +26,12 @@ namespace Vanilla.MetaScript
         {
             do
             {
-                if (scope.Cancelled) return scope;
+                if (scope.Cancelled)
+                {
+//                    Debug.LogWarning($"Yikes! I'm outta here [{key}]");
+                    
+                    return scope;
+                }
 
                 await UniTask.Yield();
             }
