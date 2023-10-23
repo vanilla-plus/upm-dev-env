@@ -11,6 +11,6 @@
   "version": "3.0.8",
   "type": "template",
   "dependencies": {
-    "com.cysharp.unitask": "2.3.3"
+    "com.cysharp.unitask": "2.4.1"
   }
 }

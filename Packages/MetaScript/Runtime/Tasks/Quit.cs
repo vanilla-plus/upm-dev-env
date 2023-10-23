@@ -22,7 +22,7 @@ namespace Vanilla.MetaScript
 		protected override string CreateAutoName() => "Quit the entire application";
 
 
-		protected override UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override UniTask<Scope> _Run(Scope scope)
 		{
 			#if UNITY_EDITOR
 			EditorApplication.ExitPlaymode();
@@ -30,7 +30,7 @@ namespace Vanilla.MetaScript
 			Application.Quit();
 			#endif
 
-			return UniTask.FromResult(trace);
+			return UniTask.FromResult(scope);
 		}
 
 	}

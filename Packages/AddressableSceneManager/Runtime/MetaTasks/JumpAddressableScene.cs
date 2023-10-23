@@ -47,7 +47,7 @@ namespace Vanilla.MetaScript.Addressables
         protected override string CreateAutoName() => $"Jump to [{TargetSceneName}] scene";
 
 
-        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+        protected override async UniTask<Scope> _Run(Scope scope)
         {
             // Load
             var loadOperation = SceneManager.TryLoadSceneInstance(assRef: assRef,
@@ -56,7 +56,7 @@ namespace Vanilla.MetaScript.Addressables
 
             while (loadOperation.Status == UniTaskStatus.Pending)
             {
-                if (trace.Cancelled) return trace;
+                if (scope.Cancelled) return scope;
 //                if (trace.HasBeenCancelled(this)) return trace;
 
                 await UniTask.Yield();
@@ -64,7 +64,12 @@ namespace Vanilla.MetaScript.Addressables
 
             Debug.Log($"Load operation status [{loadOperation.Status}]");
 
-            if (loadOperation.Status is UniTaskStatus.Faulted or UniTaskStatus.Canceled) return trace;
+            if (loadOperation.Status is UniTaskStatus.Faulted or UniTaskStatus.Canceled)
+            {
+                scope.Cancel();
+                
+                return scope;
+            }
 
             // Jump
 
@@ -84,14 +89,14 @@ namespace Vanilla.MetaScript.Addressables
                 Debug.LogWarning($"Couldn't find a MetaScriptInstance attached to any root GameObject in the [{TargetSceneName}] scene.");
 
 //                trace.Continue = false;
-                trace.scope.Cancel();
+                scope.Cancel();
 
 //                LogRunCancelled(trace: trace);
 
-                return trace;
+                return scope;
             }
 
-            await instance.Run(trace: trace);
+            await instance.Run(scope);
 
             // Unload
 
@@ -99,13 +104,13 @@ namespace Vanilla.MetaScript.Addressables
 
             while (unloadOperation.Status == UniTaskStatus.Pending)
             {
-                if (trace.Cancelled) return trace;
+                if (scope.Cancelled) return scope;
 //                if (trace.HasBeenCancelled(this)) return trace;
 
                 await UniTask.Yield();
             }
 
-            return trace;
+            return scope;
         }
 
     }

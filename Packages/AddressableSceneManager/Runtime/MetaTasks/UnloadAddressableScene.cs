@@ -34,19 +34,19 @@ namespace Vanilla.MetaScript.Addressables
 		protected override string CreateAutoName() => $"Unload scene [{assRef.editorAsset.name}]";
 
 
-		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override async UniTask<Scope> _Run(Scope scope)
 		{
 			var operation = SceneManager.TryUnloadSceneInstance(assRef).AsUniTask();
 
 			while (operation.Status == UniTaskStatus.Pending)
 			{
-				if (trace.Cancelled) return trace;
+				if (scope.Cancelled) return scope;
 //				if (tracer.HasBeenCancelled(this)) return tracer;
 
 				await UniTask.Yield();
 			}
 
-			return trace;
+			return scope;
 		}
 
 	}

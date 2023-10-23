@@ -20,11 +20,11 @@ namespace Vanilla.FileSync
 		protected override string CreateAutoName() => "Initialize S3 FileSync";
 
 
-		protected override UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override UniTask<Scope> _Run(Scope scope)
 		{
 			FileSync.Initialize(remoteRoot);
 
-			return UniTask.FromResult(trace);
+			return UniTask.FromResult(scope);
 		}
 
 	}

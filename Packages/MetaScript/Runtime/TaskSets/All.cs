@@ -13,18 +13,22 @@ namespace Vanilla.MetaScript.TaskSets
 
 		protected override string CreateAutoName() => "Proceed when all of the following complete:";
 
-		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace tracer)
+		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			var tempScope = new ExecutionScope(tracer.scope);
+			if (scope.Cancelled) return scope;
 
-			var tempTrace = tempScope.GetNewTrace();
+			var newScope = new Scope(scope, Name, GetType().Name);
+
+//			var tempTrace = tempScope.GetNewTrace();
 			
 			await UniTask.WhenAll(tasks: Enumerable.Select(source: _tasks,
-			                                               selector: t => t.Run(tempTrace)));
+			                                               selector: t => t.Run(newScope)));
 
-			tempScope.Cancel();
+			newScope.Cancel();
 			
-			return tracer;
+			newScope.Dispose();
+			
+			return scope;
 		}
 
 	}

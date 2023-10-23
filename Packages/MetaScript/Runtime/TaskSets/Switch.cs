@@ -13,15 +13,15 @@ namespace Vanilla.MetaScript.TaskSets
 		public abstract int Evaluate();
 
 
-		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override async UniTask<Scope> _Run(Scope scope)
 		{
 			var result = Evaluate();
 
 			var task = Tasks[result];
 
-			await task.Run(trace);
+			await task.Run(scope);
 
-			return trace;
+			return scope;
 		}
 
 	}

@@ -1,7 +1,9 @@
 {
     "name": "Vanilla.Easing",
     "rootNamespace": "Vanilla.Easing",
-    "references": [],
+    "references": [
+        "Vanilla.TypeMenu"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

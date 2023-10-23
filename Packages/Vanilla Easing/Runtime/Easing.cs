@@ -160,26 +160,9 @@ namespace Vanilla.Easing
 
 
 		/// <summary>
-		///     Ease in with a bounce-like animation.
+		///     Jump with a given number of bounces.
 		/// </summary>
-		public static float InBounce(this float t, int numberOfBounces) => 1f - OutBounce(t: t, numberOfBounces);
-
-
-		/// <summary>
-		///     Ease out with a bounce-like animation.
-		/// </summary>
-//		public static float OutBounce(this float t)
-//		{
-//			switch (t)
-//			{
-//				case < A: return L0 * t * t;
-//				case < B: return L0 * (t -= X) * t + 0.75f;
-//				case < C: return L0 * (t -= Y) * t + 0.9375f;
-//				default:  return L0 * (t -= Z) * t + 0.984375f;
-//			}
-//		}
-		
-		public static float OutBounce(this float t, int bounces = 5)
+		public static float Bounce(this float t, int bounces = 5)
 		{
 			if (bounces < 2) bounces = 2;
 			if (bounces > 8) bounces = 8;
@@ -204,23 +187,6 @@ namespace Vanilla.Easing
 
 			return Math.Abs(t - 1) < Mathf.Epsilon ? 1 : normalizedBouncePosition;
 		}
-
-
-
-
-
-		/// <summary>
-		///     Ease in and out with a bounce-like animation.
-		/// </summary>
-		public static float InOutBounce(this float t, int numberOfBounces)
-		{
-			var p = t * 2f;
-
-			return p < 1f ?
-				       0.5f - 0.5f * OutBounce(t: 1f - p,  numberOfBounces) :
-				       0.5f + 0.5f * OutBounce(t: p  - 1f, numberOfBounces);
-		}
-
 
 
 		#endregion

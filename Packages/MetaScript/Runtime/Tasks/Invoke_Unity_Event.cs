@@ -53,11 +53,11 @@ namespace Vanilla.MetaScript
 		}
 
 
-		protected override UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override UniTask<Scope> _Run(Scope scope)
 		{
 			unityEvent.Invoke();
 
-			return UniTask.FromResult(trace);
+			return UniTask.FromResult(scope);
 		}
 
 	}

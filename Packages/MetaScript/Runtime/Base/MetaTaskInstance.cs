@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript
 {
 
 	[Serializable]
-	public class MetaTaskInstance : MonoBehaviour, IRunnable
+	public class MetaTaskInstance : MonoBehaviour
 	{
 		
 		[SerializeReference]
@@ -30,7 +30,7 @@ namespace Vanilla.MetaScript
 			#endif
 		}
 		
-		public async UniTask<ExecutionTrace> Run(ExecutionTrace trace) => await task.Run(trace);
+		public async UniTask<Scope> Run(Scope scope) => await task.Run(scope);
 
 	}
 

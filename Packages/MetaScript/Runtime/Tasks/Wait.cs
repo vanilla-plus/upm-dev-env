@@ -18,21 +18,20 @@ namespace Vanilla.MetaScript
 
 		public float secondsToTake = 1.0f;
 		
-		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override async UniTask<Scope> _Run(Scope scope)
 		{
 			var timeRemaining = secondsToTake;
 
 			while (timeRemaining > 0.0f)
 			{
-				if (trace.Cancelled) return trace;
-//				if (trace.HasBeenCancelled(this)) return trace;
+				if (scope.Cancelled) return scope;
 
 				timeRemaining -= Time.deltaTime;
 				
 				await UniTask.Yield();
 			}
 
-			return trace;
+			return scope;
 		}
 
 	}

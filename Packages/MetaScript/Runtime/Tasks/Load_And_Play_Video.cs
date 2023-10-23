@@ -27,7 +27,7 @@ namespace Vanilla.MetaScript
         protected override string CreateAutoName() => $"Play video [{relativeVideoPath}]";
 
 
-        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+        protected override async UniTask<Scope> _Run(Scope scope)
         {
             videoPlayer.url = Path.Combine(Application.persistentDataPath,
                                            relativeVideoPath);
@@ -37,9 +37,9 @@ namespace Vanilla.MetaScript
                 Debug.LogWarning($"Video file not found [{videoPlayer.url}]");
 
 //                trace.Continue = false;
-                trace.scope.Cancel();
+                scope.Cancel();
 
-                return trace;
+                return scope;
             }
             
             videoPlayer.Prepare();
@@ -47,7 +47,7 @@ namespace Vanilla.MetaScript
             while (!videoPlayer.isPrepared)
             {
 //                if (tracer.HasBeenCancelled(this)) return tracer;
-                if (trace.Cancelled) return trace;
+                if (scope.Cancelled) return scope;
 
                 await UniTask.Yield();
             }
@@ -57,12 +57,12 @@ namespace Vanilla.MetaScript
             while (videoPlayer.isPlaying)
             {
 //                if (tracer.HasBeenCancelled(this)) return tracer;
-                if (trace.Cancelled) return trace;
+                if (scope.Cancelled) return scope;
 
                 await UniTask.Yield();
             }
             
-            return trace;
+            return scope;
         }
 
     }

@@ -1727,9 +1727,13 @@ MonoBehaviour:
   valueText: {fileID: 1004832499}
   timeText: {fileID: 1098477490}
   speed: 0.5
-  easing: 7
-  floatPower: 3
-  numberOfBounces: 5
+  easingSlot:
+    rid: 4950889183078776893
+  references:
+    version: 2
+    RefIds:
+    - rid: 4950889183078776893
+      type: {class: Elastic_In_Out, ns: Vanilla.Easing, asm: Vanilla.Easing}
 --- !u!96 &1243161071
 TrailRenderer:
   serializedVersion: 3
@@ -2192,6 +2196,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0

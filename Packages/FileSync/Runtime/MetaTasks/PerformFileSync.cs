@@ -50,7 +50,7 @@ namespace Vanilla.FileSync
 			                                              "Download specific directories";
 
 
-		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override async UniTask<Scope> _Run(Scope scope)
 		{
 			var t = 0.0f;
 
@@ -63,7 +63,7 @@ namespace Vanilla.FileSync
 
 			while (op.Status == UniTaskStatus.Pending)
 			{
-				if (trace.Cancelled) return trace;
+				if (scope.Cancelled) return scope;
 //				if (trace.HasBeenCancelled(this)) return trace;
 
 				t = Mathf.Repeat(t: t + Time.deltaTime * sinSpeed,
@@ -82,7 +82,7 @@ namespace Vanilla.FileSync
 			
 			while (t > 0.001f)
 			{
-				if (trace.Cancelled) return trace;
+				if (scope.Cancelled) return scope;
 //				if (trace.HasBeenCancelled(this)) return trace;
 
 				t = Mathf.SmoothDamp(t,
@@ -95,7 +95,7 @@ namespace Vanilla.FileSync
 				await UniTask.Yield();
 			}
 		
-			return trace;
+			return scope;
 		}
 
 	}

@@ -7,7 +7,7 @@
       "dependencies": {}
     },
     "com.cysharp.unitask": {
-      "version": "2.3.3",
+      "version": "2.4.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -255,24 +255,20 @@
       "version": "file:Vanilla Easing",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {}
+      "dependencies": {
+        "vanilla.type-menu": "3.0.4"
+      }
     },
     "vanilla.filesync": {
       "version": "file:FileSync",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.cysharp.unitask": "2.3.3"
+        "com.cysharp.unitask": "2.4.1"
       }
     },
     "vanilla.first-person-kit": {
       "version": "file:Vanilla First Person Kit",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
-    "vanilla.folder-to-bundle": {
-      "version": "file:Vanilla Folder To Bundle",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
@@ -299,7 +295,8 @@
       "dependencies": {
         "com.cysharp.unitask": "2.3.3",
         "vanilla.type-menu": "3.0.4",
-        "vanilla.delta-values": "3.0.4"
+        "vanilla.delta-values": "3.0.4",
+        "vanilla.easing": "1.0.2"
       }
     },
     "vanilla.package-template": {
@@ -310,12 +307,6 @@
     },
     "vanilla.pools": {
       "version": "file:Vanilla Pools",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
-    "vanilla.quit-utility": {
-      "version": "file:Vanilla Quit Utility",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

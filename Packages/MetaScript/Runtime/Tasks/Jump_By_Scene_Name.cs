@@ -20,7 +20,7 @@ namespace Vanilla.MetaScript
 
         protected override string CreateAutoName() => $"Jump to [{TargetSceneName}] scene";
         
-        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+        protected override async UniTask<Scope> _Run(Scope scope)
         {
             GameObject[] rootObjects = null;
             
@@ -39,9 +39,9 @@ namespace Vanilla.MetaScript
             if (rootObjects == null)
             {
 //                trace.Continue = false;
-                trace.scope.Cancel();
+                scope.Cancel();
 
-                return trace;
+                return scope;
             }
 
             MetaTaskInstance instance = null;
@@ -61,14 +61,22 @@ namespace Vanilla.MetaScript
             {
                 Debug.LogWarning($"Couldn't find a MetaScriptInstance attached to any root GameObject in the [{TargetSceneName}] scene.");
                 
-                trace.scope.Cancel();
+                scope.Cancel();
                 
-                return trace;
+                return scope;
             }
 
-            await instance.Run(trace);
+            if (scope.Cancelled) return scope;
+
+            var newScope = new Scope(scope, Name, GetType().Name);
+
+            await instance.Run(newScope);
             
-            return trace;
+            newScope.Cancel();
+            
+            newScope.Dispose();
+            
+            return scope;
         }
 
     }

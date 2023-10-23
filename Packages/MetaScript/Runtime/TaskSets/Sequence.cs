@@ -13,20 +13,24 @@ namespace Vanilla.MetaScript.TaskSets
 		protected override string CreateAutoName() => "Run the following in order:";
 
 
-		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			var tempScope = new ExecutionScope(trace.scope);
+			if (scope.Cancelled) return scope; // It's important to guard against scopes that are already cancelled.
 
-			var tempTrace = tempScope.GetNewTrace();
-			
+			var newScope = new Scope(scope, Name, GetType().Name);
+
 			foreach (var task in _tasks)
 			{
-				if (tempTrace.Cancelled) return trace;
+				if (newScope.Cancelled) return scope;
 				
-				await task.Run(tempTrace);
+				await task.Run(newScope);
 			}
 
-			return trace;
+			newScope.Cancel();
+			
+			newScope.Dispose();
+
+			return scope;
 		}
 
 	}

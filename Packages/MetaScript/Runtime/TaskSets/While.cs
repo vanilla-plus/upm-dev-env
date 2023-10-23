@@ -13,20 +13,20 @@ namespace Vanilla.MetaScript.TaskSets
 
 //		protected override string CreateAutoName() => "Repeat the following tasks while...";
 
-		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override async UniTask<Scope> _Run(Scope scope)
 		{
 			while (Evaluate())
 			{
 				foreach (var task in _tasks)
 				{
-					if (trace.Cancelled) return trace;
+					if (scope.Cancelled) return scope;
 //					if (tracer.HasBeenCancelled(this)) return tracer;
 
-					await task.Run(trace);
+					await task.Run(scope);
 				}
 			}
 
-			return trace;
+			return scope;
 		}
 
 	}

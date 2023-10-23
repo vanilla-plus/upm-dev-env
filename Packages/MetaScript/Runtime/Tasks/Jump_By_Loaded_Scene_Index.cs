@@ -20,7 +20,7 @@ namespace Vanilla.MetaScript
 
 		protected override string CreateAutoName() => $"Jump to loaded scene [{TargetSceneIndex}]";
         
-		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override async UniTask<Scope> _Run(Scope scope)
 		{
 			if (TargetSceneIndex < 0 ||
 			    TargetSceneIndex > SceneManager.loadedSceneCount)
@@ -28,9 +28,9 @@ namespace Vanilla.MetaScript
 				Debug.LogError($"Invalid Loaded Scene Index [{TargetSceneIndex}]");
 
 //				trace.Continue = false;
-				trace.scope.Cancel();
+				scope.Cancel();
 
-				return trace;
+				return scope;
 			}
 			
 			var rootObjects = SceneManager.GetSceneAt(TargetSceneIndex).GetRootGameObjects();
@@ -38,9 +38,9 @@ namespace Vanilla.MetaScript
 			if (rootObjects == null)
 			{
 //				trace.Continue = false;
-				trace.scope.Cancel();
+				scope.Cancel();
 
-				return trace;
+				return scope;
 			}
 
 			MetaTaskInstance instance = null;
@@ -61,14 +61,22 @@ namespace Vanilla.MetaScript
 				Debug.LogWarning($"Couldn't find a MetaScriptInstance attached to any root GameObject in the scene loaded at index [{TargetSceneIndex}].");
                 
 //				trace.Continue = false;
-				trace.scope.Cancel();
+				scope.Cancel();
 
-				return trace;
+				return scope;
 			}
 
-			await instance.Run(trace);
-            
-			return trace;
+			if (scope.Cancelled) return scope;
+
+			var newScope = new Scope(scope, Name, GetType().Name);
+
+			await instance.Run(newScope);
+			
+			newScope.Cancel();
+			
+			newScope.Dispose();
+
+			return scope;
 		}
 
 	}

@@ -4,11 +4,9 @@
     "references": [
         "Vanilla.MetaScript.Two",
         "Vanilla.DataAssets.Two",
-        "Vanilla.Easing",
         "Vanilla.UnityExtensions",
         "Vanilla.RayDetectors",
         "Vanilla.DotNetExtensions",
-        "Vanilla.TypeMenu",
         "Vanilla.SchrodingerAssets",
         "Vanilla.FuncOlympics",
         "Vanilla.Pools",
@@ -17,7 +15,9 @@
         "Vanilla.SphericalVectors",
         "Vanilla.SmartBool",
         "Vanilla.SmartState",
-        "Vanilla.SmartFloat"
+        "Vanilla.SmartFloat",
+        "Vanilla.TypeMenu",
+        "Vanilla.Easing"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

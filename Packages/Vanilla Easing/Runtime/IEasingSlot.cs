@@ -13,7 +13,7 @@ namespace Vanilla.Easing
     
 
     [Serializable]
-    public class EasingSlot_Power_In : IEasingSlot
+    public class Power_In : IEasingSlot
     {
 
         [SerializeField]
@@ -24,7 +24,7 @@ namespace Vanilla.Easing
     }
     
     [Serializable]
-    public class EasingSlot_Power_Out : IEasingSlot
+    public class Power_Out : IEasingSlot
     {
 
         [SerializeField]
@@ -35,7 +35,7 @@ namespace Vanilla.Easing
     }
     
     [Serializable]
-    public class EasingSlot_Power_InOut : IEasingSlot
+    public class Power_In_Out : IEasingSlot
     {
 
         [SerializeField]
@@ -45,48 +45,32 @@ namespace Vanilla.Easing
 
     }
 
-    [Serializable] public class EasingSlot_Linear : IEasingSlot { public float Ease(float normal) => normal; }
+    [Serializable] public class Linear : IEasingSlot { public float Ease(float normal) => normal; }
     
-    [Serializable] public class EasingSlot_Circle_In : IEasingSlot { public float Ease(float normal) => normal.InCircle(); }
+    [Serializable] public class Circle_In : IEasingSlot { public float Ease(float normal) => normal.InCircle(); }
     
-    [Serializable] public class EasingSlot_Circle_Out : IEasingSlot { public float Ease(float normal) => normal.OutCircle(); }
+    [Serializable] public class Circle_Out : IEasingSlot { public float Ease(float normal) => normal.OutCircle(); }
     
-    [Serializable] public class EasingSlot_Circle_InOut : IEasingSlot { public float Ease(float normal) => normal.InOutCircle(); }
+    [Serializable] public class Circle_In_Out : IEasingSlot { public float Ease(float normal) => normal.InOutCircle(); }
     
-    [Serializable] public class EasingSlot_Sine_In : IEasingSlot { public float Ease(float normal) => normal.InSine(); }
+    [Serializable] public class Sine_In : IEasingSlot { public float Ease(float normal) => normal.InSine(); }
     
-    [Serializable] public class EasingSlot_Sine_Out : IEasingSlot { public float Ease(float normal) => normal.OutSine(); }
+    [Serializable] public class Sine_Out : IEasingSlot { public float Ease(float normal) => normal.OutSine(); }
     
-    [Serializable] public class EasingSlot_Sine_InOut : IEasingSlot { public float Ease(float normal) => normal.InOutSine(); }
+    [Serializable] public class Sine_In_Out : IEasingSlot { public float Ease(float normal) => normal.InOutSine(); }
     
-    [Serializable] public class EasingSlot_Bounce_In : IEasingSlot 
+    [Serializable] public class Bounce : IEasingSlot 
     {
         [SerializeField]
         public int numberOfBounces = 3;
      
-        public float Ease(float normal) => normal.InBounce(numberOfBounces); 
+        public float Ease(float normal) => normal.Bounce(numberOfBounces); 
     }
+
+    [Serializable] public class Elastic_In : IEasingSlot { public float Ease(float normal) => normal.InElastic(); }
     
-    [Serializable] public class EasingSlot_Bounce_Out : IEasingSlot 
-    {
-        [SerializeField]
-        public int numberOfBounces = 3;
-     
-        public float Ease(float normal) => normal.OutBounce(numberOfBounces); 
-    }
+    [Serializable] public class Elastic_Out : IEasingSlot { public float Ease(float normal) => normal.OutElastic(); }
     
-    [Serializable] public class EasingSlot_Bounce_InOut : IEasingSlot 
-    {
-        [SerializeField]
-        public int numberOfBounces = 3;
-     
-        public float Ease(float normal) => normal.InOutBounce(numberOfBounces); 
-    }
-    
-    [Serializable] public class EasingSlot_Elastic_In : IEasingSlot { public float Ease(float normal) => normal.InElastic(); }
-    
-    [Serializable] public class EasingSlot_Elastic_Out : IEasingSlot { public float Ease(float normal) => normal.OutElastic(); }
-    
-    [Serializable] public class EasingSlot_Elastic_InOut : IEasingSlot { public float Ease(float normal) => normal.InOutElastic(); }
+    [Serializable] public class Elastic_In_Out : IEasingSlot { public float Ease(float normal) => normal.InOutElastic(); }
     
 }

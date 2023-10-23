@@ -8,7 +8,7 @@
     "url": "https://vanilla.plus/"
   },
   "repository": "github:vanilla-plus/upm-metascript.git",
-  "version": "3.0.4",
+  "version": "4.0.1",
   "type": "template",
   "samples": [
     {
@@ -25,6 +25,7 @@
   "dependencies": {
     "com.cysharp.unitask": "2.3.3",
     "vanilla.type-menu": "3.0.4",
-    "vanilla.delta-values": "3.0.4"
+    "vanilla.delta-values": "3.0.4",
+    "vanilla.easing": "1.0.2"
   }
 }

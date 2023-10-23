@@ -1,7 +1,7 @@
-using System;
-
 using UnityEngine;
 using UnityEngine.UI;
+
+using Vanilla.TypeMenu;
 
 namespace Vanilla.Easing.Samples
 {
@@ -18,19 +18,18 @@ namespace Vanilla.Easing.Samples
 		
 		public float speed = 0.5f;
 		
-		public UnityEasing easing;
-
-		public float floatPower = 2.0f;
-
-		public int numberOfBounces = 4;
+		[TypeMenu]
+		[Only(typeof(IEasingSlot))]
+		[SerializeReference]
+		public IEasingSlot easingSlot;
 
 		private void Update()
 		{
 			var t = Mathf.PingPong(t: Time.time * speed,
 			                       length: 1.0f);
 
-			var v = Ease(t: t);
-
+			var v = easingSlot.Ease(t);
+			
 			timeText.text  = t.ToString(format: "F");
 			valueText.text = v.ToString(format: "F");
 
@@ -38,55 +37,6 @@ namespace Vanilla.Easing.Samples
 
 			rect.anchoredPosition = new Vector2(x: t * sizeDelta.x,
 			                                    y: v * sizeDelta.y);
-		}
-
-
-		private float Ease(float t) => easing switch
-		                               {
-			                               UnityEasing.InSine       => t.InSine(),
-			                               UnityEasing.OutSine      => t.OutSine(),
-			                               UnityEasing.InOutSine    => t.InOutSine(),
-			                               UnityEasing.InPower      => t.InPower(power: floatPower),
-			                               UnityEasing.OutPower     => t.OutPower(power: floatPower),
-			                               UnityEasing.InOutPower   => t.InOutPower(power: floatPower),
-			                               UnityEasing.InBounce     => t.InBounce(numberOfBounces),
-			                               UnityEasing.OutBounce    => t.OutBounce(numberOfBounces),
-			                               UnityEasing.InOutBounce  => t.InOutBounce(numberOfBounces),
-			                               UnityEasing.InElastic    => t.InElastic(),
-			                               UnityEasing.OutElastic   => t.OutElastic(),
-			                               UnityEasing.InOutElastic => t.InOutElastic(),
-			                               UnityEasing.InBack       => t.InBack(),
-			                               UnityEasing.OutBack      => t.OutBack(),
-			                               UnityEasing.InOutBack    => t.InOutBack(),
-			                               UnityEasing.InCirc       => t.InCircle(),
-			                               UnityEasing.OutCirc      => t.OutCircle(),
-			                               UnityEasing.InOutCirc    => t.InOutCircle(),
-			                               _                        => throw new ArgumentOutOfRangeException()
-		                               };
-
-
-		public enum UnityEasing
-		{
-
-			InSine,
-			OutSine,
-			InOutSine,
-			InPower,
-			OutPower,
-			InOutPower,
-			InBounce,
-			OutBounce,
-			InOutBounce,
-			InElastic,
-			OutElastic,
-			InOutElastic,
-			InBack,
-			OutBack,
-			InOutBack,
-			InCirc,
-			OutCirc,
-			InOutCirc
-
 		}
 
 	}

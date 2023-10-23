@@ -1,6 +1,6 @@
 {
   "name": "vanilla.easing",
-  "displayName": "Vanilla Easing",
+  "displayName": "Easing",
   "description": "Vanilla Easing is a collection of extension methods that modulate float values for nice interpolation patterns.",
   "author": {
     "name": "Lucas Hehir",
@@ -10,7 +10,7 @@
   "repository": "github:vanilla-plus/upm-easing.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "library",
   "samples": [
     {
@@ -18,5 +18,8 @@
       "description": "Visualize various easing formulas on a normalized grid",
       "path": "Samples~/Easing Plot"
     }
-  ]
+  ],
+  "dependencies": {
+    "vanilla.type-menu": "3.0.4"
+  }
 }

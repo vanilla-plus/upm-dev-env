@@ -1,7 +1,9 @@
 {
-    "name": "Vanilla.QuitUtility",
-    "rootNamespace": "Vanilla.QuitUtility",
-    "references": [],
+    "name": "Vanilla.MetaScript.MaterialTasks",
+    "rootNamespace": "Vanilla.MetaScript.MaterialTasks",
+    "references": [
+        "Vanilla.MetaScript"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

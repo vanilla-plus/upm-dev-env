@@ -23,7 +23,7 @@ namespace Vanilla.MetaScript.TaskSets
 		protected override string CreateAutoName() => $"Repeat the following [{iterations}] times:";
 
 
-		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+		protected override async UniTask<Scope> _Run(Scope scope)
 		{
 			var iteration = 0;
 			
@@ -37,17 +37,17 @@ namespace Vanilla.MetaScript.TaskSets
 
 				foreach (var task in _tasks)
 				{
-					if (trace.Cancelled) return trace;
+					if (scope.Cancelled) return scope;
 //					if (trace.HasBeenCancelled(this)) return trace;
 
-					await task.Run(trace);
+					await task.Run(scope);
 				}
 			}
 
-			return trace;
+			return scope;
 		}
 		
-//		public void LogIteration(ExecutionTrace trace, int i) => Debug.Log($"{Time.frameCount:0000000}    {trace.scope.ActiveTasks}    {GetType().Name,LongestTaskName}    i:{i:0000}       {executionOptions.ToString()}    {Name}");
+//		public void LogIteration(Scope scope, int i) => Debug.Log($"{Time.frameCount:0000000}    {trace.scope.ActiveTasks}    {GetType().Name,LongestTaskName}    i:{i:0000}       {executionOptions.ToString()}    {Name}");
 
 
 	}

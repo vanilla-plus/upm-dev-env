@@ -22,18 +22,17 @@ namespace Vanilla.MetaScript
         protected override string CreateAutoName() => $"Wait for [{key}] key press";
 
 
-        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
+        protected override async UniTask<Scope> _Run(Scope scope)
         {
             do
             {
-                if (trace.Cancelled) return trace;
-//                if (trace.HasBeenCancelled(this)) return trace;
+                if (scope.Cancelled) return scope;
 
                 await UniTask.Yield();
             }
             while (!Input.GetKeyDown(key));
             
-            return trace;
+            return scope;
         }
 
     }
