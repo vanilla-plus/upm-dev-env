@@ -38,15 +38,15 @@ namespace Vanilla.MetaScript.TaskSets
 	    protected override string CreateAutoName() => "Run one of the following at random:";
 
 
-        protected override async UniTask<Tracer> _Run(Tracer tracer)
+        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
         {
 	        var randomTaskIndex = Table.SpinForAnIndex();
 	        
             var task = Tasks[randomTaskIndex];
 
-            await task.Run(tracer);
+            await task.Run(trace);
 
-            return tracer;
+            return trace;
         }
 
     }

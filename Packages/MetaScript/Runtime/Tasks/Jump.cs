@@ -16,10 +16,9 @@ namespace Vanilla.MetaScript
         
         protected override bool CanAutoName() => target && target.Task != null;
 
-
         protected override string CreateAutoName() => $"Jump to [{target.Task.Name}]";
         
-        protected override async UniTask<Tracer> _Run(Tracer tracer) => await target.Run(tracer: tracer);
+        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace) => await target.Run(trace: trace);
 
     }
 }

@@ -45,7 +45,7 @@ namespace Vanilla.MetaScript.Addressables
         protected override string CreateAutoName() => $"Load scene [{assRef.editorAsset.name}] ({(loadMode == LoadSceneMode.Single ? "Destructive" : "Additive")})";
 
 
-        protected override async UniTask<Tracer> _Run(Tracer tracer)
+        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
         {
             var operation = SceneManager.TryLoadSceneInstance(assRef,
                                                               loadMode,
@@ -53,12 +53,13 @@ namespace Vanilla.MetaScript.Addressables
 
             while (operation.Status == UniTaskStatus.Pending)
             {
-                if (tracer.HasBeenCancelled(this)) return tracer;
+                if (trace.Cancelled) return trace;
+//                if (trace.HasBeenCancelled(this)) return trace;
 
                 await UniTask.Yield();
             }
 
-            return tracer;
+            return trace;
         }
 
     }

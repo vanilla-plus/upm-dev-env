@@ -13,16 +13,20 @@ namespace Vanilla.MetaScript.TaskSets
 		protected override string CreateAutoName() => "Run the following in order:";
 
 
-		protected override async UniTask<Tracer> _Run(Tracer tracer)
+		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
 		{
+			var tempScope = new ExecutionScope(trace.scope);
+
+			var tempTrace = tempScope.GetNewTrace();
+			
 			foreach (var task in _tasks)
 			{
-				if (tracer.HasBeenCancelled(this)) break;
+				if (tempTrace.Cancelled) return trace;
 				
-				await task.Run(tracer);
+				await task.Run(tempTrace);
 			}
 
-			return tracer;
+			return trace;
 		}
 
 	}

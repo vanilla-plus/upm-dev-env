@@ -9,7 +9,7 @@ namespace Vanilla.MetaScript
 {
 
 	[Serializable]
-	public class InvokeUnityEvent : MetaTask
+	public class Invoke_Unity_Event : MetaTask
 	{
 
 		public UnityEvent unityEvent = new UnityEvent();
@@ -53,11 +53,11 @@ namespace Vanilla.MetaScript
 		}
 
 
-		protected override UniTask<Tracer> _Run(Tracer tracer)
+		protected override UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
 		{
 			unityEvent.Invoke();
 
-			return UniTask.FromResult(tracer);
+			return UniTask.FromResult(trace);
 		}
 
 	}

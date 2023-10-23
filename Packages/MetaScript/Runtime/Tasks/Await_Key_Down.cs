@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript
 {
 
     [Serializable]
-    public class AwaitKeyDown : MetaTask
+    public class Await_Key_Down : MetaTask
     {
 
         [SerializeField]
@@ -22,17 +22,18 @@ namespace Vanilla.MetaScript
         protected override string CreateAutoName() => $"Wait for [{key}] key press";
 
 
-        protected override async UniTask<Tracer> _Run(Tracer tracer)
+        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
         {
             do
             {
-                if (tracer.HasBeenCancelled(this)) return tracer;
+                if (trace.Cancelled) return trace;
+//                if (trace.HasBeenCancelled(this)) return trace;
 
                 await UniTask.Yield();
             }
             while (!Input.GetKeyDown(key));
             
-            return tracer;
+            return trace;
         }
 
     }

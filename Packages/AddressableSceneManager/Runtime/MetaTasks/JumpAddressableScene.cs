@@ -47,7 +47,7 @@ namespace Vanilla.MetaScript.Addressables
         protected override string CreateAutoName() => $"Jump to [{TargetSceneName}] scene";
 
 
-        protected override async UniTask<Tracer> _Run(Tracer tracer)
+        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
         {
             // Load
             var loadOperation = SceneManager.TryLoadSceneInstance(assRef: assRef,
@@ -56,14 +56,15 @@ namespace Vanilla.MetaScript.Addressables
 
             while (loadOperation.Status == UniTaskStatus.Pending)
             {
-                if (tracer.HasBeenCancelled(this)) return tracer;
+                if (trace.Cancelled) return trace;
+//                if (trace.HasBeenCancelled(this)) return trace;
 
                 await UniTask.Yield();
             }
 
             Debug.Log($"Load operation status [{loadOperation.Status}]");
 
-            if (loadOperation.Status is UniTaskStatus.Faulted or UniTaskStatus.Canceled) return tracer;
+            if (loadOperation.Status is UniTaskStatus.Faulted or UniTaskStatus.Canceled) return trace;
 
             // Jump
 
@@ -82,14 +83,15 @@ namespace Vanilla.MetaScript.Addressables
             {
                 Debug.LogWarning($"Couldn't find a MetaScriptInstance attached to any root GameObject in the [{TargetSceneName}] scene.");
 
-                tracer.Continue = false;
+//                trace.Continue = false;
+                trace.scope.Cancel();
 
-                LogRunCancelled(tracer: tracer);
+//                LogRunCancelled(trace: trace);
 
-                return tracer;
+                return trace;
             }
 
-            await instance.Run(tracer: tracer);
+            await instance.Run(trace: trace);
 
             // Unload
 
@@ -97,12 +99,13 @@ namespace Vanilla.MetaScript.Addressables
 
             while (unloadOperation.Status == UniTaskStatus.Pending)
             {
-                if (tracer.HasBeenCancelled(this)) return tracer;
+                if (trace.Cancelled) return trace;
+//                if (trace.HasBeenCancelled(this)) return trace;
 
                 await UniTask.Yield();
             }
 
-            return tracer;
+            return trace;
         }
 
     }

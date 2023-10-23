@@ -20,11 +20,11 @@ namespace Vanilla.MetaScript
 		public string Message;
 
 
-		protected override UniTask<Tracer> _Run(Tracer tracer)
+		protected override UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
 		{
 			Debug.Log(Message);
 
-			return UniTask.FromResult(tracer);
+			return UniTask.FromResult(trace);
 		}
 
 	}

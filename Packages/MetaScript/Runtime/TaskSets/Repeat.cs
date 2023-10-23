@@ -23,32 +23,31 @@ namespace Vanilla.MetaScript.TaskSets
 		protected override string CreateAutoName() => $"Repeat the following [{iterations}] times:";
 
 
-		protected override async UniTask<Tracer> _Run(Tracer tracer)
+		protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
 		{
 			var iteration = 0;
 			
-			while (iteration < iterations)
+			while (iteration++ < iterations)
 			{
-//				if (tracer.Cancelled(this)) break;
+//				iteration++;
 
-				iteration++;
-
-				#if debug
-				LogIteration(tracer, iteration);
-				#endif
+//				#if debug
+//				LogIteration(trace, iteration);
+//				#endif
 
 				foreach (var task in _tasks)
 				{
-					if (tracer.HasBeenCancelled(this)) return tracer;
+					if (trace.Cancelled) return trace;
+//					if (trace.HasBeenCancelled(this)) return trace;
 
-					await task.Run(tracer);
+					await task.Run(trace);
 				}
 			}
 
-			return tracer;
+			return trace;
 		}
 		
-		public void LogIteration(Tracer tracer, int i) => Debug.Log($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    i:{i:0000}       {ExecutionType,LongestExecutionType}    {Name}");
+//		public void LogIteration(ExecutionTrace trace, int i) => Debug.Log($"{Time.frameCount:0000000}    {trace.scope.ActiveTasks}    {GetType().Name,LongestTaskName}    i:{i:0000}       {executionOptions.ToString()}    {Name}");
 
 
 	}

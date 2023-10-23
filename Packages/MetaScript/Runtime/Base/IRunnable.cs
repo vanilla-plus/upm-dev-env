@@ -5,21 +5,21 @@ namespace Vanilla.MetaScript
     public interface IRunnable
     {
 
-        public UniTask<Tracer> Run(Tracer tracer);
+        public UniTask<ExecutionTrace> Run(ExecutionTrace trace);
 
     }
 //
 //    public abstract class MetaTask2
 //    {
 //
-//        public async UniTask<(MetaTask2,Tracer)> Run(Tracer tracer)
+//        public async UniTask<(MetaTask2,trace)> Run(trace trace)
 //        {
 ////            await UniTask.Yield();
 //            
-//            return (this, tracer);
+//            return (this, trace);
 //        }
 //
-//        protected abstract UniTask<Tracer> _Run(Tracer tracer);
+//        protected abstract UniTask<trace> _Run(trace trace);
 //
 //    }
 }

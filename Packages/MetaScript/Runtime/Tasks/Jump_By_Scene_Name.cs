@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript
 {
     
     [Serializable]
-    public class JumpToSceneByName : MetaTask
+    public class Jump_By_Scene_Name : MetaTask
     {
 
         public string TargetSceneName;
@@ -20,7 +20,7 @@ namespace Vanilla.MetaScript
 
         protected override string CreateAutoName() => $"Jump to [{TargetSceneName}] scene";
         
-        protected override async UniTask<Tracer> _Run(Tracer tracer)
+        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
         {
             GameObject[] rootObjects = null;
             
@@ -38,9 +38,10 @@ namespace Vanilla.MetaScript
 
             if (rootObjects == null)
             {
-                tracer.Continue = false;
-                
-                return tracer;
+//                trace.Continue = false;
+                trace.scope.Cancel();
+
+                return trace;
             }
 
             MetaTaskInstance instance = null;
@@ -60,16 +61,14 @@ namespace Vanilla.MetaScript
             {
                 Debug.LogWarning($"Couldn't find a MetaScriptInstance attached to any root GameObject in the [{TargetSceneName}] scene.");
                 
-                tracer.Continue = false;
+                trace.scope.Cancel();
                 
-                LogRunCancelled(tracer);
-
-                return tracer;
+                return trace;
             }
 
-            await instance.Run(tracer);
+            await instance.Run(trace);
             
-            return tracer;
+            return trace;
         }
 
     }

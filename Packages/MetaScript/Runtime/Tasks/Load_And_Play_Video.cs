@@ -12,7 +12,7 @@ namespace Vanilla.MetaScript
 {
     
     [Serializable]
-    public class LoadAndPlayVideo : MetaTask
+    public class Load_And_Play_Video : MetaTask
     {
 
         [SerializeField]
@@ -27,7 +27,7 @@ namespace Vanilla.MetaScript
         protected override string CreateAutoName() => $"Play video [{relativeVideoPath}]";
 
 
-        protected override async UniTask<Tracer> _Run(Tracer tracer)
+        protected override async UniTask<ExecutionTrace> _Run(ExecutionTrace trace)
         {
             videoPlayer.url = Path.Combine(Application.persistentDataPath,
                                            relativeVideoPath);
@@ -36,17 +36,19 @@ namespace Vanilla.MetaScript
             {
                 Debug.LogWarning($"Video file not found [{videoPlayer.url}]");
 
-                tracer.Continue = false;
+//                trace.Continue = false;
+                trace.scope.Cancel();
 
-                return tracer;
+                return trace;
             }
             
             videoPlayer.Prepare();
 
             while (!videoPlayer.isPrepared)
             {
-                if (tracer.HasBeenCancelled(this)) return tracer;
-                
+//                if (tracer.HasBeenCancelled(this)) return tracer;
+                if (trace.Cancelled) return trace;
+
                 await UniTask.Yield();
             }
             
@@ -54,12 +56,13 @@ namespace Vanilla.MetaScript
 
             while (videoPlayer.isPlaying)
             {
-                if (tracer.HasBeenCancelled(this)) return tracer;
-                
+//                if (tracer.HasBeenCancelled(this)) return tracer;
+                if (trace.Cancelled) return trace;
+
                 await UniTask.Yield();
             }
             
-            return tracer;
+            return trace;
         }
 
     }

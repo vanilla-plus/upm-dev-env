@@ -23,9 +23,13 @@ namespace Vanilla.MetaScript
 		[SerializeField]
 		public string AutoName;
 
+//		[SerializeField]
+//		private TaskExecutionType _executionType = TaskExecutionType.RunAndWait;
+//		public TaskExecutionType ExecutionType => _executionType;
+
 		[SerializeField]
-		private TaskExecutionType _executionType = TaskExecutionType.RunAndWait;
-		public TaskExecutionType ExecutionType => _executionType;
+//		public ExecutionOptions executionOptions = ExecutionOptions.Run | ExecutionOptions.Wait | ExecutionOptions.CancelLocal & ExecutionOptions.CancelGlobal;
+		public ExecutionOptions executionOptions = ExecutionOptions.Run | ExecutionOptions.Wait;
 
 		private const string DefaultAutoName = "This task can't be auto-named yet.";
 
@@ -46,86 +50,213 @@ namespace Vanilla.MetaScript
 
 		protected abstract string CreateAutoName();
 
+//
+//		public async UniTask<trace> Run(trace trace)
+//		{
+////			if (trace == null) throw new Exception("Run call with a null trace - how did that happen?");
+//
+//			if (trace.HasBeenCancelled(this)) return trace;
+//
+//			trace.EnterMethod($"{Name} [{GetType().Name}]");
+//
+//			try
+//			{
+//				switch (ExecutionType)
+//				{
+//					case TaskExecutionType.RunAndWait:
+//
+//						LogRunBegin(trace);
+//
+//						await _Run(trace);
+//
+//						if (trace.Continue) LogRunComplete(trace);
+//
+//						break;
+//
+//					// ToDo - Parallel is bugged but I didn't document why! Woops...
+//					// ToDo - Figure out why support for .Parallel was dropped last round
+//					case TaskExecutionType.RunAndDontWait:
+//						LogRunBegin(trace);
+//						_Run(trace).ContinueWith(LogRunComplete).Forget();
+//						break;
+//					
+//					case TaskExecutionType.Cancel:
+//						trace.Continue = false;
+//						break;
+//
+//					case TaskExecutionType.Skip:
+//						LogRunSkipped(trace);
+//						break;
+//				}
+//			}
+//			catch (Exception ex)
+//			{
+//				LogTaskError(trace);
+//
+//				Debug.LogException(ex);
+//			}
+//			finally
+//			{
+////				if (ExecutionType == TaskExecutionType.Cancel) Debug.LogError("Yep!");
+//				
+//				trace.ExitMethod();
+//			}
+//			
+//			// Does execution make it this far...?
+//			// Yes!
+//
+//			return trace;
+//		}
 
-		public async UniTask<Tracer> Run(Tracer tracer)
+//
+//		public async UniTask<ExecutionTrace> Run(ExecutionTrace trace)
+//		{
+//			if (trace.Cancelled) return trace;
+//			
+////			trace.EnterMethod($"{Name} [{GetType().Name}]");
+//
+//			trace.Enter();
+//
+//			try
+//			{
+//				if (executionFlags.HasFlag(TaskExecutionFlags.Run))
+//				{
+//					LogRunBegin(trace);
+//
+//					if (executionFlags.HasFlag(TaskExecutionFlags.Wait))
+//					{
+//						await _Run(trace);
+//
+////						if (trace.HasBeenCancelled(this)) return trace;
+//						if (trace.Cancelled) return trace;
+//
+//						LogRunComplete(trace);
+//					}
+//					else
+//					{
+//						_Run(trace).ContinueWith(LogRunComplete).Forget();
+////						_Run(trace).ContinueWith(DelayedCompletion).Forget();
+//					}
+//				}
+//				else
+//				{
+//					LogRunSkipped(trace);
+//				}
+//
+//				if (executionFlags.HasFlag(TaskExecutionFlags.Continue))
+//				{
+//					return trace;
+//				}
+//				else
+//				{
+//					trace.Continue = false; // Turn off .Continue I guess
+//
+//					return trace;
+//				}
+//			}
+//			catch (Exception ex)
+//			{
+//				LogTaskError(trace);
+//
+//				Debug.LogException(ex);
+//			}
+//			finally
+//			{
+//				trace.Exit();
+//			}
+//
+//			return trace;
+//		}
+
+
+		public async UniTask<ExecutionTrace> Run(ExecutionTrace trace)
 		{
-//			if (tracer == null) throw new Exception("Run call with a null tracer - how did that happen?");
-
-			if (tracer.HasBeenCancelled(this)) return tracer;
-
-			tracer.EnterMethod($"{Name} [{GetType().Name}]");
-
+//			if (executionFlags.HasFlag(TaskExecutionFlags.CancelGlobal))
+//			{
+//				trace.Continue        = false;
+//				trace.source.Continue = false;
+//			}
+//			else if (executionFlags.HasFlag(TaskExecutionFlags.CancelLocal))
+//			{
+//				trace.Continue = false;
+//			}
+			
+			if (trace.Cancelled)
+			{
+				Debug.LogWarning($"[{Name}] - I'm not doing anything because my ExecutionTrace is cancelled");
+				
+				return trace;
+			}
+			
 			try
 			{
-				switch (ExecutionType)
+				if (executionOptions.HasFlag(ExecutionOptions.Run))
 				{
-					case TaskExecutionType.RunAndWait:
+					trace.scope.ActiveTasks++;
 
-						LogRunBegin(tracer);
-
-						await _Run(tracer);
-
-						if (tracer.Continue) LogRunComplete(tracer);
-
-						break;
-
-					// ToDo - Parallel is bugged but I didn't document why! Woops...
-					// ToDo - Figure out why support for .Parallel was dropped last round
-					case TaskExecutionType.RunAndDontWait:
-						LogRunBegin(tracer);
-						_Run(tracer).ContinueWith(LogRunComplete).Forget();
-						break;
-					
-					case TaskExecutionType.Cancel:
-						tracer.Continue = false;
-						break;
-
-					case TaskExecutionType.Skip:
-						LogRunSkipped(tracer);
-						break;
+					if (executionOptions.HasFlag(ExecutionOptions.Wait))
+					{
+						await _Run(trace).ContinueWith(FinalizeRun);
+					}
+					else
+					{
+						_Run(trace).ContinueWith(FinalizeRun).Forget();
+					}
+				}
+				else
+				{
+					// "Skipped"
 				}
 			}
 			catch (Exception ex)
 			{
-				LogTaskError(tracer);
-
 				Debug.LogException(ex);
 			}
-			finally
-			{
-//				if (ExecutionType == TaskExecutionType.Cancel) Debug.LogError("Yep!");
-				
-				tracer.ExitMethod();
-			}
-			
-			// Does execution make it this far...?
-			// Yes!
 
-			return tracer;
+			return trace;
 		}
-
 
 		protected const   int LongestExecutionType = -8;
 		protected const int LongestTaskName      = -14;
 
-		protected abstract UniTask<Tracer> _Run(Tracer tracer);
+		protected abstract UniTask<ExecutionTrace> _Run(ExecutionTrace trace);
 
-		#if debug
-		public void LogRunBegin(Tracer tracer)     => Debug.Log($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Begun        {ExecutionType,LongestExecutionType}    {Name}");
-		public void LogRunSkipped(Tracer tracer)   => Debug.LogWarning($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Skipped      {ExecutionType,LongestExecutionType}    {Name}");
-		public void LogRunComplete(Tracer tracer)  => Debug.Log($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Complete     {ExecutionType,LongestExecutionType}    {Name}");
-//		public void LogRunComplete(Tracer tracer)  => Debug.Log($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Complete     {ExecutionType,LongestExecutionType}    {Name}");
-		public void LogRunCancelled(Tracer tracer) => Debug.LogWarning($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Cancelled    {ExecutionType,LongestExecutionType}    {Name}");
-		public void LogTaskError(Tracer tracer)    => Debug.LogError($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Error        {ExecutionType,LongestExecutionType}    {Name}");
-		public void LogTaskIdentity(Tracer tracer) => Debug.LogWarning($"{Time.frameCount:0000000}    {tracer.Depth}    {GetType().Name,LongestTaskName}    Identity     {ExecutionType,LongestExecutionType}    {Name}");
-		#else
-		public void LogRunBegin(Tracer tracer)     { }
-		public void LogRunSkipped(Tracer tracer)   { }
-		public void LogRunComplete(Tracer tracer)  { }
-		public void LogRunCancelled(Tracer tracer) { }
-		public void LogTaskError(Tracer tracer)    { }
-		public void LogTaskIdentity(Tracer tracer) { }
-		#endif
+
+		private void FinalizeRun(ExecutionTrace trace)
+		{
+			Debug.LogWarning($"{Name} finalizing");
+			
+			trace.scope.ActiveTasks--;
+//			
+//			if (executionOptions.HasFlag(ExecutionOptions.CancelGlobal))
+//			{
+//				trace.Continue        = false;
+//				trace.source.Continue = false;
+//			}
+//			else if (executionOptions.HasFlag(ExecutionOptions.CancelLocal))
+//			{
+//				trace.Continue = false;
+//			}
+		}
+
+
+//
+//		#if debug
+//		public void LogRunBegin(ExecutionTrace trace)    => Debug.Log($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Begun        {executionFlags}    {Name}");
+//		public void LogRunSkipped(ExecutionTrace trace)  => Debug.LogWarning($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Skipped      {executionFlags.ToString()}    {Name}");
+//		public void LogRunComplete(ExecutionTrace trace) => Debug.Log($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Complete     {executionFlags.ToString()}    {Name}");
+////		public void LogRunComplete(trace trace)  => Debug.Log($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Complete     {ExecutionType,LongestExecutionType}    {Name}");
+//		public void LogRunCancelled(ExecutionTrace trace) => Debug.LogWarning($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Cancelled    {executionFlags.ToString()}    {Name}");
+//		public void LogTaskError(ExecutionTrace trace)    => Debug.LogError($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Error        {executionFlags.ToString()}    {Name}");
+//		public void LogTaskIdentity(ExecutionTrace trace) => Debug.LogWarning($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Identity     {executionFlags.ToString()}    {Name}");
+//		#else
+//		public void LogRunBegin(trace trace)     { }
+//		public void LogRunSkipped(trace trace)   { }
+//		public void LogRunComplete(trace trace)  { }
+//		public void LogRunCancelled(trace trace) { }
+//		public void LogTaskError(trace trace)    { }
+//		public void LogTaskIdentity(trace trace) { }
+//		#endif
 
 	}
 
