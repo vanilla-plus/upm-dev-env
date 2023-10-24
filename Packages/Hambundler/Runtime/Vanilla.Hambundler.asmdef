@@ -1,0 +1,17 @@
+{
+    "name": "Vanilla.Hambundler",
+    "rootNamespace": "Vanilla.Hambundler",
+    "references": [
+        "UniTask",
+        "Vanilla.MetaScript"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

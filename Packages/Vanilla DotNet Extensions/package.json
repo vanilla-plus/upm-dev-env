@@ -1,9 +1,9 @@
 {
   "name": "vanilla.dotnet-extensions",
-  "displayName": "Vanilla DotNet Extensions",
+  "displayName": "DotNet Extensions",
   "description": "DotNet Extensions is a collection of extension methods for .NET.",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

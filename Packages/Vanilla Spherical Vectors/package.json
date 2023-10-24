@@ -1,9 +1,9 @@
 {
   "name": "vanilla.spherical-vectors",
-  "displayName": "Vanilla Spherical Vectors",
+  "displayName": "Spherical Vectors",
   "description": "Spherical Vectors provides two simple methods for easily converting between traditional cartesian positions (x/y/z) and spherical positions (longitude/latitude/radius).\n\nIt doesn't even introduce any new kinds of data, just use Vector3s! Each component maps directly to its axis equivalent - for example, x maps to longitude.\n\nThis allows you to have more intuitive and powerful rotational behaviour without trying to make cartesian positions work in ways they weren't built for.",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

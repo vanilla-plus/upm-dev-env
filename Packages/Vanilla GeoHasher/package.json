@@ -1,9 +1,9 @@
 {
   "name": "vanilla.geocodes",
-  "displayName": "Vanilla Geocodes",
+  "displayName": "Geocodes",
   "description": "This package supports the creation and conversion of latitude/longitude to geohashes and vice versa.",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

@@ -3,7 +3,7 @@
   "displayName": "Vanilla Swaperators",
   "description": "Swaperators is a package for swappable & serializable operators. The following types are currently supported:\n\n- Add\n- Subtract\n- Multiply\n- Divide\n- Power\n- Modulo",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

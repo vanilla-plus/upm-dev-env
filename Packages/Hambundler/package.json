@@ -1,0 +1,15 @@
+{
+  "name": "vanilla.hambundler",
+  "displayName": "Hambundler",
+  "description": "Oh that pesky Hambundler is up to his old tricks again and stealing everyones bundles!",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-hambundler.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.1",
+  "type": "template"
+}

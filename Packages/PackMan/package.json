@@ -1,0 +1,15 @@
+{
+  "name": "vanilla.packman",
+  "displayName": "PackMan",
+  "description": "PackMan is a simple Unity Editor tool for building AssetBundles.",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-packman",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template"
+}

@@ -1,9 +1,9 @@
 {
   "name": "vanilla.unity-extensions",
-  "displayName": "Vanilla Unity Extensions",
+  "displayName": "Unity Extensions",
   "description": "Vanilla Extensions is a collection of extension methods for all the data types and classes found in the Unity GameObject ecosystem.",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

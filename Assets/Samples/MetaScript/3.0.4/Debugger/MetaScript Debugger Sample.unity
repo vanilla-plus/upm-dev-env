@@ -816,6 +816,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4950889183078776849
       type: {class: Any, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript.TaskSets}
       data:
@@ -825,6 +827,7 @@ MonoBehaviour:
         _tasks:
         - rid: 4950889183078776857
         - rid: 4950889183078776851
+        - rid: 4950889199454126080
     - rid: 4950889183078776851
       type: {class: Sequence, ns: Vanilla.MetaScript.TaskSets, asm: Vanilla.MetaScript.TaskSets}
       data:
@@ -863,6 +866,39 @@ MonoBehaviour:
         AutoName: Wait for [P] key press
         taskOptions: 3
         key: 112
+    - rid: 4950889199454126080
+      type: {class: TestLerp, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: This task can't be auto-named yet.
+        AutoName: This task can't be auto-named yet.
+        taskOptions: 3
+        secondsToTake: 1
+        easingSlot:
+          rid: -2
+        easingCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 8.621914
+            outSlope: 8.621914
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.025862126
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 8.878484
+            outSlope: 8.878484
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.022774696
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
 --- !u!1 &1560397315
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,9 @@
 {
   "name": "vanilla.character-controller",
-  "displayName": "Vanilla Character Controller",
+  "displayName": "Character Controller",
   "description": "Vanilla Character Controller is a package for the Vanilla Unity SDK",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

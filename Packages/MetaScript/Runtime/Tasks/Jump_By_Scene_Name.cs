@@ -18,7 +18,7 @@ namespace Vanilla.MetaScript
         protected override bool CanAutoName() => !string.IsNullOrEmpty(TargetSceneName);
 
 
-        protected override string CreateAutoName() => $"Jump to [{TargetSceneName}] scene";
+        protected override string CreateAutoName() => $"Jump to scene [{TargetSceneName}]";
         
         protected override async UniTask<Scope> _Run(Scope scope)
         {
@@ -46,11 +46,11 @@ namespace Vanilla.MetaScript
 
             MetaTaskInstance instance = null;
 
-            Debug.Log($"Contains [{rootObjects.Length}] root GameObjects");
+//            Debug.Log($"Contains [{rootObjects.Length}] root GameObjects");
             
             foreach (var o in rootObjects)
             {
-                Debug.LogError($"Checking [{o.gameObject.name}] for a MetaScriptInstance...");
+//                Debug.LogError($"Checking [{o.gameObject.name}] for a MetaScriptInstance...");
                 
                 instance = o.GetComponent<MetaTaskInstance>();
 

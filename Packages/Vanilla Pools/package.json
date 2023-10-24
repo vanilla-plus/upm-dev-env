@@ -1,9 +1,9 @@
 {
   "name": "vanilla.pools",
-  "displayName": "Vanilla Pools",
+  "displayName": "Pools",
   "description": "Vanilla Pools is a basic GameObject pooling system. Object pooling is a great performance optimization for objects you need to create often. Instead of creating new instances all the time, create a set amount and re-use them over and over.\n\nThe goal of Pools is to make that as easy as possible to implement. Simply make a new script inheriting from Pool (the pool itself) and another one inheriting from PoolItem (the item you need a lot of) and you're set to go.\n\nTry the Example Pool sample to see it in action.",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

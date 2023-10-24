@@ -1,9 +1,9 @@
 {
   "name": "vanilla.ballistics",
-  "displayName": "Vanilla Ballistics",
+  "displayName": "Ballistics",
   "description": "Vanilla Ballistics provides several functions for easily calculating ballistics projectile velocity.",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

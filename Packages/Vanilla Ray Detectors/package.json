@@ -1,9 +1,9 @@
 {
   "name": "vanilla.ray-detectors",
-  "displayName": "Vanilla RayDetectors",
+  "displayName": "RayDetectors",
   "description": "Vanilla Ray Detectors is a toolkit for easy raycast-based target detection and monitoring.",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

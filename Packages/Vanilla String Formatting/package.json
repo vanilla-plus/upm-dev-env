@@ -3,7 +3,7 @@
   "displayName": "String Formatting",
   "description": "String Formatting is a collection of extension methods for string manipulation including human-readable conversions and some simple encryption. For example...\n\nlong byteTotal = 5000;\n\nDebug.Log(byteTotal.AsDataSize);\n\n...will print out 5Kb.",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

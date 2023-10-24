@@ -1,13 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 using Cysharp.Threading.Tasks;
 
 using UnityEngine;
-
-using Vanilla.Easing;
-using Vanilla.TypeMenu;
 
 namespace Vanilla.MetaScript
 {
@@ -18,10 +13,12 @@ namespace Vanilla.MetaScript
 
         [SerializeField]
         public float secondsToTake = 1.0f;
-
-        [TypeMenu]
-        [SerializeReference]
-        public IEasingSlot easingSlot = new Linear();
+        
+        [SerializeField]
+        public AnimationCurve easingCurve = AnimationCurve.Linear(0.0f,
+                                                                  0.0f,
+                                                                  1.0f,
+                                                                  1.0f);
 
         protected override async UniTask<Scope> _Run(Scope scope)
         {
@@ -37,7 +34,7 @@ namespace Vanilla.MetaScript
                 t += Time.deltaTime * rate;
 
                 Frame(normal: t,
-                      easedNormal: easingSlot.Ease(t));
+                      easedNormal: easingCurve.Evaluate(t));
 
                 await UniTask.Yield();
             }

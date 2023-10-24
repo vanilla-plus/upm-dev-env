@@ -1,9 +1,9 @@
 {
   "name": "vanilla.package-template",
-  "displayName": "Vanilla Package Template",
+  "displayName": "Package Template",
   "description": "This is not the greatest package in the world, no.\r This is just a template!",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },

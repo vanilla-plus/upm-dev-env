@@ -3,7 +3,7 @@
   "displayName": "Vanilla Schrodinger Assets",
   "description": "Schrodinger Assets are a type of ScriptableObject that has an weakly-typed data payload through questionable use of Unitys SerializeReference and Vanilla Type Menu.",
   "author": {
-    "name": "Lucas Hehir",
+    "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
     "url": "https://vanilla.plus/"
   },
