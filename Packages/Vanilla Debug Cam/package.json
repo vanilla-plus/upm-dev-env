@@ -1,7 +1,7 @@
 {
   "name": "vanilla.debug-cam",
   "displayName": "Debug Cam",
-  "description": "Vanilla Debug Cam is an extra Camera available only in the Unity Editor or development builds and allows for temporary Editor-camera-like control.",
+  "description": "Debug Cam is an extra Camera available only in the Unity Editor or development builds and allows for Editor-style camera control.\n\nJust hit F5 any time to instantiate it and F5 to toggle again.",
   "author": {
     "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
@@ -10,6 +10,6 @@
   "repository": "github:vanilla-plus/upm-debug-cam.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.0.1",
+  "version": "2.0.5",
   "type": "template"
 }
