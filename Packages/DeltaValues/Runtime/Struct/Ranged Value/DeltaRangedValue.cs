@@ -272,6 +272,16 @@ namespace Vanilla.DeltaValues
 
         #endregion
 
+        #region Disposal
+        
+        public override void Dispose()
+        {
+            AtMin?.Dispose();
+            AtMax?.Dispose();
+        }
+
+        #endregion
+        
     }
 
 }

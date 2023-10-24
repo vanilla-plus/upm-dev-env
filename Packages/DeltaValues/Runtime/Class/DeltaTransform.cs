@@ -16,9 +16,5 @@ namespace Vanilla.DeltaValues
                  Transform defaultValue) : base(name,
                                                 defaultValue) { }
 
-
-        public override bool ValueEquals(Transform a,
-                                         Transform b) => ReferenceEquals(a,b);
-
     }
 }

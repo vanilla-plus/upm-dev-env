@@ -10,7 +10,7 @@ namespace Vanilla.DeltaValues
 {
 
 	[Serializable]
-	public abstract class DeltaValue<T> : ISerializationCallbackReceiver
+	public abstract class DeltaValue<T> : ISerializationCallbackReceiver, IDisposable
 	{
 
 		[SerializeField]
@@ -72,6 +72,9 @@ namespace Vanilla.DeltaValues
 			Name  = !string.IsNullOrEmpty(name) ? name : $"Unknown {GetType().Name}";
 			Value = defaultValue;
 		}
+
+
+		public virtual void Dispose() { }
 
 	}
 

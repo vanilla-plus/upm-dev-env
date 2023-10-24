@@ -243,7 +243,9 @@
       "version": "file:DeltaValues",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {}
+      "dependencies": {
+        "com.cysharp.unitask": "2.4.1"
+      }
     },
     "vanilla.dotnet-extensions": {
       "version": "file:Vanilla DotNet Extensions",
@@ -344,6 +346,15 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
+    },
+    "vanilla.time-management": {
+      "version": "file:Time Management",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.cysharp.unitask": "2.4.1",
+        "vanilla.delta-values": "4.0.5"
+      }
     },
     "vanilla.type-menu": {
       "version": "file:Type Menu",

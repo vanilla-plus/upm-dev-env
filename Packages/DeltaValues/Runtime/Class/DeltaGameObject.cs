@@ -16,10 +16,6 @@ namespace Vanilla.DeltaValues
 		                       GameObject defaultValue) : base(name,
 		                                                       defaultValue) { }
 		
-		public override bool ValueEquals(GameObject a,
-		                                 GameObject b) => ReferenceEquals(a,
-		                                                                  b);
-
 	}
 
 }

@@ -4,6 +4,8 @@
 
 using System;
 
+using Cysharp.Threading.Tasks;
+
 using UnityEngine;
 
 namespace Vanilla.DeltaValues
@@ -28,17 +30,17 @@ namespace Vanilla.DeltaValues
 		#endregion
 
 		#region Construction
-
-
+		
+		public DeltaFloat() { }
 
 		public DeltaFloat(string defaultName) : base(name: defaultName)
 		{
 			_Min = float.MinValue;
 			_Max = float.MaxValue;
-			
+
 			Min = _Min;
 			Max = _Max;
-			
+
 			ChangeEpsilon = float.Epsilon;
 			MinMaxEpsilon = 0.01f;
 		}
@@ -50,10 +52,10 @@ namespace Vanilla.DeltaValues
 		{
 			_Min = float.MinValue;
 			_Max = float.MaxValue;
-			
+
 			Min = _Min;
 			Max = _Max;
-			
+
 			ChangeEpsilon = float.Epsilon;
 			MinMaxEpsilon = 0.01f;
 		}
@@ -66,10 +68,10 @@ namespace Vanilla.DeltaValues
 		{
 			_Min = float.MinValue;
 			_Max = float.MaxValue;
-			
+
 			Min = _Min;
 			Max = _Max;
-			
+
 			ChangeEpsilon = defaultChangeEpsilon;
 			MinMaxEpsilon = 0.01f;
 		}
@@ -168,6 +170,97 @@ namespace Vanilla.DeltaValues
 
 
 		public override bool ValueAtMax() => Math.Abs(value: _Value - _Max) < MinMaxEpsilon;
+
+
+
+		#endregion
+
+		#region Helpers
+
+
+
+		public async UniTask FillScaled(DeltaBool conditional,
+		                                bool targetCondition = true,
+		                                float amountPerSecond = 1.0f,
+		                                float secondsToTake = 1.0f)
+		{
+			var rate = amountPerSecond / secondsToTake;
+
+			while ((targetCondition ?
+				        conditional.Value :
+				        !conditional.Value) &&
+			       !AtMax.Value)
+			{
+				Value += Time.deltaTime * rate;
+
+				await UniTask.Yield();
+			}
+
+			Value = Max;
+		}
+
+
+		public async UniTask FillUnscaled(DeltaBool conditional,
+		                                  bool targetCondition = true,
+		                                  float amountPerSecond = 1.0f,
+		                                  float secondsToTake = 1.0f)
+		{
+			var rate = amountPerSecond / secondsToTake;
+
+			while ((targetCondition ?
+				        conditional.Value :
+				        !conditional.Value) &&
+			       !AtMax.Value)
+			{
+				Value += Time.unscaledDeltaTime * rate;
+
+				await UniTask.Yield();
+			}
+			
+			Value = Max;
+		}
+
+
+		public async UniTask DrainScaled(DeltaBool conditional,
+		                                 bool targetCondition = true,
+		                                 float amountPerSecond = 1.0f,
+		                                 float secondsToTake = 1.0f)
+		{
+			var rate = amountPerSecond / secondsToTake;
+
+			while ((targetCondition ?
+				        conditional.Value :
+				        !conditional.Value) &&
+			       !AtMin.Value)
+			{
+				Value -= Time.deltaTime * rate;
+
+				await UniTask.Yield();
+			}
+
+			Value = Min;
+		}
+
+
+		public async UniTask DrainUnscaled(DeltaBool conditional,
+		                                   bool targetCondition = true,
+		                                   float amountPerSecond = 1.0f,
+		                                   float secondsToTake = 1.0f)
+		{
+			var rate = amountPerSecond / secondsToTake;
+
+			while ((targetCondition ?
+				        conditional.Value :
+				        !conditional.Value) &&
+			       !AtMin.Value)
+			{
+				Value -= Time.unscaledDeltaTime * rate;
+
+				await UniTask.Yield();
+			}
+			
+			Value = Min;
+		}
 
 
 

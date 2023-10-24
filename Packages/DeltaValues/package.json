@@ -1,6 +1,6 @@
 {
   "name": "vanilla.delta-values",
-  "displayName": "DeltaValues",
+  "displayName": "Delta Values",
   "description": "DeltaValues is an react-like library for C# in Unity that relies on change-only event invocations. Subscriptions will only hear when their observables value has changed.",
   "author": {
     "name": "Vanilla Plus",
@@ -8,6 +8,9 @@
     "url": "https://vanilla.plus/"
   },
   "repository": "github:vanilla-plus/upm-smart-values.git",
-  "version": "3.0.4",
-  "type": "template"
+  "version": "4.0.5",
+  "type": "template",
+  "dependencies": {
+    "com.cysharp.unitask": "2.4.1"
+  }
 }

@@ -107,7 +107,7 @@ namespace Vanilla.Pools
 			                    null))
 			{
 				#if debug
-				LogWarning($"New instance of {typeof(PI).Name} didn't have a Component of that type anywhere in its hierarchy.");
+//				LogWarning($"New instance of {typeof(PI).Name} didn't have a Component of that type anywhere in its hierarchy.");
 				#endif
 			}
 			else
@@ -125,7 +125,7 @@ namespace Vanilla.Pools
 			if (!Inactive.TryPop(out var item))
 			{
 				#if debug
-				LogWarning($"[{typeof(PI).Name}] pool exhausted!");
+//				LogWarning($"[{typeof(PI).Name}] pool exhausted!");
 				#endif
 				
 				return null;

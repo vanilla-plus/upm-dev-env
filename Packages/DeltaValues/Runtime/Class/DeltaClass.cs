@@ -18,6 +18,10 @@ namespace Vanilla.DeltaValues
 		            T defaultValue) : base(name: name,
 		                                   defaultValue: defaultValue) { }
 
+
+		public override bool ValueEquals(T a,
+		                                 T b) => ReferenceEquals(a,b);
+
 	}
 
 }

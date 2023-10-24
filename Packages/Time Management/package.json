@@ -1,0 +1,19 @@
+{
+  "name": "vanilla.time-management",
+  "displayName": "Time Management",
+  "description": "Time Management contains Hourglass; a static self-managing time control class that enables graceful slow motion, fast forward and pausing. Simply call Hourglass.SetTimeScaleSlow(), Hourglass.TryPause(), etc. Make sure to hook your pause UI and management scripts to Hourglass.Paused.AtMin and .AtMax!",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-time-management.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.5",
+  "type": "template",
+  "dependencies": {
+    "com.cysharp.unitask": "2.4.1",
+    "vanilla.delta-values": "4.0.5"
+  }
+}

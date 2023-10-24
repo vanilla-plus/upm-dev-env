@@ -94,7 +94,7 @@ namespace Vanilla.Pools
 			                    null))
 			{
 				#if debug
-				LogWarning($"New instance of {typeof(PI).Name} didn't have a Component of that type anywhere in its hierarchy.");
+//				LogWarning($"New instance of {typeof(PI).Name} didn't have a Component of that type anywhere in its hierarchy.");
 				#endif
 			}
 			else

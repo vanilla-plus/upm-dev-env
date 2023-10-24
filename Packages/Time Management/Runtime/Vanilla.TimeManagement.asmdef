@@ -1,8 +1,9 @@
 {
-    "name": "Vanilla.DeltaValues",
-    "rootNamespace": "Vanilla.DeltaValues",
+    "name": "Vanilla.TimeManagement",
+    "rootNamespace": "Vanilla.TimeManagement",
     "references": [
-        "UniTask"
+        "UniTask",
+        "Vanilla.DeltaValues"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
