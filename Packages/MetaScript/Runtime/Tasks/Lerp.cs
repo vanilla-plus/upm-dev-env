@@ -22,10 +22,10 @@ namespace Vanilla.MetaScript
 
         protected override async UniTask<Scope> _Run(Scope scope)
         {
+            Init();
+            
             var t    = 0.0f;
             var rate = 1.0f / secondsToTake;
-
-            Init();
 
             do
             {

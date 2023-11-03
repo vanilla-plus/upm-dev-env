@@ -1,3 +1,7 @@
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#define debug
+#endif
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +34,7 @@ namespace Vanilla.Hambundler
             #if UNITY_EDITOR
             base.OnValidate();
 
-            bundleName = Path.GetFileNameWithoutExtension(bundlePath);
+            bundleName = Path.GetFileName(bundlePath);
             #endif
         }
         
@@ -43,9 +47,9 @@ namespace Vanilla.Hambundler
                 return scope;
             }
             
-//            #if debug
-//            Debug.Log($"AssetBundle local load begun - [{path}]");
-//            #endif
+            #if debug
+            Debug.Log($"AssetBundle local load begun - [{bundlePath}]");
+            #endif
             
             var op = AssetBundle.LoadFromFileAsync(bundlePath);
 
@@ -58,9 +62,9 @@ namespace Vanilla.Hambundler
                 await UniTask.Yield();
             }
             
-//            #if debug
-//            Debug.Log($"AssetBundle local load successful - [{path}]");
-//            #endif
+            #if debug
+            Debug.Log($"AssetBundle local load successful - [{bundlePath}]");
+            #endif
 
             Hambundler.Bundles.Add(bundleName,
                                    op.assetBundle);

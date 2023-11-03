@@ -1,7 +1,3 @@
-//#if UNITY_EDITOR || DEVELOPMENT_BUILD
-//#define debug
-//#endif
-//
 //using System;
 //using System.Collections.Generic;
 //using System.Threading;

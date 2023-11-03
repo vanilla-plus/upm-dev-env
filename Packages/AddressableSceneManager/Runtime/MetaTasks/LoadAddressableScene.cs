@@ -39,10 +39,25 @@ namespace Vanilla.MetaScript.Addressables
         }
 
 
-        protected override bool CanAutoName() => assRef.editorAsset != null;
+        protected override bool CanAutoName()
+        {
+            #if UNITY_EDITOR
+            return assRef.editorAsset;
+            #else
+			return false;
+            #endif
+        }
 
 
-        protected override string CreateAutoName() => $"Load scene [{assRef.editorAsset.name}] ({(loadMode == LoadSceneMode.Single ? "Destructive" : "Additive")})";
+        protected override string CreateAutoName()
+        {
+            #if UNITY_EDITOR
+            return $"Load scene [{assRef.editorAsset.name}] ({(loadMode == LoadSceneMode.Single ? "Destructive" : "Additive")})";
+            #else
+			return string.Empty;
+            #endif
+        }
+
 
 
         protected override async UniTask<Scope> _Run(Scope scope)

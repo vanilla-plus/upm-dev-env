@@ -1,0 +1,19 @@
+{
+    "name": "Vanilla.NavStack",
+    "rootNamespace": "Vanilla.NavStack",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:1b74f63751e39409e9ded0dcfe514e9c",
+        "GUID:5ae9754d7283e442ca2688969c8ec570"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

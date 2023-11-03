@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 
 using Cysharp.Threading.Tasks;
@@ -12,7 +10,7 @@ namespace Vanilla.MetaScript
 {
     
     [Serializable]
-    public class Load_And_Play_Video : MetaTask
+    public class Load_And_Play_Local_Video : MetaTask
     {
 
         [SerializeField]
@@ -36,7 +34,6 @@ namespace Vanilla.MetaScript
             {
                 Debug.LogWarning($"Video file not found [{videoPlayer.url}]");
 
-//                trace.Continue = false;
                 scope.Cancel();
 
                 return scope;
@@ -46,7 +43,6 @@ namespace Vanilla.MetaScript
 
             while (!videoPlayer.isPrepared)
             {
-//                if (tracer.HasBeenCancelled(this)) return tracer;
                 if (scope.Cancelled) return scope;
 
                 await UniTask.Yield();
@@ -56,7 +52,6 @@ namespace Vanilla.MetaScript
 
             while (videoPlayer.isPlaying)
             {
-//                if (tracer.HasBeenCancelled(this)) return tracer;
                 if (scope.Cancelled) return scope;
 
                 await UniTask.Yield();

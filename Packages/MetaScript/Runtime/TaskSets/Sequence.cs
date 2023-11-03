@@ -23,7 +23,7 @@ namespace Vanilla.MetaScript.TaskSets
 			{
 				if (newScope.Cancelled) return scope;
 				
-				await task.Run(newScope);
+				if (task != null) await task.Run(newScope);
 			}
 
 			newScope.Cancel();

@@ -31,8 +31,8 @@ namespace Vanilla.Hambundler
         {
 	        #if UNITY_EDITOR
 	        base.OnValidate();
-
-	        bundleName = Path.GetFileNameWithoutExtension(bundleURL);
+	        
+	        bundleName = Path.GetFileName(bundleURL);
 	        #endif
         }
 
@@ -41,20 +41,22 @@ namespace Vanilla.Hambundler
         {
 	        if (Hambundler.Bundles.ContainsKey(bundleName))
 	        {
+		        #if debug
 		        Debug.Log($"The bundle [{bundleName}] has already been loaded.");
+		        #endif
 
 		        return scope;
 	        }
 
-	        using var request = UnityWebRequestAssetBundle.GetAssetBundle(Path.Combine(Hambundler.RemoteBundlePathRoot,
-	                                                                                   bundleURL));
+	        using var request = UnityWebRequestAssetBundle.GetAssetBundle(uri: Path.Combine(path1: Hambundler.RemoteBundlePathRoot,
+	                                                                                        path2: bundleURL));
 
 	        var op = request.SendWebRequest();
 
 	        while (!op.isDone)
 	        {
 		        if (scope.Cancelled) return scope;
-		        
+
 		        OnDownloadProgress?.Invoke(op.progress);
 
 		        await UniTask.Yield();
@@ -66,18 +68,15 @@ namespace Vanilla.Hambundler
 
 		        throw new Exception(request.error);
 	        }
-        
-	        // Write DownloadHandler bytes to local file for caching?
-	        // ToDo - Never think about caching again
-        
-//	        #if debug
-//            Debug.Log($"AssetBundle remote load successful - [{bundleName}] from [{url}]");
-//	        #endif
-            
+
+	        #if debug
+	        Debug.Log($"AssetBundle remote load successful - [{bundleName}] from [{bundleURL}]");
+	        #endif
+
 	        var bundle = DownloadHandlerAssetBundle.GetContent(request);
 
-	        Hambundler.Bundles.Add(bundleName,
-	                               bundle);
+	        Hambundler.Bundles.Add(key: bundleName,
+	                               value: bundle);
 
 	        request.downloadHandler?.Dispose();
 	        request.Dispose();

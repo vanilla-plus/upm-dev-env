@@ -18,7 +18,6 @@ namespace Vanilla.MetaScript
 
         protected override string CreateAutoName() => $"Jump to [{target.Task.Name}]";
 
-//        protected override async UniTask<Scope> _Run(Scope scope) => await target.Run(scope);
         protected override async UniTask<Scope> _Run(Scope scope)
         {
             if (scope.Cancelled) return scope;

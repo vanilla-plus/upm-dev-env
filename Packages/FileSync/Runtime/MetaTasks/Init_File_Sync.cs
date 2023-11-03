@@ -9,7 +9,7 @@ namespace Vanilla.FileSync
 {
 
 	[Serializable]
-	public class InitializeFileSync : MetaTask
+	public class Init_File_Sync : MetaTask
 	{
 
 		public string remoteRoot = "https://{bucket}.s3.{region}.amazonaws.com/";

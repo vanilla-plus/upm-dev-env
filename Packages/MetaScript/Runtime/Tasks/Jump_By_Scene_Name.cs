@@ -38,7 +38,6 @@ namespace Vanilla.MetaScript
 
             if (rootObjects == null)
             {
-//                trace.Continue = false;
                 scope.Cancel();
 
                 return scope;

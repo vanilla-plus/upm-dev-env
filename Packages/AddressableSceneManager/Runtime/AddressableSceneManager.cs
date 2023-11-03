@@ -23,7 +23,7 @@ namespace Vanilla.AddressableSceneManager
 		private static void Deinitialize()
 		{
 			#if debug
-			Debug.Log("ContentSceneManager.Deinitialize");
+//			Debug.Log("ContentSceneManager.Deinitialize");
 			#endif
 		}
 	
@@ -31,7 +31,7 @@ namespace Vanilla.AddressableSceneManager
 		private static void StaticReset()
 		{
 			#if debug
-			Debug.Log("ContentSceneManager.StaticReset");
+//			Debug.Log("ContentSceneManager.StaticReset");
 			#endif
 
 			instances = new Dictionary<string, SceneInstance>();
@@ -41,7 +41,7 @@ namespace Vanilla.AddressableSceneManager
 		private static void Initialize()
 		{
 			#if debug
-			Debug.Log("ContentSceneManager.Initialize");
+//			Debug.Log("ContentSceneManager.Initialize");
 			#endif
 		}
 	

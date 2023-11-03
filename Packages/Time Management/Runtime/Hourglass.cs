@@ -4,18 +4,7 @@ using UnityEngine;
 
 using Vanilla.DeltaValues;
 
-/*
-static Lifecycle() => Debug.Log(Prefix + "Static Constructor");
-[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] static void Subs() => Debug.Log(Prefix + "Subsystem Registration");
-[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)] static void AfterAsm() => Debug.Log(Prefix + "AfterAssembliesLoaded");
-[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)] static void BeforeSlash() => Debug.Log(Prefix + "Before Splash");
-[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] static void BeforeScene() => Debug.Log(Prefix + "BeforeScene");
-private void Awake() => Debug.Log(Prefix + "Awake");
-private void OnEnable() => Debug.Log(Prefix + "OnEnable");
-[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)] static void AfterScene() => Debug.Log(Prefix + "AfterSceneLoad");
-[RuntimeInitializeOnLoadMethod] static void DefaultLog() => Debug.Log(Prefix + "RuntimeInit Default");
-void Start() => Debug.Log("Start");
-*/
+
 
 namespace Vanilla.TimeManagement
 {
@@ -82,10 +71,11 @@ namespace Vanilla.TimeManagement
 
 			CanPause = true;
 
+			Paused?.Deinit();
+
 			Paused = new DeltaState(name: "Paused",
 			                        defaultActiveState: false,
 			                        fillSeconds: 0.5f);
-			Paused.UseScaledTime = false;
 		}
 
 
@@ -95,6 +85,8 @@ namespace Vanilla.TimeManagement
 			#if debug
 			Debug.Log($"[{Time.frameCount}] [Hourglass] Init");
 			#endif
+			
+			Paused.Init();
 			
 			Paused.Progress.AtMin.OnFalse  += HandlePause;
 			Paused.Progress.AtMin.OnTrue   += HandleResume;

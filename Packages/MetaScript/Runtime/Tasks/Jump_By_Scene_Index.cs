@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript
 {
     
 	[Serializable]
-	public class Jump_By_Loaded_Scene_Index : MetaTask
+	public class Jump_By_Scene_Index : MetaTask
 	{
 
 		public int TargetSceneIndex;
@@ -27,7 +27,6 @@ namespace Vanilla.MetaScript
 			{
 				Debug.LogError($"Invalid Loaded Scene Index [{TargetSceneIndex}]");
 
-//				trace.Continue = false;
 				scope.Cancel();
 
 				return scope;
@@ -37,7 +36,6 @@ namespace Vanilla.MetaScript
 
 			if (rootObjects == null)
 			{
-//				trace.Continue = false;
 				scope.Cancel();
 
 				return scope;
@@ -60,7 +58,6 @@ namespace Vanilla.MetaScript
 			{
 				Debug.LogWarning($"Couldn't find a MetaScriptInstance attached to any root GameObject in the scene loaded at index [{TargetSceneIndex}].");
                 
-//				trace.Continue = false;
 				scope.Cancel();
 
 				return scope;

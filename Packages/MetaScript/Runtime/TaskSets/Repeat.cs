@@ -1,7 +1,3 @@
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-#define debug
-#endif
-
 using System;
 using System.Threading;
 
@@ -40,7 +36,7 @@ namespace Vanilla.MetaScript.TaskSets
 					if (scope.Cancelled) return scope;
 //					if (trace.HasBeenCancelled(this)) return trace;
 
-					await task.Run(scope);
+					if (task != null) await task.Run(scope);
 				}
 			}
 

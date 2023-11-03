@@ -9,7 +9,7 @@ namespace Vanilla.MetaScript
 {
 
 	[Serializable]
-	public class Invoke_Unity_Event : MetaTask
+	public class Unity_Event : MetaTask
 	{
 
 		public UnityEvent unityEvent = new UnityEvent();

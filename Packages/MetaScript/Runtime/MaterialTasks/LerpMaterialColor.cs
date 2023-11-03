@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.MaterialTasks
 	{
 
 		[SerializeField]
-		public Material targetMaterial;
+		public Material[] targetMaterials = Array.Empty<Material>();
 		[SerializeField]
 		public string propertyName = "_BaseColor";
 		[NonSerialized]
@@ -18,17 +18,26 @@ namespace Vanilla.MetaScript.MaterialTasks
 		[SerializeField]
 		public Gradient[] gradients = Array.Empty<Gradient>();
 		
-		protected override bool CanAutoName() => !string.IsNullOrEmpty(propertyName);
+		protected override bool CanAutoName() => targetMaterials.Length > 0 && targetMaterials[0] != null && !string.IsNullOrEmpty(propertyName);
 
-		protected override string CreateAutoName() => $"Lerp [{targetMaterial.name}.{propertyName}]";
+		protected override string CreateAutoName() => $"Lerp [{targetMaterials[0].name}.{propertyName}]";
 
 
 		protected override void Init() => propertyIndex = Shader.PropertyToID(propertyName);
 
 
 		protected override void Frame(float normal,
-		                              float easedNormal) => targetMaterial.SetColor(nameID: propertyIndex,
-		                                                                            value: SampleGradients(easedNormal));
+		                              float easedNormal)
+		{
+			var c = SampleGradients(easedNormal);
+			
+			foreach (var m in targetMaterials)
+			{
+				if (m != null)
+					m.SetColor(nameID: propertyIndex,
+					           value: c);
+			}
+		}
 
 
 		private Color SampleGradients(float n)
@@ -46,7 +55,17 @@ namespace Vanilla.MetaScript.MaterialTasks
 		}
 
 
-		protected override void CleanUp() { }
+		protected override void CleanUp()
+		{
+			var c = SampleGradients(1.0f);
+
+			foreach (var m in targetMaterials)
+			{
+				if (m != null)
+					m.SetColor(nameID: propertyIndex,
+					           value: c);
+			}
+		}
 
 	}
 

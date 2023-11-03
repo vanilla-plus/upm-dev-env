@@ -1,7 +1,9 @@
 {
     "name": "Vanilla.DebugCam",
     "rootNamespace": "Vanilla.DebugCam",
-    "references": [],
+    "references": [
+        "Vanilla.DeltaValues"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

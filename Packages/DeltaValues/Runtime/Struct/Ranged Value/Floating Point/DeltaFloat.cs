@@ -8,6 +8,10 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
+#if vanilla_metascript
+using Vanilla.MetaScript;
+#endif
+
 namespace Vanilla.DeltaValues
 {
 
@@ -30,8 +34,11 @@ namespace Vanilla.DeltaValues
 		#endregion
 
 		#region Construction
-		
+
+
+
 		public DeltaFloat() { }
+
 
 		public DeltaFloat(string defaultName) : base(name: defaultName)
 		{
@@ -179,6 +186,17 @@ namespace Vanilla.DeltaValues
 
 
 
+		public void SetFromNormal(float normal) => Value = Mathf.Lerp(a: Min,
+		                                                              b: Max,
+		                                                              t: normal);
+
+
+		public void SetFromNormal(float outgoing,
+		                          float incoming) => Value = Mathf.Lerp(a: Min,
+		                                                                b: Max,
+		                                                                t: incoming);
+
+
 		public async UniTask FillScaled(DeltaBool conditional,
 		                                bool targetCondition = true,
 		                                float amountPerSecond = 1.0f,
@@ -216,7 +234,7 @@ namespace Vanilla.DeltaValues
 
 				await UniTask.Yield();
 			}
-			
+
 			Value = Max;
 		}
 
@@ -258,9 +276,97 @@ namespace Vanilla.DeltaValues
 
 				await UniTask.Yield();
 			}
-			
+
 			Value = Min;
 		}
+
+
+		#if vanilla_metascript
+		public async UniTask<Scope> FillScaled(Scope scope,
+		                                       float amountPerSecond = 1.0f,
+		                                       float secondsToTake = 1.0f)
+		{
+			var rate = amountPerSecond / secondsToTake;
+
+			while (!AtMax.Value)
+			{
+				if (scope.Cancelled) return scope;
+
+				Value += Time.deltaTime * rate;
+
+				await UniTask.Yield();
+			}
+
+			Value = Max;
+
+			return scope;
+		}
+
+
+		public async UniTask<Scope> FillUnscaled(Scope scope,
+		                                         float amountPerSecond = 1.0f,
+		                                         float secondsToTake = 1.0f)
+		{
+			var rate = amountPerSecond / secondsToTake;
+
+			while (!AtMax.Value)
+			{
+				if (scope.Cancelled) return scope;
+
+				Value += Time.unscaledDeltaTime * rate;
+
+				await UniTask.Yield();
+			}
+
+			Value = Max;
+
+			return scope;
+		}
+
+
+		public async UniTask<Scope> DrainScaled(Scope scope,
+		                                        float amountPerSecond = 1.0f,
+		                                        float secondsToTake = 1.0f)
+		{
+			var rate = amountPerSecond / secondsToTake;
+
+			while (!AtMin.Value)
+			{
+				if (scope.Cancelled) return scope;
+
+				Value -= Time.deltaTime * rate;
+
+				await UniTask.Yield();
+			}
+
+			Value = Min;
+
+			return scope;
+		}
+
+
+		public async UniTask<Scope> DrainUnscaled(Scope scope,
+		                                          float amountPerSecond = 1.0f,
+		                                          float secondsToTake = 1.0f)
+		{
+			var rate = amountPerSecond / secondsToTake;
+
+			while (!AtMin.Value)
+			{
+				if (scope.Cancelled) return scope;
+
+				Value -= Time.unscaledDeltaTime * rate;
+
+				await UniTask.Yield();
+			}
+
+			Value = Min;
+
+			return scope;
+		}
+
+
+		#endif
 
 
 

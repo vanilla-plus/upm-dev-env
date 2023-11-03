@@ -19,7 +19,7 @@ namespace Vanilla.MetaScript.TaskSets
 
 			var task = Tasks[result];
 
-			await task.Run(scope);
+			if (task != null) await task.Run(scope);
 
 			return scope;
 		}

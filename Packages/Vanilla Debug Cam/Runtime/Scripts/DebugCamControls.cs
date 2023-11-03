@@ -8,6 +8,8 @@ using UnityEditor;
 
 using UnityEngine;
 
+using Vanilla.DeltaValues;
+
 namespace Vanilla.DebugCam
 {
     
@@ -29,30 +31,14 @@ namespace Vanilla.DebugCam
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static async Task Init()
+        private static async void Init()
         {
             #if UNITY_EDITOR
             while (debugCam == null)
             {
                 if (Input.GetKeyDown(KeyCode.F5))
                 {
-                    var path = Path.Combine("Packages",
-                                            "vanilla.debug-cam",
-                                            "Runtime",
-                                            "Prefabs",
-                                            "Debug Cam.prefab");
-                    
-                    var asset = (GameObject) AssetDatabase.LoadAssetAtPath(assetPath: path,
-                                                                           type: typeof(GameObject));
-
-                    if (asset == null)
-                    {
-                        Debug.LogWarning(message: $"We were unable to find the chosen prefab. It was expected to be found at the following path:\n\n{path}");
-
-                        return;
-                    }
-
-                    debugCam = PrefabUtility.InstantiatePrefab(assetComponentOrGameObject: asset) as GameObject;
+                    Spawn();
                     
                     break;
                 }
@@ -61,25 +47,39 @@ namespace Vanilla.DebugCam
             }
             #endif
         }
-        
+
+
+        public static void Spawn()
+        {
+            #if UNITY_EDITOR
+            var path = Path.Combine("Packages",
+                                    "vanilla.debug-cam",
+                                    "Runtime",
+                                    "Prefabs",
+                                    "Debug Cam.prefab");
+
+            var asset = (GameObject) AssetDatabase.LoadAssetAtPath(assetPath: path,
+                                                                   type: typeof(GameObject));
+
+            if (asset == null)
+            {
+                Debug.LogWarning(message: $"We were unable to find the chosen prefab. It was expected to be found at the following path:\n\n{path}");
+
+                return;
+            }
+
+            debugCam = PrefabUtility.InstantiatePrefab(assetComponentOrGameObject: asset) as GameObject;
+            #endif
+        }
+
+
         private Transform _t;
         private Camera _cam;
-        
+
+
         [Header(header: "State")]
         [SerializeField]
-        private bool _active = false;
-        public bool active
-        {
-            get => _active;
-            set
-            {
-                if (_active == value) return;
-
-                _active = value;
-
-                Toggle();
-            }
-        }
+        public DeltaBool Active = new("Debug Cam Active", defaultValue: true);
 
         [Header("Input Lock")]
         public KeyCode inputLock = KeyCode.Mouse1;
@@ -118,10 +118,8 @@ namespace Vanilla.DebugCam
         {
             #if UNITY_EDITOR
             _t     = transform;
-            _cam   = GetComponentInChildren<Camera>();
+            
             meshes = GetComponentsInChildren<MeshRenderer>();
-
-            Toggle();
             #endif
         }
 
@@ -133,29 +131,45 @@ namespace Vanilla.DebugCam
             return;
             #endif
 
-            if (debugCam == null) debugCam = gameObject;
+            // We do this because URP and HDRP attach their own "Additional Camera Data" components
+            // which can result in missing GUID references if the right pipeline isn't installed.
+            // We can't assume which pipeline this tool will be used with - so let's just add the camera
+            // at runtime and let the engine handle the rest.
+            _cam       = gameObject.AddComponent<Camera>(); 
+            _cam.depth = Active ? 100.0f : -100.0f;
+
+            Active.OnValueChanged += HandleActiveChange;
+
+            if (debugCam != null)
+            {
+                Destroy(debugCam);
+            }
+            
+            debugCam = gameObject;
+            DontDestroyOnLoad(debugCam);
 
             meshes = GetComponentsInChildren<MeshRenderer>();
         }
 
 
-        void OnEnable() => positionTarget = transform.position;
-
-
-        void Toggle()
+        private void HandleActiveChange(bool outgoing,
+                                        bool incoming)
         {
-            _cam.enabled = _active;
-            _cam.depth   = _active ? 100.0f : -100.0f;
-                
-            foreach (var m in meshes) m.enabled = _active;
+            _cam.enabled = incoming;
+            _cam.depth   = incoming ? 100.0f : -100.0f;
+            
+            foreach (var m in meshes) m.enabled = incoming;
         }
+
+
+        void OnEnable() => positionTarget = transform.position;
 
         void Update()
         {
             #if UNITY_EDITOR
-            if (Input.GetKeyDown(key: toggle)) active = !_active;
+            if (Input.GetKeyDown(key: toggle)) Active.Flip();
 
-            if (!active) return;
+            if (!Active) return;
 
             if (movementSmoothing)
             {

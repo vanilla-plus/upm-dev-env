@@ -10,8 +10,7 @@ namespace Vanilla.DeltaValues
 {
 
 	[Serializable]
-	public class DeltaState : IDisposable
-
+	public class DeltaState : IDisposable, ISerializationCallbackReceiver
 	{
 
 		[SerializeField]
@@ -45,28 +44,37 @@ namespace Vanilla.DeltaValues
 			                          defaultMin: 0.0f,
 			                          defaultMax: 1.0f,
 			                          changeEpsilon: float.Epsilon);
-			
+		}
+
+		public void Init()
+		{
 			Active.OnTrue += BeginFill;
 
 			Active.OnFalse += BeginDrain;
 		}
 
+		public void Deinit()
+		{
+			Active.OnTrue -= BeginFill;
+
+			Active.OnFalse -= BeginDrain;
+		}
 
 		private void BeginFill()
 		{
 			if (UseScaledTime)
 			{
-				Progress.FillScaled(Active,
-				                    true,
-				                    1.0f,
-				                    FillSeconds).Forget();
+				Progress.FillScaled(conditional: Active,
+				                    targetCondition: true,
+				                    amountPerSecond: 1.0f,
+				                    secondsToTake: FillSeconds).Forget();
 			}
 			else
 			{
-				Progress.FillUnscaled(Active,
-				                      true,
-				                      1.0f,
-				                      FillSeconds).Forget();
+				Progress.FillUnscaled(conditional: Active,
+				                      targetCondition: true,
+				                      amountPerSecond: 1.0f,
+				                      secondsToTake: FillSeconds).Forget();
 			}
 		}
 
@@ -75,26 +83,38 @@ namespace Vanilla.DeltaValues
 		{
 			if (UseScaledTime)
 			{
-				Progress.DrainScaled(Active,
-				                     false,
-				                     1.0f,
-				                     FillSeconds).Forget();
+				Progress.DrainScaled(conditional: Active,
+				                     targetCondition: false,
+				                     amountPerSecond: 1.0f,
+				                     secondsToTake: FillSeconds).Forget();
 			}
 			else
 			{
-				Progress.DrainUnscaled(Active,
-				                       false,
-				                       1.0f,
-				                       FillSeconds).Forget();
+				Progress.DrainUnscaled(conditional: Active,
+				                       targetCondition: false,
+				                       amountPerSecond: 1.0f,
+				                       secondsToTake: FillSeconds).Forget();
 			}
 		}
+		
+		
 
 
 		public void Dispose()
 		{
+			Deinit();
+			
 			Active?.Dispose();
 			Progress?.Dispose();
 		}
+
+
+		public void OnBeforeSerialize() { }
+
+
+		public void OnAfterDeserialize() => Progress.Value = Active.Value ?
+			                                                     1.0f :
+			                                                     0.0f;
 
 	}
 

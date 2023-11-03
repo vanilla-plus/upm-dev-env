@@ -1,12 +1,8 @@
 {
-    "name": "Vanilla.Hambundler.Editor",
-    "rootNamespace": "Vanilla.Hambundler.Editor",
-    "references": [
-        "Vanilla.Hambundler"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "name": "Vanilla.Init",
+    "rootNamespace": "Vanilla.Init",
+    "references": [],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

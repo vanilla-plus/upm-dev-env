@@ -1,0 +1,15 @@
+{
+  "name": "vanilla.init",
+  "displayName": "Init",
+  "description": "Awake, Init, Start. Init runs even if the GameObject is turned off.",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-init.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template"
+}

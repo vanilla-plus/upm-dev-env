@@ -99,11 +99,11 @@ namespace Vanilla.DeltaValues
 
                     AtMin.Value = ValueAtMin(); // Set AtMin
 
-                    OnValueChanged?.Invoke(arg1: _Value,
-                                           arg2: old);
+                    OnValueChanged?.Invoke(arg1: old,
+                                           arg2: _Value);
 
-                    onIncrease?.Invoke(arg1: _Value,
-                                       arg2: old);
+                    onIncrease?.Invoke(arg1: old,
+                                       arg2: _Value);
 
                     AtMax.Value = ValueAtMax(); // Set AtMax
                 }
@@ -113,11 +113,11 @@ namespace Vanilla.DeltaValues
 
                     AtMax.Value = ValueAtMax(); // Set AtMax
 
-                    OnValueChanged?.Invoke(arg1: _Value,
-                                           arg2: old);
+                    OnValueChanged?.Invoke(arg1: old,
+                                           arg2: _Value);
 
-                    onDecrease?.Invoke(arg1: _Value,
-                                       arg2: old);
+                    onDecrease?.Invoke(arg1: old,
+                                       arg2: _Value);
 
                     AtMin.Value = ValueAtMin(); // Set AtMin
                 }
@@ -149,7 +149,10 @@ namespace Vanilla.DeltaValues
         public override void OnBeforeSerialize() { }
 
 
-        public override void OnAfterDeserialize()
+        public override void OnAfterDeserialize() => ValidateRangedValue();
+
+
+        public void ValidateRangedValue()
         {
             ValidateMin();
             ValidateMax();
@@ -193,14 +196,14 @@ namespace Vanilla.DeltaValues
 
 
 
-        public DeltaRangedValue() { }
+        public DeltaRangedValue() => ValidateRangedValue();
 
-        public DeltaRangedValue(string name) : base(name: name) { }
+        public DeltaRangedValue(string name) : base(name: name) => ValidateRangedValue();
 
 
         public DeltaRangedValue(string defaultName,
                                 T defaultValue) : base(name: defaultName,
-                                                       defaultValue: defaultValue) { }
+                                                       defaultValue: defaultValue) => ValidateRangedValue();
 
 
         public DeltaRangedValue(string defaultName,
@@ -218,7 +221,10 @@ namespace Vanilla.DeltaValues
 
             Min   = _Min;
             Max   = _Max;
-            Value = _Value;
+            
+//            Value = _Value;
+            
+            ValidateRangedValue();
         }
 
 

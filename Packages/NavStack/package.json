@@ -1,0 +1,15 @@
+{
+  "name": "vanilla.nav-stack",
+  "displayName": "NavStack",
+  "description": "NavStack is an awaitable UniTask library for remembering a users UI state history, much like a browsers back/forward buttons.",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-nav-stack.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template"
+}

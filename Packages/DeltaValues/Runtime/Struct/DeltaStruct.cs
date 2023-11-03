@@ -15,9 +15,10 @@ namespace Vanilla.DeltaValues
 
 		public DeltaStruct(string name) : base(name: name) { }
 
+
 		public DeltaStruct(string name,
 		                   T defaultValue) : base(name: name,
-		                                          defaultValue: defaultValue) { }
+		                                          defaultValue: defaultValue) => _Value = defaultValue;
 
 	}
 

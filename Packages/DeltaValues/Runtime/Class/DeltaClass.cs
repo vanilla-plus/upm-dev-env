@@ -8,15 +8,15 @@ namespace Vanilla.DeltaValues
 {
 
 	[Serializable]
-	public abstract class DeltaClass<T> : DeltaValue<T> where T : class
+	public class DeltaClass<T> : DeltaValue<T> where T : class
 	{
 
-		protected DeltaClass(string name) : base(name: name) { }
+		public DeltaClass(string name) : base(name: name) { }
 
 
-		protected DeltaClass(string name,
-		            T defaultValue) : base(name: name,
-		                                   defaultValue: defaultValue) { }
+		public DeltaClass(string name,
+		                  T defaultValue) : base(name: name,
+		                                         defaultValue: defaultValue) { }
 
 
 		public override bool ValueEquals(T a,

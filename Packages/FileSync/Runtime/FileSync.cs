@@ -78,15 +78,21 @@ namespace Vanilla.FileSync
         public static int Download_Chunk_Buffer_ByteSize = 32 * 1024 * 1024;  // 32 mb
 //        public static int Download_Chunk_Buffer_ByteSize = 64 * 1024 * 1024;  // 64 mb
 
-        public static long  BytesDownloaded = 0;
-        public static long  BytesTotal      = 0;
-        public static float BytesPercent    = 0.0f;
+//        public static long LocalFileMapTotalSize  = 0;
+//        public static long RemoteFileMapTotalSize = 0;
+        public static long FileMapSizeDiff        = 0;
+
+        public static long  CurrentDownloadBytesDownloaded = 0;
+        public static float CurrentDownloadPercentComplete = 0.0f;
 
 //        public static Action<float> OnDownloadProgress;
 
 //        private const string XML_Node_Etag         = "s3:ETag";
 //        private const string XML_Node_StorageClass = "s3:StorageClass";
 
+        [NonSerialized]
+        public static RemoteS3Object[] RemoteFileMap = Array.Empty<RemoteS3Object>();
+        
         public static void Initialize(string remoteRoot)
         {
             Remote_Root     = remoteRoot;
@@ -118,43 +124,53 @@ namespace Vanilla.FileSync
             }
 
             #if debug
-            Debug.Log("FileMap results:");
+            Debug.Log("RemoteFileMap results:");
             foreach (var f in fileMap) Debug.Log(f.RemoteFilePath);
             #endif
 
             return fileMap.ToArray();
         }
-        
+
+
+        public static bool FileMapSyncRequired()
+        {
+            var syncRequired = false;
+
+            CurrentDownloadBytesDownloaded = 0;
+            FileMapSizeDiff                = 0;
+
+            foreach (var f in RemoteFileMap)
+            {
+                if (!f.DownloadRequired) continue;
+
+                syncRequired = true;
+
+                FileMapSizeDiff += f.RemoteFileSize;
+            }
+            
+            #if debug
+            Debug.Log($"FileMapSizeDiff: [{FileMapSizeDiff}]");
+            Debug.Log($"SyncRequired: [{syncRequired}]");
+            #endif
+
+            return syncRequired;
+        }
+
+
         public static async UniTask SynchronizeFileMap(RemoteS3Object[] fileMap, int numberOfSimultaneousDownloads)
         {
-            BytesDownloaded = 0;
-            BytesTotal      = 0;
             
-            // We have to create the directories first, otherwise we may have files trying to be created in them
-            // before they exist and that leads to an error.
-            
-            // ToDo - Handle directory-matching outside of this function altogether.
-            foreach (var f in fileMap)
-            {
-                if (f.IsAFile)
-                {
-                    BytesTotal += f.RemoteFileSize;
-                }
-                else
-                {
-                    if (!Directory.Exists(f.LocalFilePath))
-                    {
-                        Directory.CreateDirectory(f.LocalFilePath);
-                    }
-                }
-            }
+            // ToDo - This is great for downloading, but shouldn't we also
+            // ToDo - handle the removal of local files that are no longer present on remote as well?
             
             numberOfSimultaneousDownloads = Math.Clamp(numberOfSimultaneousDownloads,
                                                        1,
                                                        8);
+
+            var filesToDownload = fileMap.Where(s3Object => s3Object.DownloadRequired).ToArray();
             
-            int fileMapTotal         = fileMap.Length;
-            int fileMapSegmentStride = fileMapTotal                  / numberOfSimultaneousDownloads; // How many indices should each segment be responsible for?
+            int fileMapTotal         = filesToDownload.Length;
+            int fileMapSegmentStride = fileMapTotal / numberOfSimultaneousDownloads;                         // How many indices should each segment be responsible for?
             var willHaveRemainder    = numberOfSimultaneousDownloads * fileMapSegmentStride != fileMapTotal; // Can we evenly segment the downloads or will there be over-hang?
             var segmentTotal         = -1;
             
@@ -178,7 +194,7 @@ namespace Vanilla.FileSync
                     endIndex += fileMapTotal % numberOfSimultaneousDownloads;
                 }
                 
-                segments.Add(DownloadFileMapSegment(fileMap,
+                segments.Add(DownloadFileMapSegment(filesToDownload,
                                                     ++segmentTotal,
                                                     startIndex,
                                                     endIndex));
@@ -190,16 +206,10 @@ namespace Vanilla.FileSync
         }
 
 
-        public static void TallyBytes(long amount)
+        public static void TallyDownloadedBytes(long amount)
         {
-            BytesDownloaded += amount;
-            BytesPercent    =  (float) BytesDownloaded / BytesTotal;
-
-//            var progress = (float) BytesDownloaded / BytesTotal;
-            
-//            Debug.Log(progress);
-            
-//            OnDownloadProgress?.Invoke(progress);
+            CurrentDownloadBytesDownloaded += amount;
+            CurrentDownloadPercentComplete    =  (float) CurrentDownloadBytesDownloaded / FileMapSizeDiff;
         }
 
 
@@ -220,13 +230,13 @@ namespace Vanilla.FileSync
                 
                 Debug.Log($"Index {i} is {entry.LocalFilePath}");
                 
-                if (entry.IsAFile)
-                {
-                    if (entry.DownloadRequired())
-                    {
+//                if (entry.IsAFile)
+//                {
+//                    if (entry.DownloadRequired)
+//                    {
                         await entry.Download();
-                    }
-                }
+//                    }
+//                }
 //                else
 //                {
 //                    if (!Directory.Exists(entry.LocalFilePath))
@@ -422,6 +432,8 @@ namespace Vanilla.FileSync
             [SerializeField] public readonly string   RemoteFilePath;
             [SerializeField] public readonly DateTime RemoteLastModified;
             [SerializeField] public readonly long     RemoteFileSize;
+            [SerializeField] public readonly long     LocalFileSize;
+            [SerializeField] public readonly bool     DownloadRequired;
 
             public RemoteS3Object() { }
 
@@ -432,6 +444,8 @@ namespace Vanilla.FileSync
             {
                 IsAFile = key.Length > 0 && key[^1] != '/';
 
+//                Debug.Log($"[{key}] is {(IsAFile ? "a file" : "not a file")}");
+                
                 LocalFilePath = Path.Combine(Application.persistentDataPath,
                                              LocalSubDirectory,
                                              key);
@@ -439,8 +453,46 @@ namespace Vanilla.FileSync
                 RemoteFilePath     = key;
                 RemoteLastModified = lastModified;
                 RemoteFileSize     = size;
+
+                if (!IsAFile)
+                {
+                    DownloadRequired = false;
+                    
+                    if (!Directory.Exists(LocalFilePath)) Directory.CreateDirectory(LocalFilePath);
+                }
+                else
+                {
+                    if (!File.Exists(LocalFilePath))
+                    {
+                        #if debug
+                        Debug.LogWarning($"File [{RemoteFilePath}] doesn't exist locally - download approved");
+                        #endif
+
+                        DownloadRequired = true;
+                    }
+                    else
+                    {
+                        var localFileInfo = new FileInfo(LocalFilePath);
+
+                        LocalFileSize = localFileInfo.Length;
+
+//                    Debug.Log($"LocalFile [{RemoteFilePath}] Size [{LocalFileSize}]");
+
+                        DownloadRequired = localFileInfo.Length != RemoteFileSize;
+
+                        if (DownloadRequired)
+                        {
+                            #if debug
+                            Debug.LogWarning($"Remote file size [{RemoteFileSize}] for [{RemoteFilePath}] doesn't match local file size [{LocalFileSize}] - download approved");
+                            #endif
+                        }
+                    }
+                }
+                
+                
             }
-            
+
+
             public override bool Equals(object obj)
             {
                 // Check if obj is null or not of type RemoteS3Object
@@ -457,54 +509,54 @@ namespace Vanilla.FileSync
 
             public override string ToString() => $"RemoteS3Object Log\nIsAFile\t[{IsAFile}]\nKey\t[{RemoteFilePath}]\nLastModified\t[{RemoteLastModified}]\nSize\t[{RemoteFileSize}]";
 
-
-            public bool DownloadRequired()
-            {
-                if (!File.Exists(LocalFilePath))
-                {
-                    #if debug
-                    Debug.Log($"File [{RemoteFilePath}] doesn't exist locally - download approved");
-                    #endif
-                    
-                    return true;
-                }
-
-                var localFileInfo = new FileInfo(LocalFilePath);
-
-                // Compare the file sizes
-                var isSizeDifferent = localFileInfo.Length != RemoteFileSize;
-
-                if (isSizeDifferent)
-                {
-                    #if debug
-                    Debug.Log($"File size for [{RemoteFilePath}] doesn't match local file - download approved");
-                    #endif
-                    
-                    // File needs sync if either size or last modified timestamp is different
-                    return true;
-                }
-
-                // ToDo - This is unreliable and needs proper investigating (it's 5:45am gimme a break)
-                // ToDo - The REALLY correct way would be to use eTags.
-                // ToDo - write the eTag string to a meta data file for each asset
-                // ToDo - And then check the tag before each download.
-                
-//                // Compare the last modified timestamps
-//                var isLastModifiedDifferent = localFileInfo.LastWriteTimeUtc != RemoteLastModified.ToUniversalTime();
-//                
-//                if (isLastModifiedDifferent)
-//                {
-//                    Debug.Log($"File modification date for [{RemoteFilePath}] doesn't match local file - download approved");
 //
-//                    Debug.Log(RemoteLastModified.ToUniversalTime().ToString());
-//                    Debug.Log(localFileInfo.LastWriteTimeUtc.ToString());
+//            public bool DownloadRequired()
+//            {
+//                if (!File.Exists(LocalFilePath))
+//                {
+//                    #if debug
+//                    Debug.Log($"File [{RemoteFilePath}] doesn't exist locally - download approved");
+//                    #endif
+//                    
+//                    return true;
+//                }
+//
+//                var localFileInfo = new FileInfo(LocalFilePath);
+//
+//                // Compare the file sizes
+//                var isSizeDifferent = localFileInfo.Length != RemoteFileSize;
+//
+//                if (isSizeDifferent)
+//                {
+//                    #if debug
+//                    Debug.Log($"File size for [{RemoteFilePath}] doesn't match local file - download approved");
+//                    #endif
 //                    
 //                    // File needs sync if either size or last modified timestamp is different
 //                    return true;
 //                }
-
-                return false;
-            }
+//
+//                // ToDo - This is unreliable and needs proper investigating (it's 5:45am gimme a break)
+//                // ToDo - The REALLY correct way would be to use eTags.
+//                // ToDo - write the eTag string to a meta data file for each asset
+//                // ToDo - And then check the tag before each download.
+//                
+////                // Compare the last modified timestamps
+////                var isLastModifiedDifferent = localFileInfo.LastWriteTimeUtc != RemoteLastModified.ToUniversalTime();
+////                
+////                if (isLastModifiedDifferent)
+////                {
+////                    Debug.Log($"File modification date for [{RemoteFilePath}] doesn't match local file - download approved");
+////
+////                    Debug.Log(RemoteLastModified.ToUniversalTime().ToString());
+////                    Debug.Log(localFileInfo.LastWriteTimeUtc.ToString());
+////                    
+////                    // File needs sync if either size or last modified timestamp is different
+////                    return true;
+////                }
+//
+//                return false;
+//            }
 
 //
 //            public async UniTask Download(Func<float, float> OnProgress = null)
@@ -591,7 +643,7 @@ namespace Vanilla.FileSync
 
 //                        Debug.Log(progress);
 
-                        TallyBytes(bytesRead);
+                        TallyDownloadedBytes(bytesRead);
                         
                         await fileStream.WriteAsync(buffer,
                                                     0,

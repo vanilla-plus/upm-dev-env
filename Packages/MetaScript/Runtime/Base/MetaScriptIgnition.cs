@@ -17,6 +17,9 @@ namespace Vanilla.MetaScript
 		public bool RunOnStart = false;
 
 		[SerializeField]
+		public bool CancelSupport = true;
+		
+		[SerializeField]
 		public KeyCode debugRunKey = KeyCode.Alpha1;
 		
 		[SerializeField]
@@ -33,9 +36,14 @@ namespace Vanilla.MetaScript
 		{
 			foreach (var t in targets)
 			{
-				var scope = new Scope(null, "[ I G N I T I O N ]", "MetaScriptIgnition");
-
-				t.Run(scope).ContinueWith(s => s.Dispose());
+				if (CancelSupport)
+				{
+					t.StartTaskAndCacheScope();
+				}
+				else
+				{
+					t.StartTask();
+				}
 			}
 		}
 

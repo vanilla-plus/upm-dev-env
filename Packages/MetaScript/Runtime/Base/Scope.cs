@@ -7,6 +7,15 @@ using UnityEngine;
 namespace Vanilla.MetaScript
 {
 
+    /*
+    In MetaScript, a Scope object is kind of like a relay baton.
+    A new one is created whenever a new execution context is created (for example, loading a custom scene and jumping to it)
+    and each scope should be cleaned up ('disposed') once that context is over.
+    Scopes have a reference to their parent scope, if any, and check their parent for cancellation as well.
+    So we should be careful when creating new scopes because they can accidentally stick around in memory
+    if not disposed of at the right time.
+    */
+    
     [Serializable]
     public class Scope : IDisposable
     {
@@ -51,6 +60,18 @@ namespace Vanilla.MetaScript
         }
 
 
+        private async UniTask EditorPlayModeSelfCancellation()
+        {
+            #if UNITY_EDITOR
+            while (_Continue && Application.isPlaying)
+            {
+                await UniTask.Yield();
+            }
+            
+            Cancel();
+            #endif
+        }
+
         public Scope(Scope parent, string taskName, string taskType) // Purely for debugging, delete taskName later
         {
             this.parent = parent;
@@ -70,6 +91,7 @@ namespace Vanilla.MetaScript
 
 //            Debug.LogWarning(output);
 
+            #if debug
             var output = $"+ {_Name}";
             
             for (var i = 0;
@@ -80,6 +102,11 @@ namespace Vanilla.MetaScript
             }
             
             Debug.Log(output);
+            #endif
+            
+            #if UNITY_EDITOR
+            EditorPlayModeSelfCancellation().Forget();
+            #endif
 
             // Bummer, this seems to be the only (?) way to accurately check if the scope is ready for disposal.
             // The short version is that the perfect time is actually just checking when ActiveTasks == 0
@@ -93,22 +120,22 @@ namespace Vanilla.MetaScript
         }
 
 
-        private async UniTask MonitorActiveTasks()
-        {
-            await UniTask.WaitUntil(() => ActiveTasks == 0);
-            
-            Dispose();
-        }
+//        private async UniTask MonitorActiveTasks()
+//        {
+//            await UniTask.WaitUntil(() => ActiveTasks == 0);
+//            
+//            Dispose();
+//        }
 
 
         public void Cancel() => _Continue = false;
 
-        public void Cancel_With_Parent()
-        {
-            _Continue = false;
-            
-            parent?.Cancel();
-        }
+//        public void Cancel_With_Parent()
+//        {
+//            _Continue = false;
+//            
+//            parent?.Cancel();
+//        }
         
         public void Cancel_Recursive()
         {
@@ -160,6 +187,7 @@ namespace Vanilla.MetaScript
 //            
 //                Debug.LogError(output);
 
+                #if debug
                 var output = $"- {_Name}";
             
                 for (var i = 0;
@@ -169,7 +197,8 @@ namespace Vanilla.MetaScript
                     output = "    " + output;
                 }
             
-                Debug.LogError(output);
+                Debug.Log(output);
+                #endif
 
                 if (disposing)
                 {
