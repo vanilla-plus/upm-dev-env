@@ -3,13 +3,14 @@ using System;
 using UnityEngine;
 
 using Vanilla.DeltaValues;
+using Vanilla.Init;
 
 namespace Vanilla.NavStack
 {
 
 	[Serializable]
 	[RequireComponent(typeof(CanvasGroup))]
-	public class UI_Window : MonoBehaviour
+	public class UI_Window : MonoBehaviour, IInitiable
 	{
 
 		[SerializeField]
@@ -28,31 +29,27 @@ namespace Vanilla.NavStack
 			                         defaultActiveState: false,
 			                         fillSeconds: 0.5f);
 			
-			// Unfortunately, all the windows need to start open so they can register their events and react accordingly later.
-			// Thanks for not giving GameObjects an inactive init function Unity, ya goombas.
-
-//			_group.gameObject.SetActive(State.Active);
-//			_group.alpha          = State.Progress.Value;
-//			_group.interactable   = State.Progress.AtMax;
+			PostInit();
 			#endif
 		}
 
 
-		protected virtual void Awake() => State.Init();
-
-		
-		
-		protected virtual void Start()
+		public virtual void Init()
 		{
+			State.Init();
+			
 			State.Progress.OnValueChanged       += HandleActiveProgress;
 			State.Progress.AtMin.OnValueChanged += HandleFullyInactive;
 			State.Progress.AtMax.OnValueChanged += HandleFullyActive;
+		}
 
+
+		public virtual void PostInit()
+		{
 			_group.gameObject.SetActive(State.Active);
 			_group.alpha        = State.Progress.Value;
 			_group.interactable = State.Progress.AtMax;
 		}
-
 
 		protected virtual void HandleFullyInactive(bool outgoing,
 		                                           bool incoming) => _group.gameObject.SetActive(outgoing);

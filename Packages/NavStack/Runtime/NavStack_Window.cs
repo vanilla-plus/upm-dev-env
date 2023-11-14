@@ -20,7 +20,7 @@ namespace Vanilla.NavStack
         [SerializeField]
         public bool RemainOpenUnderneath = false;
         
-        private void OnValidate()
+        protected override void OnValidate()
         {
             #if UNITY_EDITOR
             base.OnValidate();
@@ -33,14 +33,6 @@ namespace Vanilla.NavStack
             }
             #endif
         }
-
-
-//        void Awake() => _window.Active.Active.OnTrue += PushToStack;
-
-
-//        void OnDestroy() => _window.Active.Active.OnTrue -= PushToStack;
-
-
 
         public void Nav_Open() => _stack.Nav_Open(this).Forget();
 

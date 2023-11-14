@@ -3,6 +3,8 @@ using System.Threading;
 
 using Cysharp.Threading.Tasks;
 
+using UnityEngine;
+
 namespace Vanilla.MetaScript.TaskSets
 {
 
@@ -12,23 +14,31 @@ namespace Vanilla.MetaScript.TaskSets
 
 		protected override string CreateAutoName() => "Run the following in order:";
 
-
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
 			if (scope.Cancelled) return scope; // It's important to guard against scopes that are already cancelled.
 
-			var newScope = new Scope(scope, Name, GetType().Name);
+//			var newScope = new Scope(parent: scope,
+//			                         taskName: Name,
+//			                         taskType: GetType().Name);
+//
+//			foreach (var task in _tasks)
+//			{
+//				if (newScope.Cancelled) return scope;
+//
+//				if (task != null) await task.Run(newScope);
+//			}
+//
+//			newScope.Cancel();
+//
+//			newScope.Dispose();
 
 			foreach (var task in _tasks)
 			{
-				if (newScope.Cancelled) return scope;
-				
-				if (task != null) await task.Run(newScope);
-			}
+				if (scope.Cancelled) return scope;
 
-			newScope.Cancel();
-			
-			newScope.Dispose();
+				if (task != null) await task.Run(scope);
+			}
 
 			return scope;
 		}

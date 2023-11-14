@@ -370,7 +370,7 @@ public class TypeMenuAttributeDrawer : PropertyDrawer
 			                       where !type.ContainsGenericParameters
 			                       where !type.IsClass || type.GetConstructor(types: Type.EmptyTypes) != null
 			                       where (filters ?? Array.Empty<Func<Type, bool>>()).All(f => f == null || f.Invoke(type))
-			                       select type).ToList();
+			                       select type).OrderBy(t => t.Name).ToList();
 
 		// Coalesce all the assemblies so we have no doubles 
 		var assemblies = new HashSet<Assembly>();

@@ -1,11 +1,12 @@
 using UnityEngine;
-//using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
 namespace Vanilla.Init
 {
 
 	public class ExecutionOrderTester : MonoBehaviour, IInitiable
     {
+	    #if UNITY_EDITOR
                                                                                                  static      ExecutionOrderTester()         => Debug.Log("A => ExecutionOrderTester => Static Constructor");
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] static void SubsystemRegistration()        => Debug.Log("B => ExecutionOrderTester => SubsystemRegistration");
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)] static void AfterAssembliesLoaded()        => Debug.Log("C => ExecutionOrderTester => AfterAssembliesLoaded");
@@ -20,9 +21,10 @@ namespace Vanilla.Init
         public                                                                                         void Start()                         => Debug.Log("L => ExecutionOrderTester => Start");
 
 
-//        [ContextMenu("Test Scene Load")]
-//        public void TestSceneLoad() => SceneManager.LoadScene(1,
-//                                                              LoadSceneMode.Additive);
+        [ContextMenu("Test Scene Load")]
+        public void TestSceneLoad() => SceneManager.LoadScene(1,
+                                                              LoadSceneMode.Additive);
+        #endif
 
     }
 }

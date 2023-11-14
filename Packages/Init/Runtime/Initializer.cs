@@ -46,7 +46,25 @@ namespace Vanilla.Init
 		// For some reason, the first scene load doesn't invoke SceneManager.sceneLoader. Go figure.
 		// illdoitmyself.gif
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-		private static void AfterSceneLoad() => Init(SceneManager.GetActiveScene());
+		private static void AfterSceneLoad()
+		{
+			// The Editor is unique in that it can start with multiple scenes open.
+			// Builds don't have this condition.
+			#if UNITY_EDITOR
+			for (var i = 0;
+			     i < SceneManager.sceneCount;
+			     i++)
+			{
+				var scene = SceneManager.GetSceneAt(i);
+
+				// If you open a scene in the Editor but then unload it, it still appears in the list of loaded scenes
+				// So we have to manually check ourselves...
+				if (scene.isLoaded) Init(scene);
+			}
+			#else
+			Init(SceneManager.GetActiveScene());
+			#endif
+		}
 
 
 		private static void RunInit(Scene scene,
@@ -58,7 +76,7 @@ namespace Vanilla.Init
 			#if debug
 			Debug.LogWarning($"[Initializer] Initialization begun");
 			#endif
-			
+
 			var initiables = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<IInitiable>(includeInactive: true));
 
 			foreach (var i in initiables) i.Init();

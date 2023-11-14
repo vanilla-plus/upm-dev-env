@@ -20,6 +20,9 @@ namespace Vanilla.MetaScript
 
 		[SerializeField]
 		public TaskOptions taskOptions = TaskOptions.Run | TaskOptions.Wait;
+		
+//		[SerializeField]
+//		public virtual TaskOptions taskOptions { get; } = TaskOptions.Run | TaskOptions.Wait;
 
 		private const string DefaultAutoName = "This task can't be auto-named yet.";
 
@@ -48,20 +51,26 @@ namespace Vanilla.MetaScript
 				
 				return scope;
 			}
-			
+
+			var s = taskOptions.HasFlag(flag: TaskOptions.NewScope) ?
+				        new Scope(parent: scope,
+				                  taskName: Name,
+				                  taskType: GetType().Name) :
+				        scope;
+
 			try
 			{
 				if (taskOptions.HasFlag(TaskOptions.Run))
 				{
-					scope.ActiveTasks++;
+					s.ActiveTasks++;
 
 					if (taskOptions.HasFlag(TaskOptions.Wait))
 					{
-						await _Run(scope).ContinueWith(FinalizeRun);
+						await _Run(s).ContinueWith(FinalizeRun);
 					}
 					else
 					{
-						_Run(scope).ContinueWith(FinalizeRun).Forget();
+						_Run(s).ContinueWith(FinalizeRun).Forget();
 					}
 				}
 				else
@@ -71,37 +80,26 @@ namespace Vanilla.MetaScript
 			}
 			catch (Exception ex)
 			{
-				Debug.LogException(ex);
+				Debug.LogException(exception: ex);
+			}
+
+			if (taskOptions.HasFlag(flag: TaskOptions.NewScope))
+			{
+				s.Cancel();
+
+				s.Dispose();
 			}
 
 			return scope;
 		}
 
 		protected abstract UniTask<Scope> _Run(Scope scope);
-		
-		private void FinalizeRun(Scope scope) => scope.ActiveTasks--;
 
-		
-//		protected const   int LongestExecutionType = -8;
-//		protected const int LongestTaskName      = -14;
 
-		//
-//		#if debug
-//		public void LogRunBegin(Scope scope)    => Debug.Log($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Begun        {executionFlags}    {Name}");
-//		public void LogRunSkipped(Scope scope)  => Debug.LogWarning($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Skipped      {executionFlags.ToString()}    {Name}");
-//		public void LogRunComplete(Scope scope) => Debug.Log($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Complete     {executionFlags.ToString()}    {Name}");
-////		public void LogRunComplete(trace trace)  => Debug.Log($"{Time.frameCount:0000000}    {GetType().Name,LongestTaskName}    Complete     {ExecutionType,LongestExecutionType}    {Name}");
-//		public void LogRunCancelled(Scope scope) => Debug.LogWarning($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Cancelled    {executionFlags.ToString()}    {Name}");
-//		public void LogTaskError(Scope scope)    => Debug.LogError($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Error        {executionFlags.ToString()}    {Name}");
-//		public void LogTaskIdentity(Scope scope) => Debug.LogWarning($"{Time.frameCount:0000000}    {trace.source.Activity}    {GetType().Name,LongestTaskName}    Identity     {executionFlags.ToString()}    {Name}");
-//		#else
-//		public void LogRunBegin(trace trace)     { }
-//		public void LogRunSkipped(trace trace)   { }
-//		public void LogRunComplete(trace trace)  { }
-//		public void LogRunCancelled(trace trace) { }
-//		public void LogTaskError(trace trace)    { }
-//		public void LogTaskIdentity(trace trace) { }
-//		#endif
+		private void FinalizeRun(Scope scope)
+		{
+			if (scope != null) scope.ActiveTasks--;
+		}
 
 	}
 

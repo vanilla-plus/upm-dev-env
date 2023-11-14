@@ -3,6 +3,8 @@ using System;
 
 using Cysharp.Threading.Tasks;
 
+using UnityEngine;
+
 using Vanilla.MetaScript;
 
 namespace Vanilla.FileSync
@@ -14,6 +16,11 @@ namespace Vanilla.FileSync
 
 		public string remoteRoot = "https://{bucket}.s3.{region}.amazonaws.com/";
 
+		public string localRoot = "fs";
+
+		[Range(min: 0,max: 4)]
+		public int pathSegmentsToSkip = 0;
+
 		protected override bool CanAutoName() => true;
 
 
@@ -22,7 +29,9 @@ namespace Vanilla.FileSync
 
 		protected override UniTask<Scope> _Run(Scope scope)
 		{
-			FileSync.Initialize(remoteRoot);
+			FileSync.Initialize(remoteRoot: remoteRoot,
+			                    localRoot: localRoot,
+			                    rootPathsToSkip: pathSegmentsToSkip);
 
 			return UniTask.FromResult(scope);
 		}

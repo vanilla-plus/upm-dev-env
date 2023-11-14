@@ -18,14 +18,17 @@ namespace Vanilla.MetaScript.TaskSets
 		{
 			if (scope.Cancelled) return scope;
 
-			var newScope = new Scope(scope, Name, GetType().Name);
+//			var newScope = new Scope(scope, Name, GetType().Name);
+//
+//			await UniTask.WhenAny(tasks: Enumerable.Select(source: _tasks,
+//			                                               selector: t => t.Run(newScope)));
+//
+//			newScope.Cancel();
+//			
+//			newScope.Dispose();
 
 			await UniTask.WhenAny(tasks: Enumerable.Select(source: _tasks,
-			                                               selector: t => t.Run(newScope)));
-
-			newScope.Cancel();
-			
-			newScope.Dispose();
+			                                               selector: t => t.Run(scope)));
 			
 			return scope; // Make sure to return the original scope, not the new one!
 		}

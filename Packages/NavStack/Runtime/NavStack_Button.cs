@@ -13,7 +13,7 @@ namespace Vanilla.NavStack
 		[SerializeField]
 		public Button _button;
 		
-		private void OnValidate()
+		protected override void OnValidate()
 		{
 			#if UNITY_EDITOR
 			base.OnValidate();

@@ -21,7 +21,7 @@ namespace Vanilla.MetaScript
 		{
 			scope.Cancel_Upwards(numberOfScopesToStop);
 			
-			Debug.Log(scope.Cancelled);
+//			Debug.Log(scope.Cancelled);
 
 			return UniTask.FromResult(scope);
 		}

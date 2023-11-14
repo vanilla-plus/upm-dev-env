@@ -77,6 +77,8 @@ namespace Vanilla.MetaScript
             this.parent = parent;
             this.Depth  = (byte) (parent != null ? parent.Depth + 1 : 0);
             this._Name  = $"[{taskName}] ({taskType})";
+            
+            Debug.LogWarning($"New Scope\n{parent}\n{taskName}\n{taskType}");
 
 //            var output = $"• Scope Created [{_Depth}] [{_Name}]";
 //            

@@ -3,7 +3,9 @@
     "rootNamespace": "Vanilla.DeltaValues",
     "references": [
         "UniTask",
-        "Vanilla.MetaScript"
+        "Vanilla.MetaScript",
+        "Vanilla.DotNetExtensions",
+        "Vanilla.UnityExtensions"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

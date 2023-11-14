@@ -11,6 +11,62 @@ namespace Vanilla.UnityExtensions
 	public static class Vector3Extensions
 	{
 
+		// ----------------------------------------------------------------------------------------------------------------------------- Addition //
+		
+		public static void Add(ref this Vector3 input,
+		                       Vector3 amount) => input += amount;
+		
+		public static Vector3 Add(Vector3 input,
+		                          Vector3 amount) => input + amount;
+		
+		// -------------------------------------------------------------------------------------------------------------------------- Subtraction //
+		
+		public static void Sub(ref this Vector3 input,
+		                       Vector3 amount) => input -= amount;
+		
+		public static Vector3 Sub(this Vector3 input,
+		                          Vector3 amount) => input - amount;
+		
+		// ----------------------------------------------------------------------------------------------------------------------- Multiplication //
+
+		public static void Mul(ref this Vector3 input,
+		                       float amount) => input *= amount;
+		
+		public static void Mul(ref this Vector3 input,
+		                       Vector3 amount) => input = new Vector3(x: input.x * amount.x,
+		                                                              y: input.y * amount.y,
+		                                                              z: input.z * amount.z);
+
+
+		public static Vector3 GetMul(this Vector3 input,
+		                             float amount) => input * amount;
+
+
+		public static Vector3 GetMul(this Vector3 input,
+		                             Vector3 amount) => new(x: input.x * amount.x,
+		                                                    y: input.y * amount.y,
+		                                                    z: input.z * amount.z);
+		
+		// ----------------------------------------------------------------------------------------------------------------------------- Division //
+		
+		public static void Div(ref this Vector3 input,
+		                       float amount) => input /= amount;
+		
+		public static void Div(ref this Vector3 input,
+		                       Vector3 amount) => input = new Vector3(x: input.x / amount.x,
+		                                                              y: input.y / amount.y,
+		                                                              z: input.z / amount.z);
+
+
+		public static Vector3 GetDiv(this Vector3 input,
+		                             float amount) => input / amount;
+
+
+		public static Vector3 GetDiv(this Vector3 input,
+		                             Vector3 amount) => new(x: input.x / amount.x,
+		                                                    y: input.y / amount.y,
+		                                                    z: input.z / amount.z);
+		
 		// -------------------------------------------------------------------------------------------------------------------------------- Clamp //
 
 

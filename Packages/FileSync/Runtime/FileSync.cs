@@ -61,7 +61,9 @@ namespace Vanilla.FileSync
         private static string Remote_Root     = null;
         private static string Remote_List_URL = null;
 
-        public static string LocalSubDirectory = "fetch";
+        public static string Local_Root = "fetch";
+
+        public static int Local_Path_Segments_To_Skip = 0;
 
         private const string XML_Namespace_Uri    = "http://s3.amazonaws.com/doc/2006-03-01/";
         private const string XML_Namespace_Prefix = "s3";
@@ -93,11 +95,26 @@ namespace Vanilla.FileSync
         [NonSerialized]
         public static RemoteS3Object[] RemoteFileMap = Array.Empty<RemoteS3Object>();
         
-        public static void Initialize(string remoteRoot)
+        public static void Initialize(string remoteRoot, string localRoot, int rootPathsToSkip = 0)
         {
             Remote_Root     = remoteRoot;
             Remote_List_URL = $"{Remote_Root}?list-type=2&prefix=";
+            Local_Root      = localRoot;
+            Local_Path_Segments_To_Skip = rootPathsToSkip;
         }
+//
+//
+//        public static string GetTruncatedLocalPath()
+//        {
+//            var keySegments = key.Split(sep);
+//
+//            var truncatedKey = string.Join(separator: sep,
+//                                           values: keySegments.Skip());
+//
+//            return Path.Combine(Application.persistentDataPath,
+//                                Local_Root,
+//                                truncatedKey);
+//        }
 
 
         public static async UniTask<RemoteS3Object[]> GetFileMap(IEnumerable<FetchableDirectory> directories,
@@ -107,8 +124,8 @@ namespace Vanilla.FileSync
 
             foreach (var entry in directories)
             {
-                var remoteObjects = await GetRemoteObjects(entry.directory,
-                                                           entry.includeSubdirectories);
+                var remoteObjects = await GetRemoteObjects(s3Directory: entry.directory,
+                                                           includeSubdirectories: entry.includeSubdirectories);
 
                 foreach (var o in remoteObjects)
                 {
@@ -163,9 +180,9 @@ namespace Vanilla.FileSync
             // ToDo - This is great for downloading, but shouldn't we also
             // ToDo - handle the removal of local files that are no longer present on remote as well?
             
-            numberOfSimultaneousDownloads = Math.Clamp(numberOfSimultaneousDownloads,
-                                                       1,
-                                                       8);
+            numberOfSimultaneousDownloads = Math.Clamp(value: numberOfSimultaneousDownloads,
+                                                       min: 1,
+                                                       max: 8);
 
             var filesToDownload = fileMap.Where(s3Object => s3Object.DownloadRequired).ToArray();
             
@@ -194,10 +211,10 @@ namespace Vanilla.FileSync
                     endIndex += fileMapTotal % numberOfSimultaneousDownloads;
                 }
                 
-                segments.Add(DownloadFileMapSegment(filesToDownload,
-                                                    ++segmentTotal,
-                                                    startIndex,
-                                                    endIndex));
+                segments.Add(DownloadFileMapSegment(fileMap: filesToDownload,
+                                                    segmentId: ++segmentTotal,
+                                                    startIndex: startIndex,
+                                                    endIndex: endIndex));
             }
 
             await UniTask.WhenAll(segments);
@@ -318,25 +335,25 @@ namespace Vanilla.FileSync
 
             var xmlNamespaceManager = new XmlNamespaceManager(xml.NameTable);
 
-            xmlNamespaceManager.AddNamespace(XML_Namespace_Prefix,
-                                             XML_Namespace_Uri);
+            xmlNamespaceManager.AddNamespace(prefix: XML_Namespace_Prefix,
+                                             uri: XML_Namespace_Uri);
 
-            var contentsNodes = xml.SelectNodes(XML_Namespace_XPath,
-                                                xmlNamespaceManager);
+            var contentsNodes = xml.SelectNodes(xpath: XML_Namespace_XPath,
+                                                nsmgr: xmlNamespaceManager);
 
             if (contentsNodes       == null ||
                 contentsNodes.Count == 0) return null;
 
             var node = contentsNodes[0];
 
-            var keyNode = node.SelectSingleNode(XML_Node_Key,
-                                                xmlNamespaceManager);
+            var keyNode = node.SelectSingleNode(xpath: XML_Node_Key,
+                                                nsmgr: xmlNamespaceManager);
 
-            var lastModifiedNode = node.SelectSingleNode(XML_Node_LastModified,
-                                                         xmlNamespaceManager);
+            var lastModifiedNode = node.SelectSingleNode(xpath: XML_Node_LastModified,
+                                                         nsmgr: xmlNamespaceManager);
 
-            var sizeNode = node.SelectSingleNode(XML_Node_Size,
-                                                 xmlNamespaceManager);
+            var sizeNode = node.SelectSingleNode(xpath: XML_Node_Size,
+                                                 nsmgr: xmlNamespaceManager);
 
             return new RemoteS3Object(key: keyNode.InnerText,
                                       lastModified: DateTime.Parse(lastModifiedNode.InnerText),
@@ -369,11 +386,11 @@ namespace Vanilla.FileSync
 
             var xmlNamespaceManager = new XmlNamespaceManager(xml.NameTable);
 
-            xmlNamespaceManager.AddNamespace(XML_Namespace_Prefix,
-                                             XML_Namespace_Uri);
+            xmlNamespaceManager.AddNamespace(prefix: XML_Namespace_Prefix,
+                                             uri: XML_Namespace_Uri);
 
-            var contentsNodes = xml.SelectNodes(XML_Namespace_XPath,
-                                                xmlNamespaceManager);
+            var contentsNodes = xml.SelectNodes(xpath: XML_Namespace_XPath,
+                                                nsmgr: xmlNamespaceManager);
 
             if (contentsNodes == null) return null;
 
@@ -381,17 +398,17 @@ namespace Vanilla.FileSync
 
             result.AddRange(
                             from XmlNode contentsNode in contentsNodes
-                            let keyNode = contentsNode.SelectSingleNode(XML_Node_Key,
-                                                                        xmlNamespaceManager)
+                            let keyNode = contentsNode.SelectSingleNode(xpath: XML_Node_Key,
+                                                                        nsmgr: xmlNamespaceManager)
                             let key = keyNode.InnerText
-                            let isSubdirectory = key.IndexOf('/',
-                                                             s3Directory.Length) !=
+                            let isSubdirectory = key.IndexOf(value: '/',
+                                                             startIndex: s3Directory.Length) !=
                                                  -1
                             where !isSubdirectory || includeSubdirectories
-                            let sizeNode = contentsNode.SelectSingleNode(XML_Node_Size,
-                                                                         xmlNamespaceManager)
-                            let lastModifiedNode = contentsNode.SelectSingleNode(XML_Node_LastModified,
-                                                                                 xmlNamespaceManager)
+                            let sizeNode = contentsNode.SelectSingleNode(xpath: XML_Node_Size,
+                                                                         nsmgr: xmlNamespaceManager)
+                            let lastModifiedNode = contentsNode.SelectSingleNode(xpath: XML_Node_LastModified,
+                                                                                 nsmgr: xmlNamespaceManager)
                             select new RemoteS3Object(key: key,
                                                       lastModified: DateTime.Parse(lastModifiedNode.InnerText),
                                                       size: long.Parse(sizeNode.InnerText)));
@@ -411,14 +428,14 @@ namespace Vanilla.FileSync
 //        }
 //        
 
-        private static string RelativeToAbsolute(string relative) => Path.Combine(Remote_Root,
-                                                                                  relative)
+        private static string RelativeToAbsolute(string relative) => Path.Combine(path1: Remote_Root,
+                                                                                  path2: relative)
                                                                          .Replace(oldChar: ' ',
                                                                                   newChar: '+');
 
 
-        private static string AbsoluteToRelative(string absolute) => Path.GetRelativePath(Remote_Root,
-                                                                                          absolute)
+        private static string AbsoluteToRelative(string absolute) => Path.GetRelativePath(relativeTo: Remote_Root,
+                                                                                          path: absolute)
                                                                          .Replace(oldChar: '+',
                                                                                   newChar: ' ');
 
@@ -445,10 +462,15 @@ namespace Vanilla.FileSync
                 IsAFile = key.Length > 0 && key[^1] != '/';
 
 //                Debug.Log($"[{key}] is {(IsAFile ? "a file" : "not a file")}");
-                
-                LocalFilePath = Path.Combine(Application.persistentDataPath,
-                                             LocalSubDirectory,
-                                             key);
+
+                LocalFilePath = Local_Path_Segments_To_Skip > 0 ?
+                                    Path.Combine(path1: Application.persistentDataPath,
+                                                 path2: Local_Root,
+                                                 path3: string.Join(separator: '/',
+                                                                    values: key.Split('/').Skip(Local_Path_Segments_To_Skip))) :
+                                    Path.Combine(path1: Application.persistentDataPath,
+                                                 path2: Local_Root,
+                                                 path3: key);
 
                 RemoteFilePath     = key;
                 RemoteLastModified = lastModified;
@@ -615,13 +637,13 @@ namespace Vanilla.FileSync
 
                     using var client = new HttpClient();
 
-                    using var response = await client.GetAsync(absoluteRemotePath,
-                                                               HttpCompletionOption.ResponseHeadersRead);
+                    using var response = await client.GetAsync(requestUri: absoluteRemotePath,
+                                                               completionOption: HttpCompletionOption.ResponseHeadersRead);
 
                     await using var httpStream = await response.Content.ReadAsStreamAsync();
 
-                    await using var fileStream = new FileStream(LocalFilePath,
-                                                                FileMode.Create);
+                    await using var fileStream = new FileStream(path: LocalFilePath,
+                                                                mode: FileMode.Create);
 
                     var buffer = new byte[Download_Chunk_Buffer_ByteSize];
                     
@@ -630,9 +652,9 @@ namespace Vanilla.FileSync
 //                    long totalBytesRead = 0;
 
 //                    while (Application.isPlaying && (bytesRead = await httpStream.ReadAsync(buffer, 
-                    while ((bytesRead = await httpStream.ReadAsync(buffer,
-                                                                   0,
-                                                                   buffer.Length)) >
+                    while ((bytesRead = await httpStream.ReadAsync(buffer: buffer,
+                                                                   offset: 0,
+                                                                   count: buffer.Length)) >
                            0)
                     {
 //                        totalBytesRead += bytesRead;
@@ -645,9 +667,9 @@ namespace Vanilla.FileSync
 
                         TallyDownloadedBytes(bytesRead);
                         
-                        await fileStream.WriteAsync(buffer,
-                                                    0,
-                                                    bytesRead);
+                        await fileStream.WriteAsync(buffer: buffer,
+                                                    offset: 0,
+                                                    count: bytesRead);
                     }
                 }
                 catch (Exception e)

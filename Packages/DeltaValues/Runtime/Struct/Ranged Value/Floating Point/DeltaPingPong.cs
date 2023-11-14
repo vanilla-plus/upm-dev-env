@@ -10,7 +10,7 @@ namespace Vanilla.DeltaValues
 {
 
 	[Serializable]
-	public class DeltaPingPong : DeltaFloat
+	public class DeltaPingPong : DeltaVec1
 	{
 
 		#region Properties

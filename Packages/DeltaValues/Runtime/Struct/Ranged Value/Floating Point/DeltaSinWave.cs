@@ -10,7 +10,7 @@ namespace Vanilla.DeltaValues
 {
 
 	[Serializable]
-	public class DeltaSinWave : DeltaFloat
+	public class DeltaSinWave : DeltaVec1
 	{
 
 		#region Properties

@@ -10,6 +10,9 @@
   "repository": "github:vanilla-plus/upm-nav-stack.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.0.0",
-  "type": "template"
+  "version": "1.0.3",
+  "type": "template",
+  "dependencies": {
+    "vanilla.init": "1.0.3"
+  }
 }

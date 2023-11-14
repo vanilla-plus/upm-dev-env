@@ -8,9 +8,11 @@
     "url": "https://vanilla.plus/"
   },
   "repository": "github:vanilla-plus/upm-smart-values.git",
-  "version": "4.1.4",
+  "version": "4.2.0",
   "type": "template",
   "dependencies": {
-    "com.cysharp.unitask": "2.4.1"
+    "com.cysharp.unitask": "2.4.1",
+    "vanilla.dotnet-extensions": "1.1.0",
+    "vanilla.unity-extensions": "1.1.0"
   }
 }

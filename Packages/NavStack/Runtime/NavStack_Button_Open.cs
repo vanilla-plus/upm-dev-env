@@ -20,7 +20,7 @@ namespace Vanilla.NavStack
 		[SerializeField]
 		public bool NonInteractiveWhileTargetOpen = true;
 		
-		private void OnValidate()
+		protected override void OnValidate()
 		{
 			#if UNITY_EDITOR
 			base.OnValidate();

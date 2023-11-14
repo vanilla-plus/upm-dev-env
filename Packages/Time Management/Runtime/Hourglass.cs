@@ -14,7 +14,7 @@ namespace Vanilla.TimeManagement
 
 		private static float _TimeScaleDampingVelocity;
 		
-		private static DeltaFloat TargetTimeScale;
+		private static DeltaVec1 TargetTimeScale;
 
 		private static DeltaBool Interpolating;
 
@@ -60,11 +60,11 @@ namespace Vanilla.TimeManagement
 
 			_TimeScaleDampingVelocity = 0.0f;
 
-			TargetTimeScale = new DeltaFloat(defaultName: "Target Time Scale",
-			                                 defaultValue: 1.0f,
-			                                 defaultMin: 0.0f,
-			                                 defaultMax: 100.0f,
-			                                 changeEpsilon: float.Epsilon);
+			TargetTimeScale = new DeltaVec1(defaultName: "Target Time Scale",
+			                                defaultValue: 1.0f,
+			                                defaultMin: 0.0f,
+			                                defaultMax: 100.0f,
+			                                changeEpsilon: float.Epsilon);
 
 			Interpolating = new DeltaBool(name: "Target Time Scale Interpolating",
 			                              defaultValue: false);

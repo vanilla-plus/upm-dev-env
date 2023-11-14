@@ -1,7 +1,3 @@
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-#define debug
-#endif
-
 using System;
 
 using UnityEngine;
@@ -196,14 +192,33 @@ namespace Vanilla.DeltaValues
 
 
 
-        public DeltaRangedValue() => ValidateRangedValue();
+        public DeltaRangedValue()
+        {
+            _Min = TypeMinValue;
+            _Max = TypeMaxValue;
+            
+            ValidateRangedValue();
+        }
 
-        public DeltaRangedValue(string name) : base(name: name) => ValidateRangedValue();
+
+        public DeltaRangedValue(string name) : base(name: name)
+        {
+            _Min = TypeMinValue;
+            _Max = TypeMaxValue;
+            
+            ValidateRangedValue();
+        }
 
 
         public DeltaRangedValue(string defaultName,
                                 T defaultValue) : base(name: defaultName,
-                                                       defaultValue: defaultValue) => ValidateRangedValue();
+                                                       defaultValue: defaultValue)
+        {
+            _Min = TypeMinValue;
+            _Max = TypeMaxValue;
+            
+            ValidateRangedValue();
+        }
 
 
         public DeltaRangedValue(string defaultName,
@@ -233,7 +248,25 @@ namespace Vanilla.DeltaValues
 
         #region Math
 
+        // Moved to DeltaVec
+//        public abstract T New(T initial);
+//        
+//        public abstract T Add(T a);
+//        public abstract T Sub(T a);
+//        public abstract T Mul(T a);
+//        public abstract T Div(T a);
 
+//        public abstract T Add(T a,
+//                              T b);
+//        
+//        public abstract T Sub(T a,
+//                              T b);
+//        
+//        public abstract T Mul(T a,
+//                              T b);
+//        
+//        public abstract T Div(T a,
+//                              T b);
 
         public abstract T TypeMinValue
         {
