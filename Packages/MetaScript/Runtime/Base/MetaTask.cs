@@ -4,6 +4,8 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
+using Vanilla.TypeMenu;
+
 namespace Vanilla.MetaScript
 {
 
@@ -15,17 +17,20 @@ namespace Vanilla.MetaScript
 		private string _Name;
 		public string Name => _Name;
 		
+		[HideInInspector]
 		[SerializeField]
 		public string AutoName;
 
 		[SerializeField]
 		public TaskOptions taskOptions = TaskOptions.Run | TaskOptions.Wait;
 		
-//		[SerializeField]
-//		public virtual TaskOptions taskOptions { get; } = TaskOptions.Run | TaskOptions.Wait;
-
 		private const string DefaultAutoName = "This task can't be auto-named yet.";
 
+		[SerializeReference]
+		[TypeMenu]
+		[Only(typeof(IScopeSource))]
+		public IScopeSource scopeSource;
+		
 		public virtual void OnValidate()
 		{
 			#if UNITY_EDITOR
@@ -45,17 +50,21 @@ namespace Vanilla.MetaScript
 
 		public async UniTask<Scope> Run(Scope scope)
 		{
-			if (scope.Cancelled)
-			{
-				Debug.LogWarning($"[{Name}] - I'm not doing anything because my Scope is cancelled");
-				
-				return scope;
-			}
+//			if (scope.Cancelled)
+//			{
+//				Debug.LogWarning($"[{Name}] - I'm not doing anything because my Scope is cancelled");
+//				
+//				return scope;
+//			}
 
-			var s = taskOptions.HasFlag(flag: TaskOptions.NewScope) ?
-				        new Scope(parent: scope,
-				                  taskName: Name,
-				                  taskType: GetType().Name) :
+//			var s = taskOptions.HasFlag(flag: TaskOptions.NewScope) ?
+//				        new Scope(parent: scope,
+//				                  taskName: Name)
+////				                  taskType: GetType().Name) :
+//				        : scope;
+
+			var s = scopeSource != null ?
+				        scopeSource.CreateScope(scope) :
 				        scope;
 
 			try
@@ -83,12 +92,19 @@ namespace Vanilla.MetaScript
 				Debug.LogException(exception: ex);
 			}
 
-			if (taskOptions.HasFlag(flag: TaskOptions.NewScope))
+			if (scopeSource != null)
 			{
 				s.Cancel();
 
 				s.Dispose();
 			}
+			
+//			if (taskOptions.HasFlag(flag: TaskOptions.NewScope))
+//			{
+//				s.Cancel();
+
+//				s.Dispose();
+//			}
 
 			return scope;
 		}

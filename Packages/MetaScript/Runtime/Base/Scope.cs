@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using Cysharp.Threading.Tasks;
 
@@ -19,6 +20,52 @@ namespace Vanilla.MetaScript
     [Serializable]
     public class Scope : IDisposable
     {
+
+        private static Dictionary<string, Scope> Active = new Dictionary<string, Scope>();
+        
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void Reset()
+        {
+            foreach (var s in Active.Values) s.Cancel();
+
+            Active.Clear();
+        }
+
+
+        public static Scope Get(string name)
+        {
+            Active.TryGetValue(key: name,
+                               value: out var scope);
+
+            return scope;
+        }
+
+
+        public static bool TryCancel(string name)
+        {
+            if (!Active.ContainsKey(key: name))
+            {
+                Debug.LogWarning($"No scope called [{name}].");
+
+                return false;
+            }
+
+            Active.TryGetValue(key: name,
+                               value: out var s);
+
+            if (s == null)
+            {
+                Debug.LogError($"A scope by the name [{name}] was still considered Active even after being nullified.");
+                
+                Active.Remove(name);
+
+                return false;
+            }
+            
+            s.Cancel();
+
+            return true;
+        }
 
         [SerializeField]
         private bool _Continue = true;
@@ -72,13 +119,17 @@ namespace Vanilla.MetaScript
             #endif
         }
 
-        public Scope(Scope parent, string taskName, string taskType) // Purely for debugging, delete taskName later
+        public Scope(Scope parent, string name) // Purely for debugging, delete taskName later
         {
             this.parent = parent;
+            this._Name  = name;
             this.Depth  = (byte) (parent != null ? parent.Depth + 1 : 0);
-            this._Name  = $"[{taskName}] ({taskType})";
+//            this._Name  = $"[{taskName}] ({taskType})";
+
             
-            Debug.LogWarning($"New Scope\n{parent}\n{taskName}\n{taskType}");
+            Active.Add(key: name, value: this);
+            
+//            Debug.LogWarning($"New Scope\n{parent}\n{taskName}\n{taskType}");
 
 //            var output = $"• Scope Created [{_Depth}] [{_Name}]";
 //            
@@ -107,7 +158,7 @@ namespace Vanilla.MetaScript
             #endif
             
             #if UNITY_EDITOR
-            EditorPlayModeSelfCancellation().Forget();
+//            EditorPlayModeSelfCancellation().Forget();
             #endif
 
             // Bummer, this seems to be the only (?) way to accurately check if the scope is ready for disposal.
@@ -206,6 +257,8 @@ namespace Vanilla.MetaScript
                 {
                     // Dispose managed resources.
                 }
+                
+                Active.Remove(_Name);
 
                 // Dispose unmanaged resources.
                 disposed = true;

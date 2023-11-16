@@ -37,7 +37,10 @@ namespace Vanilla.MetaScript
         {
             if (scope.Cancelled) return scope;
             
-            await target.Run(scope);
+            if (target != null && target.Task != null) await target.Task.Run(scope);
+
+
+//            await target.Run(scope);
 
             return scope;
         }

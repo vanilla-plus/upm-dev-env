@@ -75,7 +75,10 @@ namespace Vanilla.MetaScript
 //            
 //            newScope.Dispose();
 
-            await instance.Run(scope);
+//            await instance.Run(scope);
+            
+            if (instance.Task != null) await instance.Task.Run(scope);
+
             
             return scope;
         }

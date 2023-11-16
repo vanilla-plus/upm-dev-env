@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-
-using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
@@ -14,43 +10,23 @@ namespace Vanilla.MetaScript
 	{
 
 		[SerializeField]
-		public bool RunOnStart = false;
-
-		[SerializeField]
-		public bool CancelSupport = true;
-		
-		[SerializeField]
 		public KeyCode debugRunKey = KeyCode.Alpha1;
 		
 		[SerializeField]
-		public List<MetaTaskInstance> targets = new List<MetaTaskInstance>();
+		public MetaTaskInstance target;
 
-		void Start()
+		void Start() => Fire();
+
+
+		public void Fire()
 		{
-			if (RunOnStart) StartChainOfExecution();
-		}
-		
-		
-		[ContextMenu("StartChainOfExecution")]
-		public void StartChainOfExecution()
-		{
-			foreach (var t in targets)
-			{
-				if (CancelSupport)
-				{
-					t.StartTaskAndCacheScope();
-				}
-				else
-				{
-					t.StartTask();
-				}
-			}
+			if (target != null) target.StartTask();
 		}
 
 		void Update()
 		{
 			#if UNITY_EDITOR
-			if (Input.GetKeyDown(debugRunKey)) StartChainOfExecution();
+			if (Input.GetKeyDown(debugRunKey)) Fire();
 			#endif
 		}
 		
