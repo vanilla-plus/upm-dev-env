@@ -11,7 +11,7 @@ namespace Vanilla.Drivers
 
         [Range(0.0f, 1.0f)]
         [SerializeField]
-        private float _Value = 0.0f;
+        private float _Value;
         public float Value
         {
             get => _Value;
@@ -29,11 +29,13 @@ namespace Vanilla.Drivers
             }
         }
 
+        [HideInInspector]
         [SerializeField]
-        public float changeEpsilon = float.Epsilon;
+        public float changeEpsilon;
 
+        [HideInInspector]
         [SerializeField]
-        public float minMaxEpsilon = 0.01f;
+        public float minMaxEpsilon;
 
         [NonSerialized]
         public Action<float> OnValueChanged;
@@ -42,6 +44,13 @@ namespace Vanilla.Drivers
         public bool ValueAtMax => Math.Abs(value: _Value - 1.0f) < minMaxEpsilon;
 
         public static implicit operator float(Normal input) => input?.Value ?? 0f;
+
+
+        public void OnValidate()
+        {
+            if (changeEpsilon == 0) changeEpsilon = float.Epsilon;
+            if (minMaxEpsilon == 0) minMaxEpsilon = 0.01f;
+        }
 
     }
 

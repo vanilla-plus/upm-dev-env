@@ -1,7 +1,7 @@
 {
   "name": "vanilla.drivers",
   "displayName": "Drivers",
-  "description": "This is not the greatest package in the world, no.\r This is just a template!",
+  "description": "Drivers are a design-friendly way of organising and controlling data within your Unity scene.\n\nFor example, if you have many different material values that need to change in unison, you can 'drive' them all using just one slider.\n\nIt also gracefully resets your material values upon validation - finally!",
   "author": {
     "name": "Vanilla Plus",
     "email": "lucas@vanilla.com",
@@ -10,7 +10,7 @@
   "repository": "github:vanilla-plus/upm-drivers.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "type": "template",
   "dependencies": {
     "vanilla.type-menu": "3.1.0"
