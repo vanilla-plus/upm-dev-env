@@ -1,0 +1,30 @@
+{
+    "name": "Vanilla.Drivers",
+    "rootNamespace": "Vanilla.Drivers",
+    "references": [
+        "UniTask",
+        "Vanilla.DeltaValues",
+        "Vanilla.TypeMenu",
+        "Vanilla.MetaScript"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "vanilla.metascript",
+            "expression": "",
+            "define": "vanilla_metascript"
+        },
+        {
+            "name": "com.cysharp.unitask",
+            "expression": "",
+            "define": "cysharp_unitask"
+        }
+    ],
+    "noEngineReferences": false
+}

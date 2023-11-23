@@ -94,8 +94,10 @@ namespace Vanilla.NavStack
 //		        Debug.LogWarning(w);
 //	        }
 //        }
-        
-	    public async UniTask Nav_Back()
+
+	    public void Nav_Back_Sync() => Nav_Back_Async().Forget();
+
+	    public async UniTask Nav_Back_Async()
 	    {
 //		    LogStackContents();
 

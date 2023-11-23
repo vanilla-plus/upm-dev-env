@@ -54,7 +54,7 @@ namespace Vanilla.NavStack
             {
                 _button.interactable = false;
                 
-                await _stack.Nav_Back();
+                await _stack.Nav_Back_Async();
 
                 _button.interactable = !NonInteractiveWhenStackEmpty || NonInteractiveWhenStackEmpty && _stack.History.Count > 0;
                 
@@ -69,7 +69,7 @@ namespace Vanilla.NavStack
             }
             else
             {
-                _stack.Nav_Back().Forget();
+                _stack.Nav_Back_Async().Forget();
             }
         }
 

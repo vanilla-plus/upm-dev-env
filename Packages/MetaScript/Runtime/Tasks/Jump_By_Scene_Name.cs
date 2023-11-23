@@ -45,12 +45,8 @@ namespace Vanilla.MetaScript
 
             MetaTaskInstance instance = null;
 
-//            Debug.Log($"Contains [{rootObjects.Length}] root GameObjects");
-            
             foreach (var o in rootObjects)
             {
-//                Debug.LogError($"Checking [{o.gameObject.name}] for a MetaScriptInstance...");
-                
                 instance = o.GetComponent<MetaTaskInstance>();
 
                 if (instance != null) break;
@@ -67,16 +63,6 @@ namespace Vanilla.MetaScript
 
             if (scope.Cancelled) return scope;
 
-//            var newScope = new Scope(scope, Name, GetType().Name);
-//
-//            await instance.Run(newScope);
-//            
-//            newScope.Cancel();
-//            
-//            newScope.Dispose();
-
-//            await instance.Run(scope);
-            
             if (instance.Task != null) await instance.Task.Run(scope);
 
             

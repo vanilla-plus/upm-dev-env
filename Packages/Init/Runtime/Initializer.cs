@@ -1,5 +1,3 @@
-#undef debug
-
 using System.Linq;
 
 using UnityEngine;
@@ -74,17 +72,25 @@ namespace Vanilla.Init
 		{
 			
 			#if debug
-			Debug.LogWarning($"[Initializer] Initialization begun");
+			Debug.LogWarning("[Initializer] Initialization begun");
 			#endif
 
 			var initiables = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<IInitiable>(includeInactive: true));
 
+			#if debug
+			var output = initiables.Aggregate(seed: "Found the following initiables:\n",
+			                                  func: (current,
+			                                         i) => current + $"\n\t •  {i}");
+
+			Debug.LogWarning(output);
+			#endif
+			
 			foreach (var i in initiables) i.Init();
 
 			foreach (var i in initiables) i.PostInit();
 
 			#if debug
-			Debug.LogWarning($"[Initializer] Initialization complete");
+			Debug.LogWarning("[Initializer] Initialization complete");
 			#endif
 			
 		}

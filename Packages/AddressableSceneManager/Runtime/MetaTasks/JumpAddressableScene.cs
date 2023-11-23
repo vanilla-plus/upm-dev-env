@@ -96,7 +96,8 @@ namespace Vanilla.MetaScript.Addressables
                 return scope;
             }
 
-            await instance.Run(scope);
+//            await instance.Run(scope);
+            if (instance.Task != null) await instance.Task.Run(scope);
 
             // Unload
 

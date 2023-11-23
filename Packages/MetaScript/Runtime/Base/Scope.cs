@@ -9,12 +9,13 @@ namespace Vanilla.MetaScript
 {
 
     /*
-    In MetaScript, a Scope object is kind of like a relay baton.
-    A new one is created whenever a new execution context is created (for example, loading a custom scene and jumping to it)
-    and each scope should be cleaned up ('disposed') once that context is over.
-    Scopes have a reference to their parent scope, if any, and check their parent for cancellation as well.
-    So we should be careful when creating new scopes because they can accidentally stick around in memory
-    if not disposed of at the right time.
+        Scopes are a concept borrowed from other languages like JavaScript.
+        They act as a container for chains-of-execution, kind of like a thread.
+        For example, if you only created one Scope right at the start of your application and never made another one,
+        if that scope is cancelled, the entire application would close.
+        However, if you created a new scope at the start of an intro animation and cancelled that when the user hits the spacebar,
+        it would only cancel the intro animation.
+        Carefully choosing when to create a new scope is a crucial thing to consider when developing with MetaScript!
     */
     
     [Serializable]
@@ -63,6 +64,8 @@ namespace Vanilla.MetaScript
             }
             
             s.Cancel();
+            
+            Active.Remove(name);
 
             return true;
         }
@@ -92,17 +95,6 @@ namespace Vanilla.MetaScript
             set
             {
                 activeTasks = value;
-
-//                Debug.Log($"{_Name}.ActiveTasks is now [{activeTasks}]");
-                
-//                if (activeTasks != 0) return;
-
-//                Debug.LogError($"[{Time.frameCount}] Execution is officially over with a status of [{(Continue ? "Completed" : "Cancelled")}]");
-
-                // Funny little problem here.
-                // activeTasks will temporarily be set to 0 before 
-                
-//                Dispose(); 
             }
         }
 
@@ -124,25 +116,8 @@ namespace Vanilla.MetaScript
             this.parent = parent;
             this._Name  = name;
             this.Depth  = (byte) (parent != null ? parent.Depth + 1 : 0);
-//            this._Name  = $"[{taskName}] ({taskType})";
 
-            
             Active.Add(key: name, value: this);
-            
-//            Debug.LogWarning($"New Scope\n{parent}\n{taskName}\n{taskType}");
-
-//            var output = $"• Scope Created [{_Depth}] [{_Name}]";
-//            
-//            for (var i = 0;
-//                 i < Depth;
-//                 i++)
-//            {
-//                output = "    " + output;
-//            }
-            
-//            Debug.LogWarning($"Scope Created [{Depth}] {_Name}");
-
-//            Debug.LogWarning(output);
 
             #if debug
             var output = $"+ {_Name}";
@@ -160,61 +135,16 @@ namespace Vanilla.MetaScript
             #if UNITY_EDITOR
 //            EditorPlayModeSelfCancellation().Forget();
             #endif
-
-            // Bummer, this seems to be the only (?) way to accurately check if the scope is ready for disposal.
-            // The short version is that the perfect time is actually just checking when ActiveTasks == 0
-            // But that is technically true in-between tasks, even if there are more to run!
-            // So you get a situation where a scope for a Sequence will Dispose() itself after the first task completes.
-            // The second and third and any more tasks will still run, but... yeah. Not ideal.
-            // So instead, we do this dumb shit below just to make sure ActiveTasks is 0 across more than one frame 🤷🏻‍🤦🏻‍
-            // But is there another way to check altogether..?
-            
-//            MonitorActiveTasks();
         }
-
-
-//        private async UniTask MonitorActiveTasks()
-//        {
-//            await UniTask.WaitUntil(() => ActiveTasks == 0);
-//            
-//            Dispose();
-//        }
-
-
-        public void Cancel() => _Continue = false;
-
-//        public void Cancel_With_Parent()
-//        {
-//            _Continue = false;
-//            
-//            parent?.Cancel();
-//        }
         
-        public void Cancel_Recursive()
-        {
-            _Continue = false;
-
-            parent?.Cancel_Recursive();
-        }
-
-        public void Cancel_Upwards(int numberOfLayers)
+        public void Cancel()
         {
             _Continue = false;
             
-//            Debug.LogError($"Scope Cancelled [{Depth}] {_Name}");
-
-            numberOfLayers--;
-
-            if (numberOfLayers <= 0) return;
-            
-            parent?.Cancel_Upwards(numberOfLayers);
+            Active.Remove(_Name);
         }
-
+        
         public bool Cancelled => !Continue || (parent?.Cancelled ?? false);
-//
-//        public void Enter() => ActiveTasks++;
-//
-//        public void Exit() => ActiveTasks--;
 
         private bool disposed = false;
 
@@ -229,17 +159,6 @@ namespace Vanilla.MetaScript
         {
             if (!disposed)
             {
-//                var output = $"• Scope Disposed [{_Depth}] [{_Name}]";
-//            
-//                for (var i = 0;
-//                     i < Depth;
-//                     i++)
-//                {
-//                    output = "    " + output;
-//                }
-//            
-//                Debug.LogError(output);
-
                 #if debug
                 var output = $"- {_Name}";
             

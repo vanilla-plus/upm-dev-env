@@ -65,16 +65,6 @@ namespace Vanilla.MetaScript
 
 			if (scope.Cancelled) return scope;
 
-//			var newScope = new Scope(scope, Name, GetType().Name);
-
-//			await instance.Run(newScope);
-			
-//			newScope.Cancel();
-			
-//			newScope.Dispose();
-
-//			await instance.Run(scope);
-
 			if (instance.Task != null) await instance.Task.Run(scope);
 
 			return scope;
