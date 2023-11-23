@@ -3,7 +3,6 @@
     "rootNamespace": "Vanilla.Drivers",
     "references": [
         "UniTask",
-        "Vanilla.DeltaValues",
         "Vanilla.TypeMenu",
         "Vanilla.MetaScript"
     ],

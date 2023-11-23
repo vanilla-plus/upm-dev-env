@@ -1,9 +1,10 @@
 using System;
 
 using UnityEngine;
-using UnityEngine.Events;
 
 using Vanilla.TypeMenu;
+
+using Vanilla.Drivers.Modules;
 
 namespace Vanilla.Drivers
 {
@@ -15,9 +16,7 @@ namespace Vanilla.Drivers
 
         void DeInit(DriverSet driverSet);
 
-        void HandleValueChange(float normal);
-
-        void OnValidate(DriverInstance instance, DriverSet driverSet);
+        void OnValidate(DriverSet driverSet);
 
     }
 
@@ -25,15 +24,8 @@ namespace Vanilla.Drivers
     public abstract class DriverBase<T> : IDriver
     {
 
-//        [SerializeField]
-//        public string Name;
-
-//        [SerializeField]
-//        public UnityEvent<T> OnValueChange;
-
-//        [SerializeReference]
-//        [TypeMenu]
-//        public ModuleBase<T>[] modules = Array.Empty<ModuleBase<T>>();
+        [SerializeField]
+        public string Name;
 
         public abstract ModuleBase<T>[] Modules
         {
@@ -41,19 +33,9 @@ namespace Vanilla.Drivers
             set;
         }
 
-//        public abstract void OnValidate(DriverSet driverSet);
-
-
-        public void OnValidate(DriverInstance instance, DriverSet set)
+        public void OnValidate(DriverSet set)
         {
-//            if (instance.DebugMode)
-//            {
-                var value = GetInterpolate(set.normal.Value);
-//            }
-//            else
-//            {
-//                var value = 0.0f;
-//            }
+            var value = GetInterpolate(set.normal.Value);
 
             foreach (var m in Modules) m?.OnValidate(value);
         }
@@ -82,21 +64,8 @@ namespace Vanilla.Drivers
 
     }
 
-//    [Serializable]
-//    public abstract class EventDriver<T> : DriverBase<T>
-//    {
-//
-//        [SerializeField]
-//        public UnityEvent<T> OnValueChange;
-//
-//        public override void Interpolate(float normal) => OnValueChange.Invoke(Get(normal));
-//
-//    }
-
-
-
     [Serializable]
-    public class Vec1Driver : DriverBase<float>
+    public class Vector1 : DriverBase<float>
     {
 
         [SerializeField]
@@ -121,101 +90,101 @@ namespace Vanilla.Drivers
     }
 
     [Serializable]
-    public class Vec2Driver : DriverBase<Vector2>
+    public class Vector2 : DriverBase<UnityEngine.Vector2>
     {
 
         [SerializeField]
-        public Vector2 Min = Vector2.zero;
+        public UnityEngine.Vector2 Min = UnityEngine.Vector2.zero;
 
         [SerializeField]
-        public Vector2 Max = Vector2.one;
+        public UnityEngine.Vector2 Max = UnityEngine.Vector2.one;
 
         [SerializeReference]
         [TypeMenu]
         public Vec2Module[] modules = Array.Empty<Vec2Module>();
-        public override ModuleBase<Vector2>[] Modules
+        public override ModuleBase<UnityEngine.Vector2>[] Modules
         {
             get => modules;
             set => modules = value as Vec2Module[];
         }
 
-        protected override Vector2 GetInterpolate(float normal) => Vector2.Lerp(a: Min,
-                                                                                b: Max,
-                                                                                t: normal);
+        protected override UnityEngine.Vector2 GetInterpolate(float normal) => UnityEngine.Vector2.Lerp(a: Min,
+                                                                                                        b: Max,
+                                                                                                        t: normal);
 
     }
 
     [Serializable]
-    public class Vec3Driver : DriverBase<Vector3>
+    public class Vector3 : DriverBase<UnityEngine.Vector3>
     {
 
         [SerializeField]
-        public Vector3 Min = Vector3.zero;
+        public UnityEngine.Vector3 Min = UnityEngine.Vector3.zero;
 
         [SerializeField]
-        public Vector3 Max = Vector3.one;
+        public UnityEngine.Vector3 Max = UnityEngine.Vector3.one;
 
         [SerializeReference]
         [TypeMenu]
         public Vec3Module[] modules = Array.Empty<Vec3Module>();
-        public override ModuleBase<Vector3>[] Modules
+        public override ModuleBase<UnityEngine.Vector3>[] Modules
         {
             get => modules;
             set => modules = value as Vec3Module[];
         }
 
-        protected override Vector3 GetInterpolate(float normal) => Vector3.Lerp(a: Min,
-                                                                                b: Max,
-                                                                                t: normal);
+        protected override UnityEngine.Vector3 GetInterpolate(float normal) => UnityEngine.Vector3.Lerp(a: Min,
+                                                                                                        b: Max,
+                                                                                                        t: normal);
 
     }
 
     [Serializable]
-    public class ColorDriver : DriverBase<Color>
+    public class Color : DriverBase<UnityEngine.Color>
     {
 
         [SerializeField]
-        public Color From = Color.black;
+        public UnityEngine.Color From = UnityEngine.Color.black;
 
         [SerializeField]
-        public Color To = Color.white;
+        public UnityEngine.Color To = UnityEngine.Color.white;
 
         [SerializeReference]
         [TypeMenu]
         public ColorModule[] modules = Array.Empty<ColorModule>();
-        public override ModuleBase<Color>[] Modules
+        public override ModuleBase<UnityEngine.Color>[] Modules
         {
             get => modules;
             set => modules = value as ColorModule[];
         }
 
-        protected override Color GetInterpolate(float normal) => Color.Lerp(a: From,
-                                                                            b: To,
-                                                                            t: normal);
+        protected override UnityEngine.Color GetInterpolate(float normal) => UnityEngine.Color.Lerp(a: From,
+                                                                                                    b: To,
+                                                                                                    t: normal);
 
     }
 
     [Serializable]
-    public class GradientDriver : DriverBase<Color>
+    public class Gradient : DriverBase<UnityEngine.Color>
     {
 
         [SerializeField]
-        public Gradient[] gradients = Array.Empty<Gradient>();
+        public UnityEngine.Gradient[] gradients = Array.Empty<UnityEngine.Gradient>();
 
         [SerializeReference]
         [TypeMenu]
         public ColorModule[] modules = Array.Empty<ColorModule>();
-        public override ModuleBase<Color>[] Modules
+        public override ModuleBase<UnityEngine.Color>[] Modules
         {
             get => modules;
             set => modules = value as ColorModule[];
         }
 
-        protected override Color GetInterpolate(float normal)
+        protected override UnityEngine.Color GetInterpolate(float normal)
         {
             var gradientCount = gradients.Length;
 
-            if (gradientCount == 0) return Color.white;
+            if (gradientCount == 0) return UnityEngine.Color.white;
 
             var gradientBracket = (int) Mathf.Clamp(value: Mathf.Floor(f: normal * gradientCount),
                                                     min: 0,

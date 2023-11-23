@@ -12,9 +12,6 @@ namespace Vanilla.Drivers
     public class DriverInstance : MonoBehaviour
     {
 
-        [SerializeField]
-        public bool DebugMode = false;
-        
         [NonSerialized]
         public Dictionary<string, DriverSet> dictionary = new Dictionary<string, DriverSet>();
 
@@ -27,7 +24,7 @@ namespace Vanilla.Drivers
             #if UNITY_EDITOR
             foreach (var set in sets)
             {
-                set.OnValidate(this);
+                set.OnValidate();
             }
             #endif
         }
@@ -72,27 +69,23 @@ namespace Vanilla.Drivers
         public IDriver[] drivers = Array.Empty<IDriver>();
 
 
-        public void OnValidate(DriverInstance instance)
+        public void OnValidate()
         {
             #if UNITY_EDITOR
-            foreach (var d in drivers)
-                d?.OnValidate(instance,
-                              this);
-
-//            foreach (var d in drivers) d?.Interpolate(normal: normal.Value);
+            foreach (var d in drivers) d?.OnValidate(driverSet: this);
             #endif
         }
 
 
         public void Init()
         {
-            foreach (var d in drivers) d?.Init(this);
+            foreach (var d in drivers) d?.Init(driverSet: this);
         }
 
 
         public void DeInit()
         {
-            foreach (var d in drivers) d?.DeInit(this);
+            foreach (var d in drivers) d?.DeInit(driverSet: this);
         }
 
     }
