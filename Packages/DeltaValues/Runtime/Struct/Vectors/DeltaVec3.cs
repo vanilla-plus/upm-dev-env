@@ -60,11 +60,13 @@ namespace Vanilla.DeltaValues
 
         public override bool GreaterThan(Vector3 a, Vector3 b) => a.x > b.x && a.y > b.y && a.z > b.z;
 
-        public override bool ValueAtMin() => Mathf.Abs(_Value.x - _Min.x) < MinMaxEpsilon 
+        public override bool ValueAtMin() => 
+               Mathf.Abs(_Value.x - _Min.x) < MinMaxEpsilon 
             && Mathf.Abs(_Value.y - _Min.y) < MinMaxEpsilon 
             && Mathf.Abs(_Value.z - _Min.z) < MinMaxEpsilon;
 
-        public override bool ValueAtMax() => Mathf.Abs(_Value.x - _Max.x) < MinMaxEpsilon 
+        public override bool ValueAtMax() => 
+               Mathf.Abs(_Value.x - _Max.x) < MinMaxEpsilon 
             && Mathf.Abs(_Value.y - _Max.y) < MinMaxEpsilon 
             && Mathf.Abs(_Value.z - _Max.z) < MinMaxEpsilon;
 

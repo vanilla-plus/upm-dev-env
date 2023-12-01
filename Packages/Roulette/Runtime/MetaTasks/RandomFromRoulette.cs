@@ -9,7 +9,7 @@ using UnityEngine;
 
 using Vanilla.Roulette;
 
-namespace Vanilla.MetaScript.TaskSets
+namespace Vanilla.MetaScript.Flow
 {
 
 	[Serializable]

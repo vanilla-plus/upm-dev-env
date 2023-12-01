@@ -8,7 +8,7 @@
     "url": "https://vanilla.plus/"
   },
   "repository": "github:vanilla-plus/upm-s3-filesync.git",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "type": "template",
   "dependencies": {
     "com.cysharp.unitask": "2.4.1"

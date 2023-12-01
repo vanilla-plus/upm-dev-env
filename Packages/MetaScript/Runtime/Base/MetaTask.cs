@@ -24,7 +24,7 @@ namespace Vanilla.MetaScript
 		[SerializeField]
 		public TaskOptions taskOptions = TaskOptions.Run | TaskOptions.Wait;
 		
-		private const string DefaultAutoName = "This task can't be auto-named yet.";
+		protected const string DefaultAutoName = "This task can't be auto-named yet.";
 
 		[SerializeReference]
 		[TypeMenu]
@@ -50,19 +50,6 @@ namespace Vanilla.MetaScript
 
 		public async UniTask<Scope> Run(Scope scope)
 		{
-//			if (scope.Cancelled)
-//			{
-//				Debug.LogWarning($"[{Name}] - I'm not doing anything because my Scope is cancelled");
-//				
-//				return scope;
-//			}
-
-//			var s = taskOptions.HasFlag(flag: TaskOptions.NewScope) ?
-//				        new Scope(parent: scope,
-//				                  taskName: Name)
-////				                  taskType: GetType().Name) :
-//				        : scope;
-
 			var s = scopeSource != null ?
 				        scopeSource.CreateScope(scope) :
 				        scope;
@@ -99,13 +86,6 @@ namespace Vanilla.MetaScript
 				s.Dispose();
 			}
 			
-//			if (taskOptions.HasFlag(flag: TaskOptions.NewScope))
-//			{
-//				s.Cancel();
-
-//				s.Dispose();
-//			}
-
 			return scope;
 		}
 

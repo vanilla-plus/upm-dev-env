@@ -25,7 +25,7 @@ namespace Vanilla.MetaScript
         private static Dictionary<string, Scope> Active = new Dictionary<string, Scope>();
         
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void Reset()
+        private static void StaticReset()
         {
             foreach (var s in Active.Values) s.Cancel();
 
@@ -92,30 +92,18 @@ namespace Vanilla.MetaScript
         public byte ActiveTasks
         {
             get => activeTasks;
-            set
-            {
-                activeTasks = value;
-            }
+            set => activeTasks = value;
         }
 
-
-        private async UniTask EditorPlayModeSelfCancellation()
-        {
-            #if UNITY_EDITOR
-            while (_Continue && Application.isPlaying)
-            {
-                await UniTask.Yield();
-            }
-            
-            Cancel();
-            #endif
-        }
-
-        public Scope(Scope parent, string name) // Purely for debugging, delete taskName later
+        public Scope(Scope parent, string name)
         {
             this.parent = parent;
-            this._Name  = name;
-            this.Depth  = (byte) (parent != null ? parent.Depth + 1 : 0);
+            
+            _Name  = name;
+
+            Depth = (byte) (parent != null ?
+                                parent.Depth + 1 :
+                                0);
 
             Active.Add(key: name, value: this);
 
@@ -130,10 +118,6 @@ namespace Vanilla.MetaScript
             }
             
             Debug.Log(output);
-            #endif
-            
-            #if UNITY_EDITOR
-//            EditorPlayModeSelfCancellation().Forget();
             #endif
         }
         

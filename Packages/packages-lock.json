@@ -150,6 +150,17 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.services.analytics": {
+      "version": "5.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.services.core": "1.10.1"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.services.authentication": {
       "version": "2.7.2",
       "depth": 2,
@@ -164,7 +175,7 @@
     },
     "com.unity.services.core": {
       "version": "1.11.0",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.unitywebrequest": "1.0.0",
@@ -242,12 +253,20 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "vanilla.data-assets": {
+      "version": "file:DataAssets",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "vanilla.delta-values": "4.2.1"
+      }
+    },
     "vanilla.debug-cam": {
       "version": "file:Vanilla Debug Cam",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "vanilla.delta-values": "4.2.0"
+        "vanilla.delta-values": "4.2.1"
       }
     },
     "vanilla.delta-values": {
@@ -271,7 +290,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "vanilla.type-menu": "3.1.0"
+        "vanilla.type-menu": "4.1.0"
       }
     },
     "vanilla.easing": {
@@ -279,7 +298,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "vanilla.type-menu": "3.1.0"
+        "vanilla.type-menu": "4.1.0"
       }
     },
     "vanilla.filesync": {
@@ -329,7 +348,7 @@
       "source": "embedded",
       "dependencies": {
         "com.cysharp.unitask": "2.4.1",
-        "vanilla.type-menu": "3.1.0"
+        "vanilla.type-menu": "4.1.0"
       }
     },
     "vanilla.nav-stack": {
@@ -388,7 +407,7 @@
       "source": "embedded",
       "dependencies": {
         "com.cysharp.unitask": "2.4.1",
-        "vanilla.delta-values": "4.2.0"
+        "vanilla.delta-values": "4.2.1"
       }
     },
     "vanilla.type-menu": {

@@ -23,24 +23,12 @@ namespace Vanilla.MetaScript
 		{
 			#if UNITY_EDITOR
 			task?.OnValidate();
-
-			if (task is
-			    {
-				    scopeSource: null
-			    })
-			{
-				var newScopeSource = new Named_Scope_Source
-				                     {
-					                     name = "root"
-				                     };
-
-				task.scopeSource = newScopeSource;
-			}
 			#endif
 		}
 
+
 		[ContextMenu("Start Task")]
-		public void StartTask() => task.Run(null).Forget();
+		public void StartTask(Scope scope) => task.Run(scope).Forget();
 
 	}
 

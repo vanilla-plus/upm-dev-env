@@ -105,7 +105,7 @@ namespace Vanilla.DeltaValues
                 }
                 else
                 {
-                    // It was an decrease!
+                    // It was a decrease!
 
                     AtMax.Value = ValueAtMax(); // Set AtMax
 

@@ -3,8 +3,7 @@
     "rootNamespace": "Vanilla.FileSync",
     "references": [
         "UniTask",
-        "Vanilla.MetaScript",
-        "Vanilla.MetaScript.TaskSets"
+        "Vanilla.MetaScript"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
