@@ -17,9 +17,10 @@ namespace Vanilla.MetaScript.Flow
 		{
 			if (scope.Cancelled) return scope;
 
-			await UniTask.WhenAny(tasks: Enumerable.Select(source: _tasks,
-			                                               selector: t => t.Run(scope)));
-			
+			var tasksToRun = _tasks.Where(t => t.taskOptions.HasFlag(TaskOptions.Run));
+
+			await UniTask.WhenAny(tasks: tasksToRun.Select(t => t.Run(scope)));
+
 			return scope;
 		}
 
