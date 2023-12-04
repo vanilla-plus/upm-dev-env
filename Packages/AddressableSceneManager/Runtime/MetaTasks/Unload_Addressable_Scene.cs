@@ -12,7 +12,7 @@ namespace Vanilla.MetaScript.Addressables
 {
     
 	[Serializable]
-	public class UnloadAddressableScene : MetaTask
+	public class Unload_Addressable_Scene : MetaTask
 	{
 
 		[SerializeField]

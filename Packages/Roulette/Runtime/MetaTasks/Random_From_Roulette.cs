@@ -13,7 +13,7 @@ namespace Vanilla.MetaScript.Flow
 {
 
 	[Serializable]
-    public class RandomFromRoulette : MetaTaskSet
+    public class Random_From_Roulette : MetaTaskSet
     {
 
 	    [SerializeField]

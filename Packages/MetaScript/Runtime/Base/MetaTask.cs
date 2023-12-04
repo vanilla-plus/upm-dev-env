@@ -28,7 +28,7 @@ namespace Vanilla.MetaScript
 
 		[SerializeReference]
 		[TypeMenu("green")]
-		[Only(typeof(IScopeSource))]
+//		[Only(typeof(IScopeSource))]
 		public IScopeSource scopeSource;
 		
 		public virtual void OnValidate()

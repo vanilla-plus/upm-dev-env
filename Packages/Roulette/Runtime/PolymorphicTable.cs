@@ -18,7 +18,6 @@ namespace Vanilla.Roulette
 
         [SerializeReference]
         [TypeMenu("blue")]
-        [Only(typeof(IRouletteItem))]
         public List<IRouletteItem> items = new();
 
 		public T SpinForAnItem<T>() where T : IRouletteItem

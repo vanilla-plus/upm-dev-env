@@ -15,7 +15,7 @@ namespace Vanilla.MetaScript
 
 		[SerializeReference]
 		[TypeMenu("blue")]
-		[Only(typeof(MetaTask))]
+//		[Only(typeof(MetaTask))]
 		private MetaTask task;
 		public MetaTask Task => task;
 

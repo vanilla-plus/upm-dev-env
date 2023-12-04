@@ -11,10 +11,6 @@ namespace Vanilla.TypeMenu
 
 		public readonly Color color;
 
-		private const float lowerBound = 0.0f;
-		private const float midBound   = 0.69f;
-		private const float upperBound = 1.0f;
-
 		public TypeMenuAttribute(string color) => this.color = color switch
 		                                                       {
 			                                                       "red"     => new Color(0.75f,

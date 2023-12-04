@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Addressables
 {
 
     [Serializable]
-    public class JumpAddressableScene : MetaTask
+    public class Jump_Addressable_Scene : MetaTask
     {
 
         [SerializeField]
