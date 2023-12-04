@@ -6,7 +6,7 @@ namespace Vanilla.MetaScript.Materials
 {
 
 	[Serializable]
-	public class LerpMaterialColor : Lerp
+	public class Lerp_Material_Color : Lerp
 	{
 
 		[SerializeField]

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b76bb6ccd929413f818053564effdb6, type: 3}
+  m_Name: Test Vec1
+  m_EditorClassIdentifier: 
+  deltaValue:
+    _Name: Unknown DeltaVec1
+    _Value: 0
+    _Min: 0
+    _Max: 1
+    AtMin:
+      _Name: Unknown DeltaVec1.AtMin
+      _Value: 1
+    AtMax:
+      _Name: Unknown DeltaVec1.AtMax
+      _Value: 0
+    ChangeEpsilon: 1e-45
+    MinMaxEpsilon: 0.01

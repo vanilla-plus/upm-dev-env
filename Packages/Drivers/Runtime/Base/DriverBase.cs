@@ -77,7 +77,7 @@ namespace Vanilla.Drivers
         public float Max = 1.0f;
 
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("blue")]
         public Vec1Module[] modules = Array.Empty<Vec1Module>();
         public override ModuleBase<float>[] Modules
         {
@@ -102,7 +102,7 @@ namespace Vanilla.Drivers
         public UnityEngine.Vector2 Max = UnityEngine.Vector2.one;
 
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("blue")]
         public Vec2Module[] modules = Array.Empty<Vec2Module>();
         public override ModuleBase<UnityEngine.Vector2>[] Modules
         {
@@ -127,7 +127,7 @@ namespace Vanilla.Drivers
         public UnityEngine.Vector3 Max = UnityEngine.Vector3.one;
 
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("blue")]
         public Vec3Module[] modules = Array.Empty<Vec3Module>();
         public override ModuleBase<UnityEngine.Vector3>[] Modules
         {
@@ -152,7 +152,7 @@ namespace Vanilla.Drivers
         public UnityEngine.Color To = UnityEngine.Color.white;
 
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("blue")]
         public ColorModule[] modules = Array.Empty<ColorModule>();
         public override ModuleBase<UnityEngine.Color>[] Modules
         {
@@ -174,7 +174,7 @@ namespace Vanilla.Drivers
         public UnityEngine.Gradient[] gradients = Array.Empty<UnityEngine.Gradient>();
 
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("blue")]
         public ColorModule[] modules = Array.Empty<ColorModule>();
         public override ModuleBase<UnityEngine.Color>[] Modules
         {

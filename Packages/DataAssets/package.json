@@ -13,5 +13,6 @@
   "type": "template",
   "dependencies": {
     "vanilla.delta-values": "4.2.1"
-  }
+  },
+  "description": "Asset files that each contain a single instance of their respective DeltaValue."
 }

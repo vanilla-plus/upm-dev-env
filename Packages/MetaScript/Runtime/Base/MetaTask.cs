@@ -27,7 +27,7 @@ namespace Vanilla.MetaScript
 		protected const string DefaultAutoName = "This task can't be auto-named yet.";
 
 		[SerializeReference]
-		[TypeMenu]
+		[TypeMenu("green")]
 		[Only(typeof(IScopeSource))]
 		public IScopeSource scopeSource;
 		
@@ -38,7 +38,7 @@ namespace Vanilla.MetaScript
 				              CreateAutoName() :
 				              DefaultAutoName;
 
-			if (string.IsNullOrEmpty(Name) || string.Equals(Name, DefaultAutoName)) _Name = AutoName;
+			if (string.IsNullOrEmpty(Name) || string.Equals(a: Name, b: DefaultAutoName)) _Name = AutoName;
 			#endif
 		}
 		

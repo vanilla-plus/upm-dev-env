@@ -18,7 +18,7 @@ namespace Vanilla.Easing.Samples
 		
 		public float speed = 0.5f;
 		
-		[TypeMenu]
+		[TypeMenu("blue")]
 		[Only(typeof(IEasingSlot))]
 		[SerializeReference]
 		public IEasingSlot easingSlot;

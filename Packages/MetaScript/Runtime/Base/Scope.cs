@@ -27,7 +27,7 @@ namespace Vanilla.MetaScript
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void StaticReset()
         {
-            foreach (var s in Active.Values) s.Cancel();
+            foreach (var s in Active.Values) s._Continue = false;
 
             Active.Clear();
         }

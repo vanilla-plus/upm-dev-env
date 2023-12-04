@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
@@ -11,10 +12,9 @@ namespace Vanilla.MetaScript.Flow
 	[Serializable]
 	public abstract class MetaTaskSet : MetaTask
 	{
-
+		
 		[SerializeReference]
-		[TypeMenu]
-		[Only(typeof(MetaTask))]
+		[TypeMenu("blue")]
 		protected MetaTask[] _tasks = Array.Empty<MetaTask>();
 		public MetaTask[] Tasks => _tasks;
 

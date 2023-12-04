@@ -6,7 +6,7 @@ namespace Vanilla.MetaScript.Materials
 {
 
 	[Serializable]
-	public class LerpMaterialFloat : Lerp
+	public class Lerp_Material_Float : Lerp
 	{
 
 		[SerializeField]

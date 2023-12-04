@@ -128,7 +128,7 @@ namespace Vanilla.Drivers
         public Normal normal = new Normal();
 
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("blue")]
         public IDriver[] drivers = Array.Empty<IDriver>();
 
 

@@ -10,17 +10,17 @@ namespace Vanilla.TypeMenu.Samples
     {
 
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("blue")]
         [Only(typeof(IHealthy))]
         public Food eatThis;
 
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("blue")]
         [Except(typeof(IHealthy))]
         public Food dontEatThis;
 
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("blue")]
         public Food eatWhateverYouWant;
 
     }

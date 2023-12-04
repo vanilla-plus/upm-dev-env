@@ -18,7 +18,7 @@ namespace Vanilla.MetaScript
 		public MetaTaskInstance target;
 
 		[SerializeReference]
-		[TypeMenu]
+		[TypeMenu("green")]
 		[Only(typeof(IScopeSource))]
 		public IScopeSource scopeSource;
 

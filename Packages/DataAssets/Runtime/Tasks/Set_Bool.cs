@@ -9,7 +9,7 @@ using Vanilla.MetaScript;
 namespace Vanilla.DataAssets
 {
 	[Serializable]
-	public class SetDeltaBool : MetaTask
+	public class Set_Bool : MetaTask
 	{
 		public enum BoolAction
 		{

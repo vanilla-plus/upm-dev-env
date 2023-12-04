@@ -38,7 +38,7 @@ namespace Vanilla.JNode
         [Space(20.0f)]
         [Header("Data Class")]
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("green")]
         public JNode data = default;
 
         [Space(20.0f)]

@@ -17,7 +17,7 @@ namespace Vanilla.Roulette
 	{
 
         [SerializeReference]
-        [TypeMenu]
+        [TypeMenu("blue")]
         [Only(typeof(IRouletteItem))]
         public List<IRouletteItem> items = new();
 

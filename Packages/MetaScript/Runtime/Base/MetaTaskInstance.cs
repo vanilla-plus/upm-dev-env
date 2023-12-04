@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript
 	{
 
 		[SerializeReference]
-		[TypeMenu]
+		[TypeMenu("blue")]
 		[Only(typeof(MetaTask))]
 		private MetaTask task;
 		public MetaTask Task => task;
@@ -27,8 +27,10 @@ namespace Vanilla.MetaScript
 		}
 
 
-		[ContextMenu("Start Task")]
-		public void StartTask(Scope scope) => task.Run(scope).Forget();
+		[ContextMenu(itemName: "Start Task")]
+		private void EditorStart() => StartTask(null);
+		
+		public void StartTask(Scope scope) => task.Run(scope: scope).Forget();
 
 	}
 
