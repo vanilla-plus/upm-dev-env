@@ -24,6 +24,7 @@ namespace Vanilla.MetaScript
         {
             Init();
             
+//            var t    = GetStartProgress();
             var t    = 0.0f;
             var rate = 1.0f / secondsToTake;
 
@@ -44,7 +45,6 @@ namespace Vanilla.MetaScript
 
             return scope;
         }
-
 
         protected abstract void Init();
 

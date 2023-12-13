@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace Vanilla.Drivers.Modules
+namespace Vanilla.Drivers.Snrubs
 {
 
-	public interface IMaterialModule
+	public interface IMaterialSnrub
 	{
 
 		string PropertyName

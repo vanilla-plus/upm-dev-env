@@ -4,7 +4,9 @@
     "references": [
         "UniTask",
         "Vanilla.DeltaValues",
-        "Vanilla.MetaScript"
+        "Vanilla.MetaScript",
+        "Vanilla.TypeMenu",
+        "Vanilla.Normal"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

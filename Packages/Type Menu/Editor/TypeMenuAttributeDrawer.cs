@@ -97,6 +97,10 @@ public class TypeMenuAttributeDrawer : PropertyDrawer
 		var appropriateTypes = GetAppropriateTypes(property: property,
 		                                           filters: filters);
 
+		Debug.Log(appropriateTypes.Count());
+		
+		foreach (var t in appropriateTypes) Debug.Log(t.Name);
+
 		SearchableMenuWindow.ShowWindow(title: "Type Menu",
 		                                property: property,
 		                                types: appropriateTypes);
@@ -176,23 +180,30 @@ public class TypeMenuAttributeDrawer : PropertyDrawer
 		return JsonUtility.FromJson(json: serialized, type: obj.GetType());
 	}
 
-	private static List<Type> GetAppropriateTypes(SerializedProperty property, IEnumerable<Func<Type, bool>> filters)
+	private static IEnumerable<Type> GetAppropriateTypes(SerializedProperty property, IEnumerable<Func<Type, bool>> filters)
 	{
 		var typeSplitString = property.managedReferenceFieldTypename.Split(' ');
 		var realType        = Type.GetType($"{typeSplitString[1]}, {typeSplitString[0]}");
+		
 		if (realType == null)
 		{
 			Debug.LogError($"Can not get field type of managed reference : {property.managedReferenceFieldTypename}");
+			
 			return new List<Type>();
 		}
 
-		return (from type in TypeCache.GetTypesDerivedFrom(realType)
+		var derived = TypeCache.GetTypesDerivedFrom(realType).ToList();
+		
+		derived.Add(realType); // GetTypesDerivedFrom doesn't include the passed-in type, so let's add it ourselves.
+		
+		return (from type in derived
 		        where IsValidType(type: type, filters: filters)
-		        select type).OrderBy(t => t.Name).ToList();
+		        select type).OrderBy(t => t.Name);
 	}
 
+
 	private static bool IsValidType(Type type,
-	                                IEnumerable<Func<Type, bool>> filters) => !type.IsSubclassOf(typeof(UnityEngine.Object))                  &&
+	                                IEnumerable<Func<Type, bool>> filters) => !type.IsSubclassOf(typeof(UnityEngine.Object))                &&
 	                                                                          !type.IsAbstract                                                &&
 	                                                                          !type.ContainsGenericParameters                                 &&
 	                                                                          (!type.IsClass || type.GetConstructor(Type.EmptyTypes) != null) &&

@@ -13,7 +13,7 @@ public class SearchableMenuWindow : EditorWindow
 	private        string             searchQuery = string.Empty;
 	private        Vector2            scrollPosition;
 	private        SerializedProperty property;
-	private        List<Type>         types;
+	private        IEnumerable<Type>         types;
 	private        List<Type>         filteredTypes    = new List<Type>();
 	private        int                focusedItemIndex = 0; // Index of the currently focused item
 	private        GUIStyle           selectedStyle;
@@ -22,7 +22,7 @@ public class SearchableMenuWindow : EditorWindow
 	// Call this method to open the window, passing the necessary parameters
 	public static void ShowWindow(string title,
 	                              SerializedProperty property,
-	                              List<Type> types)
+	                              IEnumerable<Type> types)
 	{
 		var window = GetWindow<SearchableMenuWindow>(utility: true,
 		                                             title: title);

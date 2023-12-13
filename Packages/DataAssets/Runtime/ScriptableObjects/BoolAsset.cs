@@ -11,12 +11,16 @@ namespace Vanilla.DataAssets
 	[CreateAssetMenu(fileName = "Bool Asset",
 	                 menuName = "Vanilla/Data Assets/Bool",
 	                 order = 1)]
-	public class BoolAsset : ScriptableObject
+	public class BoolAsset : DataAsset<bool>
 	{
 
 		[SerializeField]
-		private DeltaBool deltaValue = new DeltaBool();
-		public DeltaBool DeltaValue => deltaValue;
+		private DeltaBool _delta = new();
+		public override DeltaValue<bool> Delta
+		{
+			get => _delta;
+			set => _delta = value as DeltaBool;
+		}
 
 	}
 

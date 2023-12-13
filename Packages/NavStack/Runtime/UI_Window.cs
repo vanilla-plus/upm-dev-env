@@ -10,7 +10,8 @@ namespace Vanilla.NavStack
 
 	[Serializable]
 	[RequireComponent(typeof(CanvasGroup))]
-	public class UI_Window : MonoBehaviour, IInitiable
+	public class UI_Window : MonoBehaviour,
+	                         IInitiable
 	{
 
 		[SerializeField]
@@ -28,7 +29,7 @@ namespace Vanilla.NavStack
 			State ??= new DeltaState(name: $"[{GetType().Name}].State",
 			                         defaultActiveState: false,
 			                         fillSeconds: 0.5f);
-			
+
 			PostInit();
 			#endif
 		}
@@ -37,10 +38,10 @@ namespace Vanilla.NavStack
 		public virtual void Init()
 		{
 			State.Init();
-			
-			State.Progress.OnValueChanged       += HandleActiveProgress;
-			State.Progress.AtMin.OnValueChanged += HandleFullyInactive;
-			State.Progress.AtMax.OnValueChanged += HandleFullyActive;
+
+			State.Progress.OnValueChanged                  += HandleActiveProgress;
+			State.Progress.AtMin.OnValueChangedWithHistory += HandleFullyInactive;
+			State.Progress.AtMax.OnValueChanged            += HandleFullyActive;
 		}
 
 
@@ -51,25 +52,24 @@ namespace Vanilla.NavStack
 			_group.interactable = State.Progress.AtMax;
 		}
 
+
 		protected virtual void HandleFullyInactive(bool outgoing,
 		                                           bool incoming) => _group.gameObject.SetActive(outgoing);
 
 
-		protected virtual void HandleActiveProgress(float outgoing,
-		                                            float incoming) => _group.alpha = incoming;
+		protected virtual void HandleActiveProgress(float incoming) => _group.alpha = incoming;
 
 
-		protected virtual void HandleFullyActive(bool outgoing,
-		                                         bool incoming) => _group.interactable = incoming;
+		protected virtual void HandleFullyActive(bool incoming) => _group.interactable = incoming;
 
 
 		protected virtual void OnDestroy()
 		{
 			State.Deinit();
 
-			State.Progress.OnValueChanged       -= HandleActiveProgress;
-			State.Progress.AtMin.OnValueChanged -= HandleFullyInactive;
-			State.Progress.AtMax.OnValueChanged -= HandleFullyActive;
+			State.Progress.OnValueChanged                  -= HandleActiveProgress;
+			State.Progress.AtMin.OnValueChangedWithHistory -= HandleFullyInactive;
+			State.Progress.AtMax.OnValueChanged            -= HandleFullyActive;
 		}
 
 	}

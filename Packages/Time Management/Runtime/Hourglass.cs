@@ -94,8 +94,7 @@ namespace Vanilla.TimeManagement
 			TargetTimeScale.OnValueChanged += HandleTargetTimeScaleChange;
 		}
 
-		private static void HandleTargetTimeScaleChange(float outgoing,
-		                                                float incoming) => Interpolating.Value = true;
+		private static void HandleTargetTimeScaleChange(float incoming) => Interpolating.Value = true;
 
 
 		private static void StartInterpolating() => Interpolate().Forget();

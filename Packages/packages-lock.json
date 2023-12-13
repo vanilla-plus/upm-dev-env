@@ -290,7 +290,9 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "vanilla.type-menu": "4.2.0"
+        "vanilla.type-menu": "4.2.0",
+        "vanilla.normal": "1.0.0",
+        "vanilla.data-assets": "1.0.0"
       }
     },
     "vanilla.easing": {
@@ -306,7 +308,8 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.cysharp.unitask": "2.4.1"
+        "com.cysharp.unitask": "2.4.1",
+        "vanilla.type-menu": "4.2.0"
       }
     },
     "vanilla.first-person-kit": {
@@ -317,6 +320,12 @@
     },
     "vanilla.geocodes": {
       "version": "file:Vanilla GeoHasher",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "vanilla.globals": {
+      "version": "file:Globals",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
@@ -358,6 +367,12 @@
       "dependencies": {
         "vanilla.init": "1.0.4"
       }
+    },
+    "vanilla.normal": {
+      "version": "file:Normal",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
     },
     "vanilla.package-template": {
       "version": "file:Package Template",

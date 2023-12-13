@@ -1,0 +1,16 @@
+{
+    "name": "Vanilla.Globals",
+    "rootNamespace": "Vanilla.Globals",
+    "references": [
+        "Vanilla.DeltaValues"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

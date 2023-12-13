@@ -11,12 +11,16 @@ namespace Vanilla.DataAssets
 	[CreateAssetMenu(fileName = "Vec1 Asset",
 	                 menuName = "Vanilla/Data Assets/Vec1",
 	                 order = 2)]
-	public class Vec1Asset : ScriptableObject
+	public class Vec1Asset : DataAsset<float>
 	{
 
 		[SerializeField]
-		private DeltaVec1 deltaValue = new DeltaVec1();
-		public DeltaVec1 DeltaValue => deltaValue;
+		private DeltaVec1 _delta = new();
+		public override DeltaValue<float> Delta
+		{
+			get => _delta;
+			set => _delta = value as DeltaVec1;
+		}
 
 	}
 

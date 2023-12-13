@@ -2,11 +2,11 @@ using System;
 
 using UnityEngine;
 
-namespace Vanilla.Drivers
+namespace Vanilla
 {
 
     [Serializable]
-    public class Normal
+    public class Normal : ISerializationCallbackReceiver
     {
 
         [Range(0.0f, 1.0f)]
@@ -51,6 +51,12 @@ namespace Vanilla.Drivers
             if (changeEpsilon == 0) changeEpsilon = float.Epsilon;
             if (minMaxEpsilon == 0) minMaxEpsilon = 0.01f;
         }
+
+
+        public void OnBeforeSerialize() { }
+
+
+        public void OnAfterDeserialize() => OnValidate();
 
     }
 

@@ -1,0 +1,15 @@
+{
+  "name": "vanilla.normal",
+  "displayName": "Normal",
+  "description": "Normal is a float-data class built specifically for controlling normalized values like interpolations and easing formulas.",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-normal.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template"
+}

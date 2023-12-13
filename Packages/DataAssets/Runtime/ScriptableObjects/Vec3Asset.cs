@@ -8,15 +8,19 @@ namespace Vanilla.DataAssets
 {
 
 	[Serializable]
-	[CreateAssetMenu(fileName = "Vec3 Asset",
+	[CreateAssetMenu(fileName = "Vec1 Asset",
 	                 menuName = "Vanilla/Data Assets/Vec3",
 	                 order = 4)]
-	public class Vec3Asset : ScriptableObject
+	public class Vec3Asset : DataAsset<Vector3>
 	{
 
 		[SerializeField]
-		private DeltaVec3 deltaValue = new DeltaVec3();
-		public DeltaVec3 DeltaValue => deltaValue;
+		private DeltaVec3 _delta = new();
+		public override DeltaValue<Vector3> Delta
+		{
+			get => _delta;
+			set => _delta = value as DeltaVec3;
+		}
 
 	}
 

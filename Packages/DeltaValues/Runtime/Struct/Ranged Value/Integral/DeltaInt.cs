@@ -21,6 +21,15 @@ namespace Vanilla.DeltaValues
 
 
 
+		public DeltaInt() : base(name: "Unknown DeltaInt")
+		{
+			_Min = TypeMinValue;
+			_Max = TypeMaxValue;
+
+			ValidateRangedValue();
+		}
+
+
 		public DeltaInt(string defaultName) : base(name: defaultName) { }
 
 
@@ -89,6 +98,16 @@ namespace Vanilla.DeltaValues
 
 
 		public override bool ValueAtMax() => _Value == _Max;
+
+
+
+		#endregion
+
+		#region implicits
+
+
+
+		public static implicit operator int(DeltaInt input) => input?.Value ?? 0;
 
 
 

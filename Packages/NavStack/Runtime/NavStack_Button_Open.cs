@@ -58,8 +58,7 @@ namespace Vanilla.NavStack
 		}
 
 
-		private void HandleTargetActiveAtAll(bool outgoing,
-		                                     bool incoming)
+		private void HandleTargetActiveAtAll(bool incoming)
 		{
 			if (HideWhileTargetOpen) gameObject.SetActive(incoming);
 			if (NonInteractiveWhileTargetOpen) _button.interactable = incoming;

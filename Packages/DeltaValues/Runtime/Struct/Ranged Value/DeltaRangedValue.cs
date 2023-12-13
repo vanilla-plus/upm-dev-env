@@ -95,8 +95,10 @@ namespace Vanilla.DeltaValues
 
                     AtMin.Value = ValueAtMin(); // Set AtMin
 
-                    OnValueChanged?.Invoke(arg1: old,
-                                           arg2: _Value);
+                    OnValueChanged?.Invoke(obj: _Value);
+
+                    OnValueChangedWithHistory?.Invoke(arg1: old,
+                                                      arg2: _Value);
 
                     onIncrease?.Invoke(arg1: old,
                                        arg2: _Value);
@@ -109,8 +111,10 @@ namespace Vanilla.DeltaValues
 
                     AtMax.Value = ValueAtMax(); // Set AtMax
 
-                    OnValueChanged?.Invoke(arg1: old,
-                                           arg2: _Value);
+                    OnValueChanged?.Invoke(obj: _Value);
+                    
+                    OnValueChangedWithHistory?.Invoke(arg1: old,
+                                                      arg2: _Value);
 
                     onDecrease?.Invoke(arg1: old,
                                        arg2: _Value);

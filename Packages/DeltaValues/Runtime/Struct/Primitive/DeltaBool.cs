@@ -40,8 +40,10 @@ namespace Vanilla.DeltaValues
 				Debug.Log(message: $"[{Name}] changed from [{old}] to [{value}]");
 				#endif
 
-				OnValueChanged?.Invoke(arg1: old,
-				                       arg2: value);
+				OnValueChanged?.Invoke(obj: value);
+
+				OnValueChangedWithHistory?.Invoke(arg1: old,
+				                                  arg2: value);
 
 				if (_Value)
 				{

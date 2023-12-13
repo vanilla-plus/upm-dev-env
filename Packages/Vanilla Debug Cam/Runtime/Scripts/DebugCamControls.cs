@@ -152,8 +152,7 @@ namespace Vanilla.DebugCam
         }
 
 
-        private void HandleActiveChange(bool outgoing,
-                                        bool incoming)
+        private void HandleActiveChange(bool incoming)
         {
             _cam.enabled = incoming;
             _cam.depth   = incoming ? 100.0f : -100.0f;

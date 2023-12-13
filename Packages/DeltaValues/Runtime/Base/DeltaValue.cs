@@ -5,6 +5,23 @@ using UnityEngine;
 namespace Vanilla.DeltaValues
 {
 
+//	public interface IMonitorableValue<T>
+//	{
+//
+//		public T Value
+//		{
+//			get;
+//			set;
+//		}
+//
+//		public Action<T, T> OnValueChanged
+//		{
+//			get;
+//			set;
+//		}
+//
+//	}
+	
 	[Serializable]
 	public abstract class DeltaValue<T> : ISerializationCallbackReceiver, IDisposable
 	{
@@ -32,16 +49,25 @@ namespace Vanilla.DeltaValues
 				_Value = value;
 				
 				#if debug
-				Debug.Log($"[{Name}] changed from [{old}] to [{value}]");
+				Debug.Log(message: $"[{Name}] changed from [{old}] to [{value}]");
 				#endif
 
-				OnValueChanged?.Invoke(arg1: old,
-				                       arg2: value);
+				OnValueChanged?.Invoke(obj: value);
+				
+				OnValueChangedWithHistory?.Invoke(arg1: old,
+				                                  arg2: value);
 			}
 		}
 
 		[field: NonSerialized]
-		public Action<T, T> OnValueChanged
+		public Action<T> OnValueChanged
+		{
+			get;
+			set;
+		}
+
+		[field: NonSerialized]
+		public Action<T, T> OnValueChangedWithHistory
 		{
 			get;
 			set;
@@ -60,12 +86,12 @@ namespace Vanilla.DeltaValues
 
 
 		public DeltaValue(string name) => 
-			Name  = !string.IsNullOrEmpty(name) ? name : $"Unknown {GetType().Name}";
+			Name  = !string.IsNullOrEmpty(value: name) ? name : $"Unknown {GetType().Name}";
 
 
 		public DeltaValue(string name, T defaultValue)
 		{
-			Name  = !string.IsNullOrEmpty(name) ? name : $"Unknown {GetType().Name}";
+			Name  = !string.IsNullOrEmpty(value: name) ? name : $"Unknown {GetType().Name}";
 			Value = defaultValue;
 		}
 

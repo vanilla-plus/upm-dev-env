@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.VFX;
 
-namespace Vanilla.Drivers.Modules
+namespace Vanilla.Drivers.Snrubs
 {
 
-	public interface IVFXGraphModule
+	public interface IVFXGraphSnrub
 	{
 		
 		string PropertyName

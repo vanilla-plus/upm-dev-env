@@ -11,16 +11,17 @@ namespace Vanilla.DataAssets
 	[CreateAssetMenu(fileName = "Int Asset",
 	                 menuName = "Vanilla/Data Assets/Int",
 	                 order = 4)]
-	public class IntAsset : ScriptableObject
+	public class IntAsset : DataAsset<int>
 	{
 
 		[SerializeField]
-		private DeltaInt deltaValue = new DeltaInt(defaultName: "Unknown DeltaInt",
-		                                           defaultValue: 0,
-		                                           defaultMin: int.MinValue,
-		                                           defaultMax: int.MaxValue);
-		public DeltaInt DeltaValue => deltaValue;
-
+		private DeltaInt _delta = new();
+		public override DeltaValue<int> Delta
+		{
+			get => _delta;
+			set => _delta = value as DeltaInt;
+		}
+		
 	}
 
 }

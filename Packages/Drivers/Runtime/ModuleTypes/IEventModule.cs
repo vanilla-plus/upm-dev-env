@@ -1,9 +1,9 @@
 using UnityEngine.Events;
 
-namespace Vanilla.Drivers.Modules
+namespace Vanilla.Drivers.Snrubs
 {
 
-	public interface IEventModule<T>
+	public interface IEventSnrub<T>
 	{
 
 		UnityEvent<T> OnValueChange

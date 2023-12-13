@@ -2,12 +2,12 @@ using System;
 
 using UnityEngine;
 
-namespace Vanilla.Drivers.Modules.Vector1
+namespace Vanilla.Drivers.Snrubs.Vector1
 {
 
 	[Serializable]
-	public class Set_Material : Vec1Module,
-	                            IMaterialModule
+	public class Set_Material : Vec1Snrub,
+	                            IMaterialSnrub
 	{
 
 		
@@ -65,7 +65,7 @@ namespace Vanilla.Drivers.Modules.Vector1
 			#endif
 		}
 		
-		public override void Init(DriverSet driverSet) => PropertyID = Shader.PropertyToID(PropertyName);
+		public override void Init(DriverSocket<float> socket) => PropertyID = Shader.PropertyToID(PropertyName);
 
 		public override void HandleValueChange(float value)
 		{
