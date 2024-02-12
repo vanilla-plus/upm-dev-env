@@ -10,7 +10,7 @@ namespace Vanilla.DataAssets
 	[Serializable]
 	[CreateAssetMenu(fileName = "Bool Asset",
 	                 menuName = "Vanilla/Data Assets/Bool",
-	                 order = 1)]
+	                 order = 0)]
 	public class BoolAsset : DataAsset<bool>
 	{
 

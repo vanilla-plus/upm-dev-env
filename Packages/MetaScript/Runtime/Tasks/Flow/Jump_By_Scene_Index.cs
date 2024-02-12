@@ -26,7 +26,7 @@ namespace Vanilla.MetaScript.Flow
 			{
 				Debug.LogError($"Invalid Loaded Scene Index [{TargetSceneIndex}]");
 
-				scope.Cancel();
+//				scope.Cancel();
 
 				return scope;
 			}
@@ -35,7 +35,7 @@ namespace Vanilla.MetaScript.Flow
 
 			if (rootObjects == null)
 			{
-				scope.Cancel();
+//				scope.Cancel();
 
 				return scope;
 			}
@@ -57,7 +57,7 @@ namespace Vanilla.MetaScript.Flow
 			{
 				Debug.LogWarning($"Couldn't find a MetaScriptInstance attached to any root GameObject in the scene loaded at index [{TargetSceneIndex}].");
                 
-				scope.Cancel();
+//				scope.Cancel();
 
 				return scope;
 			}

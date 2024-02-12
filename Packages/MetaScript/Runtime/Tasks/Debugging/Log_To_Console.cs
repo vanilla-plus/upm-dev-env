@@ -33,6 +33,8 @@ namespace Vanilla.MetaScript.Debugging
 
 		protected override UniTask<Scope> _Run(Scope scope)
 		{
+//			Debug.Log(scope.Name);
+//			Debug.Log(scope.Cancelled);
 			
 			switch (logType)
 			{

@@ -12,18 +12,18 @@ namespace Vanilla.DeltaValues
 {
 
 	[Serializable]
-	public class DeltaVec1 : DeltaVec<float>
+	public class DeltaFloat : DeltaVec<float>
 	{
 		
 		#region Constructors
 	    
-		public DeltaVec1() : base() { }
-		public DeltaVec1(string defaultName) : base(defaultName) { }
-		public DeltaVec1(string defaultName, float defaultValue) : base(defaultName: defaultName, defaultValue: defaultValue) { }
-		public DeltaVec1(string defaultName, float defaultValue, float defaultChangeEpsilon) : base(defaultName: defaultName, defaultValue: defaultValue, defaultChangeEpsilon: defaultChangeEpsilon) { }
-		public DeltaVec1(string defaultName, float defaultValue, float defaultMin, float defaultMax) : base(defaultName: defaultName, defaultValue: defaultValue, defaultMin: defaultMin, defaultMax: defaultMax) { }
-		public DeltaVec1(string defaultName, float defaultValue, float defaultMin, float defaultMax, float changeEpsilon) : base(defaultName: defaultName, defaultValue: defaultValue, defaultMin: defaultMin, defaultMax: defaultMax, changeEpsilon: changeEpsilon) { }
-		public DeltaVec1(string defaultName, float defaultValue, float defaultMin, float defaultMax, float changeEpsilon, float minMaxEpsilon) : base(defaultName: defaultName, defaultValue: defaultValue, defaultMin: defaultMin, defaultMax: defaultMax, changeEpsilon: changeEpsilon, minMaxEpsilon: minMaxEpsilon) { }
+		public DeltaFloat() : base() { }
+		public DeltaFloat(string defaultName) : base(defaultName) { }
+		public DeltaFloat(string defaultName, float defaultValue) : base(defaultName: defaultName, defaultValue: defaultValue) { }
+		public DeltaFloat(string defaultName, float defaultValue, float defaultChangeEpsilon) : base(defaultName: defaultName, defaultValue: defaultValue, defaultChangeEpsilon: defaultChangeEpsilon) { }
+		public DeltaFloat(string defaultName, float defaultValue, float defaultMin, float defaultMax) : base(defaultName: defaultName, defaultValue: defaultValue, defaultMin: defaultMin, defaultMax: defaultMax) { }
+		public DeltaFloat(string defaultName, float defaultValue, float defaultMin, float defaultMax, float changeEpsilon) : base(defaultName: defaultName, defaultValue: defaultValue, defaultMin: defaultMin, defaultMax: defaultMax, changeEpsilon: changeEpsilon) { }
+		public DeltaFloat(string defaultName, float defaultValue, float defaultMin, float defaultMax, float changeEpsilon, float minMaxEpsilon) : base(defaultName: defaultName, defaultValue: defaultValue, defaultMin: defaultMin, defaultMax: defaultMax, changeEpsilon: changeEpsilon, minMaxEpsilon: minMaxEpsilon) { }
 
 		#endregion
 
@@ -97,7 +97,7 @@ namespace Vanilla.DeltaValues
 
 
 
-		public static implicit operator float(DeltaVec1 input) => input?.Value ?? 0f;
+		public static implicit operator float(DeltaFloat input) => input?.Value ?? 0f;
 
 
 
@@ -106,10 +106,10 @@ namespace Vanilla.DeltaValues
 		#region Operators
 		
 
-		public static float operator +(DeltaVec1 a, DeltaVec1 b) => a.Value + b.Value;
-		public static float operator -(DeltaVec1 a, DeltaVec1 b) => a.Value - b.Value;
-		public static float operator *(DeltaVec1 a, DeltaVec1 b) => a.Value * b.Value;
-		public static float operator /(DeltaVec1 a, DeltaVec1 b) => a.Value / b.Value;
+		public static float operator +(DeltaFloat a, DeltaFloat b) => a.Value + b.Value;
+		public static float operator -(DeltaFloat a, DeltaFloat b) => a.Value - b.Value;
+		public static float operator *(DeltaFloat a, DeltaFloat b) => a.Value * b.Value;
+		public static float operator /(DeltaFloat a, DeltaFloat b) => a.Value / b.Value;
 
 
 		#endregion

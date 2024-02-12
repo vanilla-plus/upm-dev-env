@@ -12,25 +12,25 @@
 //{
 //
 //	[Serializable]
-//	public class Set_Vec1_Asset : MetaTask
+//	public class Set_Float_Asset : MetaTask
 //	{
 //
 //		[SerializeField]
-//		public Vec1Asset asset;
+//		public FloatAsset asset;
 //
 //		[SerializeReference]
 //		[TypeMenu("yellow")]
-//		public Vec1_Source Vec1Source;
+//		public Float_Source FloatSource;
 //
-//		protected override bool CanAutoName() => asset != null && Vec1Source != null;
+//		protected override bool CanAutoName() => asset != null && FloatSource != null;
 //
 //
-//		protected override string CreateAutoName() => Vec1Source switch
+//		protected override string CreateAutoName() => FloatSource switch
 //		                                              {
-//			                                              Direct_Vec1_Source directSource => $"Set [{asset.name}] to [{directSource.Value}]",
-//			                                              Asset_Vec1_Source assetSource   => $"Set [{asset.name}] to the value of [{assetSource.asset.name}]",
-//			                                              Delta_Vec1_Source deltaSource   => $"Set [{asset.name}] to the value of [{deltaSource.Delta.Name}]",
-//			                                              _                               => "Unknown Vec1Source Type"
+//			                                              Direct_Float_Source directSource => $"Set [{asset.name}] to [{directSource.Value}]",
+//			                                              Asset_Float_Source assetSource   => $"Set [{asset.name}] to the value of [{assetSource.asset.name}]",
+//			                                              Delta_Float_Source deltaSource   => $"Set [{asset.name}] to the value of [{deltaSource.Delta.Name}]",
+//			                                              _                               => "Unknown FloatSource Type"
 //		                                              };
 //
 //
@@ -44,14 +44,14 @@
 //				return UniTask.FromResult(scope);
 //			}
 //
-//			if (Vec1Source == null)
+//			if (FloatSource == null)
 //			{
 //				Debug.LogError($"[{Name}] - null source!");
 //
 //				return UniTask.FromResult(scope);
 //			}
 //
-//			asset.DeltaValue.Value = Vec1Source.Get();
+//			asset.DeltaValue.Value = FloatSource.Get();
 //
 //			return UniTask.FromResult(scope);
 //			

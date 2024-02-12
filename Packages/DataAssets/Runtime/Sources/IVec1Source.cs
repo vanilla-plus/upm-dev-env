@@ -7,9 +7,9 @@ using Vanilla.DeltaValues;
 namespace Vanilla.DataAssets.Sources
 {
 
-//	public interface IVec1Source : IDataSource<float> { }
+//	public interface IFloatSource : IDataSource<float> { }
 
-	public abstract class Vec1_Source : IDataSource<float>
+	public abstract class Float_Source : IDataSource<float>
 	{
 
 		public abstract float Value
@@ -21,7 +21,7 @@ namespace Vanilla.DataAssets.Sources
 	}
 
 	[Serializable]
-	public class Direct_Vec1_Source : IDataSource<float>
+	public class Direct_Float_Source : IDataSource<float>
 	{
 
 		[SerializeField]
@@ -35,11 +35,11 @@ namespace Vanilla.DataAssets.Sources
 	}
 
 	[Serializable]
-	public class Asset_Vec1_Source : IDataSource<float>
+	public class Asset_Float_Source : IDataSource<float>
 	{
 
 		[SerializeField]
-		public Vec1Asset asset;
+		public FloatAsset asset;
 
 		public float Value
 		{
@@ -50,11 +50,11 @@ namespace Vanilla.DataAssets.Sources
 	}
 
 	[Serializable]
-	public class Delta_Vec1_Source : IDataSource<float>
+	public class Delta_Float_Source : IDataSource<float>
 	{
 
 		[SerializeField]
-		public DeltaVec1 Delta = new();
+		public DeltaFloat Delta = new();
 
 		public float Value
 		{

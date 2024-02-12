@@ -15,16 +15,21 @@ namespace Vanilla.FileSync
 		public long  CurrentDownloadBytesDownloaded = 0;
 		public float CurrentDownloadPercentComplete = 0.0f;
 
+		public FileSync.RemoteS3Object[] FileMap;
 
-		void Update()
-		{
-//			LocalFileMapTotalSize          = FileSync.LocalFileMapTotalSize;
-//			RemoteFileMapTotalSize         = FileSync.RemoteFileMapTotalSize;
-			FileMapSizeDiff                = FileSync.FileMapSizeDiff;
-			CurrentDownloadBytesDownloaded = FileSync.CurrentDownloadBytesDownloaded;
-			CurrentDownloadPercentComplete = FileSync.CurrentDownloadPercentComplete;
+		[ContextMenu("Get FileMap")]
+		public void GetCopyOfFileMap() => FileMap = FileSync.RemoteFileMap;
 
-		}
+
+//		void Update()
+//		{
+////			LocalFileMapTotalSize          = FileSync.LocalFileMapTotalSize;
+////			RemoteFileMapTotalSize         = FileSync.RemoteFileMapTotalSize;
+//			FileMapSizeDiff                = FileSync.FileMapSizeDiff;
+//			CurrentDownloadBytesDownloaded = FileSync.CurrentDownloadBytesDownloaded;
+//			CurrentDownloadPercentComplete = FileSync.CurrentDownloadPercentComplete;
+//
+//		}
 
 	}
 

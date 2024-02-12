@@ -97,9 +97,9 @@ public class TypeMenuAttributeDrawer : PropertyDrawer
 		var appropriateTypes = GetAppropriateTypes(property: property,
 		                                           filters: filters);
 
-		Debug.Log(appropriateTypes.Count());
+//		Debug.Log(appropriateTypes.Count());
 		
-		foreach (var t in appropriateTypes) Debug.Log(t.Name);
+//		foreach (var t in appropriateTypes) Debug.Log(t.Name);
 
 		SearchableMenuWindow.ShowWindow(title: "Type Menu",
 		                                property: property,

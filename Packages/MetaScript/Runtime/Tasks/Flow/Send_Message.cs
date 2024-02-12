@@ -84,7 +84,7 @@ namespace Vanilla.MetaScript.Flow
 
 	}
 
-	[Serializable] public class Vec1 : ISendMessagePayload
+	[Serializable] public class Float : ISendMessagePayload
 	{
 
 		[SerializeField]

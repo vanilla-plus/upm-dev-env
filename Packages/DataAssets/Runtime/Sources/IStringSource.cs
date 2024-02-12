@@ -21,26 +21,29 @@ namespace Vanilla.DataAssets.Sources
 	}
 
 	[Serializable]
-	public class Direct_String_Source : IDataSource<string>
+	public class Direct_String_Source : String_Source
 	{
 
 		[SerializeField]
 		public string _value;
-		public string Value
+		public override string Value
 		{
 			get => _value;
 			set => _value = value;
 		}
 
+
+		public Direct_String_Source(string defaultValue) => Value = defaultValue;
+
 	}
 
 	[Serializable]
-	public class Asset_String_Source : IDataSource<string>
+	public class Asset_String_Source : String_Source
 	{
 
 		[SerializeField]
 		public StringAsset asset;
-		public string Value
+		public override string Value
 		{
 			get => asset.Delta.Value;
 			set => asset.Delta.Value = value;
@@ -50,12 +53,12 @@ namespace Vanilla.DataAssets.Sources
 
 	
 	[Serializable]
-	public class Delta_String_Source : IDataSource<string>
+	public class Delta_String_Source : String_Source
 	{
 
 		[SerializeField]
 		public DeltaString Delta;
-		public string Value
+		public override string Value
 		{
 			get => Delta.Value;
 			set => Delta.Value = value;

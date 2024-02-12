@@ -12,15 +12,15 @@
 //{
 //
 //	[Serializable]
-//	public class Interpolate_Vec1_Asset : MetaTask
+//	public class Interpolate_Float_Asset : MetaTask
 //	{
 //
 //		[SerializeField]
-//		public Vec1Asset asset;
+//		public FloatAsset asset;
 //
 //		[SerializeReference]
 //		[TypeMenu("yellow")]
-//		public Vec1_Source target;
+//		public Float_Source target;
 //
 //		[SerializeField]
 //		public bool UseScaledTime = true;
@@ -45,10 +45,10 @@
 //
 //		protected override string CreateAutoName() => target switch
 //		                                              {
-//			                                              Direct_Vec1_Source directSource => $"Set [{asset.name}] to [{directSource.Value}]",
-//			                                              Asset_Vec1_Source assetSource   => $"Set [{asset.name}] to the value of [{assetSource.asset.name}]",
-//			                                              Delta_Vec1_Source deltaSource   => $"Set [{asset.name}] to the value of [{deltaSource.Delta.Name}]",
-//			                                              _                               => "Unknown Vec1Source Type"
+//			                                              Direct_Float_Source directSource => $"Set [{asset.name}] to [{directSource.Value}]",
+//			                                              Asset_Float_Source assetSource   => $"Set [{asset.name}] to the value of [{assetSource.asset.name}]",
+//			                                              Delta_Float_Source deltaSource   => $"Set [{asset.name}] to the value of [{deltaSource.Delta.Name}]",
+//			                                              _                               => "Unknown FloatSource Type"
 //		                                              };
 //
 //

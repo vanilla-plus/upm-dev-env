@@ -37,7 +37,7 @@ namespace Vanilla.MetaScript.Flow
 
             if (rootObjects == null)
             {
-                scope.Cancel();
+//                scope.Cancel();
 
                 return scope;
             }
@@ -55,7 +55,7 @@ namespace Vanilla.MetaScript.Flow
             {
                 Debug.LogWarning($"Couldn't find a MetaScriptInstance attached to any root GameObject in the [{TargetSceneName}] scene.");
                 
-                scope.Cancel();
+//                scope.Cancel();
                 
                 return scope;
             }

@@ -10,9 +10,9 @@
   "repository": "github:vanilla-plus/upm-debug-cam.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "2.3.0",
+  "version": "2.3.2",
   "type": "template",
   "dependencies": {
-    "vanilla.delta-values": "4.2.1"
+    "vanilla.delta-values": "4.2.3"
   }
 }

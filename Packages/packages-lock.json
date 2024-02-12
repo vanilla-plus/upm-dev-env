@@ -7,8 +7,8 @@
       "dependencies": {}
     },
     "com.cysharp.unitask": {
-      "version": "2.4.1",
-      "depth": 0,
+      "version": "2.5.3",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://package.openupm.com"
@@ -258,7 +258,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "vanilla.delta-values": "4.2.1"
+        "vanilla.delta-values": "4.2.3"
       }
     },
     "vanilla.debug-cam": {
@@ -266,7 +266,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "vanilla.delta-values": "4.2.1"
+        "vanilla.delta-values": "4.2.3"
       }
     },
     "vanilla.delta-values": {
@@ -274,9 +274,9 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.cysharp.unitask": "2.4.1",
+        "com.cysharp.unitask": "2.5.3",
         "vanilla.dotnet-extensions": "1.1.0",
-        "vanilla.unity-extensions": "1.1.0"
+        "vanilla.unity-extensions": "1.1.1"
       }
     },
     "vanilla.dotnet-extensions": {
@@ -292,7 +292,7 @@
       "dependencies": {
         "vanilla.type-menu": "4.2.0",
         "vanilla.normal": "1.0.0",
-        "vanilla.data-assets": "1.0.0"
+        "vanilla.data-assets": "1.1.0"
       }
     },
     "vanilla.easing": {
@@ -308,7 +308,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.cysharp.unitask": "2.4.1",
+        "com.cysharp.unitask": "2.5.3",
         "vanilla.type-menu": "4.2.0"
       }
     },
@@ -320,12 +320,6 @@
     },
     "vanilla.geocodes": {
       "version": "file:Vanilla GeoHasher",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
-    "vanilla.globals": {
-      "version": "file:Globals",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
@@ -356,7 +350,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.cysharp.unitask": "2.4.1",
+        "com.cysharp.unitask": "2.5.3",
         "vanilla.type-menu": "4.2.0"
       }
     },
@@ -365,7 +359,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "vanilla.init": "1.0.4"
+        "vanilla.init": "1.0.5"
       }
     },
     "vanilla.normal": {
@@ -421,8 +415,8 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.cysharp.unitask": "2.4.1",
-        "vanilla.delta-values": "4.2.1"
+        "com.cysharp.unitask": "2.5.3",
+        "vanilla.delta-values": "4.2.3"
       }
     },
     "vanilla.type-menu": {

@@ -8,9 +8,9 @@ namespace Vanilla.DataAssets
 {
 
 	[Serializable]
-	[CreateAssetMenu(fileName = "Vec1 Asset",
+	[CreateAssetMenu(fileName = "Float Asset",
 	                 menuName = "Vanilla/Data Assets/Vec3",
-	                 order = 4)]
+	                 order = 5)]
 	public class Vec3Asset : DataAsset<Vector3>
 	{
 

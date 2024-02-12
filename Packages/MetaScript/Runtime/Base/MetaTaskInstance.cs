@@ -15,7 +15,6 @@ namespace Vanilla.MetaScript
 
 		[SerializeReference]
 		[TypeMenu("blue")]
-//		[Only(typeof(MetaTask))]
 		private MetaTask task;
 		public MetaTask Task => task;
 
@@ -30,7 +29,22 @@ namespace Vanilla.MetaScript
 		[ContextMenu(itemName: "Start Task")]
 		private void EditorStart() => StartTask(null);
 		
-		public void StartTask(Scope scope) => task.Run(scope: scope).Forget();
+//		public void StartTask(Scope scope) => task.Run(scope: scope).Forget();
+		public void StartTask(Scope scope) => task.Run(scope)
+		                                          .ContinueWith(s =>
+		                                                        {
+//			                                                        Debug.LogError("The eagle has landed.");
+			                                                        
+//			                                                        Debug.Log(s.Name);
+
+			                                                        scope.Cancel();
+
+			                                                        scope.Dispose();
+			                                                        
+//			                                                        s.Cancel();
+
+//			                                                        s.Dispose();
+		                                                        });
 
 	}
 

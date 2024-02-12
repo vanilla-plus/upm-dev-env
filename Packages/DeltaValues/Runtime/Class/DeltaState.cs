@@ -20,7 +20,7 @@ namespace Vanilla.DeltaValues
 		public DeltaBool Active;
 
 		[SerializeField]
-		public DeltaVec1 Progress;
+		public DeltaFloat Progress;
 
 		public bool UseScaledTime = false;
 
@@ -37,7 +37,7 @@ namespace Vanilla.DeltaValues
 			Active = new DeltaBool(name: Name + ".Active",
 			                       defaultValue: defaultActiveState);
 
-			Progress = new DeltaVec1(defaultName: Name + ".Progress",
+			Progress = new DeltaFloat(defaultName: Name + ".Progress",
 			                         defaultValue: defaultActiveState ?
 				                                       1.0f :
 				                                       0.0f,

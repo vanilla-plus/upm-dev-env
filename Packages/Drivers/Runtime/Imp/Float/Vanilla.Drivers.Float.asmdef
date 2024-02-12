@@ -1,0 +1,19 @@
+{
+    "name": "Vanilla.Drivers.Float",
+    "rootNamespace": "Vanilla.Drivers.Float",
+    "references": [
+        "Vanilla.Drivers",
+        "Vanilla.DataAssets",
+        "Vanilla.TypeMenu",
+        "Vanilla.DeltaValues"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

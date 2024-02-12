@@ -13,14 +13,19 @@ namespace Vanilla.MetaScript.Flow
 
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
+			var s = scope;
+			
 			foreach (var task in _tasks)
 			{
-				if (scope.Cancelled) return scope;
+				if (s.Cancelled) return s;
 
-				if (task != null) await task.Run(scope);
+				if (task != null)
+				{
+					s = await task.Run(s);
+				}
 			}
 
-			return scope;
+			return s;
 		}
 
 	}

@@ -30,6 +30,8 @@ namespace Vanilla.MetaScript
 			                {
 				                name = "root"
 			                };
+
+			if (target == null) target = GetComponent<MetaTaskInstance>();
 			#endif
 		}
 		

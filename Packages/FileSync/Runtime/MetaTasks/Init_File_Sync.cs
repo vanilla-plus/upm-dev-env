@@ -16,14 +16,14 @@ namespace Vanilla.FileSync
 	[Serializable]
 	public class Init_File_Sync : MetaTask
 	{
+
+		[SerializeReference]
+		[TypeMenu("yellow")]
+		public String_Source remoteRoot = new Direct_String_Source("https://bucket.s3.region.amazonaws.com/");
 		
 		[SerializeReference]
 		[TypeMenu("yellow")]
-		public String_Source remoteRoot;
-		
-		[SerializeReference]
-		[TypeMenu("yellow")]
-		public String_Source localRoot;
+		public String_Source localRoot = new Direct_String_Source("fs");
 
 		[Range(min: 0,max: 4)]
 		public int pathSegmentsToSkip = 0;

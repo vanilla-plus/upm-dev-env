@@ -3,7 +3,6 @@ using System;
 using UnityEngine;
 
 using Vanilla.Init;
-using Vanilla.TypeMenu;
 
 namespace Vanilla.Drivers
 {
@@ -27,7 +26,7 @@ namespace Vanilla.Drivers
 		[SerializeField]
 		public WakeMethod wakeMethod = WakeMethod.Init;
 
-		public abstract DriverSocket<T>[] Sockets
+		public abstract Driver<T>[] Drivers
 		{
 			get;
 		}
@@ -36,7 +35,7 @@ namespace Vanilla.Drivers
 		private void OnValidate()
 		{
 			#if UNITY_EDITOR
-			foreach (var set in Sockets) set?.OnValidate();
+			foreach (var set in Drivers) set?.OnValidate();
 			#endif
 		}
 
@@ -45,7 +44,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.Awake) return;
 
-			foreach (var set in Sockets) set?.Init();
+			foreach (var set in Drivers) set?.Init();
 		}
 
 
@@ -53,7 +52,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.Start) return;
 
-			foreach (var set in Sockets) set?.Init();
+			foreach (var set in Drivers) set?.Init();
 		}
 
 
@@ -61,7 +60,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.Init) return;
 
-			foreach (var set in Sockets) set?.Init();
+			foreach (var set in Drivers) set?.Init();
 		}
 
 
@@ -69,7 +68,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.PostInit) return;
 
-			foreach (var set in Sockets) set?.Init();
+			foreach (var set in Drivers) set?.Init();
 		}
 
 
@@ -77,7 +76,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.OnEnable) return;
 
-			foreach (var set in Sockets) set?.Init();
+			foreach (var set in Drivers) set?.Init();
 		}
 
 
@@ -85,7 +84,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.OnEnable) return;
 
-			foreach (var set in Sockets) set?.DeInit();
+			foreach (var set in Drivers) set?.DeInit();
 		}
 
 
@@ -93,7 +92,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod == WakeMethod.OnEnable) return;
 
-			foreach (var set in Sockets) set?.DeInit();
+			foreach (var set in Drivers) set?.DeInit();
 		}
 
 	}

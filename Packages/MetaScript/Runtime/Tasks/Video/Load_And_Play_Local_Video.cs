@@ -34,7 +34,7 @@ namespace Vanilla.MetaScript.Video
             {
                 Debug.LogWarning($"Video file not found [{videoPlayer.url}]");
 
-                scope.Cancel();
+//                scope.Cancel();
 
                 return scope;
             }

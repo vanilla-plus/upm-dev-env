@@ -10,7 +10,7 @@ namespace Vanilla.DataAssets
 	[Serializable]
 	[CreateAssetMenu(fileName = "Int Asset",
 	                 menuName = "Vanilla/Data Assets/Int",
-	                 order = 4)]
+	                 order = 1)]
 	public class IntAsset : DataAsset<int>
 	{
 

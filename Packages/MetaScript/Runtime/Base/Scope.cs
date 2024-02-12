@@ -65,7 +65,9 @@ namespace Vanilla.MetaScript
             
             s.Cancel();
             
-            Active.Remove(name);
+//            s.Dispose();
+//            
+//            Active.Remove(name);
 
             return true;
         }
@@ -78,6 +80,7 @@ namespace Vanilla.MetaScript
 
         [SerializeField]
         private string _Name;
+        public string Name => _Name;
         
         [SerializeField]
         private byte _Depth;
@@ -124,8 +127,10 @@ namespace Vanilla.MetaScript
         public void Cancel()
         {
             _Continue = false;
-            
+
             Active.Remove(_Name);
+
+            Dispose();
         }
         
         public bool Cancelled => !Continue || (parent?.Cancelled ?? false);

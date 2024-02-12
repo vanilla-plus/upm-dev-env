@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f9c6faa35e0d4508841e9d51a39ee51, type: 3}
   m_Name: Test Int
   m_EditorClassIdentifier: 
-  deltaValue:
-    _Name: Unknown DeltaInt
-    _Value: 0
+  _delta:
+    _Name: Test Int
+    _Value: 10
     _Min: 0
-    _Max: 5
+    _Max: 10
     AtMin:
-      _Name: Unknown DeltaInt.AtMin
-      _Value: 1
-    AtMax:
-      _Name: Unknown DeltaInt.AtMax
+      _Name: Test Int.AtMin
       _Value: 0
+    AtMax:
+      _Name: Test Int.AtMax
+      _Value: 1

@@ -12,7 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8ea10bd388c4c2bb4f71e180af3bcf, type: 3}
   m_Name: Test Normal
   m_EditorClassIdentifier: 
-  deltaValue:
+  _delta:
+    _Name: Test Normal
     _Value: 0
-    changeEpsilon: 1e-45
-    minMaxEpsilon: 0.01
+    _Min: 0
+    _Max: 1
+    AtMin:
+      _Name: Test Normal.AtMin
+      _Value: 1
+    AtMax:
+      _Name: Test Normal.AtMax
+      _Value: 0
+    ChangeEpsilon: 1e-45
+    MinMaxEpsilon: 0.01

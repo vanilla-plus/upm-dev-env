@@ -6,7 +6,9 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
+#if vanilla_metascript
 using Vanilla.MetaScript;
+#endif
 
 namespace Vanilla.DeltaValues
 {

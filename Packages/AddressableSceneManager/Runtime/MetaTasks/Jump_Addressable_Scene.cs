@@ -66,7 +66,7 @@ namespace Vanilla.MetaScript.Addressables
 
             if (loadOperation.Status is UniTaskStatus.Faulted or UniTaskStatus.Canceled)
             {
-                scope.Cancel();
+//                scope.Cancel();
                 
                 return scope;
             }
@@ -89,7 +89,7 @@ namespace Vanilla.MetaScript.Addressables
                 Debug.LogWarning($"Couldn't find a MetaScriptInstance attached to any root GameObject in the [{TargetSceneName}] scene.");
 
 //                trace.Continue = false;
-                scope.Cancel();
+//                scope.Cancel();
 
 //                LogRunCancelled(trace: trace);
 

@@ -140,10 +140,10 @@ namespace Vanilla.FileSync
                 if (!fileMap.Contains(o)) fileMap.Add(o);
             }
 
-            #if debug
-            Debug.Log("RemoteFileMap results:");
-            foreach (var f in fileMap) Debug.Log(f.RemoteFilePath);
-            #endif
+//            #if debug
+//            Debug.Log("RemoteFileMap results:");
+//            foreach (var f in fileMap) Debug.Log(f.RemoteFilePath);
+//            #endif
 
             return fileMap.ToArray();
         }
@@ -331,6 +331,8 @@ namespace Vanilla.FileSync
 
             var xml = new XmlDocument();
 
+            Debug.Log(listRequest.downloadHandler.text);
+            
             xml.LoadXml(listRequest.downloadHandler.text);
 
             var xmlNamespaceManager = new XmlNamespaceManager(xml.NameTable);
@@ -367,6 +369,8 @@ namespace Vanilla.FileSync
             // Where you're putting s3Directory here, you can put anything! including a specific relative file path.
             // It's treated as a prefix, i.e. flower_ would return flower_shield, flower_whatever, etc
             // You can only search for one prefix per-request.
+            Debug.Log(s3Directory);
+            
             var listUrl = $"{Remote_List_URL}{UnityWebRequest.EscapeURL(s3Directory)}";
 
             using var listRequest = UnityWebRequest.Get(listUrl);
@@ -413,6 +417,33 @@ namespace Vanilla.FileSync
                                                       lastModified: DateTime.Parse(lastModifiedNode.InnerText),
                                                       size: long.Parse(sizeNode.InnerText)));
 
+//            var what = contentsNodes[0]
+//                       .SelectSingleNode(xpath: XML_Node_Key,
+//                                         nsmgr: xmlNamespaceManager)
+//                       .InnerText;
+//            
+//            Debug.Log(s3Directory);
+//            Debug.Log(what);
+//            
+//            
+//
+//            Debug.Log(what.IndexOf(value: '/',
+//                                      startIndex: s3Directory.Length) !=
+//                      -1);
+
+//
+//
+//            for (var i = 0;
+//                 i < contentsNodes.Count;
+//                 i++)
+//            {
+//                var keyNodeThing = contentsNodes[i]
+//                .SelectSingleNode(XML_Node_Key,
+//                                  xmlNamespaceManager);
+//                
+//                Debug.Log(keyNodeThing.InnerText);
+//            }
+//            
             return result;
         }
 
@@ -444,13 +475,13 @@ namespace Vanilla.FileSync
         public class RemoteS3Object
         {
 
-            [SerializeField] public readonly bool     IsAFile;
-            [SerializeField] public readonly string   LocalFilePath;
-            [SerializeField] public readonly string   RemoteFilePath;
-            [SerializeField] public readonly DateTime RemoteLastModified;
-            [SerializeField] public readonly long     RemoteFileSize;
-            [SerializeField] public readonly long     LocalFileSize;
-            [SerializeField] public readonly bool     DownloadRequired;
+            [SerializeField] public bool     IsAFile;
+            [SerializeField] public string   LocalFilePath;
+            [SerializeField] public string   RemoteFilePath;
+            [SerializeField] public DateTime RemoteLastModified;
+            [SerializeField] public long     RemoteFileSize;
+            [SerializeField] public long     LocalFileSize;
+            [SerializeField] public bool     DownloadRequired;
 
             public RemoteS3Object() { }
 
@@ -459,7 +490,9 @@ namespace Vanilla.FileSync
                                   DateTime lastModified,
                                   long size)
             {
-                IsAFile = key.Length > 0 && key[^1] != '/';
+                // This worked but isn't it overkill?
+//                IsAFile = key.Length > 0 && key[^1] != '/';
+                IsAFile = size > 0;
 
 //                Debug.Log($"[{key}] is {(IsAFile ? "a file" : "not a file")}");
 
