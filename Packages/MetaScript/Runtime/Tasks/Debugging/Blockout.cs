@@ -57,6 +57,11 @@ namespace MyCompany.MyProject
 				
 				await UniTask.Yield(PlayerLoopTiming.Update);
 			}
+			
+			if (uiTextElement != null)
+			{
+				uiTextElement.text = string.Empty;
+			}
 
 			return scope;
 		}

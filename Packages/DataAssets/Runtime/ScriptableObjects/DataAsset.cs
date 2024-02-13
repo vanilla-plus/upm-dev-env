@@ -11,6 +11,12 @@ namespace Vanilla.DataAssets
 	public abstract class DataAsset<T> : ScriptableObject
 	{
 
+		//        string Name
+//        {
+//            get;
+//            set;
+//        }
+		
 		public abstract IDataSource<T> Source
 		{
 			get;

@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 using UnityEngine.Events;
 
 namespace Vanilla.Drivers.Color
@@ -10,15 +8,15 @@ namespace Vanilla.Drivers.Color
     public class Unity_Event : Module
     {
 
-        [SerializeField]
-        public UnityEvent<UnityEngine.Color> onValueChange = new();
-        public UnityEvent<UnityEngine.Color> OnValueChange => onValueChange;
+        public UnityEvent<UnityEngine.Color> OnSet = new();
 
-        public override void OnValidate(Driver<UnityEngine.Color> driver) => OnValueChange.Invoke(driver.Asset.Source.Value);
+        public override void OnValidate(Driver<UnityEngine.Color> driver) => OnSet.Invoke(driver.Asset.Source.Value);
 
-        public override void Init(Driver<UnityEngine.Color> driver) => HandleValueChange(driver.Asset.Source.Value);
+        public override void Init(Driver<UnityEngine.Color> driver) => TryConnectSet(driver);
 
-        public override void HandleValueChange(UnityEngine.Color value) => OnValueChange.Invoke(value);
+        public override void DeInit(Driver<UnityEngine.Color> driver) => TryDisconnectSet(driver);
+
+        protected override void HandleSet(UnityEngine.Color value) => OnSet.Invoke(value);
 
     }
 }

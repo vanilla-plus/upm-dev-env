@@ -5,6 +5,7 @@ using UnityEngine.VFX;
 
 namespace Vanilla.Drivers.Vec3
 {
+
     [Serializable]
     public class Set_VFX_Graph : Module
     {
@@ -33,27 +34,18 @@ namespace Vanilla.Drivers.Vec3
             set => graphs = value;
         }
 
-
-        public override void OnValidate(Driver<Vector3> driver)
-        {
-            #if UNITY_EDITOR
-            PropertyID = Shader.PropertyToID(PropertyName);
-
-            // Is it safe to set VFXGraph values outside of Play Mode? Let's find out.
-
-            HandleValueChange(driver.Asset.Source.Value);
-            #endif
-        }
-		
         public override void Init(Driver<Vector3> driver)
         {
             PropertyID = Shader.PropertyToID(PropertyName);
-            
-            base.Init(driver: driver);
+
+            TryConnectSet(driver);
         }
 
 
-        public override void HandleValueChange(Vector3 value)
+        public override void DeInit(Driver<Vector3> driver) => TryDisconnectSet(driver);
+
+
+        protected override void HandleSet(Vector3 value)
         {
             foreach (var g in Graphs)
             {
@@ -62,6 +54,7 @@ namespace Vanilla.Drivers.Vec3
                                  v: value);
             }
         }
-		
+
     }
+
 }

@@ -31,7 +31,7 @@ namespace Vanilla.Drivers
 
 			Asset.Source.Value = InitialValue;
 
-			foreach (var d in Modules) d?.OnValidate(this);
+			foreach (var module in Modules) module?.OnValidate(this);
 			#endif
 		}
 
@@ -45,16 +45,16 @@ namespace Vanilla.Drivers
 				return;
 			}
 			
+			if (Asset.Source == null)
+			{
+				Debug.LogError($"[{Asset.name}] has a null Source.");
+				
+				return;
+			}
+			
 			Asset.Source.Value = InitialValue;
 
-			foreach (var d in Modules) d?.Init(this);
-
-			//			Asset.Delta.Value = InitialValue;
-
-			// I think the idea was that this set would invoke HandleValueChange
-			// But thanks to set-defense, it might not always fire.
-			// I think in the name of safety, set before initting (like above)
-			// And then manually call a HandleValueChange in each modules Init.
+			foreach (var module in Modules) module?.Init(this);
 		}
 
 

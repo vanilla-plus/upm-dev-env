@@ -33,27 +33,18 @@ namespace Vanilla.Drivers.Vec2
             set => graphs = value;
         }
 
-
-        public override void OnValidate(Driver<Vector2> driver)
-        {
-            #if UNITY_EDITOR
-            PropertyID = Shader.PropertyToID(PropertyName);
-
-            // Is it safe to set VFXGraph values outside of Play Mode? Let's find out.
-
-            HandleValueChange(driver.Asset.Source.Value);
-            #endif
-        }
-		
         public override void Init(Driver<Vector2> driver)
         {
             PropertyID = Shader.PropertyToID(PropertyName);
             
-            base.Init(driver: driver);
+            TryConnectSet(driver);
         }
 
 
-        public override void HandleValueChange(Vector2 value)
+        public override void DeInit(Driver<Vector2> driver) => TryDisconnectSet(driver);
+
+
+        protected override void HandleSet(Vector2 value)
         {
             foreach (var g in Graphs)
             {

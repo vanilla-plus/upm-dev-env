@@ -1,24 +1,25 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Vanilla.Drivers.Vec3
 {
-    [Serializable]
-    public class Unity_Event : Module
-    {
 
-        [SerializeField]
-        public UnityEvent<Vector3> onValueChange = new();
-        public UnityEvent<Vector3> OnValueChange => onValueChange;
+	[Serializable]
+	public class Unity_Event : Module
+	{
 
-        public override void OnValidate(Driver<Vector3> driver) => OnValueChange.Invoke(driver.Asset.Source.Value);
+		public UnityEvent<Vector3> OnSet = new();
 
-        public override void Init(Driver<Vector3> driver) => HandleValueChange(driver.Asset.Source.Value);
+        public override void OnValidate(Driver<Vector3> driver) => OnSet.Invoke(driver.Asset.Source.Value);
 
-        public override void HandleValueChange(Vector3 value) => OnValueChange.Invoke(value);
+		public override void Init(Driver<Vector3> driver) => TryConnectSet(driver);
 
-    }
+		public override void DeInit(Driver<Vector3> driver) => TryDisconnectSet(driver);
+
+		protected override void HandleSet(Vector3 value) => OnSet.Invoke(value);
+
+	}
+
 }

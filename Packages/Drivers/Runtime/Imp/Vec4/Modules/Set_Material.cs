@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -29,27 +27,19 @@ namespace Vanilla.Drivers.Vec4
 
 		[SerializeField]
 		private Material[] materials = Array.Empty<Material>();
-		public Material[] Materials => materials;
 
-		[SerializeField]
-		public GameObject[] controlledObjects = Array.Empty<GameObject>();
-		
-		// Warning - This is hacktown, USA.
 		// Unity is like "cant call SetColorImp during serialization
 		// so we don't, we call SetColor, without telling mummy.
 		// And it works fine? So like shut up Unity?? Just kill the imp
 
-		// Okay, this is a bit of a mouthful, but this will automatically
-		// also turn off any target GameObjects if the "get" value is 0.0f
-		
 		public override void OnValidate(Driver<Vector4> driver)
 		{
+			if (!ValidReferences(driver)) return;
+			
 			if (driver.Asset == null) return;
 
 			var value = driver.Asset.Source.Value;
 			
-			PropertyID = Shader.PropertyToID(PropertyName);
-
 			#if UNITY_EDITOR
 			foreach (var material in materials)
 			{
@@ -72,16 +62,20 @@ namespace Vanilla.Drivers.Vec4
 			#endif
 		}
 
+		
 
 		public override void Init(Driver<Vector4> driver)
 		{
 			PropertyID = Shader.PropertyToID(PropertyName);
 
-			base.Init(driver);
+			TryConnectSet(driver);
 		}
 
 
-		public override void HandleValueChange(Vector4 value)
+		public override void DeInit(Driver<Vector4> driver) => TryDisconnectSet(driver);
+
+
+		protected override void HandleSet(Vector4 value)
 		{
 			foreach (var material in materials)
 			{

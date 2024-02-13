@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 using UnityEngine.Events;
 
 namespace Vanilla.Drivers.Float
@@ -10,15 +8,14 @@ namespace Vanilla.Drivers.Float
     public class Unity_Event : Module
     {
 
-        [SerializeField]
-        public UnityEvent<float> onValueChange = new();
-        public UnityEvent<float> OnValueChange => onValueChange;
+        public UnityEvent<float> OnSet = new ();
 
-        public override void OnValidate(Driver<float> driver) => OnValueChange.Invoke(driver.Asset.Source.Value);
+        public override void OnValidate(Driver<float> driver) => OnSet.Invoke(driver.Asset.Source.Value);
 
-        public override void Init(Driver<float> driver) => HandleValueChange(driver.Asset.Source.Value);
+        public override void Init(Driver<float> driver)   => TryConnectSet(driver);
+        public override void DeInit(Driver<float> driver) => TryDisconnectSet(driver);
 
-        public override void HandleValueChange(float value) => OnValueChange.Invoke(value);
+        protected override void HandleSet(float value) => OnSet.Invoke(value);
 
     }
 }

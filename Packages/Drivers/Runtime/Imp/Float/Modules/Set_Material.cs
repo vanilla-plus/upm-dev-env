@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -29,27 +27,18 @@ namespace Vanilla.Drivers.Float
 
 		[SerializeField]
 		private Material[] materials = Array.Empty<Material>();
-		public Material[] Materials => materials;
 
-		[SerializeField]
-		public GameObject[] controlledObjects = Array.Empty<GameObject>();
-		
 		// Warning - This is hacktown, USA.
 		// Unity is like "cant call SetColorImp during serialization
 		// so we don't, we call SetColor, without telling mummy.
 		// And it works fine? So like shut up Unity?? Just kill the imp
 
-		// Okay, this is a bit of a mouthful, but this will automatically
-		// also turn off any target GameObjects if the "get" value is 0.0f
-		
 		public override void OnValidate(Driver<float> driver)
 		{
 			if (driver.Asset == null) return;
 
 			var value = driver.Asset.Source.Value;
 			
-			PropertyID = Shader.PropertyToID(PropertyName);
-
 			#if UNITY_EDITOR
 			foreach (var material in materials)
 			{
@@ -77,11 +66,12 @@ namespace Vanilla.Drivers.Float
 		{
 			PropertyID = Shader.PropertyToID(PropertyName);
 
-			base.Init(driver);
+			TryConnectSet(driver);
 		}
 
+		public override void DeInit(Driver<float> driver) => TryDisconnectSet(driver);
 
-		public override void HandleValueChange(float value)
+		protected override void HandleSet(float value)
 		{
 			foreach (var material in materials)
 			{

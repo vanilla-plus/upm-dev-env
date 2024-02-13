@@ -3,7 +3,6 @@
     "rootNamespace": "Vanilla.DataAssets",
     "references": [
         "UniTask",
-        "Vanilla.DeltaValues",
         "Vanilla.TypeMenu",
         "Vanilla.Normal",
         "Vanilla.MetaScript"

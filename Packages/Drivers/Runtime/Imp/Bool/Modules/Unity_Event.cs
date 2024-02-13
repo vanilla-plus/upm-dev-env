@@ -1,24 +1,24 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 using UnityEngine.Events;
 
 namespace Vanilla.Drivers.Bool
 {
+
 	[Serializable]
 	public class Unity_Event : Module
 	{
 
-		[SerializeField]
-		public UnityEvent<bool> onValueChange = new();
-		public UnityEvent<bool> OnValueChange => onValueChange;
+		public UnityEvent<bool> OnSet = new();
 
-		public override void OnValidate(Driver<bool> driver) => OnValueChange.Invoke(driver.Asset.Source.Value);
+		public override void OnValidate(Driver<bool> driver) => OnSet.Invoke(driver.Asset.Source.Value);
 
-		public override void Init(Driver<bool> driver) => HandleValueChange(driver.Asset.Source.Value);
+		public override void Init(Driver<bool> driver) => TryConnectSet(driver);
 
-		public override void HandleValueChange(bool value) => OnValueChange.Invoke(value);
+		public override void DeInit(Driver<bool> driver) => TryDisconnectSet(driver);
+
+		protected override void HandleSet(bool value) => OnSet.Invoke(value);
 
 	}
+
 }

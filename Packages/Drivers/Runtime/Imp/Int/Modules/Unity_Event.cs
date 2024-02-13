@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 using UnityEngine.Events;
 
 namespace Vanilla.Drivers.Int
@@ -10,15 +8,15 @@ namespace Vanilla.Drivers.Int
 	public class Unity_Event : Module
 	{
 
-		[SerializeField]
-		public UnityEvent<int> onValueChange = new();
-		public UnityEvent<int> OnValueChange => onValueChange;
+		public UnityEvent<int> OnSet = new();
 
-		public override void OnValidate(Driver<int> driver) => OnValueChange.Invoke(driver.Asset.Source.Value);
+		public override void OnValidate(Driver<int> driver) => OnSet.Invoke(driver.Asset.Source.Value);
 
-		public override void Init(Driver<int> driver) => HandleValueChange(driver.Asset.Source.Value);
+		public override void Init(Driver<int> driver) => TryConnectSet(driver);
 
-		public override void HandleValueChange(int value) => OnValueChange.Invoke(value);
+		public override void DeInit(Driver<int> driver) => TryDisconnectSet(driver);
+
+		protected override void HandleSet(int value) => OnSet.Invoke(value);
 
 	}
 }

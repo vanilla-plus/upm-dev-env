@@ -330,6 +330,15 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "vanilla.hourglass": {
+      "version": "file:Time Management",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.cysharp.unitask": "2.5.3",
+        "vanilla.data-assets": "4.2.3"
+      }
+    },
     "vanilla.init": {
       "version": "file:Init",
       "depth": 0,
@@ -409,15 +418,6 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
-    },
-    "vanilla.time-management": {
-      "version": "file:Time Management",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.cysharp.unitask": "2.5.3",
-        "vanilla.delta-values": "4.2.3"
-      }
     },
     "vanilla.type-menu": {
       "version": "file:Type Menu",
