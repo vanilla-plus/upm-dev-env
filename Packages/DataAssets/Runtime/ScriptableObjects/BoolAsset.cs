@@ -2,7 +2,8 @@ using System;
 
 using UnityEngine;
 
-using Vanilla.DeltaValues;
+using Vanilla.DataSources;
+using Vanilla.TypeMenu;
 
 namespace Vanilla.DataAssets
 {
@@ -14,12 +15,13 @@ namespace Vanilla.DataAssets
 	public class BoolAsset : DataAsset<bool>
 	{
 
-		[SerializeField]
-		private DeltaBool _delta = new();
-		public override DeltaValue<bool> Delta
+		[SerializeReference]
+		[TypeMenu("yellow")]
+		private BoolSource _source;
+		public override IDataSource<bool> Source
 		{
-			get => _delta;
-			set => _delta = value as DeltaBool;
+			get => _source;
+			set => _source = value as BoolSource;
 		}
 
 	}

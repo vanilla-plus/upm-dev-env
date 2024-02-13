@@ -46,7 +46,7 @@ namespace Vanilla.Drivers.Float
 		{
 			if (driver.Asset == null) return;
 
-			var value = driver.Asset.Delta.Value;
+			var value = driver.Asset.Source.Value;
 			
 			PropertyID = Shader.PropertyToID(PropertyName);
 

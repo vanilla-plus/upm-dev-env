@@ -29,7 +29,7 @@ namespace Vanilla.Drivers
 			#if UNITY_EDITOR
 			if (Asset == null) return;
 
-			Asset.Delta.Value = InitialValue;
+			Asset.Source.Value = InitialValue;
 
 			foreach (var d in Modules) d?.OnValidate(this);
 			#endif
@@ -45,7 +45,7 @@ namespace Vanilla.Drivers
 				return;
 			}
 			
-			Asset.Delta.Value = InitialValue;
+			Asset.Source.Value = InitialValue;
 
 			foreach (var d in Modules) d?.Init(this);
 

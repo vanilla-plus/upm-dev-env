@@ -41,7 +41,7 @@ namespace Vanilla.Drivers.Bool
 
 			// Is it safe to set VFXGraph values outside of Play Mode? Let's find out.
 
-			HandleValueChange(driver.Asset.Delta.Value);
+			HandleValueChange(driver.Asset.Source.Value);
 			#endif
 		}
 		

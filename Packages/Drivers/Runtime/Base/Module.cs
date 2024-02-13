@@ -31,9 +31,9 @@ namespace Vanilla.Drivers
         {
 //            foreach (var m in Snrubs) m?.Init(driver);
 
-            driver.Asset.Delta.OnValueChanged += HandleValueChange;
+            driver.Asset.Source.OnSet += HandleValueChange;
 
-            HandleValueChange(driver.Asset.Delta.Value);
+            HandleValueChange(driver.Asset.Source.Value);
         }
         
 //        public void HandleValueChange(float value)
@@ -42,7 +42,7 @@ namespace Vanilla.Drivers
 //        }
 
 
-        public virtual void DeInit(Driver<T> driver) => driver.Asset.Delta.OnValueChanged -= HandleValueChange;
+        public virtual void DeInit(Driver<T> driver) => driver.Asset.Source.OnSet -= HandleValueChange;
 
         public abstract void HandleValueChange(T value);
 

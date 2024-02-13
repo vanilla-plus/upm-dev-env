@@ -2,7 +2,8 @@ using System;
 
 using UnityEngine;
 
-using Vanilla.DeltaValues;
+using Vanilla.DataSources;
+using Vanilla.TypeMenu;
 
 namespace Vanilla.DataAssets
 {
@@ -14,12 +15,13 @@ namespace Vanilla.DataAssets
 	public class FloatAsset : DataAsset<float>
 	{
 
-		[SerializeField]
-		private DeltaFloat _delta = new();
-		public override DeltaValue<float> Delta
+		[SerializeReference]
+		[TypeMenu("yellow")]
+		private FloatSource _source;
+		public override IDataSource<float> Source
 		{
-			get => _delta;
-			set => _delta = value as DeltaFloat;
+			get => _source;
+			set => _source = value as FloatSource;
 		}
 
 	}

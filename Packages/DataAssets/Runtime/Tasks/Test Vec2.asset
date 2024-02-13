@@ -12,16 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0c8ae779fa8445cb16c87166c9e9c0, type: 3}
   m_Name: Test Vec2
   m_EditorClassIdentifier: 
-  _delta:
-    _Name: Test Vec2
-    _Value: {x: 0, y: 0}
-    _Min: {x: -3.4028235e+38, y: -3.4028235e+38}
-    _Max: {x: 3.4028235e+38, y: 3.4028235e+38}
-    AtMin:
-      _Name: Test Vec2.AtMin
-      _Value: 0
-    AtMax:
-      _Name: Test Vec2.AtMax
-      _Value: 0
-    ChangeEpsilon: 1e-45
-    MinMaxEpsilon: 0.01
+  _source:
+    rid: 7093663371400839185
+  references:
+    version: 2
+    RefIds:
+    - rid: 7093663371400839185
+      type: {class: DirectVec2Source, ns: Vanilla.DataAssets, asm: Vanilla.DataAssets}
+      data:
+        _name: Test Vec2
+        _value: {x: 0, y: 0}

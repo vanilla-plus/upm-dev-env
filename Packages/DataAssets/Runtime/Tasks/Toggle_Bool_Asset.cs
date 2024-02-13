@@ -31,7 +31,7 @@ namespace Vanilla.DataAssets.Tasks
 				return UniTask.FromResult(scope);
 			}
 
-			asset.Delta.Value = !asset.Delta.Value;
+			asset.Source.Value = !asset.Source.Value;
 
 			return UniTask.FromResult(scope);
 		}

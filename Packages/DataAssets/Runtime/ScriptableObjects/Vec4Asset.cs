@@ -2,7 +2,8 @@ using System;
 
 using UnityEngine;
 
-using Vanilla.DeltaValues;
+using Vanilla.DataSources;
+using Vanilla.TypeMenu;
 
 namespace Vanilla.DataAssets
 {
@@ -14,12 +15,13 @@ namespace Vanilla.DataAssets
 	public class Vec4Asset : DataAsset<Vector4>
 	{
 
-		[SerializeField]
-		private DeltaVec4 _delta = new();
-		public override DeltaValue<Vector4> Delta
+		[SerializeReference]
+		[TypeMenu("yellow")]
+		private Vec4Source _source;
+		public override IDataSource<Vector4> Source
 		{
-			get => _delta;
-			set => _delta = value as DeltaVec4;
+			get => _source;
+			set => _source = value as Vec4Source;
 		}
 
 	}

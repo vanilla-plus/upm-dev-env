@@ -41,7 +41,7 @@ namespace Vanilla.Drivers.Color
 		{
 			PropertyID = Shader.PropertyToID(PropertyName);
 
-			var value = driver.Asset.Delta.Value;
+			var value = driver.Asset.Source.Value;
 
 			#if UNITY_EDITOR
 			foreach (var material in materials)

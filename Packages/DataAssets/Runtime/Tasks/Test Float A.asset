@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b76bb6ccd929413f818053564effdb6, type: 3}
+  m_Name: Test Float A
+  m_EditorClassIdentifier: 
+  _source:
+    rid: 7093663371400839195
+  references:
+    version: 2
+    RefIds:
+    - rid: 7093663371400839195
+      type: {class: RangedFloatSource, ns: Vanilla.DataSources, asm: Vanilla.DataAssets}
+      data:
+        _name: Test Float A
+        _value: 0
+        _Min: 0
+        _Max: 3
+        _atMin:
+          _name: Test Float A.AtMin
+          _value: 1
+        _atMax:
+          _name: Test Float A.AtMax
+          _value: 0
+        _minMaxEpsilon: 0.0001
