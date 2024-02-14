@@ -264,7 +264,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "vanilla.data-assets": "2.0.0"
+        "vanilla.data-assets": "2.0.4"
       }
     },
     "vanilla.delta-values": {
@@ -289,8 +289,7 @@
       "source": "embedded",
       "dependencies": {
         "vanilla.type-menu": "4.2.0",
-        "vanilla.normal": "1.0.0",
-        "vanilla.data-assets": "1.1.0"
+        "vanilla.data-assets": "2.0.4"
       }
     },
     "vanilla.easing": {
@@ -334,7 +333,7 @@
       "source": "embedded",
       "dependencies": {
         "com.cysharp.unitask": "2.5.3",
-        "vanilla.data-assets": "2.0.0",
+        "vanilla.data-assets": "2.0.4",
         "vanilla.state": "1.0.0"
       }
     },
@@ -368,7 +367,7 @@
       "source": "embedded",
       "dependencies": {
         "vanilla.init": "1.0.5",
-        "vanilla.data-assets": "2.0.0",
+        "vanilla.data-assets": "2.0.4",
         "vanilla.state": "1.0.0"
       }
     },
@@ -420,7 +419,7 @@
       "source": "embedded",
       "dependencies": {
         "com.cysharp.unitask": "2.5.3",
-        "vanilla.data-assets": "2.0.0"
+        "vanilla.data-assets": "2.0.4"
       }
     },
     "vanilla.string-formatting": {

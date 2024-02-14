@@ -35,10 +35,10 @@ namespace Vanilla.Drivers.Color
 		protected override void HandleSet(UnityEngine.Color incoming)
 		{
 			var shouldBeActive = incoming.a > Mathf.Epsilon;
-
+			
 			foreach (var g in controlledObjects)
 				if (g != null)
-					g.SetActive(!shouldBeActive);
+					g.SetActive(shouldBeActive);
 		}
 
 	}

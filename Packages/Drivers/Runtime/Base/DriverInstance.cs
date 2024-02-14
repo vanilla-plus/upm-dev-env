@@ -35,7 +35,7 @@ namespace Vanilla.Drivers
 		private void OnValidate()
 		{
 			#if UNITY_EDITOR
-			foreach (var set in Drivers) set?.OnValidate();
+			foreach (var driver in Drivers) driver?.OnValidate();
 			#endif
 		}
 
@@ -44,7 +44,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.Awake) return;
 
-			foreach (var set in Drivers) set?.Init();
+			foreach (var driver in Drivers) driver?.Init();
 		}
 
 
@@ -52,7 +52,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.Start) return;
 
-			foreach (var set in Drivers) set?.Init();
+			foreach (var driver in Drivers) driver?.Init();
 		}
 
 
@@ -60,7 +60,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.Init) return;
 
-			foreach (var set in Drivers) set?.Init();
+			foreach (var driver in Drivers) driver?.Init();
 		}
 
 
@@ -68,7 +68,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.PostInit) return;
 
-			foreach (var set in Drivers) set?.Init();
+			foreach (var driver in Drivers) driver?.Init();
 		}
 
 
@@ -76,7 +76,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.OnEnable) return;
 
-			foreach (var set in Drivers) set?.Init();
+			foreach (var driver in Drivers) driver?.Init();
 		}
 
 
@@ -84,7 +84,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod != WakeMethod.OnEnable) return;
 
-			foreach (var set in Drivers) set?.DeInit();
+			foreach (var driver in Drivers) driver?.DeInit();
 		}
 
 
@@ -92,7 +92,7 @@ namespace Vanilla.Drivers
 		{
 			if (wakeMethod == WakeMethod.OnEnable) return;
 
-			foreach (var set in Drivers) set?.DeInit();
+			foreach (var driver in Drivers) driver?.DeInit();
 		}
 
 	}

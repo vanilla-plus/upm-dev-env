@@ -6,7 +6,7 @@ using Vanilla.DataAssets;
 
 namespace Vanilla.DataSources
 {
-    public interface IAssetSource<T>
+    public interface IAssetSource<T> : IDataSource<T>
     {
 
 

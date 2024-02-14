@@ -10,7 +10,7 @@
   "repository": "github:vanilla-plus/upm-geodetics.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "type": "template",
   "samples": [
     {

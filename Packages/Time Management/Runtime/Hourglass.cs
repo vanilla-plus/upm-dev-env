@@ -74,7 +74,7 @@ namespace Vanilla.Hourglass
 
 			CanPause = true;
 
-			Paused.Progress.AtMin.OnSet += HandlePausedAtMin; // Does this error out? It might - consider
+//			Paused.Progress.AtMin.OnSet += HandlePausedAtMin; // Does this error out? It might - consider
 			Paused?.Deinit();
 
 			Paused = new State(name: "Paused",

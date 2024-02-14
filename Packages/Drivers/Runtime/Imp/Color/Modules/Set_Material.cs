@@ -38,17 +38,22 @@ namespace Vanilla.Drivers.Color
 			if (!ValidReferences(driver)) return;
 
 			var value = driver.Asset.Source.Value;
+
+			// Even though these need setting in builds (and are NOT platform-agnostic)
+			// We can still set them temporarily here so that changes can be
+			// reflected in the Editor (which has it's own PropertyID)
+			PropertyID = Shader.PropertyToID(PropertyName);
 			
 			#if UNITY_EDITOR
 			foreach (var material in materials)
 			{
 				if (material == null) continue;
 
-				var setMethod = typeof(Material).GetMethod(name: "SetVector",
+				var setMethod = typeof(Material).GetMethod(name: "SetColor",
 				                                           types: new[]
 				                                                  {
 					                                                  typeof(string),
-					                                                  typeof(Vector4)
+					                                                  typeof(UnityEngine.Color)
 				                                                  });
 
 				setMethod?.Invoke(obj: material,

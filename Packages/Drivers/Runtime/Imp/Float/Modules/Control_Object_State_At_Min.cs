@@ -52,7 +52,7 @@ namespace Vanilla.Drivers.Float
 
 			foreach (var g in controlledObjects)
 				if (g != null)
-					g.SetActive(!shouldBeActive);
+					g.SetActive(shouldBeActive);
 		}
 
 	}

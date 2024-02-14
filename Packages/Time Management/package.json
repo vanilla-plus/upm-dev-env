@@ -10,11 +10,11 @@
   "repository": "github:vanilla-plus/upm-time-management.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "template",
   "dependencies": {
     "com.cysharp.unitask": "2.5.3",
-    "vanilla.data-assets": "2.0.0",
+    "vanilla.data-assets": "2.0.4",
     "vanilla.state": "1.0.0"
   }
 }

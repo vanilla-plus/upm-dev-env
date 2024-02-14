@@ -10,10 +10,10 @@
   "repository": "github:vanilla-plus/upm-state.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "template",
   "dependencies": {
     "com.cysharp.unitask": "2.5.3",
-    "vanilla.data-assets": "2.0.0"
+    "vanilla.data-assets": "2.0.4"
   }
 }

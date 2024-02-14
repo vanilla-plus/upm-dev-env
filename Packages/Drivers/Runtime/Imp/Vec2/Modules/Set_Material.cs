@@ -39,6 +39,11 @@ namespace Vanilla.Drivers.Vec2
 			if (driver.Asset == null) return;
 
 			var value = driver.Asset.Source.Value;
+			
+			// Even though these need setting in builds (and are NOT platform-agnostic)
+			// We can still set them temporarily here so that changes can be
+			// reflected in the Editor (which has it's own PropertyID)
+			PropertyID = Shader.PropertyToID(PropertyName);
 
 			foreach (var material in materials)
 			{

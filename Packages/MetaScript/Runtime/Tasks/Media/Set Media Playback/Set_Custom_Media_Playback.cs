@@ -1,13 +1,12 @@
 using System;
 
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace Vanilla.MetaScript
 {
     
 	[Serializable]
-	public class Set_Custom_Media_Playback : Set_Media_Playback<PlayableDirector>
+	public class Set_Custom_Media_Playback : Set_Media_Playback<Component>
 	{
 
 		[SerializeField] public string PlayCallString = "Play";
