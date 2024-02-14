@@ -13,6 +13,6 @@
   "version": "2.3.2",
   "type": "template",
   "dependencies": {
-    "vanilla.delta-values": "4.2.3"
+    "vanilla.data-assets": "2.0.0"
   }
 }

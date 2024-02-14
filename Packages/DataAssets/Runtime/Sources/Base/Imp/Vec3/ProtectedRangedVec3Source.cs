@@ -13,7 +13,16 @@ namespace Vanilla.DataAssets
                                              IRangedDataSource<Vector3>
     {
 
-        [SerializeField]
+	    [SerializeField]
+	    private string _name = "Unnamed ProtectedRangedColorSource";
+	    public string Name
+	    {
+		    get => _name;
+		    set => _name = value;
+	    }
+	    
+
+	    [SerializeField]
         private Vector3 _value;
         public override Vector3 Value
         {
@@ -32,9 +41,13 @@ namespace Vanilla.DataAssets
 
                 if (_value == value) return;
 
-                var old = _value;
+                var outgoing = _value;
 
                 _value = value;
+
+                #if debug
+                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
+                #endif
                 
                 // Hm, we don't check for an 'increase' or 'decrease' here because I suppose it's a little bit vague when it comes to Vectors?
                 // The way more useful information here would be if each particular dimension had its own Min/Max/AtMin/AtMax but structuring that
@@ -42,9 +55,9 @@ namespace Vanilla.DataAssets
                 
                 // I think we can flub this check for now.
 
-                OnSet?.Invoke(_value);
-                OnSetWithHistory?.Invoke(arg1: _value,
-                                         arg2: old);
+                OnSet?.Invoke(value);
+                OnSetWithHistory?.Invoke(arg1: value,
+                                         arg2: outgoing);
                 
                 _atMin.Value = VectorIsAtMin;
                 _atMax.Value = VectorIsAtMax;
@@ -120,18 +133,22 @@ namespace Vanilla.DataAssets
                                               min: _min.z,
                                               max: float.MaxValue));
 
-//            AtMin.Name = $"{Name}.AtMin";
-//            AtMax.Name = $"{Name}.AtMax";
-            
-            Value = new Vector3(x: Mathf.Clamp(value: _value.x,
-                                                min: _min.x,
-                                                max: _max.x),
-                                 y: Mathf.Clamp(value: _value.y,
-                                                min: _min.y,
-                                                max: _max.y),
-                                 z: Mathf.Clamp(value: _value.z,
-                                                min: _min.z,
-                                                max: _max.z));
+            AtMin.Name = $"{Name}.AtMin";
+            AtMax.Name = $"{Name}.AtMax";
+
+            Value = _value;
+
+//            var old = _value;
+//
+//            _value = new Vector3(x: Mathf.Clamp(value: _value.x,
+//                                                min: _min.x,
+//                                                max: _max.x),
+//                                 y: Mathf.Clamp(value: _value.y,
+//                                                min: _min.y,
+//                                                max: _max.y),
+//                                 z: Mathf.Clamp(value: _value.z,
+//                                                min: _min.z,
+//                                                max: _max.z));
         }
 
         private bool VectorIsAtMin => Mathf.Abs(_value.x - _min.x) < MinMaxEpsilon && Mathf.Abs(_value.y - _min.y) < MinMaxEpsilon && Mathf.Abs(_value.z - _min.z) < MinMaxEpsilon;

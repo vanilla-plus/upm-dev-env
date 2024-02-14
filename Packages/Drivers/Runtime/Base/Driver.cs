@@ -29,7 +29,11 @@ namespace Vanilla.Drivers
 			#if UNITY_EDITOR
 			if (Asset == null) return;
 
+//			Debug.LogWarning(Asset.Source.Value);
+			
 			Asset.Source.Value = InitialValue;
+
+//			Debug.LogError(Asset.Source.Value);
 
 			foreach (var module in Modules) module?.OnValidate(this);
 			#endif

@@ -2,9 +2,10 @@
     "name": "Vanilla.NavStack",
     "rootNamespace": "Vanilla.NavStack",
     "references": [
-        "GUID:f51ebe6a0ceec4240a699833d6309b23",
-        "GUID:1b74f63751e39409e9ded0dcfe514e9c",
-        "GUID:5ae9754d7283e442ca2688969c8ec570"
+        "UniTask",
+        "Vanilla.DataAssets",
+        "Vanilla.Init",
+        "Vanilla.State"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

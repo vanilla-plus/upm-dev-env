@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-namespace Vanilla.TimeManagement
+namespace Vanilla.Hourglass
 {
 
 	[Serializable]
@@ -21,13 +21,13 @@ namespace Vanilla.TimeManagement
 		{
 			#if UNITY_EDITOR
 			
-			if (Input.GetKeyDown(testPause)) Hourglass.TryPause();
+			if (Input.GetKeyDown(testPause)) HourGlass.TryPause();
 
-			if (Input.GetKeyDown(slowMotionKey)) Hourglass.SetTimeScaleSlow();
-			if (Input.GetKeyUp(slowMotionKey)) Hourglass.SetTimeScaleNormal();
+			if (Input.GetKeyDown(slowMotionKey)) HourGlass.SetTimeScaleSlow();
+			if (Input.GetKeyUp(slowMotionKey)) HourGlass.SetTimeScaleNormal();
 
-			if (Input.GetKeyDown(fastForwardKey)) Hourglass.SetTimeScaleFast();
-			if (Input.GetKeyUp(fastForwardKey)) Hourglass.SetTimeScaleNormal();
+			if (Input.GetKeyDown(fastForwardKey)) HourGlass.SetTimeScaleFast();
+			if (Input.GetKeyUp(fastForwardKey)) HourGlass.SetTimeScaleNormal();
 			#endif
 		}
 

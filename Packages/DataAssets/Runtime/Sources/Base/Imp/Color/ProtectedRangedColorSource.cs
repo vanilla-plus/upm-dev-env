@@ -12,8 +12,20 @@ namespace Vanilla.DataAssets
                                              IProtectedSource<Color>,
                                              IRangedDataSource<Color>
     {
+	    
+	    [SerializeField]
+	    private string _name = "Unnamed ProtectedRangedColorSource";
+	    public string Name
+	    {
+		    get => _name;
+		    set => _name = value;
+	    }
 
-        [SerializeField]
+
+
+
+
+	    [SerializeField]
         private Color _value;
         public override Color Value
         {
@@ -35,9 +47,13 @@ namespace Vanilla.DataAssets
 
                 if (_value == value) return;
 
-                var old = _value;
+                var outgoing = _value;
 
                 _value = value;
+
+                #if debug
+                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
+                #endif
                 
                 // Hm, we don't check for an 'increase' or 'decrease' here because I suppose it's a little bit vague when it comes to Vectors?
                 // The way more useful information here would be if each particular dimension had its own Min/Max/AtMin/AtMax but structuring that
@@ -45,16 +61,16 @@ namespace Vanilla.DataAssets
                 
                 // I think we can flub this check for now.
 
-                OnSet?.Invoke(_value);
-                OnSetWithHistory?.Invoke(arg1: _value,
-                                         arg2: old);
+                OnSet?.Invoke(value);
+                OnSetWithHistory?.Invoke(arg1: value,
+                                         arg2: outgoing);
                 
                 _atMin.Value = VectorIsAtMin;
                 _atMax.Value = VectorIsAtMax;
             }
         }
-        
-		[SerializeField]
+
+        [SerializeField]
 		private Color _min = new Color(r: float.MinValue,
 		                               g: float.MinValue,
 		                               b: float.MinValue,
@@ -131,21 +147,25 @@ namespace Vanilla.DataAssets
 			                                  min: _min.a,
 			                                  max: float.MaxValue));
 
-//			AtMin.Name = $"{Name}.AtMin";
-//			AtMax.Name = $"{Name}.AtMax";
-			
-			Value = new Color(r: Mathf.Clamp(value: _value.r,
-			                                  min: _min.r,
-			                                  max: _max.r),
-			                     g: Mathf.Clamp(value: _value.g,
-			                                    min: _min.g,
-			                                    max: _max.g),
-			                     b: Mathf.Clamp(value: _value.b,
-			                                    min: _min.b,
-			                                    max: _max.b),
-			                     a: Mathf.Clamp(value: _value.a,
-			                                    min: _min.a,
-			                                    max: _max.a));
+			AtMin.Name = $"{Name}.AtMin";
+			AtMax.Name = $"{Name}.AtMax";
+
+			Value = _value;
+
+//			var old = _value;
+
+//			Value = new Color(r: Mathf.Clamp(value: _value.r,
+//			                                  min: _min.r,
+//			                                  max: _max.r),
+//			                   g: Mathf.Clamp(value: _value.g,
+//			                                  min: _min.g,
+//			                                  max: _max.g),
+//			                   b: Mathf.Clamp(value: _value.b,
+//			                                  min: _min.b,
+//			                                  max: _max.b),
+//			                   a: Mathf.Clamp(value: _value.a,
+//			                                  min: _min.a,
+//			                                  max: _max.a));
 		}
 
 

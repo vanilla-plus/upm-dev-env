@@ -10,6 +10,14 @@ namespace Vanilla.DataSources
 	{
 
 		[SerializeField]
+		private string _name = "Unnamed ProtectedRangedColorSource";
+		public string Name
+		{
+			get => _name;
+			set => _name = value;
+		}
+
+		[SerializeField]
 		private Vector4 _value;
 		public override Vector4 Value
 		{
@@ -18,15 +26,19 @@ namespace Vanilla.DataSources
 			{
 				if (_value == value) return;
                 
-				var old = _value;
+				var outgoing = _value;
 
 				_value = value;
-                
-				OnSet?.Invoke(_value);
-				OnSetWithHistory?.Invoke(_value, old);
+
+				#if debug
+				Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
+				#endif
+				
+				OnSet?.Invoke(value);
+				OnSetWithHistory?.Invoke(value, outgoing);
 			}
 		}
-
+		
 		public override void OnBeforeSerialize() { }
 
 		public override void OnAfterDeserialize() { }

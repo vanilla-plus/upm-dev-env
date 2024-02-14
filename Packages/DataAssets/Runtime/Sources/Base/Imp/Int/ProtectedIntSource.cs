@@ -12,6 +12,16 @@ namespace Vanilla.DataSources
     {
 
         [SerializeField]
+        private string _name = "Unnamed ProtectedIntSource";
+        public string Name
+        {
+            get => _name;
+            set => _name = value;
+        }
+
+
+
+        [SerializeField]
         private int _value;
         public override int Value
         {
@@ -20,12 +30,16 @@ namespace Vanilla.DataSources
             {
                 if (_value == value) return;
                 
-                var old = _value;
+                var outgoing = _value;
 
                 _value = value;
+
+                #if debug
+                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
+                #endif
                 
-                OnSet?.Invoke(_value);
-                OnSetWithHistory?.Invoke(_value, old);
+                OnSet?.Invoke(value);
+                OnSetWithHistory?.Invoke(value, outgoing);
             }
         }
 

@@ -12,6 +12,14 @@ namespace Vanilla.DataSources
     {
 
         [SerializeField]
+        private string _name = "Unnamed ProtectedRangedFloatSource";
+        public string Name
+        {
+            get => _name;
+            set => _name = value;
+        }
+
+        [SerializeField]
         public float _changeEpsilon = Mathf.Epsilon;
         public float ChangeEpsilon
         {
@@ -27,37 +35,41 @@ namespace Vanilla.DataSources
             get => _value;
             set
             {
-                var incoming = Mathf.Clamp(value,
-                                           Min,
-                                           Max);
+                value = Mathf.Clamp(value,
+                                    Min,
+                                    Max);
+
+                if (Mathf.Abs(_value - value) < ChangeEpsilon) return;
                 
-                if (Mathf.Abs(_value - incoming) > ChangeEpsilon) return;
+                var outgoing = _value;
 
-                var old = _value;
+                _value = value;
 
-                _value = incoming;
+                #if debug
+                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
+                #endif
 
-                if (_value > old)
+                if (value > outgoing)
                 {
-                    _atMin.Value = Math.Abs(value: _value - _Min) < MinMaxEpsilon;
+                    _atMin.Value = Math.Abs(value: value - _Min) < MinMaxEpsilon;
 
-                    OnSet?.Invoke(_value);
+                    OnSet?.Invoke(value);
 
-                    OnSetWithHistory?.Invoke(_value,
-                                             old);
+                    OnSetWithHistory?.Invoke(value,
+                                             outgoing);
                     
                     _atMax.Value = Math.Abs(value: _value - _Max) < MinMaxEpsilon;
                 }
                 else
                 {
-                    _atMax.Value = Math.Abs(value: _value - _Max) < MinMaxEpsilon;
+                    _atMax.Value = Math.Abs(value: value - _Max) < MinMaxEpsilon;
 
-                    OnSet?.Invoke(_value);
+                    OnSet?.Invoke(value);
 
-                    OnSetWithHistory?.Invoke(_value,
-                                             old);
+                    OnSetWithHistory?.Invoke(value,
+                                             outgoing);
                     
-                    _atMin.Value = Math.Abs(value: _value - _Min) < MinMaxEpsilon;
+                    _atMin.Value = Math.Abs(value: value - _Min) < MinMaxEpsilon;
                 }
             }
         }
@@ -114,13 +126,56 @@ namespace Vanilla.DataSources
                                _Min,
                                float.MaxValue);
 
-//            AtMin.Name = $"{Name}.AtMin";
-//            AtMax.Name = $"{Name}.AtMax";
+            AtMin.Name = $"{Name}.AtMin";
+            AtMax.Name = $"{Name}.AtMax";
+            
+//            Value = Mathf.Clamp(_value,
+//                                 _Min,
+//                                 _Max);
 
-            Value = Mathf.Clamp(_value,
-                                _Min,
-                                _Max);
+            Value = _value;
         }
+
+//
+//        public override void OnAfterDeserialize() => ValidateRangedValue();
+//
+//
+//        public void ValidateRangedValue()
+//        {
+//            ValidateMin();
+//            ValidateMax();
+//
+//            ValidateValue();
+//
+//            AtMin.Name = $"{Name}.AtMin";
+//
+//            ValidateAtMin();
+//
+//            AtMax.Name = $"{Name}.AtMax";
+//
+//            ValidateAtMax();
+//        }
+//
+//
+//        private void ValidateMin() => _Min = Mathf.Clamp(_Min,
+//                                                        float.MinValue,
+//                                                        max: _Max);
+//
+//
+//        private void ValidateMax() => _Max = Mathf.Clamp(_Max,
+//                                                         min: _Min,
+//                                                         max: float.MaxValue);
+//
+//
+//        private void ValidateValue() => Value = Mathf.Clamp(_value,
+//                                                             min: _Min,
+//                                                             max: _Max);
+//
+//
+//        protected void ValidateAtMin() => AtMin.Value = Math.Abs(value: _value - _Min) < MinMaxEpsilon;
+//
+//        protected void ValidateAtMax() => AtMax.Value = Math.Abs(value: _value - _Max) < MinMaxEpsilon;
+
 
     }
 

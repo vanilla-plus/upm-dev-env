@@ -21,7 +21,7 @@ namespace Vanilla.NavStack
         {
             base.Awake();
             
-            _stack.StackIsEmpty.OnValueChangedWithHistory += HandleStackIsEmpty;
+            _stack.StackIsEmpty.OnSetWithHistory += HandleStackIsEmpty;
         }
 
 
@@ -34,7 +34,7 @@ namespace Vanilla.NavStack
 
         protected override void OnDestroy()
         {
-            _stack.StackIsEmpty.OnValueChangedWithHistory -= HandleStackIsEmpty;
+            _stack.StackIsEmpty.OnSetWithHistory -= HandleStackIsEmpty;
 
             base.OnDestroy();
         }

@@ -1,7 +1,8 @@
 {
-    "name": "Vanilla.DebugCam",
-    "rootNamespace": "Vanilla.DebugCam",
+    "name": "Vanilla.State",
+    "rootNamespace": "Vanilla.State",
     "references": [
+        "UniTask",
         "Vanilla.DataAssets"
     ],
     "includePlatforms": [],

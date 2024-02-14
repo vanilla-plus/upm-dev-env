@@ -6,8 +6,20 @@ namespace Vanilla.DataSources
 {
 	
 	[Serializable]
-	public class ProtectedVec3Source : Vec3Source, IProtectedSource<Vector3>
+	public class ProtectedVec3Source : Vec3Source,
+	                                   IProtectedSource<Vector3>
 	{
+
+		[SerializeField]
+		private string _name = "Unnamed ProtectedRangedColorSource";
+		public string Name
+		{
+			get => _name;
+			set => _name = value;
+		}
+
+
+
 
 		[SerializeField]
 		private Vector3 _value;
@@ -17,13 +29,17 @@ namespace Vanilla.DataSources
 			set
 			{
 				if (_value == value) return;
-                
-				var old = _value;
+
+				var outgoing = _value;
 
 				_value = value;
+
+				#if debug
+				Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
+				#endif
                 
-				OnSet?.Invoke(_value);
-				OnSetWithHistory?.Invoke(_value, old);
+				OnSet?.Invoke(value);
+				OnSetWithHistory?.Invoke(value, outgoing);
 			}
 		}
 

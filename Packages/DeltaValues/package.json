@@ -1,6 +1,6 @@
 {
   "name": "vanilla.delta-values",
-  "displayName": "Delta Values",
+  "displayName": "Delta Values - Deprecated",
   "description": "DeltaValues is an react-like library for C# in Unity that relies on change-only event invocations. Subscriptions will only hear when their observables value has changed.",
   "author": {
     "name": "Vanilla Plus",

@@ -1,7 +1,5 @@
 using System;
 
-using UnityEngine;
-
 namespace Vanilla.DataSources
 {
     
@@ -41,6 +39,12 @@ namespace Vanilla.DataSources
         public abstract void OnBeforeSerialize();
 
         public abstract void OnAfterDeserialize();
+
+
+        public static implicit operator bool(BoolSource input) => input is
+                                                                  {
+                                                                      Value: true
+                                                                  };
 
     }
 }

@@ -11,6 +11,14 @@ namespace Vanilla.DataSources
     {
 
         [SerializeField]
+        private string _name = "Unnamed ProtectedBoolSource";
+        public string Name
+        {
+            get => _name;
+            set => _name = value;
+        }
+
+        [SerializeField]
         private bool _value = false;
         public sealed override bool Value
         {
@@ -19,12 +27,18 @@ namespace Vanilla.DataSources
             {
                 if (_value == value) return;
 
+                var outgoing = _value;
+                
                 _value = value;
+                
+                #if debug
+                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
+                #endif
 
                 OnSet?.Invoke(_value);
 
                 OnSetWithHistory?.Invoke(_value,
-                                         !_value);
+                                         outgoing);
             }
         }
 
@@ -37,7 +51,7 @@ namespace Vanilla.DataSources
         public override void OnBeforeSerialize() { }
 
         public override void OnAfterDeserialize() { }
-
+        
     }
 
 }

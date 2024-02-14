@@ -2,7 +2,6 @@ using System;
 
 using UnityEngine;
 
-using Vanilla.DeltaValues;
 using Vanilla.Init;
 
 namespace Vanilla.NavStack
@@ -15,7 +14,7 @@ namespace Vanilla.NavStack
 	{
 
 		[SerializeField]
-		public DeltaState State;
+		public State State;
 
 		[SerializeField]
 		private CanvasGroup _group;
@@ -26,9 +25,9 @@ namespace Vanilla.NavStack
 			#if UNITY_EDITOR
 			if (_group == null) _group = GetComponent<CanvasGroup>();
 
-			State ??= new DeltaState(name: $"[{GetType().Name}].State",
-			                         defaultActiveState: false,
-			                         fillSeconds: 0.5f);
+			State ??= new State(name: $"[{GetType().Name}].State",
+			                    defaultActiveState: false,
+			                    fillSeconds: 0.5f);
 
 			PostInit();
 			#endif
@@ -39,9 +38,9 @@ namespace Vanilla.NavStack
 		{
 			State.Init();
 
-			State.Progress.OnValueChanged                  += HandleActiveProgress;
-			State.Progress.AtMin.OnValueChangedWithHistory += HandleFullyInactive;
-			State.Progress.AtMax.OnValueChanged            += HandleFullyActive;
+			State.Progress.OnSet                  += HandleActiveProgress;
+			State.Progress.AtMin.OnSetWithHistory += HandleFullyInactive;
+			State.Progress.AtMax.OnSet            += HandleFullyActive;
 		}
 
 
@@ -67,9 +66,9 @@ namespace Vanilla.NavStack
 		{
 			State.Deinit();
 
-			State.Progress.OnValueChanged                  -= HandleActiveProgress;
-			State.Progress.AtMin.OnValueChangedWithHistory -= HandleFullyInactive;
-			State.Progress.AtMax.OnValueChanged            -= HandleFullyActive;
+			State.Progress.OnSet                  -= HandleActiveProgress;
+			State.Progress.AtMin.OnSetWithHistory -= HandleFullyInactive;
+			State.Progress.AtMax.OnSet            -= HandleFullyActive;
 		}
 
 	}

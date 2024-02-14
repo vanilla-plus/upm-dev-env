@@ -1,9 +1,10 @@
 {
-    "name": "Vanilla.TimeManagement",
-    "rootNamespace": "Vanilla.TimeManagement",
+    "name": "Vanilla.Hourglass",
+    "rootNamespace": "Vanilla.Hourglass",
     "references": [
         "UniTask",
-        "Vanilla.DeltaValues"
+        "Vanilla.DataAssets",
+        "Vanilla.State"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

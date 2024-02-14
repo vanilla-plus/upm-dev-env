@@ -10,6 +10,18 @@ namespace Vanilla.DataSources
     public class ProtectedFloatSource : FloatSource, 
                                         IProtectedSource<float>
     {
+        
+        [SerializeField]
+        private string _name = "Unnamed ProtectedFloatSource";
+        public string Name
+        {
+            get => _name;
+            set => _name = value;
+        }
+
+
+
+
 
         [SerializeField]
         public float _changeEpsilon = Mathf.Epsilon;
@@ -28,12 +40,16 @@ namespace Vanilla.DataSources
             {
                 if (Mathf.Abs(_value - value) > ChangeEpsilon) return;
                 
-                var old = _value;
+                var outgoing = _value;
 
                 _value = value;
+
+                #if debug
+                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
+                #endif
                 
-                OnSet?.Invoke(_value);
-                OnSetWithHistory?.Invoke(_value, old);
+                OnSet?.Invoke(value);
+                OnSetWithHistory?.Invoke(value, outgoing);
             }
         }
 

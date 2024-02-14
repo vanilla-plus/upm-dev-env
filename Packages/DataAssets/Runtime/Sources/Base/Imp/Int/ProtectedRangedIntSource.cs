@@ -12,47 +12,60 @@ namespace Vanilla.DataSources
     {
 
         [SerializeField]
+        private string _name = "Unnamed ProtectedRangedColorSource";
+        public string Name
+        {
+            get => _name;
+            set => _name = value;
+        }
+
+
+
+        [SerializeField]
         private int _value;
         public override int Value
         {
             get => _value;
             set
             {
-                var incoming = Mathf.Clamp(value,
-                                           Min,
-                                           Max);
+                value = Mathf.Clamp(value,
+                                    Min,
+                                    Max);
                 
-                if (_value == incoming) return;
+                if (_value == value) return;
 
-                var old = _value;
+                var outgoing = _value;
 
-                _value = incoming;
+                _value = value;
+
+                #if debug
+                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
+                #endif
                 
-                if (_value > old)
+                if (value > outgoing)
                 {
-                    _atMin.Value = _value == _Min;
+                    _atMin.Value = value == _Min;
 
-                    OnSet?.Invoke(_value);
+                    OnSet?.Invoke(value);
 
-                    OnSetWithHistory?.Invoke(_value,
-                                             old);
+                    OnSetWithHistory?.Invoke(value,
+                                             outgoing);
                     
-                    _atMax.Value = _value == Max;
+                    _atMax.Value = value == Max;
                 }
                 else
                 {
-                    _atMax.Value = _value == Max;
+                    _atMax.Value = value == Max;
 
-                    OnSet?.Invoke(_value);
+                    OnSet?.Invoke(value);
 
-                    OnSetWithHistory?.Invoke(_value,
-                                             old);
+                    OnSetWithHistory?.Invoke(value,
+                                             outgoing);
                     
-                    _atMin.Value = _value == _Min;
+                    _atMin.Value = value == _Min;
                 }
             }
         }
-
 
 
         [SerializeField]
@@ -99,12 +112,18 @@ namespace Vanilla.DataSources
                                _Min,
                                int.MaxValue);
 
-//            AtMin.Name = $"{Name}.AtMin";
-//            AtMax.Name = $"{Name}.AtMax";
+            AtMin.Name = $"{Name}.AtMin";
+            AtMax.Name = $"{Name}.AtMax";
+
+            Value = _value;
+
+//            var old = _value;
+
+//            _value = Mathf.Clamp(_value,
+//                                 _Min,
+//                                 _Max);
             
-            Value = Mathf.Clamp(_value,
-                                 _Min,
-                                 _Max);
+//            SignificantSet(_value, old);
         }
 
     }

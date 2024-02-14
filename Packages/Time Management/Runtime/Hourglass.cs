@@ -2,21 +2,19 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
-using Vanilla.DeltaValues;
+using Vanilla.DataSources;
 
-
-
-namespace Vanilla.TimeManagement
+namespace Vanilla.Hourglass
 {
 
-	public static class Hourglass
+	public static class HourGlass
 	{
 
 		private static float _TimeScaleDampingVelocity;
 		
-		private static DeltaFloat TargetTimeScale;
+		private static ProtectedRangedFloatSource TargetTimeScale;
 
-		private static DeltaBool Interpolating;
+		private static ProtectedBoolSource Interpolating;
 
 		private static float _PauseTimeScaleCache;
 
@@ -42,7 +40,7 @@ namespace Vanilla.TimeManagement
 
 		public static bool CanPause;
 		
-		public static DeltaState Paused;
+		public static State Paused;
 		
 		
 
@@ -60,22 +58,28 @@ namespace Vanilla.TimeManagement
 
 			_TimeScaleDampingVelocity = 0.0f;
 
-			TargetTimeScale = new DeltaFloat(defaultName: "Target Time Scale",
-			                                defaultValue: 1.0f,
-			                                defaultMin: 0.0f,
-			                                defaultMax: 100.0f,
-			                                changeEpsilon: float.Epsilon);
+			TargetTimeScale = new ProtectedRangedFloatSource
+			                  {
+				                  Name = "Target Time Scale",
+				                  Min = 0.0f,
+				                  Max = 100.0f,
+				                  Value = 1.0f
+			                  };
 
-			Interpolating = new DeltaBool(name: "Target Time Scale Interpolating",
-			                              defaultValue: false);
+			Interpolating = new ProtectedBoolSource
+			                {
+				                Name = "Target Time Scale Interpolating",
+				                Value = false
+			                };
 
 			CanPause = true;
 
+			Paused.Progress.AtMin.OnSet += HandlePausedAtMin; // Does this error out? It might - consider
 			Paused?.Deinit();
 
-			Paused = new DeltaState(name: "Paused",
-			                        defaultActiveState: false,
-			                        fillSeconds: 0.5f);
+			Paused = new State(name: "Paused",
+			                   defaultActiveState: false,
+			                   fillSeconds: 0.5f);
 		}
 
 
@@ -85,19 +89,37 @@ namespace Vanilla.TimeManagement
 			#if debug
 			Debug.Log($"[{Time.frameCount}] [Hourglass] Init");
 			#endif
-			
+
 			Paused.Init();
-			
-			Paused.Progress.AtMin.OnFalse  += HandlePause;
-			Paused.Progress.AtMin.OnTrue   += HandleResume;
-			Interpolating.OnTrue           += StartInterpolating;
-			TargetTimeScale.OnValueChanged += HandleTargetTimeScaleChange;
+
+			Paused.Progress.AtMin.OnSet += HandlePausedAtMin;
+			Interpolating.OnSet         += HandleInterpolatingSet;
+			TargetTimeScale.OnSet       += HandleTargetTimeScaleChange;
+		}
+
+
+		private static void HandlePausedAtMin(bool atMin)
+		{
+			if (atMin)
+			{
+				HandleResume();
+			}
+			else
+			{
+				HandlePause();
+			}
 		}
 
 		private static void HandleTargetTimeScaleChange(float incoming) => Interpolating.Value = true;
 
 
-		private static void StartInterpolating() => Interpolate().Forget();
+		private static void HandleInterpolatingSet(bool isInterpolating)
+		{
+			if (isInterpolating)
+			{
+				Interpolate().Forget();
+			}
+		}
 
 		private static async UniTask Interpolate()
 		{

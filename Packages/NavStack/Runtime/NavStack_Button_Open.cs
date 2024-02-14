@@ -41,7 +41,7 @@ namespace Vanilla.NavStack
 		{
 			base.Awake();
 
-			_target._window.State.Progress.AtMin.OnValueChanged += HandleTargetActiveAtAll;
+			_target._window.State.Progress.AtMin.OnSet += HandleTargetActiveAtAll;
 		}
 
 		protected virtual void OnEnable()
@@ -52,7 +52,7 @@ namespace Vanilla.NavStack
 
 		protected override void OnDestroy()
 		{
-			_target._window.State.Progress.AtMin.OnValueChanged += HandleTargetActiveAtAll;
+			_target._window.State.Progress.AtMin.OnSet += HandleTargetActiveAtAll;
 
 			base.OnDestroy();
 		}

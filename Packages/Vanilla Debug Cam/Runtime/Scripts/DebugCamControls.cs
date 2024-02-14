@@ -8,7 +8,7 @@ using UnityEditor;
 
 using UnityEngine;
 
-using Vanilla.DeltaValues;
+using Vanilla.DataSources;
 
 namespace Vanilla.DebugCam
 {
@@ -79,7 +79,11 @@ namespace Vanilla.DebugCam
 
         [Header(header: "State")]
         [SerializeField]
-        public DeltaBool Active = new("Debug Cam Active", defaultValue: true);
+        public ProtectedBoolSource Active = new()
+                                            {
+                                                Name  = "Debug Cam Active",
+                                                Value = true
+                                            };
 
         [Header("Input Lock")]
         public KeyCode inputLock = KeyCode.Mouse1;
@@ -138,7 +142,7 @@ namespace Vanilla.DebugCam
             _cam       = gameObject.AddComponent<Camera>(); 
             _cam.depth = Active ? 100.0f : -100.0f;
 
-            Active.OnValueChanged += HandleActiveChange;
+            Active.OnSet += HandleActiveChange;
 
             if (debugCam != null)
             {

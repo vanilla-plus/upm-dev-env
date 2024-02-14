@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
-using Vanilla.DeltaValues;
+using Vanilla.DataSources;
 
 namespace Vanilla.NavStack
 {
@@ -27,11 +27,14 @@ namespace Vanilla.NavStack
         public Stack<NavStack_Window> History = new Stack<NavStack_Window>();
 
         [NonSerialized]
-        public DeltaBool StackIsEmpty;
+        public ProtectedBoolSource StackIsEmpty;
 
 
-        void Awake() => StackIsEmpty = new DeltaBool(name: $"[{gameObject.name}].NavStack.StackIsEmpty",
-                                                     defaultValue: true);
+        void Awake() => StackIsEmpty = new ProtectedBoolSource
+                                       {
+	                                       Name  = $"[{gameObject.name}].NavStack.StackIsEmpty",
+	                                       Value = true
+                                       };
 
 
         public async UniTask Nav_Open(NavStack_Window newWindow)
