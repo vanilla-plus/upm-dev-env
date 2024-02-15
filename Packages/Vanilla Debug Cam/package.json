@@ -13,6 +13,6 @@
   "version": "2.3.3",
   "type": "template",
   "dependencies": {
-    "vanilla.data-assets": "2.0.4"
+    "vanilla.data-assets": "2.0.5"
   }
 }

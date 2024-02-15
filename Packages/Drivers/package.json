@@ -10,10 +10,10 @@
   "repository": "github:vanilla-plus/upm-drivers.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "type": "template",
   "dependencies": {
     "vanilla.type-menu": "4.2.0",
-    "vanilla.data-assets": "2.0.4"
+    "vanilla.data-assets": "2.0.5"
   }
 }

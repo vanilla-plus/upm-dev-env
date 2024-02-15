@@ -12,6 +12,10 @@ namespace Vanilla.Drivers
 	{
 
 		[SerializeField]
+		[HideInInspector]
+		private string Name;
+		
+		[SerializeField]
 		public T InitialValue;
 		
 		public abstract DataAsset<T> Asset
@@ -27,7 +31,14 @@ namespace Vanilla.Drivers
 		public virtual void OnValidate()
 		{
 			#if UNITY_EDITOR
-			if (Asset == null) return;
+			if (Asset        == null ||
+			    Asset.Source == null)
+			{
+				Name = "No Asset/Source assigned";
+				return;
+			}
+
+			Name = $"{Asset.name} [{Asset.Source.GetType().Name}]";
 
 //			Debug.LogWarning(Asset.Source.Value);
 			
