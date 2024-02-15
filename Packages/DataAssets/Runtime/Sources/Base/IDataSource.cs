@@ -30,5 +30,8 @@ namespace Vanilla.DataSources
             set;
         }
 
+        void Init();
+        void Deinit();
+
     }
 }

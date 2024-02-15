@@ -30,7 +30,11 @@ namespace Vanilla.DataSources
             set => _onSetWithHistory = value;
         }
 
-//        public BoolSource() => _name = "Unnamed BoolSource";
+        public virtual void Init() { }
+
+        public virtual void Deinit() { }
+
+        //        public BoolSource() => _name = "Unnamed BoolSource";
 //
 //        public BoolSource(string name) => _name = name;
 

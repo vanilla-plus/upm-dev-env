@@ -27,7 +27,7 @@ namespace Vanilla.DataSources
 
         public override void OnBeforeSerialize() { }
 
-        public override void OnAfterDeserialize() { }
+        public override void OnAfterDeserialize() => Value = _value;
 
     }
 }

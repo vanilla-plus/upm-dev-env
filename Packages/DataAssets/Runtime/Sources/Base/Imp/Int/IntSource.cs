@@ -39,6 +39,10 @@ namespace Vanilla.DataSources
             set => _onSetWithHistory = value;
         }
 
+        public virtual void Init() { }
+
+        public virtual void Deinit() { }
+
         public abstract void OnBeforeSerialize();
 
         public abstract void OnAfterDeserialize();
