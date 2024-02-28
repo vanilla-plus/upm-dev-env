@@ -3,9 +3,9 @@
     "rootNamespace": "Vanilla.NavStack",
     "references": [
         "UniTask",
-        "Vanilla.DataAssets",
         "Vanilla.Init",
-        "Vanilla.State"
+        "Vanilla.State",
+        "Vanilla.MetaScript"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

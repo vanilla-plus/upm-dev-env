@@ -2,7 +2,7 @@
     "name": "Vanilla.DebugCam",
     "rootNamespace": "Vanilla.DebugCam",
     "references": [
-        "Vanilla.DataAssets"
+        "Vanilla.MetaScript"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

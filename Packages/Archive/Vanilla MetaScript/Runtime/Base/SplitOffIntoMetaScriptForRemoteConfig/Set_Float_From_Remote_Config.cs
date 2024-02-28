@@ -5,7 +5,7 @@
 //
 //using Unity.RemoteConfig;
 //
-//using Vanilla.DataAssets;
+//using Vanilla.MetaScript.DataAssets;
 //
 //namespace Vanilla.MetaScript
 //{

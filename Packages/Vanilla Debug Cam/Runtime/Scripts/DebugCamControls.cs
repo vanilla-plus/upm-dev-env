@@ -8,7 +8,7 @@ using UnityEditor;
 
 using UnityEngine;
 
-using Vanilla.DataSources;
+using Vanilla.MetaScript.DataSources;
 
 namespace Vanilla.DebugCam
 {

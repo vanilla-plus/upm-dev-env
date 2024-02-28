@@ -2,7 +2,7 @@
     "name": "Vanilla.MetaScript",
     "rootNamespace": "Vanilla.MetaScript",
     "references": [
-        "Vanilla.DataAssets.Two",
+        "Vanilla.MetaScript.DataAssets.Two",
         "Vanilla.DotNetExtensions",
         "Vanilla.StringFormatting",
         "Vanilla.TypeMenu",

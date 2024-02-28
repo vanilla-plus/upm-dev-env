@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
-using Vanilla.DataSources;
+using Vanilla.MetaScript.DataSources;
 
 namespace Vanilla.NavStack
 {

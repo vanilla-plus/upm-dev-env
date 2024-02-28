@@ -10,11 +10,12 @@
   "repository": "github:vanilla-plus/upm-nav-stack.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "2.0.5",
+  "version": "2.0.7",
   "type": "template",
   "dependencies": {
+    "com.cysharp.unitask": "2.5.3",
     "vanilla.init": "1.0.5",
-    "vanilla.data-assets": "2.0.5",
-    "vanilla.state": "1.0.0"
+    "vanilla.state": "1.0.3",
+    "vanilla.metascript": "5.0.0"
   }
 }

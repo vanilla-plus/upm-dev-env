@@ -5,7 +5,8 @@
         "UniTask",
         "Vanilla.TypeMenu",
         "Unity.Services.Core",
-        "Unity.Services.Analytics"
+        "Unity.Services.Analytics",
+        "Vanilla.Init"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

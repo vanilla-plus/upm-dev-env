@@ -5,7 +5,7 @@
 //using UnityEngine;
 //
 //using Vanilla.UnityExtensions;
-//using Vanilla.DataAssets;
+//using Vanilla.MetaScript.DataAssets;
 //
 //namespace Vanilla.MetaScript
 //{

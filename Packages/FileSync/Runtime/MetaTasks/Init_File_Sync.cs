@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
-using Vanilla.DataSources;
+using Vanilla.MetaScript.DataSources;
 using Vanilla.MetaScript;
 using Vanilla.TypeMenu;
 
