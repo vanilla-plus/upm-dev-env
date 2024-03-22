@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Drivers.Float
 		[SerializeField]
 		public GameObject[] controlledObjects = Array.Empty<GameObject>();
 
-		public override void OnValidate(Driver<float> driver)
+		public override void OnValidate(Driver driver)
 		{
 			#if UNITY_EDITOR
 			if (!ValidReferences(driver)) return;
@@ -36,14 +36,14 @@ namespace Vanilla.MetaScript.Drivers.Float
 		}
 
 
-		public override void Init(Driver<float> driver)
+		public override void Init(Driver driver)
 		{
 			if (!ValidReferences(driver)) return;
 
 			TryConnectAtMinSet(driver);
 		}
 		
-		public override void DeInit(Driver<float> driver) => TryDisconnectAtMinSet(driver);
+		public override void DeInit(Driver driver) => TryDisconnectAtMinSet(driver);
 
 
 		protected override void HandleAtMinSet(bool atMin)

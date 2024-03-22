@@ -221,6 +221,12 @@
         "vanilla.metascript": "5.0.0"
       }
     },
+    "vanilla.debug-define": {
+      "version": "file:Debug Define",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "vanilla.dotnet-extensions": {
       "version": "file:Vanilla DotNet Extensions",
       "depth": 0,
@@ -294,7 +300,8 @@
         "com.cysharp.unitask": "2.5.3",
         "vanilla.init": "1.0.5",
         "vanilla.state": "1.0.3",
-        "vanilla.metascript": "5.0.0"
+        "vanilla.metascript": "5.0.0",
+        "vanilla.type-menu": "4.2.0"
       }
     },
     "vanilla.package-template": {

@@ -12,7 +12,7 @@ namespace Vanilla.MetaScript.Drivers.Color
 		[SerializeField]
 		public GameObject[] controlledObjects = Array.Empty<GameObject>();
 
-		public override void OnValidate(Driver<UnityEngine.Color> driver)
+		public override void OnValidate(Driver driver)
 		{
 			#if UNITY_EDITOR
 			if (!ValidReferences(driver)) return;
@@ -27,9 +27,9 @@ namespace Vanilla.MetaScript.Drivers.Color
 		}
 
 
-		public override void Init(Driver<UnityEngine.Color> driver) => TryConnectSet(driver);
+		public override void Init(Driver driver) => TryConnectSet(driver);
 
-		public override void DeInit(Driver<UnityEngine.Color> driver) => TryDisconnectSet(driver);
+		public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 		
 
 		protected override void HandleSet(UnityEngine.Color incoming)

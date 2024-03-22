@@ -33,7 +33,7 @@ namespace Vanilla.MetaScript.Drivers.Color
             set => graphs = value;
         }
         
-        public override void Init(Driver<UnityEngine.Color> driver)
+        public override void Init(Driver driver)
         {
             PropertyID = Shader.PropertyToID(PropertyName);
             
@@ -41,7 +41,7 @@ namespace Vanilla.MetaScript.Drivers.Color
         }
 
 
-        public override void DeInit(Driver<UnityEngine.Color> driver) => TryDisconnectSet(driver);
+        public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 
 
         protected override void HandleSet(UnityEngine.Color value)

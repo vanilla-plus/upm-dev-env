@@ -1,0 +1,15 @@
+{
+  "name": "vanilla.debug-define",
+  "displayName": "Debug Define",
+  "description": "Possibly the cheekiest package ever built. This empty package is used to enable the script preprocessor #debug, thus allowing optional debugging in other Vanilla packages. Simply install or uninstall this package to enable/disable debugging respectively.",
+  "author": {
+    "name": "Vanilla Plus",
+    "email": "lucas@vanilla.com",
+    "url": "https://vanilla.plus/"
+  },
+  "repository": "github:vanilla-plus/upm-debug-define.git",
+  "unity": "2020.2",
+  "unityRelease": "4f1",
+  "version": "1.0.0",
+  "type": "template"
+}

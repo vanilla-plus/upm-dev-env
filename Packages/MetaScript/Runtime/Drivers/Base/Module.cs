@@ -2,28 +2,33 @@ using System;
 
 using UnityEngine;
 
+using Vanilla.MetaScript.DataAssets;
 using Vanilla.MetaScript.DataSources;
 
 namespace Vanilla.MetaScript.Drivers
 {
     
     [Serializable]
-    public abstract class Module<T>
+    public abstract class Module<T,S,A,M,D>
+        where S : IDataSource<T>
+        where A : DataAsset<T,S>
+        where M : Module<T,S,A,M,D>
+        where D : Driver<T,S,A,M,D>
     {
 
-        public virtual void OnValidate(Driver<T> driver) { }
+        public virtual void OnValidate(D driver) { }
 
-        public abstract void Init(Driver<T> driver);
+        public abstract void Init(D driver);
         
-        public abstract void DeInit(Driver<T> driver);
+        public abstract void DeInit(D driver);
 
         // This function checks if the Asset and Asset.Source exist first.
 
-        protected virtual bool ValidReferences(Driver<T> driver) => driver.Asset != null && driver.Asset.Source != null;
+        protected virtual bool ValidReferences(D driver) => driver.Asset != null && driver.Asset.Source != null;
 
         // This will automatically connect a HandleSet if it can. Put it in override Init if desired.
 
-        protected void TryConnectSet(Driver<T> driver)
+        protected void TryConnectSet(D driver)
         {
             if (!ValidReferences(driver))
             {
@@ -41,7 +46,7 @@ namespace Vanilla.MetaScript.Drivers
         
         // This will automatically disconnect a HandleSet if it can. Put it in override DeInit if desired.
 
-        protected void TryDisconnectSet(Driver<T> driver)
+        protected void TryDisconnectSet(D driver)
         {
             if (!ValidReferences(driver))
             {
@@ -55,7 +60,7 @@ namespace Vanilla.MetaScript.Drivers
         
         // This will automatically connect a HandleSetWithHistory if it can. Put it in override Init if desired.
 
-        protected void TryConnectSetWithHistory(Driver<T> driver)
+        protected void TryConnectSetWithHistory(D driver)
         {
             if (!ValidReferences(driver))
             {
@@ -74,7 +79,7 @@ namespace Vanilla.MetaScript.Drivers
         
         // This will automatically disconnect a HandleSetWithHistory if it can. Put it in override DeInit if desired.
 
-        protected void TryDisconnectSetWithHistory(Driver<T> driver)
+        protected void TryDisconnectSetWithHistory(D driver)
         {
             if (!ValidReferences(driver))
             {
@@ -89,7 +94,7 @@ namespace Vanilla.MetaScript.Drivers
         // " " but for AtMin
 
 
-        protected void TryConnectAtMinSet(Driver<T> driver)
+        protected void TryConnectAtMinSet(D driver)
         {
             if (!ValidReferences(driver))
             {
@@ -112,7 +117,7 @@ namespace Vanilla.MetaScript.Drivers
         
         protected virtual void HandleAtMinSet(bool atMin) { }
         
-        protected void TryDisconnectAtMinSet(Driver<T> driver)
+        protected void TryDisconnectAtMinSet(D driver)
         {
             if (!ValidReferences(driver))
             {
@@ -134,7 +139,7 @@ namespace Vanilla.MetaScript.Drivers
         // " " but for AtMax
         
         
-        protected void TryConnectAtMaxSet(Driver<T> driver)
+        protected void TryConnectAtMaxSet(D driver)
         {
             if (!ValidReferences(driver))
             {
@@ -157,7 +162,7 @@ namespace Vanilla.MetaScript.Drivers
         
         protected virtual void HandleAtMaxSet(bool atMax) { }
         
-        protected void TryDisconnectAtMaxSet(Driver<T> driver)
+        protected void TryDisconnectAtMaxSet(D driver)
         {
             if (!ValidReferences(driver))
             {

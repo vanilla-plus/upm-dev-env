@@ -11,10 +11,10 @@ namespace Vanilla.MetaScript.Drivers.Vec2
 
         public UnityEvent<Vector2> OnSet = new();
 
-        public override void OnValidate(Driver<Vector2> driver) => OnSet.Invoke(driver.Asset.Source.Value);
+        public override void OnValidate(Driver driver) => OnSet.Invoke(driver.Asset.Source.Value);
 
-        public override void Init(Driver<Vector2> driver) => TryConnectSet(driver);
-        public override void DeInit(Driver<Vector2> driver) => TryDisconnectSet(driver);
+        public override void Init(Driver driver) => TryConnectSet(driver);
+        public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 
         protected override void HandleSet(Vector2 value) => OnSet.Invoke(value);
 

@@ -11,11 +11,11 @@ namespace Vanilla.MetaScript.Drivers.Bool
 
 		public UnityEvent<bool> OnSet = new();
 
-		public override void OnValidate(Driver<bool> driver) => OnSet.Invoke(driver.Asset.Source.Value);
+		public override void OnValidate(Driver driver) => OnSet.Invoke(driver.Asset.Source.Value);
 
-		public override void Init(Driver<bool> driver) => TryConnectSet(driver);
+		public override void Init(Driver driver) => TryConnectSet(driver);
 
-		public override void DeInit(Driver<bool> driver) => TryDisconnectSet(driver);
+		public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 
 		protected override void HandleSet(bool value) => OnSet.Invoke(value);
 

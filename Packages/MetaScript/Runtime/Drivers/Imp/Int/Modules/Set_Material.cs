@@ -33,7 +33,7 @@ namespace Vanilla.MetaScript.Drivers.Int
 		// so we don't, we call SetColor, without telling mummy.
 		// And it works fine? So like shut up Unity?? Just kill the imp
 
-		public override void OnValidate(Driver<int> driver)
+		public override void OnValidate(Driver driver)
 		{
 			if (!ValidReferences(driver)) return;
 
@@ -67,7 +67,7 @@ namespace Vanilla.MetaScript.Drivers.Int
 		}
 
 
-		public override void Init(Driver<int> driver)
+		public override void Init(Driver driver)
 		{
 			PropertyID = Shader.PropertyToID(PropertyName);
 
@@ -75,7 +75,7 @@ namespace Vanilla.MetaScript.Drivers.Int
 		}
 
 
-		public override void DeInit(Driver<int> driver) => TryDisconnectSet(driver);
+		public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 
 
 		protected override void HandleSet(int value)

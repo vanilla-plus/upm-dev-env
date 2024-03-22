@@ -35,7 +35,7 @@ namespace Vanilla.MetaScript.Drivers.Vec4
         }
 
 
-        public override void Init(Driver<Vector4> driver)
+        public override void Init(Driver driver)
         {
             PropertyID = Shader.PropertyToID(PropertyName);
 
@@ -43,7 +43,7 @@ namespace Vanilla.MetaScript.Drivers.Vec4
         }
 
 
-        public override void DeInit(Driver<Vector4> driver) => TryDisconnectSet(driver);
+        public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 
 
         protected override void HandleSet(Vector4 value)

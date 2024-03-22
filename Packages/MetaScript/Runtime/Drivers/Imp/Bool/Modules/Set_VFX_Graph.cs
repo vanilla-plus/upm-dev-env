@@ -33,7 +33,7 @@ namespace Vanilla.MetaScript.Drivers.Bool
 			set => graphs = value;
 		}
 
-		public override void Init(Driver<bool> driver)
+		public override void Init(Driver driver)
 		{
 			PropertyID = Shader.PropertyToID(PropertyName);
             
@@ -41,7 +41,7 @@ namespace Vanilla.MetaScript.Drivers.Bool
 		}
 
 
-		public override void DeInit(Driver<bool> driver) => TryDisconnectSet(driver);
+		public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 
 
 		protected override void HandleSet(bool value)

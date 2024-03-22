@@ -15,7 +15,7 @@ namespace Vanilla.MetaScript.Drivers.Vec2
 		[HideInInspector]
 		private string DriverName;
 		
-		public override void OnValidate(Driver<Vector2> driver)
+		public override void OnValidate(Driver driver)
 		{
 			if (!ValidReferences(driver)) return;
 
@@ -23,7 +23,7 @@ namespace Vanilla.MetaScript.Drivers.Vec2
 		}
 
 
-		public override void Init(Driver<Vector2> driver)
+		public override void Init(Driver driver)
 		{
 			if (!IncludeHistory)
 			{
@@ -36,7 +36,7 @@ namespace Vanilla.MetaScript.Drivers.Vec2
 		}
 
 
-		public override void DeInit(Driver<Vector2> driver)
+		public override void DeInit(Driver driver)
 		{
 			if (!IncludeHistory)
 			{

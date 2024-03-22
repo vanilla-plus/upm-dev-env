@@ -10,11 +10,11 @@ namespace Vanilla.MetaScript.Drivers.Color
 
         public UnityEvent<UnityEngine.Color> OnSet = new();
 
-        public override void OnValidate(Driver<UnityEngine.Color> driver) => OnSet.Invoke(driver.Asset.Source.Value);
+        public override void OnValidate(Driver driver) => OnSet.Invoke(driver.Asset.Source.Value);
 
-        public override void Init(Driver<UnityEngine.Color> driver) => TryConnectSet(driver);
+        public override void Init(Driver driver) => TryConnectSet(driver);
 
-        public override void DeInit(Driver<UnityEngine.Color> driver) => TryDisconnectSet(driver);
+        public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 
         protected override void HandleSet(UnityEngine.Color value) => OnSet.Invoke(value);
 

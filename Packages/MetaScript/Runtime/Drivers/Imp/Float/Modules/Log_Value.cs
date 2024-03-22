@@ -15,7 +15,7 @@ namespace Vanilla.MetaScript.Drivers.Float
 		[HideInInspector]
 		private string DriverName;
 		
-		public override void OnValidate(Driver<float> driver)
+		public override void OnValidate(Driver driver)
 		{
 			if (!ValidReferences(driver)) return;
 
@@ -23,7 +23,7 @@ namespace Vanilla.MetaScript.Drivers.Float
 		}
 
 
-		public override void Init(Driver<float> driver)
+		public override void Init(Driver driver)
 		{
 			if (!IncludeHistory)
 			{
@@ -36,7 +36,7 @@ namespace Vanilla.MetaScript.Drivers.Float
 		}
 
 
-		public override void DeInit(Driver<float> driver)
+		public override void DeInit(Driver driver)
 		{
 			if (!IncludeHistory)
 			{

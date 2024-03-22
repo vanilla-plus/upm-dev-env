@@ -2,6 +2,9 @@ using System;
 
 using UnityEngine;
 
+using Vanilla.MetaScript.DataSources;
+using Vanilla.TypeMenu;
+
 namespace Vanilla.MetaScript.Flow
 {
     
@@ -9,13 +12,14 @@ namespace Vanilla.MetaScript.Flow
     public class While_Loop : While_Base
     {
 
-        [SerializeField]
-        public bool Loop = true;
+        [SerializeReference]
+        [TypeMenu("red")]
+        public BoolSource ContinueLoop;
         
         protected override string CreateAutoName() => "Repeat the following tasks while...";
 
 
-        public override bool Evaluate() => Loop;
+        public override bool Evaluate() => ContinueLoop.Value;
 
     }
 }

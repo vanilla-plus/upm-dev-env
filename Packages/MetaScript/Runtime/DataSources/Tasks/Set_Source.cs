@@ -14,19 +14,20 @@ namespace Vanilla.MetaScript.DataAssets
 {
 
     [Serializable]
-    public abstract class Set_Source<PayloadType, Source, AssetSource> : MetaTask
-        where PayloadType : struct
-        where Source : IDataSource<PayloadType>
-        where AssetSource : IAssetSource<PayloadType>, new()
+    public abstract class Set_Source<T, S, A, AssetSource> : MetaTask
+        where T : struct
+        where S : IDataSource<T>
+        where A : DataAsset<T,S>
+        where AssetSource : IAssetSource<T, S, A>, new()
     {
 
         [SerializeReference]
         [TypeMenu("red")]
-        public Source source;
+        public S source;
 
         [SerializeReference]
         [TypeMenu("red")]
-        public Source target;
+        public S target;
 
         protected override bool CanAutoName() => source != null && target != null;
 

@@ -33,7 +33,7 @@ namespace Vanilla.MetaScript.Drivers.Vec2
             set => graphs = value;
         }
 
-        public override void Init(Driver<Vector2> driver)
+        public override void Init(Driver driver)
         {
             PropertyID = Shader.PropertyToID(PropertyName);
             
@@ -41,7 +41,7 @@ namespace Vanilla.MetaScript.Drivers.Vec2
         }
 
 
-        public override void DeInit(Driver<Vector2> driver) => TryDisconnectSet(driver);
+        public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 
 
         protected override void HandleSet(Vector2 value)

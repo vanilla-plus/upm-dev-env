@@ -3,7 +3,8 @@
     "rootNamespace": "Vanilla.State",
     "references": [
         "UniTask",
-        "Vanilla.MetaScript"
+        "Vanilla.MetaScript",
+        "Vanilla.TypeMenu"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

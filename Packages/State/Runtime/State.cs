@@ -104,11 +104,18 @@ namespace Vanilla
 		public void OnBeforeSerialize() { }
 
 
-		public void OnAfterDeserialize() => Progress.Value = Active.Value ?
-			                                                     1.0f :
-			                                                     0.0f;
-		
-		
+		public void OnAfterDeserialize()
+		{
+			Active.Name         = $"{Name}.Active";
+			Progress.AtMin.Name = $"{Name}.Progress.AtMin";
+			Progress.AtMax.Name = $"{Name}.Progress.AtMax";
+			
+			Progress.Value = Active.Value ?
+				                 1.0f :
+				                 0.0f;
+		}
+
+
 		public async UniTask FillScaled(bool targetCondition = true,
 		                                float amountPerSecond = 1.0f,
 		                                float secondsToTake = 1.0f)

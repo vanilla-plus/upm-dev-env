@@ -25,6 +25,11 @@
             "name": "com.unity.services.analytics",
             "expression": "",
             "define": "unity_services_analytics"
+        },
+        {
+            "name": "vanilla.debug-define",
+            "expression": "",
+            "define": "debug"
         }
     ],
     "noEngineReferences": false

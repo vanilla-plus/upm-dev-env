@@ -4,23 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Vanilla.MetaScript.DataAssets;
+using Vanilla.MetaScript.DataSources;
 using Vanilla.TypeMenu;
 
 namespace Vanilla.MetaScript.Drivers.Vec3
 {
     
     [Serializable]
-    public class Driver : Driver<Vector3>
+    public class Driver : Driver<Vector3, Vec3Source, Vec3Asset, Module, Driver>
     {
 
         [SerializeField]
         private Vec3Asset _asset;
-        public override DataAsset<Vector3> Asset => _asset;
+        public override Vec3Asset Asset => _asset;
 
         [SerializeReference]
         [TypeMenu("red")]
         private Module[] _modules = Array.Empty<Module>();
-        public override Module<Vector3>[] Modules => _modules;
+        public override Module[] Modules => _modules;
 
     }
 }

@@ -32,7 +32,7 @@ namespace Vanilla.MetaScript.Drivers.Vec4
 		// so we don't, we call SetColor, without telling mummy.
 		// And it works fine? So like shut up Unity?? Just kill the imp
 
-		public override void OnValidate(Driver<Vector4> driver)
+		public override void OnValidate(Driver driver)
 		{
 			if (!ValidReferences(driver)) return;
 			
@@ -69,7 +69,7 @@ namespace Vanilla.MetaScript.Drivers.Vec4
 
 		
 
-		public override void Init(Driver<Vector4> driver)
+		public override void Init(Driver driver)
 		{
 			PropertyID = Shader.PropertyToID(PropertyName);
 
@@ -77,7 +77,7 @@ namespace Vanilla.MetaScript.Drivers.Vec4
 		}
 
 
-		public override void DeInit(Driver<Vector4> driver) => TryDisconnectSet(driver);
+		public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 
 
 		protected override void HandleSet(Vector4 value)

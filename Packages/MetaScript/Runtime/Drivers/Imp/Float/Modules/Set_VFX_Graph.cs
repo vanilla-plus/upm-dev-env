@@ -33,7 +33,7 @@ namespace Vanilla.MetaScript.Drivers.Float
             set => graphs = value;
         }
 
-        public override void Init(Driver<float> driver)
+        public override void Init(Driver driver)
         {
             PropertyID = Shader.PropertyToID(PropertyName);
             
@@ -41,7 +41,7 @@ namespace Vanilla.MetaScript.Drivers.Float
         }
 
 
-        public override void DeInit(Driver<float> driver) => TryDisconnectSet(driver);
+        public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 
 
         protected override void HandleSet(float value)

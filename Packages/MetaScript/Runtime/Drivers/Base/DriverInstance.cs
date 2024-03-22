@@ -3,13 +3,19 @@ using System;
 using UnityEngine;
 
 using Vanilla.Init;
+using Vanilla.MetaScript.DataAssets;
+using Vanilla.MetaScript.DataSources;
 
 namespace Vanilla.MetaScript.Drivers
 {
 
 	[Serializable]
-	public abstract class DriverInstance<T> : MonoBehaviour,
-	                                          IInitiable
+	public abstract class DriverInstance<T,S,A,M,D> : MonoBehaviour,
+	                                                  IInitiable
+		where S : IDataSource<T>
+		where A : DataAsset<T,S>
+		where M : Module<T,S,A,M,D>
+		where D : Driver<T,S,A,M,D>
 	{
 
 		public enum WakeMethod
@@ -26,7 +32,7 @@ namespace Vanilla.MetaScript.Drivers
 		[SerializeField]
 		public WakeMethod wakeMethod = WakeMethod.Init;
 
-		public abstract Driver<T>[] Drivers
+		public abstract D[] Drivers
 		{
 			get;
 		}

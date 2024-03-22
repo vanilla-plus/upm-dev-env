@@ -3,12 +3,17 @@ using System;
 using UnityEngine;
 
 using Vanilla.MetaScript.DataAssets;
+using Vanilla.MetaScript.DataSources;
 
 namespace Vanilla.MetaScript.Drivers
 {
 
 	[Serializable]
-	public abstract class Driver<T>
+	public abstract class Driver<T,S,A,M,D>
+		where S : IDataSource<T>
+		where A : DataAsset<T,S>
+		where M : Module<T,S,A,M,D>
+		where D : Driver<T,S,A,M,D>
 	{
 
 		[SerializeField]
@@ -18,12 +23,12 @@ namespace Vanilla.MetaScript.Drivers
 		[SerializeField]
 		public T InitialValue;
 		
-		public abstract DataAsset<T> Asset
+		public abstract A Asset
 		{
 			get;
 		}
         
-		public abstract Module<T>[] Modules
+		public abstract M[] Modules
 		{
 			get;
 		}
@@ -46,7 +51,7 @@ namespace Vanilla.MetaScript.Drivers
 
 //			Debug.LogError(Asset.Source.Value);
 
-			foreach (var module in Modules) module?.OnValidate(this);
+			foreach (var module in Modules) module?.OnValidate(this as D);
 			#endif
 		}
 
@@ -69,13 +74,13 @@ namespace Vanilla.MetaScript.Drivers
 			
 			Asset.Source.Value = InitialValue;
 
-			foreach (var module in Modules) module?.Init(this);
+			foreach (var module in Modules) module?.Init(this as D);
 		}
 
 
 		public virtual void DeInit()
 		{
-			foreach (var d in Modules) d?.DeInit(this);
+			foreach (var d in Modules) d?.DeInit(this as D);
 		}
 
 	}

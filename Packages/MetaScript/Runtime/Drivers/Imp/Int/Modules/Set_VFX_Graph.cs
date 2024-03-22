@@ -33,14 +33,14 @@ namespace Vanilla.MetaScript.Drivers.Int
 			set => graphs = value;
 		}
 
-		public override void Init(Driver<int> driver)
+		public override void Init(Driver driver)
 		{
 			PropertyID = Shader.PropertyToID(PropertyName);
 			
 			TryConnectSet(driver);
 		}
 		
-		public override void DeInit(Driver<int> driver) => TryDisconnectSet(driver);
+		public override void DeInit(Driver driver) => TryDisconnectSet(driver);
 		
 		protected override void HandleSet(int value)
 		{
