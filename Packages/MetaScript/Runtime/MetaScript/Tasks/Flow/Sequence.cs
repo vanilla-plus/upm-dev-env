@@ -2,6 +2,8 @@ using System;
 
 using Cysharp.Threading.Tasks;
 
+using UnityEngine;
+
 namespace Vanilla.MetaScript.Flow
 {
 
@@ -17,15 +19,24 @@ namespace Vanilla.MetaScript.Flow
 			
 			foreach (var task in _tasks)
 			{
-				if (s.Cancelled) return s;
+				if (s.Cancelled)
+				{
+					return s.parent;
+				}
 
 				if (task != null)
 				{
 					s = await task.Run(s);
 				}
+				
+//				if (s.Cancelled)
+//				{
+//					return s.parent;
+//				}
 			}
 
 			return s;
+//			return s.GetLastActiveScope();
 		}
 
 	}

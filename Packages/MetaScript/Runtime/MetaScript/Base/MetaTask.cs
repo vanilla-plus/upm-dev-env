@@ -1,11 +1,8 @@
 using System;
-using System.Threading.Tasks;
-
-using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
-using Vanilla.TypeMenu;
+using Cysharp.Threading.Tasks;
 
 namespace Vanilla.MetaScript
 {
@@ -22,16 +19,10 @@ namespace Vanilla.MetaScript
 		[SerializeField]
 		public string AutoName;
 
-		[SerializeField]
-		public TaskOptions taskOptions = TaskOptions.Run | TaskOptions.Wait;
+		[SerializeField] public TaskOptions taskOptions = TaskOptions.Run | TaskOptions.Wait;
 		
 		protected const string DefaultAutoName = "This task can't be auto-named yet.";
 
-//		[SerializeReference]
-//		[TypeMenu("green")]
-////		[Only(typeof(IScopeSource))]
-//		public IScopeSource scopeSource;
-		
 		public virtual void OnValidate()
 		{
 			#if UNITY_EDITOR
@@ -51,81 +42,40 @@ namespace Vanilla.MetaScript
 
 		public async UniTask<Scope> Run(Scope scope)
 		{
-//			var s = scopeSource != null ?
-//				        scopeSource.CreateScope(scope) :
-//				        scope;
-			
-//			Debug.LogWarning(Name);
-//			Debug.Log(scope.Name);
-
 			var s = scope;
 
 			try
 			{
-				if (taskOptions.HasFlag(TaskOptions.Run))
+				if ((taskOptions & TaskOptions.Run) != 0)
 				{
-//					scope.ActiveTasks++;
-
-					if (taskOptions.HasFlag(TaskOptions.Wait))
+					if ((taskOptions & TaskOptions.Wait) != 0)
 					{
-//						await _Run(scope).ContinueWith(FinalizeRun);
-
 						s = await _Run(s);
-
-//						s.ActiveTasks--;
 					}
 					else
 					{
-//						_Run(scope).ContinueWith(FinalizeRun).Forget();
-
-						// Weird quirk time - we can't have our cake and eat it too when it comes to scopes.
-						// At this stage, we're telling a task to run but not to wait for it.
-						// Getting a returned scope from the task is only possible if we wait,
-						// since we don't know what sort of task it is and it may be asynchronous.
-	
-						// So I think the best we can hope for is to pass the current scope in, wish it well and move on.
-						// I can't wait for a designer to find this and trip over it
-						// and for me to then struggle to remember and explain the issue.
-
 						_Run(s);
 
-						// This works as long as the task returns the scope with UniTask.FromResult(scope)
-						// But if its async and simply returns scope...
-						
-//						s = _Run(scope).GetAwaiter().GetResult(); // Errors
-//						s = _Run(scope).AsTask().Result; // Hard crash
+						// Just a heads up - it isn't possible to return a scope from unawaited tasks.
+						// Makes sense - the return type is the UniTask<Scope>, not the scope payload.
 					}
-				}
-				else
-				{
-					// "Skipped"
 				}
 			}
 			catch (Exception ex)
 			{
 				Debug.LogException(exception: ex);
 			}
-			
-//			Debug.Log(s.Name);
 
-//
-//			if (scopeSource != null)
+//			if (s.Cancelled)
 //			{
-//				s.Cancel();
-//
-//				s.Dispose();
+//				s = s.parent;
 //			}
 			
 			return s;
+//			return s.GetLastActiveScope();
 		}
 
 		protected abstract UniTask<Scope> _Run(Scope scope);
-
-
-//		private void FinalizeRun(Scope scope)
-//		{
-//			if (scope != null) scope.ActiveTasks--;
-//		}
 
 	}
 

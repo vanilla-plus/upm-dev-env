@@ -26,7 +26,8 @@ namespace Vanilla.MetaScript.Flow
 			{
 				foreach (var task in _tasks)
 				{
-					if (s.Cancelled) return s;
+					if (s.Cancelled) return s; // This was working fine - just in case the below gives you grief
+//					if (s.Cancelled) return s.parent;
 
 					if (task != null)
 					{
@@ -52,6 +53,7 @@ namespace Vanilla.MetaScript.Flow
 			}
 
 			return s;
+//			return s.GetLastActiveScope();
 		}
 
 	}

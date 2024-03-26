@@ -11,13 +11,11 @@ namespace Vanilla.MetaScript.Flow
     public class Close_Scope : MetaTask
     {
 
-        [SerializeField]
-        public bool thisScope = false;
+        [SerializeField] public bool thisScope = false;
         
-        [SerializeField]
-        public string targetScope;
+        [SerializeField] public string targetScope;
         
-        protected override bool CanAutoName() => !string.IsNullOrEmpty(value: targetScope);
+        protected override bool CanAutoName() => thisScope || !string.IsNullOrEmpty(value: targetScope);
 
 
         protected override string CreateAutoName() => $"Close {(thisScope ? "[this scope]" : $"the [{targetScope}] scope")}";
@@ -25,8 +23,13 @@ namespace Vanilla.MetaScript.Flow
 
         protected override UniTask<Scope> _Run(Scope scope)
         {
-            if (scope.Cancelled) return UniTask.FromResult(value: scope);
+            if (scope.Cancelled) return UniTask.FromResult(value: scope.parent);
 
+//            else
+//                Debug.LogWarning($"[{scope}] is cancelled? [{scope.Cancelled}] but who am I trying to cancel? [{targetScope}]");
+            
+            var nextScopeUp = scope.parent;
+            
             if (thisScope)
             {
                 scope.Cancel();
@@ -36,7 +39,16 @@ namespace Vanilla.MetaScript.Flow
                 Scope.TryCancel(name: targetScope);
             }
 
-            return UniTask.FromResult(value: scope);
+//            return UniTask.FromResult(value: scope);
+//            return UniTask.FromResult(value: parentScopeToReturnTo);
+
+//            var nextScopeUp = scope.GetLastActiveScope();
+
+//            Debug.Log($"NextScopeUp is [{nextScopeUp}]");
+            
+            return UniTask.FromResult(value: nextScopeUp);
+//            return s.GetLastActiveScope();
+
         }
 
     }

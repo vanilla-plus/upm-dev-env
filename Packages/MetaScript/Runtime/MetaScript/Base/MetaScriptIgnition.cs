@@ -19,7 +19,6 @@ namespace Vanilla.MetaScript
 
 		[SerializeReference]
 		[TypeMenu("green")]
-//		[Only(typeof(IScopeSource))]
 		public IScopeSource scopeSource;
 
 
@@ -40,7 +39,7 @@ namespace Vanilla.MetaScript
 
 		public void Fire()
 		{
-			if (target != null) target.StartTask(scopeSource.CreateScope(null));
+			if (target != null) target.Task?.Run(scopeSource.CreateScope(null));
 		}
 
 		void Update()

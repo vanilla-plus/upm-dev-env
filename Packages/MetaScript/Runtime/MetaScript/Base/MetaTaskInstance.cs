@@ -26,25 +26,28 @@ namespace Vanilla.MetaScript
 		}
 
 
-		[ContextMenu(itemName: "Start Task")]
-		private void EditorStart() => StartTask(null);
+		[ContextMenu(itemName: "Test Run")]
+		private void EditorStart() => task?.Run(new Scope(null, "editor"));
 		
 //		public void StartTask(Scope scope) => task.Run(scope: scope).Forget();
-		public void StartTask(Scope scope) => task.Run(scope)
-		                                          .ContinueWith(s =>
-		                                                        {
+
+//		public void StartTask(Scope scope) => task.Run(scope);
+//
+//		public void StartTask(Scope scope) => task.Run(scope)
+//		                                          .ContinueWith(s =>
+//		                                                        {
 //			                                                        Debug.LogError("The eagle has landed.");
-			                                                        
+//			                                                        
 //			                                                        Debug.Log(s.Name);
-
-			                                                        scope.Cancel();
-
-			                                                        scope.Dispose();
-			                                                        
-//			                                                        s.Cancel();
-
-//			                                                        s.Dispose();
-		                                                        });
+//
+//			                                                        scope.Cancel();
+//
+//			                                                        scope.Dispose();
+//			                                                        
+////			                                                        s.Cancel();
+//
+////			                                                        s.Dispose();
+//		                                                        });
 
 	}
 

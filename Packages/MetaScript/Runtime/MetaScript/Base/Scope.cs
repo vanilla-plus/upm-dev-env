@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Cysharp.Threading.Tasks;
 
@@ -22,6 +23,15 @@ namespace Vanilla.MetaScript
     public class Scope : IDisposable
     {
 
+        public enum FlowState
+        {
+
+            Continue,
+            Cancelled,
+            FastForward
+
+        }
+        
         private static Dictionary<string, Scope> Active = new Dictionary<string, Scope>();
         
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -44,6 +54,10 @@ namespace Vanilla.MetaScript
 
         public static bool TryCancel(string name)
         {
+            #if debug
+            Debug.Log($"Scope cancellation requested for [{name}]");
+            #endif
+            
             if (!Active.ContainsKey(key: name))
             {
                 Debug.LogWarning($"No scope called [{name}].");
@@ -65,6 +79,16 @@ namespace Vanilla.MetaScript
             
             s.Cancel();
             
+            // Okay I think I got it!
+            // You might need to change the return value of this from a bool to a Scope.
+            // Then iterate recursively until you find a parent that isn't cancelled and return that.
+            // Or even a new function altogether that does this specifically? So weird...
+            // The reason is, think about it, if you have a running task that is checking for cancellation
+            // and detects it being true for the current scope, it should immediately delegate itself back
+            // to the previous not-cancelled scope automatically.
+            // If you don't do this, TaskSets like Sequences or While Loops don't know how to return control
+            // back to the last active parent scope. But of course they should!
+
 //            s.Dispose();
 //            
 //            Active.Remove(name);
@@ -72,6 +96,9 @@ namespace Vanilla.MetaScript
             return true;
         }
 
+        public Scope GetLastActiveScope() => Continue ? this : parent?.GetLastActiveScope();
+
+        
         [SerializeField]
         private bool _Continue = true;
         public bool Continue => _Continue;
@@ -111,21 +138,18 @@ namespace Vanilla.MetaScript
             Active.Add(key: name, value: this);
 
             #if debug
-            var output = $"+ {_Name}";
+            PrintScopeOpened();
             
-            for (var i = 0;
-                 i < Depth;
-                 i++)
-            {
-                output = "    " + output;
-            }
-            
-            Debug.Log(output);
+//            PrintActiveScopes();
             #endif
         }
         
         public void Cancel()
         {
+            #if debug
+            Debug.Log($"Scope [{Name}] cancelled");
+            #endif
+            
             _Continue = false;
 
             Active.Remove(_Name);
@@ -149,29 +173,62 @@ namespace Vanilla.MetaScript
             if (!disposed)
             {
                 #if debug
-                var output = $"- {_Name}";
-            
-                for (var i = 0;
-                     i < Depth;
-                     i++)
-                {
-                    output = "    " + output;
-                }
-            
-                Debug.Log(output);
+                PrintScopeClosed();
                 #endif
 
-                if (disposing)
-                {
-                    // Dispose managed resources.
-                }
+                if (disposing) { /* Dispose managed resources. */ }
                 
                 Active.Remove(_Name);
+
+                #if debug
+//                PrintActiveScopes();
+                #endif
 
                 // Dispose unmanaged resources.
                 disposed = true;
             }
         }
+
+
+        private void PrintScopeOpened()
+        {
+            var output = $"+ {_Name}";
+            
+            for (var i = 0;
+                 i < Depth;
+                 i++)
+            {
+                output = "    " + output;
+            }
+            
+            Debug.LogWarning($"MetaScript Scope Opened: {output}");
+        }
+
+        private void PrintScopeClosed()
+        {
+            var output = $"- {_Name}";
+            
+            for (var i = 0;
+                 i < Depth;
+                 i++)
+            {
+                output = "    " + output;
+            }
+            
+            Debug.LogWarning($"MetaScript Scope Closed: {output}");
+        }
+
+        private void PrintActiveScopes()
+        {
+            var output = Active.Aggregate(seed: "Active Scopes:\n\n",
+                                          func: (current,
+                                                 s) => current + $"name:{s.Key} - parent:[{s.Value.parent}]\n");
+            
+            Debug.LogWarning(output);
+        }
+
+
+        public override string ToString() => Name;
 
         ~Scope() => Dispose(false);
 
