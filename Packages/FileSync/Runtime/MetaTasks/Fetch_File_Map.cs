@@ -1,3 +1,4 @@
+#if vanilla_metascript
 using System;
 
 using Cysharp.Threading.Tasks;
@@ -35,3 +36,4 @@ namespace Vanilla.FileSync
 
     }
 }
+#endif

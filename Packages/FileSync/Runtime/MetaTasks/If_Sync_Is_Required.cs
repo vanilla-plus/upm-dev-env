@@ -1,3 +1,4 @@
+#if vanilla_metascript
 using System;
 
 using Vanilla.MetaScript.Flow;
@@ -18,3 +19,4 @@ namespace Vanilla.FileSync
 
     }
 }
+#endif

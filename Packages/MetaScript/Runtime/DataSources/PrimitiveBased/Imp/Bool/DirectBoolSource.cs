@@ -19,6 +19,15 @@ namespace Vanilla.MetaScript.DataSources
                 var old = _value;
                 
                 _value = value;
+
+                if (_value)
+                {
+                    OnTrue?.Invoke();
+                }
+                else
+                {
+                    OnFalse?.Invoke();
+                }
                 
                 OnSet?.Invoke(_value);
                 OnSetWithHistory?.Invoke(_value, old);

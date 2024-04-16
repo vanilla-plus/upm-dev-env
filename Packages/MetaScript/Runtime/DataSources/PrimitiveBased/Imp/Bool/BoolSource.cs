@@ -29,6 +29,23 @@ namespace Vanilla.MetaScript.DataSources
             get => _onSetWithHistory;
             set => _onSetWithHistory = value;
         }
+        
+        [NonSerialized]
+        private Action _onTrue;
+        public Action OnTrue
+        {
+            get => _onTrue;
+            set => _onTrue = value;
+        }
+        
+        [NonSerialized]
+        private Action _onFalse;
+        public Action OnFalse
+        {
+            get => _onFalse;
+            set => _onFalse = value;
+        }
+        
 
 //        public BoolSource() => _name = "Unnamed BoolSource";
 //

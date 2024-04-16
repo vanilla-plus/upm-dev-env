@@ -34,9 +34,17 @@ namespace Vanilla.MetaScript.DataSources
                 #if debug
                 Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
                 #endif
+                
+                if (_value)
+                {
+                    OnTrue?.Invoke();
+                }
+                else
+                {
+                    OnFalse?.Invoke();
+                }
 
                 OnSet?.Invoke(_value);
-
                 OnSetWithHistory?.Invoke(_value,
                                          outgoing);
             }
