@@ -9,7 +9,7 @@
 //
 //	[Serializable]
 //	[CreateAssetMenu(fileName = "Normal Asset",
-//	                 menuName = "Vanilla/Data Assets/Normal",
+//	                 menuName = "Vanilla/MetaScript/Data Assets/Normal",
 //	                 order = 2)]
 //	public class NormalAsset : DataAsset<float>
 //	{

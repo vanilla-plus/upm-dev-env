@@ -15,7 +15,7 @@ namespace Vanilla.MetaScript.Flow
 	public class Quit : MetaTask
 	{
 
-		protected override bool CanAutoName() => true;
+		protected override bool Valid => true;
 
 
 		protected override string CreateAutoName() => "Quit the entire application";

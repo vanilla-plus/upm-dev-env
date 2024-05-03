@@ -2,12 +2,14 @@ using System;
 
 using UnityEngine;
 
+using Vanilla.MetaScript.DataAssets;
+
 namespace Vanilla.MetaScript.DataSources
 {
 
 	[Serializable]
-	public class RangedColorSource : ColorSource,
-	                                IRangedDataSource<Color>
+	public class RangedColorSource : ColorSource, 
+	                                 IRangedDataSource<Color>
 	{
 
 		[SerializeField]
@@ -49,23 +51,50 @@ namespace Vanilla.MetaScript.DataSources
 				_atMax.Value = VectorIsAtMax;
 			}
 		}
-		
+//
+//		[SerializeReference] public IDataSource<Color> _Min = new DirectColorSource
+//		                                                      {
+//			                                                      Value = Color.black
+//		                                                      };
+//
+//		[SerializeReference] public IDataSource<Color> _Max = new DirectColorSource
+//		                                                      {
+//			                                                      Value = Color.white
+//		                                                      };
+//		
+//		public IDataSource<Color> Min
+//		{
+//			get => _Min;
+//			set => _Min = value;
+//		}
+//		
+//		public IDataSource<Color> Max
+//		{
+//			get => _Max;
+//			set => _Max = value;
+//		}
+
+		// Deprecated - This value will be removed after the values are copied over to the ColorSource versions of Min + Max
+		[HideInInspector]
 		[SerializeField]
 		private Color _min = new Color(r: float.MinValue,
 		                               g: float.MinValue,
 		                               b: float.MinValue,
-		                                 a: float.MinValue);
+		                               a: float.MinValue);
 		public Color Min
 		{
 			get => _min;
 			set => _min = value;
 		}
+//
 
+		// Deprecated - This value will be removed after the values are copied over to the ColorSource versions of Min + Max
+		[HideInInspector]
 		[SerializeField]
 		private Color _max = new Color(r: float.MaxValue,
-		                                   g: float.MaxValue,
-		                                   b: float.MaxValue,
-		                                   a: float.MaxValue);
+		                               g: float.MaxValue,
+		                               b: float.MaxValue,
+		                               a: float.MaxValue);
 		public Color Max
 		{
 			get => _max;

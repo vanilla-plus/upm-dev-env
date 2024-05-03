@@ -1,5 +1,7 @@
 using System;
 
+using UnityEngine;
+
 namespace Vanilla.MetaScript.DataSources
 {
     
@@ -7,7 +9,13 @@ namespace Vanilla.MetaScript.DataSources
     public abstract class BoolSource : IDataSource<bool>
     {
 
-        
+//        [SerializeField] private string _name = "Unnamed BoolSource";
+//        public string Name
+//        {
+//            get => _name;
+//            set => _name = value;
+//        }
+
         public abstract bool Value
         {
             get;

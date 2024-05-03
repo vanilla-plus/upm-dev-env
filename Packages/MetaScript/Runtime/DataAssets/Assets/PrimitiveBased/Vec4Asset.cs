@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 	[Serializable]
 	[CreateAssetMenu(fileName = "Vec4 Asset",
-	                 menuName = "Vanilla/Data Assets/Vec4",
+	                 menuName = "Vanilla/MetaScript/Data Assets/Vec4",
 	                 order = 6)]
 	public class Vec4Asset : DataAsset<Vector4,Vec4Source>
 	{

@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 		
 		[SerializeField]
-		private FloatAsset _asset;
+		internal FloatAsset _asset;
 		public FloatAsset Asset
 		{
 			get => _asset;

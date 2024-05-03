@@ -22,7 +22,7 @@ namespace Vanilla.MetaScript.Media
 
 
 		// This task can auto-name itself if the Animator and triggerName are set.
-		protected override bool CanAutoName() => targetAnimator != null && !string.IsNullOrEmpty(triggerName);
+		protected override bool Valid => targetAnimator != null && !string.IsNullOrEmpty(triggerName);
 
 
 		// Create the AutoName here.

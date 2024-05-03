@@ -12,13 +12,13 @@ namespace Vanilla.MetaScript.DataSources
     {
 
         [SerializeField]
-        private string _name = "Unnamed ProtectedRangedFloatSource";
+        private string _Name = "Unnamed ProtectedRangedFloatSource";
         public string Name
         {
-            get => _name;
-            set => _name = value;
+            get => _Name;
+            set => _Name = value;
         }
-
+        
         [SerializeField]
         public float _changeEpsilon = Mathf.Epsilon;
         public float ChangeEpsilon
@@ -44,10 +44,6 @@ namespace Vanilla.MetaScript.DataSources
                 var outgoing = _value;
 
                 _value = value;
-
-                #if debug
-                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
-                #endif
 
                 if (value > outgoing)
                 {

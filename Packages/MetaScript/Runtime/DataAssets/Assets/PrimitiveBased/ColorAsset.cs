@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 	[Serializable]
 	[CreateAssetMenu(fileName = "Color Asset",
-	                 menuName = "Vanilla/Data Assets/Color",
+	                 menuName = "Vanilla/MetaScript/Data Assets/Color",
 	                 order = 7)]
 	public class ColorAsset : DataAsset<Color,ColorSource>
 	{

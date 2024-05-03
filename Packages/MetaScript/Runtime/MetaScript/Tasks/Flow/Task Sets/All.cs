@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Flow
 
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			if (scope.Cancelled) return scope;
+			
 
 			await UniTask.WhenAll(tasks: Enumerable.Select(source: _tasks,
 			                                               selector: t => t.Run(scope)));

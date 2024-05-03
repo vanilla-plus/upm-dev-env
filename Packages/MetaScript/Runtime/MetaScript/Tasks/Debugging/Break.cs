@@ -10,14 +10,14 @@ namespace Vanilla.MetaScript.Debugging
 	public class Break : MetaTask
 	{
 
-		protected override bool CanAutoName() => true;
+		protected override bool Valid => true;
 
 		protected override string CreateAutoName() => "Call Debug.Break";
 
 
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			if (scope.Cancelled) return scope;
+			
 
 			Debug.Break();
 

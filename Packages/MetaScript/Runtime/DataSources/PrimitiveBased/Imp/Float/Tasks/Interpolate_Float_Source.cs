@@ -38,7 +38,7 @@ namespace Vanilla.MetaScript.DataAssets
 		                                                          timeEnd: 1.0f,
 		                                                          valueEnd: 1.0f);
 		
-		protected override bool CanAutoName() => source != null && target != null;
+		protected override bool Valid => source != null && target != null;
 
 
 		protected override string CreateAutoName() => $"Lerp [{(source is AssetFloatSource s && s.Asset != null ? s.Asset.name : source.GetType().Name)}] to [{(target is AssetFloatSource t && t.Asset != null ? t.Asset.name : target.GetType().Name)}] over [{seconds}] seconds";
@@ -46,7 +46,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			if (scope.Cancelled) return scope;
+			
 
 			if (source == null ||
 			    target == null) return scope;

@@ -37,7 +37,7 @@ namespace Vanilla.MetaScript.DataAssets
 			                                  Value = true
 		                                  };
 
-		protected override bool CanAutoName() => targetSource != null && toSource != null;
+		protected override bool Valid => targetSource != null && toSource != null;
 
 
 		protected override string CreateAutoName() => $"Change [{(targetSource is AssetColorSource s && s.Asset != null ? s.Asset.name : targetSource.GetType().Name)}] to [{(toSource is AssetColorSource t && t.Asset != null ? t.Asset.name : toSource.GetType().Name)}] over time";
@@ -45,7 +45,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			if (scope.Cancelled) return scope;
+			
 
 			if (targetSource == null ||
 			    toSource == null) return scope;

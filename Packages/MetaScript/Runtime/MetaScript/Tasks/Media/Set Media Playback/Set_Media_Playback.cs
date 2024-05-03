@@ -11,7 +11,7 @@ namespace Vanilla.MetaScript
     public abstract class Set_Media_Playback<T> : MetaTask
     {
 
-        protected override bool CanAutoName() => targetComponent != null;
+        protected override bool Valid => targetComponent != null;
 
         protected override string CreateAutoName() => $"Set playback on [{targetComponent.GetType().Name}] to [{action.ToString()}]";
 
@@ -37,7 +37,7 @@ namespace Vanilla.MetaScript
 
         protected override UniTask<Scope> _Run(Scope scope)
         {
-            if (scope.Cancelled) return UniTask.FromResult(scope);
+            
 
             HandleSet();
             

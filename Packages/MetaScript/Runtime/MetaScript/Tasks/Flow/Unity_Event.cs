@@ -14,24 +14,27 @@ namespace Vanilla.MetaScript.Flow
 		public UnityEvent unityEvent = new UnityEvent();
 
 
-		protected override bool CanAutoName()
+		protected override bool Valid
 		{
-			var count = unityEvent.GetPersistentEventCount();
-
-			if (count == 0) return false;
-
-			for (var i = 0;
-			     i < count;
-			     i++)
+			get
 			{
-				if (unityEvent.GetPersistentTarget(i) == null
-				 || string.IsNullOrEmpty(unityEvent.GetPersistentMethodName(i)))
-				{
-					return false;
-				}
-			}
+				var count = unityEvent.GetPersistentEventCount();
 
-			return true;
+				if (count == 0) return false;
+
+				for (var i = 0;
+				     i < count;
+				     i++)
+				{
+					if (unityEvent.GetPersistentTarget(i) == null ||
+					    string.IsNullOrEmpty(unityEvent.GetPersistentMethodName(i)))
+					{
+						return false;
+					}
+				}
+
+				return true;
+			}
 		}
 
 

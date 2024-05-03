@@ -17,7 +17,7 @@ namespace Vanilla.MetaScript.DataAssets
 		[TypeMenu("red")]
 		public BoolSource source = new AssetBoolSource();
 
-		protected override bool CanAutoName() => source != null && _tasks is
+		protected override bool Valid => source != null && _tasks is
 		                                         {
 			                                         Length: >= 2
 		                                         };

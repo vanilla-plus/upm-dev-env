@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.Drivers
 
 	[Serializable]
 	public abstract class Driver<T,S,A,M,D>
-		where S : IDataSource<T>
+		where S : class, IDataSource<T>
 		where A : DataAsset<T,S>
 		where M : Module<T,S,A,M,D>
 		where D : Driver<T,S,A,M,D>
@@ -43,11 +43,14 @@ namespace Vanilla.MetaScript.Drivers
 				return;
 			}
 
+			// ToDo: Remove this line and InitialValue after porting has been performed.
+			Asset.DefaultValue = InitialValue;
+
 			Name = $"{Asset.name} [{Asset.Source.GetType().Name}]";
 
 //			Debug.LogWarning(Asset.Source.Value);
 			
-			Asset.Source.Value = InitialValue;
+//			Asset.Source.Value = InitialValue;
 
 //			Debug.LogError(Asset.Source.Value);
 
@@ -72,7 +75,7 @@ namespace Vanilla.MetaScript.Drivers
 				return;
 			}
 			
-			Asset.Source.Value = InitialValue;
+//			Asset.Source.Value = InitialValue;
 
 			foreach (var module in Modules) module?.Init(this as D);
 		}

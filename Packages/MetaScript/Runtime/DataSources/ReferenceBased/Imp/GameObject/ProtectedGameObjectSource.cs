@@ -10,6 +10,14 @@ namespace Vanilla.MetaScript
 	[Serializable]
 	public class ProtectedGameObjectSource : IGameObjectSource
 	{
+		
+//		[SerializeField]
+//		private string _name = "Unnamed ProtectedGameObjectSource";
+//		public string Name
+//		{
+//			get => _name;
+//			set => _name = value;
+//		}
 
 		[SerializeField]
 		private GameObject _value;

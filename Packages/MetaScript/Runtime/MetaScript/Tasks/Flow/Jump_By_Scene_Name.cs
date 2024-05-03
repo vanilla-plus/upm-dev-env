@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Flow
 
         public string TargetSceneName;
 
-        protected override bool CanAutoName() => !string.IsNullOrEmpty(TargetSceneName);
+        protected override bool Valid => !string.IsNullOrEmpty(TargetSceneName);
 
 
         protected override string CreateAutoName() => $"Jump to scene [{TargetSceneName}]";
@@ -60,7 +60,7 @@ namespace Vanilla.MetaScript.Flow
                 return scope;
             }
 
-            if (scope.Cancelled) return scope;
+            
 
             if (instance.Task != null) await instance.Task.Run(scope);
 

@@ -19,7 +19,7 @@ namespace Vanilla.MetaScript.DataAssets
         [TypeMenu("red")]
         public BoolSource source = new AssetBoolSource();
 
-        protected override bool CanAutoName() => source != null;
+        protected override bool Valid => source != null;
 
 
         protected override string CreateAutoName() => $"Flip [{(source is AssetBoolSource boolSource ? boolSource.Asset.name : source.GetType().Name)}]";
@@ -27,7 +27,7 @@ namespace Vanilla.MetaScript.DataAssets
 
         protected override UniTask<Scope> _Run(Scope scope)
         {
-            if (scope.Cancelled) return UniTask.FromResult(scope);
+            
             
             source?.Flip();
             

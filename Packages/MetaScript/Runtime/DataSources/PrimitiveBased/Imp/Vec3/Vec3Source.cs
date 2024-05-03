@@ -9,14 +9,6 @@ namespace Vanilla.MetaScript.DataSources
 	public abstract class Vec3Source : IDataSource<Vector3>
 	{
 
-//		[SerializeField]
-//		private string _name = "Unnamed Vec3Source";
-//		public string Name
-//		{
-//			get => _name;
-//			set => _name = value;
-//		}
-        
 		public abstract Vector3 Value
 		{
 			get;

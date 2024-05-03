@@ -9,6 +9,14 @@ namespace Vanilla.MetaScript.DataSources
 	public class ProtectedTransformSource : IProtectedComponentSource<Transform, ITransformSource>, ITransformSource
 	{
 
+//		[SerializeField]
+//		private string _name = "Unnamed ProtectedTransformSource";
+//		public string Name
+//		{
+//			get => _name;
+//			set => _name = value;
+//		}
+		
 		[SerializeField]
 		private Transform _value;
 		public Transform Value

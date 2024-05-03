@@ -20,10 +20,7 @@ namespace Vanilla.MetaScript.DataAssets
 		    get => _name;
 		    set => _name = value;
 	    }
-
-
-
-
+	    
 	    [SerializeField]
         private Vector4 _value;
         public override Vector4 Value
@@ -50,9 +47,9 @@ namespace Vanilla.MetaScript.DataAssets
 
                 _value = value;
 
-                #if debug
-                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
-                #endif
+//                #if debug
+//                Debug.Log($"[{Time.frameCount}] [{Name}] was changed from [{outgoing}] to [{value}]");
+//                #endif
                 
                 // Hm, we don't check for an 'increase' or 'decrease' here because I suppose it's a little bit vague when it comes to Vectors?
                 // The way more useful information here would be if each particular dimension had its own Min/Max/AtMin/AtMax but structuring that

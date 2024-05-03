@@ -11,7 +11,7 @@ namespace Vanilla.MetaScript.Flow
 	public class Wait : MetaTask
 	{
 
-		protected override bool CanAutoName() => true;
+		protected override bool Valid => true;
 
 		protected override string CreateAutoName() => $"Wait for {secondsToTake} seconds";
 

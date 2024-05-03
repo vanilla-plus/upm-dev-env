@@ -10,14 +10,6 @@ namespace Vanilla.MetaScript.DataSources
 	                                   IProtectedSource<Vector2>
 	{
 
-		[SerializeField]
-		private string _name = "Unnamed ProtectedRangedColorSource";
-		public string Name
-		{
-			get => _name;
-			set => _name = value;
-		}
-
 
 
 		[SerializeField]
@@ -33,10 +25,6 @@ namespace Vanilla.MetaScript.DataSources
 
 				_value = value;
 
-				#if debug
-				Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
-				#endif
-                
 				OnSet?.Invoke(value);
 				OnSetWithHistory?.Invoke(value, outgoing);
 			}

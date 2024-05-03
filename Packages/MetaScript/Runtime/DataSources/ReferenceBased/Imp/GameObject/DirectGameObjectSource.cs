@@ -11,6 +11,14 @@ namespace Vanilla.MetaScript
     public class DirectGameObjectSource : IGameObjectSource
     {
 
+//        [SerializeField]
+//        private string _name = "Unnamed DirectGameObjectSource";
+//        public string Name
+//        {
+//            get => _name;
+//            set => _name = value;
+//        }
+        
         [SerializeField]
         private GameObject _value;
         public GameObject Value

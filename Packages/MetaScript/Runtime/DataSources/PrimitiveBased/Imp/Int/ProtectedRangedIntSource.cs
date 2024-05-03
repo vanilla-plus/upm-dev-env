@@ -12,15 +12,13 @@ namespace Vanilla.MetaScript.DataSources
     {
 
         [SerializeField]
-        private string _name = "Unnamed ProtectedRangedColorSource";
+        private string _Name = "Unnamed ProtectedRangedIntSource";
         public string Name
         {
-            get => _name;
-            set => _name = value;
+            get => _Name;
+            set => _Name = value;
         }
-
-
-
+        
         [SerializeField]
         private int _value;
         public override int Value
@@ -38,10 +36,6 @@ namespace Vanilla.MetaScript.DataSources
 
                 _value = value;
 
-                #if debug
-                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
-                #endif
-                
                 if (value > outgoing)
                 {
                     _atMin.Value = value == _Min;

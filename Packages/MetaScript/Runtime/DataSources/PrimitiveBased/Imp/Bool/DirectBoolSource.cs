@@ -4,11 +4,13 @@ using UnityEngine;
 
 namespace Vanilla.MetaScript.DataSources
 {
-    
+
     [Serializable]
     public class DirectBoolSource : BoolSource
     {
 
+        
+        
         [SerializeField]
         private bool _value = false;
         public override bool Value
@@ -17,7 +19,7 @@ namespace Vanilla.MetaScript.DataSources
             set
             {
                 var old = _value;
-                
+
                 _value = value;
 
                 if (_value)
@@ -28,9 +30,11 @@ namespace Vanilla.MetaScript.DataSources
                 {
                     OnFalse?.Invoke();
                 }
-                
+
                 OnSet?.Invoke(_value);
-                OnSetWithHistory?.Invoke(_value, old);
+
+                OnSetWithHistory?.Invoke(_value,
+                                         old);
             }
         }
 
@@ -38,5 +42,8 @@ namespace Vanilla.MetaScript.DataSources
 
         public override void OnAfterDeserialize() { }
 
+        public override string ToString() => Value.ToString();
+
     }
+
 }

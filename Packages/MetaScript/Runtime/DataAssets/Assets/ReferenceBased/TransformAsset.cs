@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 	[Serializable]
 	[CreateAssetMenu(fileName = "Transform Asset",
-	                 menuName = "Vanilla/Data Assets/Transform",
+	                 menuName = "Vanilla/MetaScript/Data Assets/Transform",
 	                 order = 9)]
 	public class TransformAsset : ComponentAsset<Transform, ITransformSource>
 	{

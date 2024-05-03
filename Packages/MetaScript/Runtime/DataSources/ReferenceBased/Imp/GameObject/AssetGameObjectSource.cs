@@ -12,8 +12,17 @@ namespace Vanilla.MetaScript
 	public class AssetGameObjectSource : IGameObjectSource
 	{
 
+//		[SerializeField]
+//		private string _name = "Unnamed AssetGameObjectSource";
+//		public string Name
+//		{
+//			get => _name;
+//			set => _name = value;
+//		}
+		
 		[SerializeField]
 		private GameObject _value;
+
 		public GameObject Value
 		{
 			get => _value;

@@ -10,18 +10,14 @@ namespace Vanilla.MetaScript.DataSources
     public class ProtectedFloatSource : FloatSource, 
                                         IProtectedSource<float>
     {
-        
-        [SerializeField]
-        private string _name = "Unnamed ProtectedFloatSource";
-        public string Name
-        {
-            get => _name;
-            set => _name = value;
-        }
 
-
-
-
+//        [SerializeField]
+//        private string _Name = "Unnamed ProtectedFloatSource";
+//        public string Name
+//        {
+//            get => _Name;
+//            set => _Name = value;
+//        }
 
         [SerializeField]
         public float _changeEpsilon = Mathf.Epsilon;
@@ -43,10 +39,6 @@ namespace Vanilla.MetaScript.DataSources
                 var outgoing = _value;
 
                 _value = value;
-
-                #if debug
-                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
-                #endif
                 
                 OnSet?.Invoke(value);
                 OnSetWithHistory?.Invoke(value, outgoing);
@@ -56,6 +48,7 @@ namespace Vanilla.MetaScript.DataSources
         public override void OnBeforeSerialize() { }
 
         public override void OnAfterDeserialize() { }
+
 
     }
 }

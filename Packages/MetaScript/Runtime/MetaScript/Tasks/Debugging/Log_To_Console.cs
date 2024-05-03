@@ -23,7 +23,7 @@ namespace Vanilla.MetaScript.Debugging
 		[SerializeField]
 		public LogType logType = LogType.Log;
 
-		protected override bool CanAutoName() => !string.IsNullOrEmpty(Message);
+		protected override bool Valid => !string.IsNullOrEmpty(Message);
 
 		protected override string CreateAutoName() => $"Print [{Message}] to the console";
 

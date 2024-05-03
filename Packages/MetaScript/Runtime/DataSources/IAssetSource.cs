@@ -7,7 +7,7 @@ using Vanilla.MetaScript.DataAssets;
 namespace Vanilla.MetaScript.DataSources
 {
     public interface IAssetSource<T,S,A>
-        where S : IDataSource<T>
+        where S : class, IDataSource<T>
         where A : DataAsset<T,S>
     {
         

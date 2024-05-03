@@ -31,9 +31,9 @@ namespace Vanilla.MetaScript.DataSources
                 
                 _value = value;
                 
-                #if debug
-                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
-                #endif
+//                #if debug
+//                Debug.Log($"[{Time.frameCount}] [{Name}] was changed from [{outgoing}] to [{value}]");
+//                #endif
                 
                 if (_value)
                 {
@@ -60,6 +60,8 @@ namespace Vanilla.MetaScript.DataSources
 
         public override void OnAfterDeserialize() { }
         
+        public override string ToString() => Value.ToString();
+
     }
 
 }

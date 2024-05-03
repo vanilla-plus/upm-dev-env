@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Flow
 
 		public int TargetSceneIndex;
 
-		protected override bool CanAutoName() => true;
+		protected override bool Valid => true;
 
 
 		protected override string CreateAutoName() => $"Jump to loaded scene [{TargetSceneIndex}]";
@@ -62,7 +62,7 @@ namespace Vanilla.MetaScript.Flow
 				return scope;
 			}
 
-			if (scope.Cancelled) return scope;
+			
 
 			if (instance.Task != null) await instance.Task.Run(scope);
 

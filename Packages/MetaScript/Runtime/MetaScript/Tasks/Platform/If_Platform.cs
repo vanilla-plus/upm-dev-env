@@ -18,6 +18,10 @@ namespace Vanilla.MetaScript.Flow
 		public class PlatformTaskMapping
 		{
 
+			[HideInInspector]
+			[SerializeField]
+			private string Name;
+			
 			[SerializeField]
 			public RuntimePlatform[] platforms = Array.Empty<RuntimePlatform>();
 
@@ -25,19 +29,50 @@ namespace Vanilla.MetaScript.Flow
 			[TypeMenu("blue")]
 			public MetaTask task;
 
+
+//			internal void OnValidate()
+			public void OnValidate()
+			{
+				#if UNITY_EDITOR
+				Name = platforms.Aggregate(string.Empty,
+				                           (s,
+				                            platform) => s + (platform + " / "));
+
+				if (!string.IsNullOrEmpty(Name)) Name = Name[..^3];
+
+				task?.OnValidate();
+				#endif
+			}
+
 		}
 
 		[SerializeField]
 		public PlatformTaskMapping[] mappings = Array.Empty<PlatformTaskMapping>();
 
-		protected override bool CanAutoName() => false;
+		protected override bool Valid => false;
+
+//		public override void OnValidate()
+		public override void OnValidate()
+		{
+			#if UNITY_EDITOR
+//			base.OnValidate();
+			base.OnValidate();
+
+			foreach (var m in mappings)
+			{
+//				m?.OnValidate();
+				m?.OnValidate();
+			}
+			#endif
+		}
+
 
 		protected override         string CreateAutoName() => "If running in UnityEditor...";
 
 
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			if (scope.Cancelled) return scope;
+			
 
 			var targetTask = mappings.FirstOrDefault(m => m.platforms.Any(p => p == Application.platform))?.task;
 

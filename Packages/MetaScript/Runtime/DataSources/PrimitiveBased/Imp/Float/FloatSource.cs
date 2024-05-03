@@ -9,7 +9,20 @@ namespace Vanilla.MetaScript.DataSources
     public abstract class FloatSource : IDataSource<float>
     {
 
+//        public abstract string Name
+//        {
+//            get;
+//            set;
+//        }
         
+//        [SerializeField]
+//        private string _name = "Unnamed FloatSource";
+//        public string Name
+//        {
+//            get => _name;
+//            set => _name = value;
+//        }
+
         public abstract float Value
         {
             get;

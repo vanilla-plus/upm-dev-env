@@ -14,23 +14,23 @@ namespace Vanilla.MetaScript.Media
 		[SerializeField]
 		private UnityEngine.Animation targetAnimation;
 
-		protected override bool CanAutoName() => targetAnimation != null;
+		protected override bool Valid => targetAnimation != null;
 
 		protected override string CreateAutoName() => $"Stop current animation on {targetAnimation.gameObject.name}";
 
 
-		protected override async UniTask<Scope> _Run(Scope scope)
+		protected override UniTask<Scope> _Run(Scope scope)
 		{
 			if (targetAnimation == null)
 			{
 				Debug.LogError("Animator or AnimationClip not set for PlayAnimationAndWait task.");
 
-				return scope;
+				return UniTask.FromResult(scope);
 			}
 
 			targetAnimation.Stop();
 
-			return scope;
+			return UniTask.FromResult(scope);
 		}
 
 	}

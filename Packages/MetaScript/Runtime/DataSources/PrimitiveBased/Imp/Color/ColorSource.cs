@@ -9,7 +9,14 @@ namespace Vanilla.MetaScript.DataSources
 	public abstract class ColorSource : IDataSource<Color>
 	{
 
-        
+//		[SerializeField]
+//		private string _name = "Unnamed ColorSource";
+//		public string Name
+//		{
+//			get => _name;
+//			set => _name = value;
+//		}
+		
 		public abstract Color Value
 		{
 			get;

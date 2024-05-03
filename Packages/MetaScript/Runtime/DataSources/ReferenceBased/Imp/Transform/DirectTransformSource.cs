@@ -12,6 +12,14 @@ namespace Vanilla.MetaScript
     public class DirectTransformSource : IDirectComponentSource<Transform, DirectTransformSource>, ITransformSource
     {
 
+//        [SerializeField]
+//        private string _name = "Unnamed DirectTransformSource";
+//        public string Name
+//        {
+//            get => _name;
+//            set => _name = value;
+//        }
+        
         [SerializeField]
         private Transform _value;
         public Transform Value

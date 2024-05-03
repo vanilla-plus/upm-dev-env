@@ -14,13 +14,13 @@ namespace Vanilla.MetaScript.Analytics
 	public class Initialize_Analytics : MetaTask
 	{
 
-		protected override bool CanAutoName() => true;
+		protected override bool Valid => true;
 
 		protected override string CreateAutoName() => "Initialize Unity Analytics";
 
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			if (scope.Cancelled) return scope;
+			
 
 			await UnityServices.InitializeAsync();
 

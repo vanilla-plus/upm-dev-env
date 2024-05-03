@@ -12,7 +12,7 @@ namespace Vanilla.MetaScript
 	{
 
 		[SerializeField]
-		public KeyCode debugRunKey = KeyCode.Alpha1;
+		public KeyCode debugRunKey = KeyCode.None;
 		
 		[SerializeField]
 		public MetaTaskInstance target;

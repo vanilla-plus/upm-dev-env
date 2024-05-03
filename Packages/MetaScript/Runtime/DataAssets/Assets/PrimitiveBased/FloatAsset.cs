@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 	[Serializable]
 	[CreateAssetMenu(fileName = "Float Asset",
-	                 menuName = "Vanilla/Data Assets/Float",
+	                 menuName = "Vanilla/MetaScript/Data Assets/Float",
 	                 order = 3)]
 	public class FloatAsset : DataAsset<float,FloatSource>
 	{

@@ -11,17 +11,6 @@ namespace Vanilla.MetaScript.DataSources
 	{
 
 		[SerializeField]
-		private string _name = "Unnamed ProtectedRangedColorSource";
-		public string Name
-		{
-			get => _name;
-			set => _name = value;
-		}
-
-
-
-
-		[SerializeField]
 		private Vector3 _value;
 		public override Vector3 Value
 		{
@@ -34,10 +23,6 @@ namespace Vanilla.MetaScript.DataSources
 
 				_value = value;
 
-				#if debug
-				Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
-				#endif
-                
 				OnSet?.Invoke(value);
 				OnSetWithHistory?.Invoke(value, outgoing);
 			}

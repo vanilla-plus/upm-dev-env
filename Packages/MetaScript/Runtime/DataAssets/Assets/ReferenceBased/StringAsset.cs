@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 	[Serializable]
 	[CreateAssetMenu(fileName = "String Asset",
-	                 menuName = "Vanilla/Data Assets/String",
+	                 menuName = "Vanilla/MetaScript/Data Assets/String",
 	                 order = 7)]
 	public class StringAsset : DataAsset<string,StringSource>
 	{

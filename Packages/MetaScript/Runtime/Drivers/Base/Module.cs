@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.Drivers
     
     [Serializable]
     public abstract class Module<T,S,A,M,D>
-        where S : IDataSource<T>
+        where S : class, IDataSource<T>
         where A : DataAsset<T,S>
         where M : Module<T,S,A,M,D>
         where D : Driver<T,S,A,M,D>
@@ -71,8 +71,10 @@ namespace Vanilla.MetaScript.Drivers
 
             driver.Asset.Source.OnSetWithHistory += HandleSetWithHistory;
 
+            var old = driver.Asset.Source.Value;
+            
             HandleSetWithHistory(driver.Asset.Source.Value,
-                                 driver.InitialValue);
+                                 old);
         }
         
         protected virtual void HandleSetWithHistory(T incoming, T outgoing) { }

@@ -19,7 +19,7 @@ namespace Vanilla.MetaScript.Analytics
 		public string eventName = "default_event";
 
 		// AutoName for self-documentation
-		protected override bool CanAutoName() => true;
+		protected override bool Valid => true;
 
 		protected override string CreateAutoName() => $"Submit Analytics Event '{eventName}'";
 
@@ -27,7 +27,7 @@ namespace Vanilla.MetaScript.Analytics
 		// The main execution method for the task
 		protected override UniTask<Scope> _Run(Scope scope)
 		{
-			if (scope.Cancelled) return UniTask.FromResult(scope);
+			
 
 			AnalyticsService.Instance.CustomData(eventName);
 			

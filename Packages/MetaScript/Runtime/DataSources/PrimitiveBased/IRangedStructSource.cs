@@ -7,6 +7,18 @@ namespace Vanilla.MetaScript.DataSources
     public interface IRangedDataSource<T> : IStructSource<T>
     {
 
+//        IDataSource<T> Min
+//        {
+//            get;
+//            set;
+//        }
+//        
+//        IDataSource<T> Max
+//        {
+//            get;
+//            set;
+//        }
+        
         T Min
         {
             get;

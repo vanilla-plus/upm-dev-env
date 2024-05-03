@@ -12,19 +12,15 @@ namespace Vanilla.MetaScript.DataAssets
                                              IProtectedSource<Color>,
                                              IRangedDataSource<Color>
     {
-	    
+
 	    [SerializeField]
-	    private string _name = "Unnamed ProtectedRangedColorSource";
+	    private string _Name = "Unnamed ProtectedRangedColorSource";
 	    public string Name
 	    {
-		    get => _name;
-		    set => _name = value;
+		    get => _Name;
+		    set => _Name = value;
 	    }
-
-
-
-
-
+	    
 	    [SerializeField]
         private Color _value;
         public override Color Value
@@ -51,10 +47,6 @@ namespace Vanilla.MetaScript.DataAssets
 
                 _value = value;
 
-                #if debug
-                Debug.Log($"[{Name}] was changed from [{outgoing}] to [{value}]");
-                #endif
-                
                 // Hm, we don't check for an 'increase' or 'decrease' here because I suppose it's a little bit vague when it comes to Vectors?
                 // The way more useful information here would be if each particular dimension had its own Min/Max/AtMin/AtMax but structuring that
                 // would be hell...?

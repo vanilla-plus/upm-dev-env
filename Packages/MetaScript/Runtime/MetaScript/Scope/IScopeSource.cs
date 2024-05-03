@@ -63,24 +63,28 @@ namespace Vanilla.MetaScript
     [Serializable]
     public class Randomized_Scope_Source : IScopeSource
     {
-
-        public Scope CreateScope(Scope parent) => new Scope(parent: parent,
-                                                            name: NewRandomScopeName(16));
         
-        private string NewRandomScopeName(sbyte size)
-        {
-            using var rng = new RNGCryptoServiceProvider();
-
-            var data = new byte[size / 2];
-
-            rng.GetBytes(data);
-
-            var sb = new StringBuilder(size);
-
-            foreach (var b in data) sb.Append(b.ToString("X2"));
-
-            return sb.ToString();
-        }
+        public Scope CreateScope(Scope parent) => new Scope(parent: parent,
+                                                            name: Scope.GetRandomScopeName(16));
+        
+//
+//        public Scope CreateScope(Scope parent) => new Scope(parent: parent,
+//                                                            name: NewRandomScopeName(16));
+//        
+//        private string NewRandomScopeName(sbyte size)
+//        {
+//            using var rng = new RNGCryptoServiceProvider();
+//
+//            var data = new byte[size / 2];
+//
+//            rng.GetBytes(data);
+//
+//            var sb = new StringBuilder(size);
+//
+//            foreach (var b in data) sb.Append(b.ToString("X2"));
+//
+//            return sb.ToString();
+//        }
 
     }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 
 using Cysharp.Threading.Tasks;
 
@@ -156,7 +157,7 @@ namespace Vanilla.MetaScript
 
             Dispose();
         }
-        
+
         public bool Cancelled => !Continue || (parent?.Cancelled ?? false);
 
         private bool disposed = false;
@@ -231,6 +232,27 @@ namespace Vanilla.MetaScript
         public override string ToString() => Name;
 
         ~Scope() => Dispose(false);
+
+
+        internal static string GetRandomScopeName(sbyte size)
+        {
+            Span<byte> data = stackalloc byte[size / 2];
+            
+            RandomNumberGenerator.Fill(data);
+
+            Span<char> result = stackalloc char[size];
+
+            for (var i = 0; i < data.Length; i++)
+            {
+                var b = data[i];
+                result[i * 2]     = HexToChar(b >> 4);
+                result[i * 2 + 1] = HexToChar(b & 0xF);
+            }
+
+            return new string(result);
+        }
+
+        private static char HexToChar(int hex) => hex < 10 ? (char)('0' + hex) : (char)('A' + hex - 10);
 
     }
 }

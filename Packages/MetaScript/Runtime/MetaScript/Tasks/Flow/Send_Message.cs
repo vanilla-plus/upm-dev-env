@@ -24,14 +24,14 @@ namespace Vanilla.MetaScript.Flow
 		[SerializeField]
 		private SendMessageOptions options = SendMessageOptions.RequireReceiver;
 
-		protected override bool CanAutoName() => target != null && !string.IsNullOrEmpty(methodName);
+		protected override bool Valid => target != null && !string.IsNullOrEmpty(methodName);
 
 		protected override string CreateAutoName() => $"Call [{target.name}.{methodName}]";
 
 
 		protected override UniTask<Scope> _Run(Scope scope)
 		{
-			if (scope.Cancelled) return UniTask.FromResult(scope);
+			
 			
 			if (target == null)
 			{

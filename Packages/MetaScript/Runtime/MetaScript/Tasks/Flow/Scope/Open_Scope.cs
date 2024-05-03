@@ -17,9 +17,16 @@ namespace Vanilla.MetaScript
         [TypeMenu("green")]
         public IScopeSource scopeSource;
         
-        protected override bool CanAutoName() => scopeSource != null;
-        
-        protected override string CreateAutoName() => $"Open a new [{scopeSource.GetType().Name}] scope";
+        protected override bool Valid => scopeSource != null;
+
+
+        protected override string CreateAutoName() => scopeSource switch
+                                                      {
+                                                          Named_Scope_Source s      => $"Open a new [{s}] scope",
+                                                          Randomized_Scope_Source s => $"Open a randomised scope",
+                                                          Indexed_Scope_Source s    => $"Open an indexed [{s.prefix}] scope",
+                                                          _                         => "?"
+                                                      };
 
 
         protected override UniTask<Scope> _Run(Scope scope)

@@ -6,6 +6,8 @@ using UnityEngine;
 
 using Vanilla.TypeMenu;
 
+using Object = UnityEngine.Object;
+
 namespace Vanilla.MetaScript.Flow
 {
 
@@ -22,14 +24,17 @@ namespace Vanilla.MetaScript.Flow
 		public override void OnValidate()
 		{
 			#if UNITY_EDITOR
-			foreach (var t in _tasks) t?.OnValidate();
+			foreach (var t in _tasks)
+			{
+				t?.OnValidate();
+			}
 			#endif
-
+			
 			base.OnValidate();
 		}
 
 
-		protected override bool CanAutoName() => Tasks != null && Tasks.Length > 0 && Tasks.All(task => task != null);
+		protected override bool Valid => Tasks != null && Tasks.Length > 0 && Tasks.All(task => task != null);
 
 	}
 

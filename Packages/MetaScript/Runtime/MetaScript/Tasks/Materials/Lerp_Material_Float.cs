@@ -20,7 +20,7 @@ namespace Vanilla.MetaScript.Materials
 		[NonSerialized]
 		private int propertyIndex = -1;
 
-		protected override bool CanAutoName() => targetMaterials.Length > 0 && targetMaterials[0] != null && !string.IsNullOrEmpty(propertyName);
+		protected override bool Valid => targetMaterials.Length > 0 && targetMaterials[0] != null && !string.IsNullOrEmpty(propertyName);
 
 		protected override string CreateAutoName() => $"Lerp [{targetMaterials[0].name}.{propertyName}] from [{@from}] to [{to}]";
 

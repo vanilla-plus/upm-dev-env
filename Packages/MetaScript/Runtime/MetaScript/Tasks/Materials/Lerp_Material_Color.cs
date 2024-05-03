@@ -18,7 +18,7 @@ namespace Vanilla.MetaScript.Materials
 		[SerializeField]
 		public Gradient[] gradients = Array.Empty<Gradient>();
 		
-		protected override bool CanAutoName() => targetMaterials.Length > 0 && targetMaterials[0] != null && !string.IsNullOrEmpty(propertyName);
+		protected override bool Valid => targetMaterials.Length > 0 && targetMaterials[0] != null && !string.IsNullOrEmpty(propertyName);
 
 		protected override string CreateAutoName() => $"Lerp [{targetMaterials[0].name}.{propertyName}]";
 

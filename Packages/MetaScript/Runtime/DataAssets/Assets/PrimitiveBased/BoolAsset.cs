@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 	[Serializable]
 	[CreateAssetMenu(fileName = "Bool Asset",
-	                 menuName = "Vanilla/Data Assets/Bool",
+	                 menuName = "Vanilla/MetaScript/Data Assets/Bool",
 	                 order = 0)]
 	public class BoolAsset : DataAsset<bool, BoolSource>
 	{

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429fa8deec1fa4b468ef96f23ca6a668, type: 3}
+  m_Name: Test MetaAction_String
+  m_EditorClassIdentifier: 
+  Description: "Describe this action below:\n\n\u2022 What does it do?\n\u2022 What
+    scene is it used in?\n\u2022 When should it be called?"
+  Source:
+    rid: 3914819350297837638
+  references:
+    version: 2
+    RefIds:
+    - rid: 3914819350297837638
+      type: {class: AssetStringSource, ns: Vanilla.MetaScript.DataAssets, asm: Vanilla.MetaScript}
+      data:
+        _asset: {fileID: 0}

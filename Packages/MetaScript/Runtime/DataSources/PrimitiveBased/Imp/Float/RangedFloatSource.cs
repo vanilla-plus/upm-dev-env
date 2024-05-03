@@ -11,6 +11,14 @@ namespace Vanilla.MetaScript.DataSources
     {
 
         [SerializeField]
+        private string _Name = "Unnamed RangedFloatSource";
+        public string Name
+        {
+            get => _Name;
+            set => _Name = value;
+        }
+        
+        [SerializeField]
         private float _value;
         public override float Value
         {
@@ -101,8 +109,8 @@ namespace Vanilla.MetaScript.DataSources
                                _Min,
                                float.MaxValue);
 
-//            AtMin.Name = $"{Name}.AtMin";
-//            AtMax.Name = $"{Name}.AtMax";
+            AtMin.Name = $"{Name}.AtMin";
+            AtMax.Name = $"{Name}.AtMax";
             
             Value = Mathf.Clamp(_value,
                                  _Min,

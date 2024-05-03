@@ -11,7 +11,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 	[Serializable]
 	[CreateAssetMenu(fileName = "GameObject Asset",
-	                 menuName = "Vanilla/Data Assets/GameObject",
+	                 menuName = "Vanilla/MetaScript/Data Assets/GameObject",
 	                 order = 8)]
 	public class GameObjectAsset : RefAsset<GameObject, IGameObjectSource>
 	{

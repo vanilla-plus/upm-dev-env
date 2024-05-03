@@ -15,7 +15,7 @@ namespace Vanilla.MetaScript.Flow
 
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			if (scope.Cancelled) return scope;
+			
 
 			var tasksToRun = _tasks.Where(t => t.taskOptions.HasFlag(TaskOptions.Run));
 

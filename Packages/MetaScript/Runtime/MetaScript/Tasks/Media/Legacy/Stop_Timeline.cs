@@ -15,23 +15,23 @@ namespace Vanilla.MetaScript.Media
 		[SerializeField]
 		private PlayableDirector playableDirector;
 		
-		protected override bool CanAutoName() => playableDirector != null;
+		protected override bool Valid => playableDirector != null;
 
 		protected override string CreateAutoName() => $"Stop Playable on {playableDirector.gameObject.name}";
 
 
-		protected override async UniTask<Scope> _Run(Scope scope)
+		protected override UniTask<Scope> _Run(Scope scope)
 		{
 			if (playableDirector == null)
 			{
 				Debug.LogError("Animator or AnimationClip not set for PlayAnimationAndWait task.");
 
-				return scope;
+				return UniTask.FromResult(scope);
 			}
 
 			playableDirector.Stop();
 
-			return scope;
+			return UniTask.FromResult(scope);
 		}
 
 	}

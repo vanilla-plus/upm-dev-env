@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 	[Serializable]
 	[CreateAssetMenu(fileName = "Int Asset",
-	                 menuName = "Vanilla/Data Assets/Int",
+	                 menuName = "Vanilla/MetaScript/Data Assets/Int",
 	                 order = 1)]
 	public class IntAsset : DataAsset<int,IntSource>
 	{

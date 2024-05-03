@@ -12,6 +12,14 @@ namespace Vanilla.MetaScript.DataSources
 	public class AssetTransformSource : IAssetComponentSource<Transform, ITransformSource, TransformAsset>, ITransformSource
 	{
 
+//		[SerializeField]
+//		private string _name = "Unnamed AssetTransformSource";
+//		public string Name
+//		{
+//			get => _name;
+//			set => _name = value;
+//		}
+		
 		[SerializeField]
 		private TransformAsset _asset;
 		public TransformAsset Asset

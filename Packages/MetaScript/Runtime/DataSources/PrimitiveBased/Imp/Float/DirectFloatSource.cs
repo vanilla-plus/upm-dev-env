@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.DataSources
     {
 
         [SerializeField]
-        private float _value = 0.0f;
+        internal float _value = 0.0f;
         public override float Value
         {
             get => _value;

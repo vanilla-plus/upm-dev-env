@@ -4,9 +4,16 @@ using UnityEngine;
 
 namespace Vanilla.MetaScript.DataSources
 {
+    
     public interface IDataSource<T> : ISerializationCallbackReceiver
     {
 
+//        string Name
+//        {
+//            get;
+//            set;
+//        }
+        
         T Value
         {
             get;
