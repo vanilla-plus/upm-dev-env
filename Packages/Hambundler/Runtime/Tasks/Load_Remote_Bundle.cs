@@ -21,7 +21,7 @@ namespace Vanilla.Hambundler
         public string        bundleName;
         public Action<float> OnDownloadProgress;
 
-        protected override bool CanAutoName() => !string.IsNullOrWhiteSpace(bundleURL);
+        protected override bool Valid => !string.IsNullOrWhiteSpace(bundleURL);
 
 
         protected override string CreateAutoName() => $"Load bundle [{bundleName}] from remote path [{bundleURL}]";

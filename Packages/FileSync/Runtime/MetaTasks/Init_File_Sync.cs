@@ -29,7 +29,7 @@ namespace Vanilla.FileSync
 		[Range(min: 0,max: 4)]
 		public int pathSegmentsToSkip = 0;
 
-		protected override bool CanAutoName() => remoteRoot != null && localRoot != null;
+		protected override bool Valid => remoteRoot != null && localRoot != null;
 
 		protected override string CreateAutoName() => "Initialize FileSync";
 

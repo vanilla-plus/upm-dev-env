@@ -23,7 +23,7 @@ namespace Vanilla.Hambundler
 
         public Action<float> OnUnloadProgress;
         
-        protected override bool CanAutoName() => !string.IsNullOrWhiteSpace(bundleName);
+        protected override bool Valid => !string.IsNullOrWhiteSpace(bundleName);
 
 
         protected override string CreateAutoName() => $"Unload bundle [{bundleName}]";

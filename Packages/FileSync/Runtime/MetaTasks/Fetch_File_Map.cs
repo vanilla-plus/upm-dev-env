@@ -20,7 +20,7 @@ namespace Vanilla.FileSync
         [SerializeField]
         public string[] files = Array.Empty<string>();
 
-        protected override bool CanAutoName() => true;
+        protected override bool Valid => true;
 
 
         protected override string CreateAutoName() => "Build a FileMap";

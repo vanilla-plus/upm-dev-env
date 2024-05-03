@@ -13,7 +13,7 @@ namespace Vanilla.Hambundler
 
         public string RemoteBundlePathRoot = "https://<bucket>.s3.<region>.amazonaws.com";
         
-        protected override bool CanAutoName() => !string.IsNullOrWhiteSpace(RemoteBundlePathRoot);
+        protected override bool Valid => !string.IsNullOrWhiteSpace(RemoteBundlePathRoot);
         
         protected override string CreateAutoName() => $"Set Remote Bundle Path Root to [{RemoteBundlePathRoot}]";
         

@@ -24,7 +24,7 @@ namespace Vanilla.Hambundler
         public string        bundleName;
         public Action<float> OnLoadProgress;
         
-        protected override bool CanAutoName() => !string.IsNullOrWhiteSpace(bundlePath);
+        protected override bool Valid => !string.IsNullOrWhiteSpace(bundlePath);
 
 
         protected override string CreateAutoName() => $"Load bundle [{bundleName}] from local file [{bundlePath}]";
