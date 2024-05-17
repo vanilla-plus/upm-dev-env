@@ -43,15 +43,25 @@ namespace Vanilla.FileSync
 
 //                Debug.Log($"[{key}] is {(IsAFile ? "a file" : "not a file")}");
 
-				LocalFilePath = Local_Path_Segments_To_Skip > 0 ?
-					                Path.Combine(path1: Application.persistentDataPath,
-					                             path2: Local_Root,
-					                             path3: string.Join(separator: '/',
-					                                                values: key.Split('/').Skip(Local_Path_Segments_To_Skip))) :
-					                Path.Combine(path1: Application.persistentDataPath,
-					                             path2: Local_Root,
-					                             path3: key);
+//				LocalFilePath = Local_Path_Segments_To_Skip > 0 ?
+//					                Path.Combine(path1: Application.persistentDataPath,
+//					                             path2: Local_Root,
+//					                             path3: string.Join(separator: '/',
+//					                                                values: key.Split('/').Skip(Local_Path_Segments_To_Skip))) :
+//					                Path.Combine(path1: Application.persistentDataPath,
+//					                             path2: Local_Root,
+//					                             path3: key);
                 
+				// Let's not assume that Files will end up in persistent data path.
+				// They most likely will and foregoing this will require the creation of a type of StringSource_Concatenation
+				// Purely so we can have Local_Root default to it with StringSource_ApplicationPersistentDataPath in the first slot and the second slot a direct 'fs'
+				LocalFilePath = Local_Path_Segments_To_Skip > 0 ?
+					                Path.Combine(path1: Local_Root,
+					                             path2: string.Join(separator: '/',
+					                                                values: key.Split('/').Skip(Local_Path_Segments_To_Skip))) :
+					                Path.Combine(path1: Local_Root,
+					                             path2: key);
+
 				IsAFile       = size > 0;
 				FileName      = Path.GetFileNameWithoutExtension(key);
 				FileExtension = Path.GetExtension(key);

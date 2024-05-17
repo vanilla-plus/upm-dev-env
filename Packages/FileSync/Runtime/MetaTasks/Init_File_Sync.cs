@@ -5,9 +5,9 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
-using Vanilla.MetaScript.DataSources;
-using Vanilla.MetaScript;
 using Vanilla.TypeMenu;
+using Vanilla.MetaScript;
+using Vanilla.MetaScript.DataSources.Strings;
 
 namespace Vanilla.FileSync
 {
@@ -18,18 +18,30 @@ namespace Vanilla.FileSync
 
 		[SerializeReference]
 		[TypeMenu("yellow")]
-		public StringSource remoteRoot;
-//		public StringSource remoteRoot = new DirectStringSource("Remote Root URL", "https://bucket.s3.region.amazonaws.com/");
+		public StringSource remoteRoot = new StringSource_Direct
+		                                 {
+			                                 Value = "https: //bucket.s3.region.amazonaws.com/"
+		                                 };
 
 		[SerializeReference]
 		[TypeMenu("yellow")]
-		public StringSource localRoot;
-//		public String_Source localRoot = new Direct_String_Source("fs");
+		public StringSource localRoot = new StringSource_Concat_Path
+		                                {
+			                                Elements = new StringSource[]
+			                                           {
+				                                           new StringSource_Application_PersistentDataPath(),
+				                                           new StringSource_Direct
+				                                           {
+					                                           Value = "fs"
+				                                           }
+			                                           }
+		                                };
 
-		[Range(min: 0,max: 4)]
+		[Tooltip("When listing specific folders or files, how many prefix directories should be ignored? For example, if set to 1, you can simply request the folder 'images' instead of 'myProject/images'")]
+		[Range(min: 0,max: 8)]
 		public int pathSegmentsToSkip = 0;
 
-		protected override bool Valid => remoteRoot != null && localRoot != null;
+		protected override bool Validate => remoteRoot != null && localRoot != null;
 
 		protected override string CreateAutoName() => "Initialize FileSync";
 

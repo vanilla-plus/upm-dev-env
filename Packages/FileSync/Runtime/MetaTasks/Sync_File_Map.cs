@@ -34,7 +34,7 @@ namespace Vanilla.FileSync
 		[SerializeField]
 		public UnityEvent<float> OnProgressSinWave = new UnityEvent<float>();
 
-		protected override bool Valid => true;
+		protected override bool Validate => true;
 
 		protected override string CreateAutoName() => "Download missing FileMap contents";
 

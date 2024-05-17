@@ -1,0 +1,1191 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.37311924, g: 0.38073963, b: 0.3587269, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 0}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 3
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    buildHeightMesh: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &53670983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 53670985}
+  - component: {fileID: 53670984}
+  m_Layer: 0
+  m_Name: GameObject (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &53670984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53670983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 003cbdb3a30614ff8a219617223a3f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &53670985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53670983}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40.862488, y: 10.497982, z: -5.947664}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &673744937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 673744942}
+  - component: {fileID: 673744941}
+  - component: {fileID: 673744940}
+  - component: {fileID: 673744939}
+  - component: {fileID: 673744938}
+  - component: {fileID: 673744943}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &673744938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673744937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cdd0225543ec4623b766b42bff17c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Asset: {fileID: 11400000, guid: 0fe8dcbcd6ca843b5ae06a3a8095eb1e, type: 2}
+--- !u!65 &673744939
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673744937}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &673744940
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673744937}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &673744941
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673744937}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &673744942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673744937}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &673744943
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673744937}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &812678214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 812678216}
+  - component: {fileID: 812678215}
+  m_Layer: 0
+  m_Name: String Test Stuff
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &812678215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812678214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06a882ef6dd14af8b2cef9cc023da58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  task:
+    rid: 3914819350297837686
+  references:
+    version: 2
+    RefIds:
+    - rid: 3914819350297837686
+      type: {class: Sequence, ns: Vanilla.MetaScript.Flow, asm: Vanilla.MetaScript}
+      data:
+        _Name: 'Run the following in order:'
+        AutoName: 'Run the following in order:'
+        _isValid: 1
+        taskOptions: 3
+        _tasks:
+        - rid: 8747163868043673649
+        - rid: 3914819350297837687
+        - rid: 3914819350297837700
+        - rid: 8747163868043673639
+        - rid: 8747163868043673646
+        - rid: 8747163868043673651
+    - rid: 3914819350297837687
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [What] to the console
+        AutoName: Print [What] to the console
+        _isValid: 1
+        taskOptions: 3
+        logType: 0
+        MessageSource:
+          rid: 8747163868043673645
+    - rid: 3914819350297837700
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [<Application.streamingAssetsPath>] to the console
+        AutoName: Print [<Application.streamingAssetsPath>] to the console
+        _isValid: 1
+        taskOptions: 3
+        logType: 0
+        MessageSource:
+          rid: 8747163868043673602
+    - rid: 8747163868043673602
+      type: {class: StringSource_Application_StreamingAssetsPath, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data: 
+    - rid: 8747163868043673639
+      type: {class: Any, ns: Vanilla.MetaScript.Flow, asm: Vanilla.MetaScript}
+      data:
+        _Name: 'Proceed when any of the following complete:'
+        AutoName: 'Proceed when any of the following complete:'
+        _isValid: 1
+        taskOptions: 3
+        _tasks:
+        - rid: 8747163868043673642
+    - rid: 8747163868043673642
+      type: {class: If_Platform, ns: Vanilla.MetaScript.Flow, asm: Vanilla.MetaScript}
+      data:
+        _Name: If the platform is...
+        AutoName: If the platform is...
+        _isValid: 1
+        taskOptions: 3
+        mappings:
+        - Name: OSXEditor
+          platforms: 00000000
+          task:
+            rid: 8747163868043673643
+    - rid: 8747163868043673643
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [What] to the console
+        AutoName: Print [What] to the console
+        _isValid: 1
+        taskOptions: 3
+        logType: 0
+        MessageSource:
+          rid: 8747163868043673644
+    - rid: 8747163868043673644
+      type: {class: StringSource_Direct, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data:
+        _value: What
+    - rid: 8747163868043673645
+      type: {class: StringSource_Direct, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data:
+        _value: What
+    - rid: 8747163868043673646
+      type: {class: Await_MetaAction, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Await Test MetaAction invocation
+        AutoName: Await Test MetaAction invocation
+        _isValid: 1
+        taskOptions: 3
+        metaAction: {fileID: 11400000, guid: 16970d2604558443680dc4c1311df6e1, type: 2}
+    - rid: 8747163868043673649
+      type: {class: Unity_Event, ns: Vanilla.MetaScript.Flow, asm: Vanilla.MetaScript}
+      data:
+        _Name: Call [Animator Asset.AnimatorAsset.Assign]
+        AutoName: Call [Animator Asset.AnimatorAsset.Assign]
+        _isValid: 1
+        taskOptions: 3
+        unityEvent:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 11400000, guid: 9ab816c336eb544b9998361f9a61dea5,
+                type: 2}
+              m_TargetAssemblyTypeName: Vanilla.MetaScript.DataAssets.AnimatorAsset,
+                Vanilla.MetaScript
+              m_MethodName: Assign
+              m_Mode: 2
+              m_Arguments:
+                m_ObjectArgument: {fileID: 812678214}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+    - rid: 8747163868043673651
+      type: {class: Load_Local_Bundle, ns: Vanilla.Hambundler, asm: Vanilla.Hambundler}
+      data:
+        _Name: Load bundle [spatial] from local file [https://epic-encounters.s3.ap-southeast-2.amazonaws.com/bundles/spatial]
+        AutoName: Load bundle [spatial] from local file [https://epic-encounters.s3.ap-southeast-2.amazonaws.com/bundles/spatial]
+        _isValid: 1
+        taskOptions: 3
+        BundlePath:
+          rid: 8747163868043673652
+        BundleName:
+          rid: 8747163868043673653
+    - rid: 8747163868043673652
+      type: {class: StringSource_Concat_Path, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data:
+        BakeValueOnFirstAccess: 1
+        Elements:
+        - rid: 8747163868043673654
+        - rid: 8747163868043673655
+    - rid: 8747163868043673653
+      type: {class: StringSource_Direct, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data:
+        _value: spatial
+    - rid: 8747163868043673654
+      type: {class: StringSource_Direct, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data:
+        _value: https://epic-encounters.s3.ap-southeast-2.amazonaws.com
+    - rid: 8747163868043673655
+      type: {class: StringSource_Direct, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data:
+        _value: bundles/spatial
+--- !u!4 &812678216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812678214}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1383636418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1383636421}
+  - component: {fileID: 1383636420}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1383636420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383636418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06a882ef6dd14af8b2cef9cc023da58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  task:
+    rid: 3914819350297837568
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3914819350297837568
+      type: {class: While_Loop, ns: Vanilla.MetaScript.Flow, asm: Vanilla.MetaScript}
+      data:
+        _Name: Repeat the following tasks while...
+        AutoName: Invalid Task
+        _isValid: 0
+        taskOptions: -1
+        _tasks:
+        - rid: 3914819350297837570
+        - rid: 3914819350297837621
+        - rid: 3914819350297837615
+        - rid: 3914819350297837620
+        - rid: 3914819350297837624
+        - rid: 3914819350297837622
+        - rid: 3914819350297837573
+        - rid: 3914819350297837631
+        ContinueLoop:
+          rid: 3914819350297837569
+    - rid: 3914819350297837569
+      type: {class: DirectBoolSource, ns: Vanilla.MetaScript.DataSources, asm: Vanilla.MetaScript}
+      data:
+        _value: 1
+    - rid: 3914819350297837570
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [Hi] to the console
+        AutoName: Invalid Task
+        _isValid: 0
+        taskOptions: 3
+        logType: 0
+        MessageSource:
+          rid: -2
+    - rid: 3914819350297837573
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [Bye] to the console
+        AutoName: Invalid Task
+        _isValid: 0
+        taskOptions: 3
+        logType: 0
+        MessageSource:
+          rid: -2
+    - rid: 3914819350297837615
+      type: {class: Key_Down, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Wait for [G] key press
+        AutoName: Wait for [G] key press
+        _isValid: 1
+        taskOptions: 3
+        key: 103
+    - rid: 3914819350297837620
+      type: {class: Await_MetaAction, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Await Test MetaAction invocation
+        AutoName: Await Test MetaAction invocation
+        _isValid: 1
+        taskOptions: 0
+        metaAction: {fileID: 11400000, guid: 16970d2604558443680dc4c1311df6e1, type: 2}
+    - rid: 3914819350297837621
+      type: {class: Initialize_Asset_Values, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _Name: Reset [4] assets to their default values
+        AutoName: Reset [4] assets to their default values
+        _isValid: 1
+        taskOptions: 3
+        Assets:
+        - {fileID: 11400000, guid: 8725a62592d2a4a578c6bc9e6e9c3e2c, type: 2}
+        - {fileID: 11400000, guid: b5b862641406c43cf9226791fb4ac435, type: 2}
+        - {fileID: 11400000, guid: 4192df18cf1ed4d898e1ba15025e9e22, type: 2}
+        - {fileID: 11400000, guid: 0fe8dcbcd6ca843b5ae06a3a8095eb1e, type: 2}
+    - rid: 3914819350297837622
+      type: {class: Key_Down, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Wait for [H] key press
+        AutoName: Wait for [H] key press
+        _isValid: 1
+        taskOptions: 3
+        key: 104
+    - rid: 3914819350297837624
+      type: {class: Set_Float_Source, ns: Vanilla.MetaScript.DataAssets, asm: Vanilla.MetaScript}
+      data:
+        _Name: Set [Test Float] to [DirectFloatSource]
+        AutoName: Set [Test Float A] to [DirectFloatSource]
+        _isValid: 1
+        taskOptions: 3
+        source:
+          rid: 3914819350297837630
+        target:
+          rid: 3914819350297837626
+    - rid: 3914819350297837626
+      type: {class: DirectFloatSource, ns: Vanilla.MetaScript.DataSources, asm: Vanilla.MetaScript}
+      data:
+        _value: 999
+    - rid: 3914819350297837630
+      type: {class: AssetFloatSource, ns: Vanilla.MetaScript.DataAssets, asm: Vanilla.MetaScript}
+      data:
+        _asset: {fileID: 11400000, guid: 4192df18cf1ed4d898e1ba15025e9e22, type: 2}
+    - rid: 3914819350297837631
+      type: {class: If_Platform, ns: Vanilla.MetaScript.Flow, asm: Vanilla.MetaScript}
+      data:
+        _Name: If the platform is...
+        AutoName: If the platform is...
+        _isValid: 1
+        taskOptions: 3
+        mappings:
+        - Name: OSXEditor / WindowsEditor / LinuxEditor
+          platforms: 000000000700000010000000
+          task:
+            rid: 3914819350297837633
+        - Name: VisionOS
+          platforms: 32000000
+          task:
+            rid: 3914819350297837634
+    - rid: 3914819350297837633
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [What] to the console
+        AutoName: Invalid Task
+        _isValid: 0
+        taskOptions: 3
+        logType: 0
+        MessageSource:
+          rid: -2
+    - rid: 3914819350297837634
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [What] to the console
+        AutoName: Invalid Task
+        _isValid: 0
+        taskOptions: 3
+        logType: 0
+        MessageSource:
+          rid: -2
+--- !u!4 &1383636421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383636418}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1588777604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1588777607}
+  - component: {fileID: 1588777606}
+  - component: {fileID: 1588777605}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1588777605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588777604}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b679058258e5845cd8d3b02dbfd7ad4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugRunKey: 49
+  target: {fileID: 1588777606}
+  scopeSource:
+    rid: 3914819350297837576
+  references:
+    version: 2
+    RefIds:
+    - rid: 3914819350297837576
+      type: {class: Named_Scope_Source, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        name: root
+--- !u!114 &1588777606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588777604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06a882ef6dd14af8b2cef9cc023da58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  task:
+    rid: 3914819350297837568
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3914819350297837568
+      type: {class: While_Loop, ns: Vanilla.MetaScript.Flow, asm: Vanilla.MetaScript}
+      data:
+        _Name: Repeat the following tasks while...
+        AutoName: Invalid Task
+        _isValid: 0
+        taskOptions: 3
+        _tasks:
+        - rid: 3914819350297837570
+        - rid: 3914819350297837615
+        - rid: 3914819350297837616
+        - rid: 3914819350297837573
+        ContinueLoop:
+          rid: 3914819350297837569
+    - rid: 3914819350297837569
+      type: {class: DirectBoolSource, ns: Vanilla.MetaScript.DataSources, asm: Vanilla.MetaScript}
+      data:
+        _value: 1
+    - rid: 3914819350297837570
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [Hi] to the console
+        AutoName: Invalid Task
+        _isValid: 0
+        taskOptions: 3
+        logType: 0
+        MessageSource:
+          rid: -2
+    - rid: 3914819350297837573
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [Bye] to the console
+        AutoName: Invalid Task
+        _isValid: 0
+        taskOptions: 3
+        logType: 0
+        MessageSource:
+          rid: -2
+    - rid: 3914819350297837615
+      type: {class: Key_Down, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Wait for [G] key press
+        AutoName: Wait for [G] key press
+        _isValid: 1
+        taskOptions: 3
+        key: 103
+    - rid: 3914819350297837616
+      type: {class: Set_Float_Source, ns: Vanilla.MetaScript.DataAssets, asm: Vanilla.MetaScript}
+      data:
+        _Name: Set [Test Float] to [DirectFloatSource]
+        AutoName: Set [Test Float A] to [DirectFloatSource]
+        _isValid: 1
+        taskOptions: 3
+        source:
+          rid: 3914819350297837617
+        target:
+          rid: 3914819350297837619
+    - rid: 3914819350297837617
+      type: {class: AssetFloatSource, ns: Vanilla.MetaScript.DataAssets, asm: Vanilla.MetaScript}
+      data:
+        _asset: {fileID: 11400000, guid: 4192df18cf1ed4d898e1ba15025e9e22, type: 2}
+    - rid: 3914819350297837619
+      type: {class: DirectFloatSource, ns: Vanilla.MetaScript.DataSources, asm: Vanilla.MetaScript}
+      data:
+        _value: 5
+--- !u!4 &1588777607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588777604}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1746967472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1746967474}
+  - component: {fileID: 1746967473}
+  m_Layer: 0
+  m_Name: Drivers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1746967473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746967472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b64510bfe744cf39901aa441abc611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wakeMethod: 2
+  _drivers:
+  - Name: Test Float A [ProtectedRangedFloatSource]
+    InitialValue: 0
+    _asset: {fileID: 11400000, guid: 4192df18cf1ed4d898e1ba15025e9e22, type: 2}
+    _modules: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!4 &1746967474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746967472}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.04, y: -0.03999996, z: 0.96000004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1879086142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1879086144}
+  - component: {fileID: 1879086143}
+  m_Layer: 0
+  m_Name: Ignition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1879086143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879086142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b679058258e5845cd8d3b02dbfd7ad4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugRunKey: 49
+  target: {fileID: 2090229066}
+  scopeSource:
+    rid: 3914819350297837693
+  references:
+    version: 2
+    RefIds:
+    - rid: 3914819350297837693
+      type: {class: Randomized_Scope_Source, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data: 
+--- !u!4 &1879086144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879086142}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2046373268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2046373270}
+  - component: {fileID: 2046373269}
+  m_Layer: 0
+  m_Name: Initializers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2046373269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046373268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e9806e618ef49298907d62b41404e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wakeMethod: 2
+  Initializers:
+  - rid: 3914819350297837610
+  - rid: 3914819350297837609
+  - rid: 3914819350297837611
+  - rid: 3914819350297837612
+  references:
+    version: 2
+    RefIds:
+    - rid: 3914819350297837609
+      type: {class: Float, ns: Vanilla.MetaScript.DataAssets.Initializers.Float, asm: Vanilla.MetaScript}
+      data:
+        Asset: {fileID: 0}
+        InitialValue: 0
+    - rid: 3914819350297837610
+      type: {class: Bool, ns: Vanilla.MetaScript.DataAssets.Initializers.Bool, asm: Vanilla.MetaScript}
+      data:
+        Asset: {fileID: 11400000, guid: 8725a62592d2a4a578c6bc9e6e9c3e2c, type: 2}
+        InitialValue: 0
+    - rid: 3914819350297837611
+      type: {class: Int, ns: Vanilla.MetaScript.DataAssets.Initializers.Int, asm: Vanilla.MetaScript}
+      data:
+        Asset: {fileID: 0}
+        InitialValue: 0
+    - rid: 3914819350297837612
+      type: {class: Color, ns: Vanilla.MetaScript.DataAssets.Initializers.Color, asm: Vanilla.MetaScript}
+      data:
+        Asset: {fileID: 0}
+        InitialValue: {r: 0, g: 0, b: 0, a: 0}
+--- !u!4 &2046373270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046373268}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2090229063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2090229065}
+  - component: {fileID: 2090229066}
+  m_Layer: 0
+  m_Name: TestStuff
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2090229065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090229063}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2090229066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090229063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06a882ef6dd14af8b2cef9cc023da58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  task:
+    rid: 8747163868043673603
+  references:
+    version: 2
+    RefIds:
+    - rid: 8747163868043673603
+      type: {class: Sequence, ns: Vanilla.MetaScript.Flow, asm: Vanilla.MetaScript}
+      data:
+        _Name: 'Run the following in order:'
+        AutoName: 'Run the following in order:'
+        _isValid: 1
+        taskOptions: 3
+        _tasks:
+        - rid: 8747163868043673604
+        - rid: 8747163868043673609
+        - rid: 8747163868043673610
+        - rid: 8747163868043673629
+    - rid: 8747163868043673604
+      type: {class: Init_File_Sync, ns: Vanilla.FileSync, asm: Vanilla.FileSync}
+      data:
+        _Name: Initialize FileSync
+        AutoName: Initialize FileSync
+        _isValid: 1
+        taskOptions: 3
+        remoteRoot:
+          rid: 8747163868043673605
+        localRoot:
+          rid: 8747163868043673624
+        pathSegmentsToSkip: 0
+    - rid: 8747163868043673605
+      type: {class: StringSource_Direct, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data:
+        _value: https://vanilla-plus-test.s3.ap-southeast-2.amazonaws.com
+    - rid: 8747163868043673609
+      type: {class: Fetch_File_Map, ns: Vanilla.FileSync, asm: Vanilla.FileSync}
+      data:
+        _Name: Build a FileMap
+        AutoName: Build a FileMap
+        _isValid: 1
+        taskOptions: 3
+        directories:
+        - directory: png
+          includeSubdirectories: 1
+        files: []
+    - rid: 8747163868043673610
+      type: {class: If_Sync_Is_Required, ns: Vanilla.FileSync, asm: Vanilla.FileSync}
+      data:
+        _Name: If FileMap needs synchronizing...
+        AutoName: If FileMap needs synchronizing...
+        _isValid: 1
+        taskOptions: 3
+        _tasks:
+        - rid: 8747163868043673612
+        - rid: 8747163868043673611
+    - rid: 8747163868043673611
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [No download required] to the console
+        AutoName: Print [No download required] to the console
+        _isValid: 1
+        taskOptions: 0
+        logType: 0
+        MessageSource:
+          rid: 8747163868043673613
+    - rid: 8747163868043673612
+      type: {class: Sync_File_Map, ns: Vanilla.FileSync, asm: Vanilla.FileSync}
+      data:
+        _Name: Download missing FileMap contents
+        AutoName: Download missing FileMap contents
+        _isValid: 1
+        taskOptions: 3
+        numberOfSimultaneousDownloads: 1
+        sinSpeed: 0.333
+        postLoadSmoothTime: 0.333
+        OnProgressSinWave:
+          m_PersistentCalls:
+            m_Calls: []
+    - rid: 8747163868043673613
+      type: {class: StringSource_Direct, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data:
+        _value: No download required
+    - rid: 8747163868043673624
+      type: {class: StringSource_Asset, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data:
+        _asset: {fileID: 11400000, guid: c6d689e2677964066800b1f7a1b1abd6, type: 2}
+    - rid: 8747163868043673629
+      type: {class: If_Sync_Is_Required, ns: Vanilla.FileSync, asm: Vanilla.FileSync}
+      data:
+        _Name: If FileMap needs synchronizing...
+        AutoName: If FileMap needs synchronizing...
+        _isValid: 1
+        taskOptions: 3
+        _tasks:
+        - rid: 8747163868043673636
+        - rid: 8747163868043673637
+    - rid: 8747163868043673636
+      type: {class: Sync_File_Map, ns: Vanilla.FileSync, asm: Vanilla.FileSync}
+      data:
+        _Name: Download missing FileMap contents
+        AutoName: Download missing FileMap contents
+        _isValid: 1
+        taskOptions: 3
+        numberOfSimultaneousDownloads: 1
+        sinSpeed: 0.333
+        postLoadSmoothTime: 0.333
+        OnProgressSinWave:
+          m_PersistentCalls:
+            m_Calls: []
+    - rid: 8747163868043673637
+      type: {class: Log_To_Console, ns: Vanilla.MetaScript.Debugging, asm: Vanilla.MetaScript}
+      data:
+        _Name: Print [No download required :)] to the console
+        AutoName: Print [No download required :)] to the console
+        _isValid: 1
+        taskOptions: 0
+        logType: 0
+        MessageSource:
+          rid: 8747163868043673638
+    - rid: 8747163868043673638
+      type: {class: StringSource_Direct, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
+      data:
+        _value: No download required :)
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1879086144}
+  - {fileID: 1588777607}
+  - {fileID: 1383636421}
+  - {fileID: 1746967474}
+  - {fileID: 2046373270}
+  - {fileID: 53670985}
+  - {fileID: 2090229065}
+  - {fileID: 673744942}
+  - {fileID: 812678216}
