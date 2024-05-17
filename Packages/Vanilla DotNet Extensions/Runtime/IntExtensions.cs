@@ -4,8 +4,6 @@ namespace Vanilla.DotNetExtensions
 	public static class IntExtensions
 	{
 
-		// --------------------------------------------------------------------------------------------------------------------------- Validation //
-
 		public static bool IsPositive(this int input) => input > 0;
 
 		public static bool IsPositiveOrZero(this int input) => input >= 0;

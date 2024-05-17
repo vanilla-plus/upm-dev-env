@@ -437,12 +437,6 @@
         "vanilla.metascript": "5.0.0"
       }
     },
-    "vanilla.string-formatting": {
-      "version": "file:Vanilla String Formatting",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "vanilla.type-menu": {
       "version": "file:Type Menu",
       "depth": 0,
