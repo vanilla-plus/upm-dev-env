@@ -1,10 +1,4 @@
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-#define debug
-#endif
-
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 
 using Cysharp.Threading.Tasks;
@@ -12,6 +6,8 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 using Vanilla.MetaScript;
+using Vanilla.MetaScript.DataSources.Strings;
+using Vanilla.TypeMenu;
 
 namespace Vanilla.Hambundler
 {
@@ -20,38 +16,50 @@ namespace Vanilla.Hambundler
     public class Load_Local_Bundle : MetaTask
     {
 
-        public string        bundlePath;
-        public string        bundleName;
+        [TypeMenu("red")]
+        [SerializeReference] public StringSource BundlePath;
+
+        [TypeMenu("red")]
+        [SerializeReference] public StringSource BundleName;
+
+//        public string        bundlePath;
+//        public string        bundleName;
         public Action<float> OnLoadProgress;
         
-        protected override bool Valid => !string.IsNullOrWhiteSpace(bundlePath);
+        protected override bool Validate => BundlePath != null && BundleName != null && !string.IsNullOrWhiteSpace(BundlePath.Value) && !string.IsNullOrWhiteSpace(BundleName.Value);
 
 
-        protected override string CreateAutoName() => $"Load bundle [{bundleName}] from local file [{bundlePath}]";
+        protected override string CreateAutoName() => $"Load bundle [{BundleName}] from local file [{BundlePath}]";
 
         public override void OnValidate()
         {
             #if UNITY_EDITOR
             base.OnValidate();
 
-            bundleName = Path.GetFileName(bundlePath);
+            if (BundlePath != null &&
+                BundleName != null)
+            {
+                BundleName.Value = Path.GetFileName(BundlePath.Value);
+            }
             #endif
         }
         
         protected override async UniTask<Scope> _Run(Scope scope)
         {
-            if (Hambundler.Bundles.ContainsKey(bundleName))
+            if (Hambundler.Bundles.ContainsKey(BundleName.Value))
             {
-                Debug.Log($"The bundle [{bundleName}] has already been loaded.");
+                #if debug
+                Debug.Log($"The bundle [{BundleName.Value}] has already been loaded.");
+                #endif
 
                 return scope;
             }
             
             #if debug
-            Debug.Log($"AssetBundle local load begun - [{bundlePath}]");
+            Debug.Log($"AssetBundle local load begun - [{BundlePath.Value}]");
             #endif
             
-            var op = AssetBundle.LoadFromFileAsync(bundlePath);
+            var op = AssetBundle.LoadFromFileAsync(BundlePath.Value);
 
             while (!op.isDone)
             {
@@ -63,10 +71,10 @@ namespace Vanilla.Hambundler
             }
             
             #if debug
-            Debug.Log($"AssetBundle local load successful - [{bundlePath}]");
+            Debug.Log($"AssetBundle local load successful - [{BundlePath.Value}]");
             #endif
 
-            Hambundler.Bundles.Add(bundleName,
+            Hambundler.Bundles.Add(BundleName.Value,
                                    op.assetBundle);
 
             return scope;

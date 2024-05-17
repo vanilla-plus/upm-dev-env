@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 using Vanilla.MetaScript;
+using Vanilla.MetaScript.DataSources.Strings;
+using Vanilla.TypeMenu;
 
 namespace Vanilla.Hambundler
 {
@@ -14,17 +16,23 @@ namespace Vanilla.Hambundler
 	[Serializable]
     public class Load_Remote_Bundle : MetaTask
     {
+	 
+	    [TypeMenu("red")]
+	    [SerializeReference] public StringSource BundleURL;
+
+	    [TypeMenu("red")]
+	    [SerializeReference] public StringSource BundleName;
 	    
-	    [SerializeField]
-        public string        bundleURL;
-        [SerializeField]
-        public string        bundleName;
+//	    [SerializeField]
+//        public string        bundleURL;
+//        [SerializeField]
+//        public string        bundleName;
         public Action<float> OnDownloadProgress;
 
-        protected override bool Valid => !string.IsNullOrWhiteSpace(bundleURL);
+        protected override bool Validate => BundleURL != null && !string.IsNullOrWhiteSpace(BundleURL.Value);
 
 
-        protected override string CreateAutoName() => $"Load bundle [{bundleName}] from remote path [{bundleURL}]";
+        protected override string CreateAutoName() => $"Load bundle [{BundleName.Value}] from remote path [{BundleURL.Value}]";
 
 
         public override void OnValidate()
@@ -32,24 +40,23 @@ namespace Vanilla.Hambundler
 	        #if UNITY_EDITOR
 	        base.OnValidate();
 	        
-	        bundleName = Path.GetFileName(bundleURL);
+	        BundleName.Value = Path.GetFileName(BundleURL.Value);
 	        #endif
         }
 
 
         protected override async UniTask<Scope> _Run(Scope scope)
         {
-	        if (Hambundler.Bundles.ContainsKey(bundleName))
+	        if (Hambundler.Bundles.ContainsKey(BundleName.Value))
 	        {
 		        #if debug
-		        Debug.Log($"The bundle [{bundleName}] has already been loaded.");
+		        Debug.Log($"The bundle [{BundleName.Value}] has already been loaded.");
 		        #endif
 
 		        return scope;
 	        }
 
-	        using var request = UnityWebRequestAssetBundle.GetAssetBundle(uri: Path.Combine(path1: Hambundler.RemoteBundlePathRoot,
-	                                                                                        path2: bundleURL));
+	        using var request = UnityWebRequestAssetBundle.GetAssetBundle(uri: BundleURL.Value);
 
 	        var op = request.SendWebRequest();
 
@@ -70,12 +77,12 @@ namespace Vanilla.Hambundler
 	        }
 
 	        #if debug
-	        Debug.Log($"AssetBundle remote load successful - [{bundleName}] from [{bundleURL}]");
+	        Debug.Log($"AssetBundle remote load successful - [{BundleName.Value}] from [{BundleURL.Value}]");
 	        #endif
 
 	        var bundle = DownloadHandlerAssetBundle.GetContent(request);
 
-	        Hambundler.Bundles.Add(key: bundleName,
+	        Hambundler.Bundles.Add(key: BundleName.Value,
 	                               value: bundle);
 
 	        request.downloadHandler?.Dispose();

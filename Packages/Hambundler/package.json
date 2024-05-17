@@ -10,10 +10,11 @@
   "repository": "github:vanilla-plus/upm-hambundler.git",
   "unity": "2020.2",
   "unityRelease": "4f1",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "type": "template",
   "dependencies": {
     "com.cysharp.unitask": "2.5.3",
-    "vanilla.metascript": "5.0.0"
+    "vanilla.metascript": "5.4.2",
+    "vanilla.type-menu": "4.2.0"
   }
 }

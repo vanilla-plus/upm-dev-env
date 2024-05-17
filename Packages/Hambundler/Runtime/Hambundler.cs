@@ -17,8 +17,6 @@ namespace Vanilla.Hambundler
     public static class Hambundler
     {
 
-        public static string RemoteBundlePathRoot;
-        
         public static Dictionary<string, AssetBundle> Bundles = new Dictionary<string, AssetBundle>();
 
 
@@ -83,8 +81,7 @@ namespace Vanilla.Hambundler
                 return;
             }
 
-            using var request = UnityWebRequestAssetBundle.GetAssetBundle(uri: Path.Combine(path1: RemoteBundlePathRoot,
-                                                                                            path2: url));
+            using var request = UnityWebRequestAssetBundle.GetAssetBundle(uri: url);
 
             var op = request.SendWebRequest();
 

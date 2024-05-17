@@ -3,7 +3,8 @@
     "rootNamespace": "Vanilla.Hambundler",
     "references": [
         "UniTask",
-        "Vanilla.MetaScript"
+        "Vanilla.MetaScript",
+        "Vanilla.TypeMenu"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

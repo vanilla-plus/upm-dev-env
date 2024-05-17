@@ -1,16 +1,12 @@
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-#define debug
-#endif
-
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
 using Vanilla.MetaScript;
+using Vanilla.MetaScript.DataSources.Strings;
+using Vanilla.TypeMenu;
 
 namespace Vanilla.Hambundler
 {
@@ -19,31 +15,33 @@ namespace Vanilla.Hambundler
     public class Unload_Bundle : MetaTask
     {
 
-        public string bundleName;
+        [TypeMenu("red")]
+        [SerializeReference] public StringSource BundleName;
+//        public string bundleName;
 
         public Action<float> OnUnloadProgress;
         
-        protected override bool Valid => !string.IsNullOrWhiteSpace(bundleName);
+        protected override bool Validate => BundleName != null && !string.IsNullOrWhiteSpace(BundleName.Value);
 
 
-        protected override string CreateAutoName() => $"Unload bundle [{bundleName}]";
+        protected override string CreateAutoName() => $"Unload bundle [{BundleName.Value}]";
 
         protected override async UniTask<Scope> _Run(Scope scope)
         {
-            Hambundler.Bundles.TryGetValue(key: bundleName,
+            Hambundler.Bundles.TryGetValue(key: BundleName.Value,
                                 value: out var bundle);
 
             if (bundle == null)
             {
-                Debug.LogError($"No loaded bundle by the name [{bundleName}]");
+                Debug.LogError($"No loaded bundle by the name [{BundleName.Value}]");
                 
                 return scope;
             }
             
-            Hambundler.Bundles.Remove(bundleName);
+            Hambundler.Bundles.Remove(BundleName.Value);
 
             #if debug
-            Debug.Log($"AssetBundle unload begun - [{bundleName}]");
+            Debug.Log($"AssetBundle unload begun - [{BundleName.Value}]");
             #endif
             
             var op = bundle.UnloadAsync(true);
@@ -58,7 +56,7 @@ namespace Vanilla.Hambundler
             }
             
             #if debug
-            Debug.Log($"AssetBundle unload successful - [{bundleName}]");
+            Debug.Log($"AssetBundle unload successful - [{BundleName.Value}]");
             #endif
 
             return scope;
