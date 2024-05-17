@@ -17,7 +17,7 @@ namespace Vanilla.MetaScript
 
         [SerializeField] public AssetFloatSource timerAsset;
 
-        protected override bool Valid => timerAsset != null && timerAsset.Asset != null && timerAsset.Asset.Source != null;
+        protected override bool Validate => timerAsset != null && timerAsset.Asset != null && timerAsset.Asset.Source != null;
 
         protected override string CreateAutoName() => null;
 

@@ -17,7 +17,7 @@ namespace Vanilla.MetaScript
         [TypeMenu("green")]
         public IScopeSource scopeSource;
         
-        protected override bool Valid => scopeSource != null;
+        protected override bool Validate => scopeSource != null;
 
 
         protected override string CreateAutoName() => scopeSource switch
@@ -25,7 +25,7 @@ namespace Vanilla.MetaScript
                                                           Named_Scope_Source s      => $"Open a new [{s}] scope",
                                                           Randomized_Scope_Source s => $"Open a randomised scope",
                                                           Indexed_Scope_Source s    => $"Open an indexed [{s.prefix}] scope",
-                                                          _                         => "?"
+                                                          _                         => Utility.Unknown
                                                       };
 
 

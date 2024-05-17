@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.Debugging
 	public class Break : MetaTask
 	{
 
-		protected override bool Valid => true;
+		protected override bool Validate => true;
 
 		protected override string CreateAutoName() => "Call Debug.Break";
 

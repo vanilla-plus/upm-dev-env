@@ -28,13 +28,20 @@ namespace Vanilla.MetaScript.Flow
 			{
 				t?.OnValidate();
 			}
-			#endif
-			
+
 			base.OnValidate();
+			#endif
 		}
 
 
-		protected override bool Valid => Tasks != null && Tasks.Length > 0 && Tasks.All(task => task != null);
+		protected override bool Validate => Tasks is
+		                                    {
+			                                    Length: > 0
+		                                    } &&
+		                                    Tasks.All(task => task is
+		                                                      {
+			                                                      IsValid: true
+		                                                      });
 
 	}
 

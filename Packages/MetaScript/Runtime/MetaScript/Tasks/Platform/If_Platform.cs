@@ -29,8 +29,6 @@ namespace Vanilla.MetaScript.Flow
 			[TypeMenu("blue")]
 			public MetaTask task;
 
-
-//			internal void OnValidate()
 			public void OnValidate()
 			{
 				#if UNITY_EDITOR
@@ -49,40 +47,47 @@ namespace Vanilla.MetaScript.Flow
 		[SerializeField]
 		public PlatformTaskMapping[] mappings = Array.Empty<PlatformTaskMapping>();
 
-		protected override bool Valid => false;
+		protected override bool Validate => mappings is
+		                                    {
+			                                    Length: > 0
+		                                    } &&
+		                                    mappings.All(mapping => mapping is
+		                                                            {
+			                                                            platforms:
+			                                                            {
+				                                                            Length: > 0
+			                                                            },
+			                                                            task: not null
+		                                                            });
 
-//		public override void OnValidate()
 		public override void OnValidate()
 		{
 			#if UNITY_EDITOR
-//			base.OnValidate();
 			base.OnValidate();
 
-			foreach (var m in mappings)
-			{
-//				m?.OnValidate();
-				m?.OnValidate();
-			}
+			foreach (var m in mappings) m?.OnValidate();
 			#endif
 		}
 
 
-		protected override         string CreateAutoName() => "If running in UnityEditor...";
+		protected override         string CreateAutoName() => "If the platform is...";
 
 
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			
+			var targetMapping = mappings.FirstOrDefault(m => m.platforms.Any(p => p == Application.platform));
 
-			var targetTask = mappings.FirstOrDefault(m => m.platforms.Any(p => p == Application.platform))?.task;
-
-			if (targetTask == null)
+			if (targetMapping == null)
 			{
 				Debug.LogError($"Task for platform [{Application.platform}] is null.");
 			}
 			else
 			{
-				await targetTask.Run(scope);
+				#if debug
+				Debug.Log($"The chosen platform was [{targetMapping.platforms[0].ToString()}]");
+				#endif
+				
+				await targetMapping.task.Run(scope);
 			}
 			
 			return scope;

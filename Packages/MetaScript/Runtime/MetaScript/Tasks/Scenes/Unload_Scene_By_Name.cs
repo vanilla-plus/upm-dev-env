@@ -23,7 +23,7 @@ namespace Vanilla.MetaScript.Scenes
 		[NonSerialized]
 		public Action<float> OnProgress;
         
-		protected override bool Valid => !string.IsNullOrWhiteSpace(sceneName);
+		protected override bool Validate => !string.IsNullOrWhiteSpace(sceneName);
 
 
 		protected override string CreateAutoName() => $"Unload [{sceneName}] scene";

@@ -24,7 +24,7 @@ namespace Vanilla.MetaScript.Flow
 		[SerializeField]
 		private SendMessageOptions options = SendMessageOptions.RequireReceiver;
 
-		protected override bool Valid => target != null && !string.IsNullOrEmpty(methodName);
+		protected override bool Validate => target != null && !string.IsNullOrEmpty(methodName);
 
 		protected override string CreateAutoName() => $"Call [{target.name}.{methodName}]";
 

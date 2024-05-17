@@ -350,7 +350,8 @@
       "source": "embedded",
       "dependencies": {
         "com.cysharp.unitask": "2.5.3",
-        "vanilla.metascript": "5.0.0"
+        "vanilla.metascript": "5.4.2",
+        "vanilla.type-menu": "4.2.0"
       }
     },
     "vanilla.hourglass": {

@@ -15,7 +15,7 @@ namespace Vanilla.MetaScript.Media
 		[SerializeField]
 		private PlayableDirector playableDirector;
 		
-		protected override bool Valid => playableDirector != null;
+		protected override bool Validate => playableDirector != null;
 
 		protected override string CreateAutoName() => $"Stop Playable on {playableDirector.gameObject.name}";
 

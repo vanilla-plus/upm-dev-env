@@ -15,7 +15,7 @@ namespace Vanilla.MetaScript
 
         [SerializeReference] public BaseAsset[] Assets = Array.Empty<BaseAsset>();
 
-        protected override bool Valid => Assets != null;
+        protected override bool Validate => Assets != null;
 
         protected override string CreateAutoName() => $"Reset [{Assets.Length}] assets to their default values";
         

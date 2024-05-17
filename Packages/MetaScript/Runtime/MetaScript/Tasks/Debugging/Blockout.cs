@@ -24,7 +24,7 @@ namespace MyCompany.MyProject
 //		[SerializeField]
 //		private TextMeshPro tmpTextElement;
 
-		protected override bool Valid => true;
+		protected override bool Validate => true;
 
 		protected override string CreateAutoName() => $"Blockout '{message}' for {lengthInSeconds} seconds";
 

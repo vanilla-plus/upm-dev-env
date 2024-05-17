@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 
 using Vanilla.MetaScript.DataSources.GenericComponent;
+using Vanilla.TypeMenu;
 
 namespace Vanilla.MetaScript.DataAssets
 {
@@ -15,6 +16,8 @@ namespace Vanilla.MetaScript.DataAssets
 		where T : Component
 		where S : class, IComponentSource<T,S>
 	{
+
+		public virtual void Assign(GameObject g) => Source.Value = g.GetComponent<T>();
 
 //		[SerializeReference]
 //		[TypeMenu("yellow")]

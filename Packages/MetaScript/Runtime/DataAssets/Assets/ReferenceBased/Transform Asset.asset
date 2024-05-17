@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfc4a0fbc17d4ca2bffce8e6aa2467b, type: 3}
+  m_Name: Transform Asset
+  m_EditorClassIdentifier: 
+  Description: "Describe this asset here:\n\n\u2022 What does this data do?\n\u2022
+    What scene is it used in?\n\u2022 Why is this default value used?"
+  DefaultValue: {fileID: 0}
+  _source:
+    rid: 3914819350297837645
+  references:
+    version: 2
+    RefIds:
+    - rid: 3914819350297837645
+      type: {class: DirectTransformSource, ns: Vanilla.MetaScript, asm: Vanilla.MetaScript}
+      data:
+        _value: {fileID: 0}

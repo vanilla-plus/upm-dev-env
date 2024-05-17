@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Flow
 
         public string TargetSceneName;
 
-        protected override bool Valid => !string.IsNullOrEmpty(TargetSceneName);
+        protected override bool Validate => !string.IsNullOrEmpty(TargetSceneName);
 
 
         protected override string CreateAutoName() => $"Jump to scene [{TargetSceneName}]";

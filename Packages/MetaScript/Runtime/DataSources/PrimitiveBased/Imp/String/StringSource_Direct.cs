@@ -2,13 +2,11 @@ using System;
 
 using UnityEngine;
 
-using Vanilla.MetaScript.DataSources;
-
-namespace Vanilla.MetaScript.DataAssets
+namespace Vanilla.MetaScript.DataSources.Strings
 {
     
     [Serializable]
-    public class DirectStringSource : StringSource
+    public class StringSource_Direct : StringSource
     {
 
         [SerializeField]

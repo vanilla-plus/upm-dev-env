@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Flow
 		public UnityEvent unityEvent = new UnityEvent();
 
 
-		protected override bool Valid
+		protected override bool Validate
 		{
 			get
 			{

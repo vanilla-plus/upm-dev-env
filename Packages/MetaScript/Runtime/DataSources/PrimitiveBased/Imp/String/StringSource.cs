@@ -1,8 +1,6 @@
 using System;
 
-using UnityEngine;
-
-namespace Vanilla.MetaScript.DataSources
+namespace Vanilla.MetaScript.DataSources.Strings
 {
     
 	[Serializable]
@@ -39,9 +37,15 @@ namespace Vanilla.MetaScript.DataSources
 			set => _onSetWithHistory = value;
 		}
 
-		public abstract void OnBeforeSerialize();
+		public virtual void OnBeforeSerialize() { }
 
-		public abstract void OnAfterDeserialize();
+		public virtual void OnAfterDeserialize() { }
+
+		public override string ToString() => Value;
+
+//		public static implicit operator string(StringSource input) => input != null ?
+//			                                                              input.ToString() :
+//			                                                              Utility.Unknown;
 
 	}
 }

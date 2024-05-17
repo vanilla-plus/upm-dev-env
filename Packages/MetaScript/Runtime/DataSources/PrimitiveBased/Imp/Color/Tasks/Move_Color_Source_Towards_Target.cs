@@ -37,7 +37,7 @@ namespace Vanilla.MetaScript.DataAssets
 			                                  Value = true
 		                                  };
 
-		protected override bool Valid => targetSource != null && toSource != null;
+		protected override bool Validate => targetSource != null && toSource != null;
 
 
 		protected override string CreateAutoName() => $"Change [{(targetSource is AssetColorSource s && s.Asset != null ? s.Asset.name : targetSource.GetType().Name)}] to [{(toSource is AssetColorSource t && t.Asset != null ? t.Asset.name : toSource.GetType().Name)}] over time";

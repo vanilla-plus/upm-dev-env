@@ -23,7 +23,9 @@ namespace Vanilla.MetaScript.DataAssets
 		[TypeMenu("red")]
 		public FloatSource target;
 
-		[SerializeField] public float seconds = 1.0f;
+		[SerializeReference]
+		[TypeMenu("red")]
+		public FloatSource seconds;
 
 		[SerializeReference]
 		[TypeMenu("magenta")]
@@ -38,7 +40,7 @@ namespace Vanilla.MetaScript.DataAssets
 		                                                          timeEnd: 1.0f,
 		                                                          valueEnd: 1.0f);
 		
-		protected override bool Valid => source != null && target != null;
+		protected override bool Validate => source != null && target != null;
 
 
 		protected override string CreateAutoName() => $"Lerp [{(source is AssetFloatSource s && s.Asset != null ? s.Asset.name : source.GetType().Name)}] to [{(target is AssetFloatSource t && t.Asset != null ? t.Asset.name : target.GetType().Name)}] over [{seconds}] seconds";
@@ -58,7 +60,7 @@ namespace Vanilla.MetaScript.DataAssets
 			var start = source.Value;
 			var end   = target.Value;
 			var i     = 0.0f;
-			var rate  = 1.0f / seconds;
+			var rate  = 1.0f / seconds.Value;
 
 			if (useScaledTime)
 			{

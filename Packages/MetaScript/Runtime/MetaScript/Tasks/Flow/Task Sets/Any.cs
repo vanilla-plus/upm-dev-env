@@ -15,8 +15,6 @@ namespace Vanilla.MetaScript.Flow
 
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			
-
 			var tasksToRun = _tasks.Where(t => t.taskOptions.HasFlag(TaskOptions.Run));
 
 			await UniTask.WhenAny(tasks: tasksToRun.Select(t => t.Run(scope)));

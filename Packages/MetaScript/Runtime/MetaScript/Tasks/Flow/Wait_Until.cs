@@ -18,7 +18,7 @@ namespace Vanilla.MetaScript.Flow
 		[SerializeReference]
 		public BoolSource condition;
 		
-		protected override bool Valid => condition != null;
+		protected override bool Validate => condition != null;
 
 		protected override string CreateAutoName() => $"Wait until [{(condition == null ? "null" : condition)}]";
 

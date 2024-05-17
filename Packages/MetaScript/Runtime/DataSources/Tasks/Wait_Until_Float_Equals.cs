@@ -36,7 +36,7 @@ namespace Vanilla.MetaScript
 			                             _value = float.Epsilon
 		                             };
         
-		protected override bool Valid => A != null && B != null && Epsilon != null;
+		protected override bool Validate => A != null && B != null && Epsilon != null;
 
 
 		protected override string CreateAutoName() => $"Wait until [{(A == null ? "null" : A)}] equals [{(B == null ? "null" : B)}]";

@@ -13,7 +13,7 @@ namespace Vanilla.MetaScript
 
         [SerializeField] public MetaAction metaAction;
 
-        protected override bool Valid => metaAction != null;
+        protected override bool Validate => metaAction != null;
 
         protected override string CreateAutoName() => $"Await {metaAction.name} invocation";
 

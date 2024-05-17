@@ -2,8 +2,9 @@ using System;
 
 using UnityEngine;
 
-using Vanilla.MetaScript.DataSources;
 using Vanilla.TypeMenu;
+
+using Vanilla.MetaScript.DataSources.Strings;
 
 namespace Vanilla.MetaScript.DataAssets
 {

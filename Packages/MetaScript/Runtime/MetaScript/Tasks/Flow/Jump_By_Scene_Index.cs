@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Flow
 
 		public int TargetSceneIndex;
 
-		protected override bool Valid => true;
+		protected override bool Validate => true;
 
 
 		protected override string CreateAutoName() => $"Jump to loaded scene [{TargetSceneIndex}]";

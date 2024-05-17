@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Flow
         [SerializeField]
         public MetaTaskInstance target;
         
-        protected override bool Valid => target && target.Task != null;
+        protected override bool Validate => target && target.Task != null;
 
         protected override string CreateAutoName() => $"Jump to [{target.Task.Name}]";
 

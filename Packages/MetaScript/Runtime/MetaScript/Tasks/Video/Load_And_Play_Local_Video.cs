@@ -19,7 +19,7 @@ namespace Vanilla.MetaScript.Video
         [SerializeField]
         public VideoPlayer videoPlayer;
         
-        protected override bool Valid => videoPlayer && !string.IsNullOrEmpty(relativeVideoPath) && Path.HasExtension(relativeVideoPath);
+        protected override bool Validate => videoPlayer && !string.IsNullOrEmpty(relativeVideoPath) && Path.HasExtension(relativeVideoPath);
 
 
         protected override string CreateAutoName() => $"Play video [{relativeVideoPath}]";

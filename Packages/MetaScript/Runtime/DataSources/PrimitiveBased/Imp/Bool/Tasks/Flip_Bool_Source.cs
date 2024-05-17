@@ -19,7 +19,7 @@ namespace Vanilla.MetaScript.DataAssets
         [TypeMenu("red")]
         public BoolSource source = new AssetBoolSource();
 
-        protected override bool Valid => source != null;
+        protected override bool Validate => source != null;
 
 
         protected override string CreateAutoName() => $"Flip [{(source is AssetBoolSource boolSource ? boolSource.Asset.name : source.GetType().Name)}]";

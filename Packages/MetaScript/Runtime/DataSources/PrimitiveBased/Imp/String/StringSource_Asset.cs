@@ -2,13 +2,13 @@ using System;
 
 using UnityEngine;
 
-using Vanilla.MetaScript.DataSources;
+using Vanilla.MetaScript.DataAssets;
 
-namespace Vanilla.MetaScript.DataAssets
+namespace Vanilla.MetaScript.DataSources.Strings
 {
     
 	[Serializable]
-	public class AssetStringSource : StringSource, IAssetSource<string, StringSource, StringAsset>
+	public class StringSource_Asset : StringSource, IAssetSource<string, StringSource, StringAsset>
 	{
 
 //        [SerializeField]
@@ -37,6 +37,13 @@ namespace Vanilla.MetaScript.DataAssets
 		public override void OnBeforeSerialize() { }
 
 		public override void OnAfterDeserialize() { }
-        
+
+
+//		public override string ToString() => Asset != null ?
+//			                                     Asset.Source != null ?
+//				                                     Asset.Source.Value :
+//				                                      Utility.Unknown :
+//			                                     Utility.Unknown;
+
 	}
 }

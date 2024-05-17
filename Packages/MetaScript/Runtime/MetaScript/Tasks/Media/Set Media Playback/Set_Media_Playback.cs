@@ -11,7 +11,7 @@ namespace Vanilla.MetaScript
     public abstract class Set_Media_Playback<T> : MetaTask
     {
 
-        protected override bool Valid => targetComponent != null;
+        protected override bool Validate => targetComponent != null;
 
         protected override string CreateAutoName() => $"Set playback on [{targetComponent.GetType().Name}] to [{action.ToString()}]";
 

@@ -15,7 +15,7 @@ namespace Vanilla.MetaScript.Flow
         
         [SerializeField] public string targetScope;
         
-        protected override bool Valid => thisScope || !string.IsNullOrEmpty(value: targetScope);
+        protected override bool Validate => thisScope || !string.IsNullOrEmpty(value: targetScope);
 
 
         protected override string CreateAutoName() => $"Close {(thisScope ? "[this scope]" : $"the [{targetScope}] scope")}";

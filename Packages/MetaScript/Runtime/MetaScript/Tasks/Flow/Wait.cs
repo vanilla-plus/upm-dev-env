@@ -4,6 +4,9 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
+using Vanilla.MetaScript.DataSources;
+using Vanilla.TypeMenu;
+
 namespace Vanilla.MetaScript.Flow
 {
 
@@ -11,15 +14,33 @@ namespace Vanilla.MetaScript.Flow
 	public class Wait : MetaTask
 	{
 
-		protected override bool Valid => true;
+		protected override bool Validate => true;
 
 		protected override string CreateAutoName() => $"Wait for {secondsToTake} seconds";
 
 		public float secondsToTake = 1.0f;
+
+
+		public override void OnValidate()
+		{
+			#if UNITY_EDITOR
+			base.OnValidate();
+
+			SecondsToTake.Value = secondsToTake;
+			#endif
+		}
+
+
+		[TypeMenu("Red")]
+		[SerializeReference]
+		public FloatSource SecondsToTake = new DirectFloatSource
+		                                   {
+			                                   _value = 1.0f
+		                                   };
 		
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			var timeRemaining = secondsToTake;
+			var timeRemaining = SecondsToTake.Value;
 
 			while (timeRemaining > 0.0f)
 			{

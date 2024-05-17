@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Debugging
         [SerializeField]
         public KeyCode key = KeyCode.Alpha1;
 
-        protected override bool Valid => true;
+        protected override bool Validate => true;
 
 
         protected override string CreateAutoName() => $"Wait for [{key}] key press";

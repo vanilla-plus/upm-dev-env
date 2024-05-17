@@ -19,7 +19,7 @@ namespace Vanilla.MetaScript.Analytics
 		public string eventName = "default_event";
 
 		// AutoName for self-documentation
-		protected override bool Valid => true;
+		protected override bool Validate => true;
 
 		protected override string CreateAutoName() => $"Submit Analytics Event '{eventName}'";
 

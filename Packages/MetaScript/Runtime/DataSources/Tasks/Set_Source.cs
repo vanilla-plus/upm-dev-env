@@ -29,7 +29,7 @@ namespace Vanilla.MetaScript.DataAssets
         [TypeMenu("red")]
         public S target;
 
-        protected override bool Valid => source != null && target != null;
+        protected override bool Validate => source != null && target != null;
 
 
         protected override string CreateAutoName() => $"Set [{(source is AssetSource s && s.Asset != null ? s.Asset.name : source.GetType().Name)}] to [{(target is AssetSource t && t.Asset != null ? t.Asset.name : target.GetType().Name)}]";

@@ -14,7 +14,7 @@ namespace Vanilla.MetaScript.Media
 		[SerializeField]
 		private Animation targetAnimation;
 
-		protected override bool Valid => targetAnimation != null;
+		protected override bool Validate => targetAnimation != null;
 
 		protected override string CreateAutoName() => $"Play current animation on {targetAnimation.gameObject.name}";
 

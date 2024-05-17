@@ -4,6 +4,9 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
+using Vanilla.MetaScript.DataSources.Strings;
+using Vanilla.TypeMenu;
+
 namespace Vanilla.MetaScript.Debugging
 {
 
@@ -23,33 +26,30 @@ namespace Vanilla.MetaScript.Debugging
 		[SerializeField]
 		public LogType logType = LogType.Log;
 
-		protected override bool Valid => !string.IsNullOrEmpty(Message);
+		protected override bool Validate => MessageSource != null;
 
-		protected override string CreateAutoName() => $"Print [{Message}] to the console";
+		protected override string CreateAutoName() => $"Print [{MessageSource}] to the console";
 
-		[SerializeField]
-		public string Message;
-
-
+		[TypeMenu("red")]
+		[SerializeReference]
+		public StringSource MessageSource;
+		
 		protected override UniTask<Scope> _Run(Scope scope)
 		{
-//			Debug.Log(scope.Name);
-//			Debug.Log(scope.Cancelled);
-			
 			switch (logType)
 			{
 				case LogType.Log:
-					Debug.Log(Message);
+					Debug.Log(MessageSource);
 
 					break;
 
 				case LogType.Warning:
-					Debug.LogWarning(Message);
+					Debug.LogWarning(MessageSource);
 
 					break;
 
 				case LogType.Error:
-					Debug.LogError(Message);
+					Debug.LogError(MessageSource);
 
 					break;
 

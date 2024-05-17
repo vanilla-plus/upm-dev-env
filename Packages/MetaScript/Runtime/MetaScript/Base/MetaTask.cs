@@ -23,7 +23,8 @@ namespace Vanilla.MetaScript
 
 //		[HideInInspector]
 		[SerializeField]
-		protected bool _valid = false;
+		protected bool _isValid = false;
+		public bool IsValid => _isValid;
 
 		[SerializeField] public TaskOptions taskOptions = TaskOptions.Run | TaskOptions.Wait;
 		
@@ -33,9 +34,9 @@ namespace Vanilla.MetaScript
 		public virtual void OnValidate()
 		{
 			#if UNITY_EDITOR
-			_valid = Valid;
+			_isValid = Validate;
 
-			if (_valid)
+			if (_isValid)
 			{
 				AutoName = CreateAutoName();
 			}
@@ -54,7 +55,7 @@ namespace Vanilla.MetaScript
 		
 		
 
-		protected abstract bool Valid
+		protected abstract bool Validate
 		{
 			get;
 		}
@@ -64,7 +65,7 @@ namespace Vanilla.MetaScript
 		public async UniTask<Scope> Run(Scope scope)
 		{
 			// You should just automatically check here instead of every single _Run...
-			if (scope.Cancelled || !_valid) return scope;
+			if (scope.Cancelled || !_isValid) return scope;
 
 			var s = scope;
 

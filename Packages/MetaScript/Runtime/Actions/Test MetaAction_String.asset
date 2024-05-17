@@ -15,11 +15,12 @@ MonoBehaviour:
   Description: "Describe this action below:\n\n\u2022 What does it do?\n\u2022 What
     scene is it used in?\n\u2022 When should it be called?"
   Source:
-    rid: 3914819350297837638
+    rid: 8747163868043673647
   references:
     version: 2
     RefIds:
-    - rid: 3914819350297837638
-      type: {class: AssetStringSource, ns: Vanilla.MetaScript.DataAssets, asm: Vanilla.MetaScript}
+    - rid: 8747163868043673647
+      type: {class: StringSource_Direct, ns: Vanilla.MetaScript.DataSources.Strings,
+        asm: Vanilla.MetaScript}
       data:
-        _asset: {fileID: 0}
+        _value: What

@@ -16,7 +16,7 @@ namespace Vanilla.MetaScript.Flow
         [TypeMenu("red")]
         public IntSource Index;
         
-        protected override bool Valid => base.Valid && Index != null;
+        protected override bool Validate => base.Validate && Index != null;
         
         protected override string CreateAutoName() => $"Run task at value of [{(Index is ProtectedIntSource p ? p.Name : Index is DirectIntSource d ? d.Value : Index.GetType().Name)}]";
 

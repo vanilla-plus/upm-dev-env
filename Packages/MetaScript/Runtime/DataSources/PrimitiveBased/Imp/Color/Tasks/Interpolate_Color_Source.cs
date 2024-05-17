@@ -47,7 +47,7 @@ namespace Vanilla.MetaScript.DataAssets
 		                                                          timeEnd: 1.0f,
 		                                                          valueEnd: 1.0f);
 
-		protected override bool Valid => targetSource != null && fromSource != null && toSource != null;
+		protected override bool Validate => targetSource != null && fromSource != null && toSource != null;
 
 
 		protected override string CreateAutoName() => $"Interpolate [{(targetSource is AssetColorSource s && s.Asset != null ? s.Asset.name : targetSource.GetType().Name)}] from [{(fromSource is AssetColorSource from && from.Asset != null ? from.Asset.name : fromSource.GetType().Name)}] to [{(toSource is AssetColorSource to && to.Asset != null ? to.Asset.name : toSource.GetType().Name)}]";

@@ -23,7 +23,7 @@ namespace Vanilla.MetaScript
         public BoolSource B;
         
         
-        protected override bool Valid => A != null && B != null;
+        protected override bool Validate => A != null && B != null;
 
 
         protected override string CreateAutoName() => $"Wait until [{(A == null ? "null" : A)}] equals [{(B == null ? "null" : B)}]";

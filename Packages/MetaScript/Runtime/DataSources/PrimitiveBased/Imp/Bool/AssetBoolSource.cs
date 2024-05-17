@@ -44,8 +44,8 @@ namespace Vanilla.MetaScript.DataAssets
                                                      Asset.Source is AssetBoolSource ?
                                                          Asset.Source.ToString() : // Drill into the nested source for a name
                                                          Asset.name : // This assumes that no new BoolSource children have unique ToStrings like AssetBoolSource does!
-                                                     Utility.c_NullName :
-                                                 Utility.c_NullName;
+                                                     Utility.Unknown :
+                                                 Utility.Unknown;
 
     }
 }

@@ -8,7 +8,7 @@ namespace Vanilla.MetaScript.DataSources
 {
 
 	[Serializable]
-	public class PositionToSource : MonoBehaviour
+	public class PositionToDataSource : MonoBehaviour
 	{
 
 		[SerializeReference]

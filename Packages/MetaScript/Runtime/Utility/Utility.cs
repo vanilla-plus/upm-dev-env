@@ -6,6 +6,6 @@ namespace Vanilla.MetaScript
 {
     public static class Utility
     {
-        public const string c_NullName = "‽";
+        public const string Unknown = "‽";
     }
 }
