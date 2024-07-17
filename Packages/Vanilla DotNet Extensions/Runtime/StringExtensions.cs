@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 
 namespace Vanilla.DotNetExtensions
@@ -197,6 +198,17 @@ namespace Vanilla.DotNetExtensions
 				       _    => $"{(decimalBytes / Eb).ToString(DataFormatSpecifier)}Eb"
 			       };
 		}
+
+
+		#endregion
+
+		#region Encryption
+
+
+
+		public static string Twist(this string input,
+		                           int twist) => new(input.Select(c => (char) (c ^ twist)).ToArray());
+
 
 
 		#endregion
