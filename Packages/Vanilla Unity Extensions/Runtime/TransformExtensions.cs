@@ -193,8 +193,36 @@ namespace Vanilla.UnityExtensions
 		// ------------------------------------------------------------------------------------------------------------------------- Translations //
 
 		#region Translations
+		
+		// It is recommend to align using a child transform.
+		public static void AlignChildren(this Transform input,
+		                                 Transform myChild,
+		                                 Transform otherChild)
+		{
+			input.rotation =  otherChild.rotation * Quaternion.Inverse(myChild.localRotation);
+			input.position += otherChild.position - myChild.position;
+		}
 
 
+		public static void AlignChildrenRotation(this Transform input,
+		                                         Transform myChild,
+		                                         Transform otherChild) => input.rotation = otherChild.rotation * Quaternion.Inverse(myChild.localRotation);
+
+		public static void AlignChildrenPosition(this Transform input,
+		                                         Transform myChild,
+		                                         Transform otherChild) => input.position += otherChild.position - myChild.position;
+
+		// It is perfectly plausible to align using a non-childed transform.
+		// For this to work, we can do the slightly more expensive operation:
+		public static void Align(this Transform input,
+		                         Transform thingYouWantToTreatAsAChild,
+		                         Transform alignmentTarget)
+		{
+			var aRotationLocalToInput = thingYouWantToTreatAsAChild.rotation * Quaternion.Inverse(input.rotation); // Notice these are the exact same steps?
+			input.rotation =  alignmentTarget.rotation * Quaternion.Inverse(aRotationLocalToInput); // We just localise through A first to treat it like a child transform, then localise to B after.
+			input.position += alignmentTarget.position - thingYouWantToTreatAsAChild.position;
+		}
+		
 
 		/// <summary>
 		/// 	Makes the input face directly away from the target.
