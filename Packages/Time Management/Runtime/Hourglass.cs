@@ -14,7 +14,7 @@ namespace Vanilla.Hourglass
 		
 		private static ProtectedRangedFloatSource TargetTimeScale;
 
-		private static ProtectedBoolSource Interpolating;
+		private static BoolSource_Protected Interpolating;
 
 		private static float _PauseTimeScaleCache;
 
@@ -66,7 +66,7 @@ namespace Vanilla.Hourglass
 				                  Value = 1.0f
 			                  };
 
-			Interpolating = new ProtectedBoolSource
+			Interpolating = new BoolSource_Protected
 			                {
 				                Name = "Target Time Scale Interpolating",
 				                Value = false

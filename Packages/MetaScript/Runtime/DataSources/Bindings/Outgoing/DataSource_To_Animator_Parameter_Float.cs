@@ -4,7 +4,7 @@ namespace Vanilla.MetaScript.DataSources.Bindings
 {
 
 	[SerializeField]
-	public class DataSource_To_Animator_Parameter_Float : DataSource_To_Animator_Parameter<float, FloatSource>
+	public class DataSource_To_Animator_Parameter_Float : DataSource_To_Animator_Parameter<float>
 	{
 
 		protected override void HandleDataSet(float value) => Animator.SetFloat(_parameterID,

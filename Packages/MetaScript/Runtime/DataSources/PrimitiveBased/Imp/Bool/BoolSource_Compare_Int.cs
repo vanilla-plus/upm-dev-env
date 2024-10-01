@@ -7,40 +7,31 @@ using Vanilla.TypeMenu;
 
 namespace Vanilla.MetaScript
 {
-    
+
 	[Serializable]
-	public class BoolSource_Compare_Int : BoolSource_Compare<int,IntSource>
+	public class BoolSource_Compare_Int : BoolSource_Compare<int, IGettableSource<int>>
 	{
 
 		[SerializeReference]
 		[TypeMenu("red")]
-		private IntSource _A;
-		public override IntSource A => _A;
+		private IGettableSource<int> _A;
+		public override IGettableSource<int> A => _A;
 
 		[SerializeReference]
 		[TypeMenu("red")]
-		private IntSource _B;
-		public override IntSource B => _B;
+		private IGettableSource<int> _B;
+		public override IGettableSource<int> B => _B;
 
-		public override bool Value
-		{
-			get => comparisonType switch
-			       {
-				       NumericalComparisonType.EqualTo              => Math.Abs(A.Value - B.Value) < Mathf.Epsilon,
-				       NumericalComparisonType.GreaterThan          => A.Value                     > B.Value,
-				       NumericalComparisonType.LessThan             => A.Value                     < B.Value,
-				       NumericalComparisonType.GreaterThanOrEqualTo => A.Value                     >= B.Value,
-				       NumericalComparisonType.LessThanOrEqualTo    => A.Value                     <= B.Value,
-				       _                                            => throw new ArgumentOutOfRangeException()
-			       };
-			set { }
-		}
-
-		public override void OnBeforeSerialize() { }
-
-		public override void OnAfterDeserialize() { }
-
-
+		public override bool Value => comparisonType switch
+		                              {
+			                              NumericalComparisonType.EqualTo              => Math.Abs(A.Value - B.Value) < Mathf.Epsilon,
+			                              NumericalComparisonType.GreaterThan          => A.Value                     > B.Value,
+			                              NumericalComparisonType.LessThan             => A.Value                     < B.Value,
+			                              NumericalComparisonType.GreaterThanOrEqualTo => A.Value                     >= B.Value,
+			                              NumericalComparisonType.LessThanOrEqualTo    => A.Value                     <= B.Value,
+			                              _                                            => throw new ArgumentOutOfRangeException()
+		                              };
 
 	}
+
 }

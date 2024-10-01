@@ -79,7 +79,7 @@ namespace Vanilla.DebugCam
 
         [Header(header: "State")]
         [SerializeField]
-        public ProtectedBoolSource Active = new()
+        public BoolSource_Protected Active = new()
                                             {
                                                 Name  = "Debug Cam Active",
                                                 Value = true

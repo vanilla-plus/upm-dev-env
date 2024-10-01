@@ -15,16 +15,16 @@ namespace Vanilla.MetaScript
     public class Timer : MetaTask
     {
 
-        [SerializeField] public AssetFloatSource timerAsset;
+        [SerializeField] public FloatSource_Asset TimerFloatSourceAsset;
 
-        protected override bool Validate => timerAsset != null && timerAsset.Asset != null && timerAsset.Asset.Source != null;
+        protected override bool Validate => TimerFloatSourceAsset != null && TimerFloatSourceAsset.Asset != null && TimerFloatSourceAsset.Asset.Source != null;
 
         protected override string CreateAutoName() => null;
 
 
         protected async override UniTask<Scope> _Run(Scope scope)
         {
-            timerAsset.Value = timerAsset.Asset.DefaultValue;
+            TimerFloatSourceAsset.Value = TimerFloatSourceAsset.Asset.DefaultValue;
 
             
             

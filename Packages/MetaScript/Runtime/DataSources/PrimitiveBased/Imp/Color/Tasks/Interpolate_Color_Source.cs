@@ -29,7 +29,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 		[SerializeReference]
 		[TypeMenu("magenta")]
-		public FloatSource speed = new DirectFloatSource()
+		public FloatSource speed = new FloatSource_Direct()
 		                           {
 			                           Value = 1.0f
 		                           };
@@ -50,7 +50,7 @@ namespace Vanilla.MetaScript.DataAssets
 		protected override bool Validate => targetSource != null && fromSource != null && toSource != null;
 
 
-		protected override string CreateAutoName() => $"Interpolate [{(targetSource is AssetColorSource s && s.Asset != null ? s.Asset.name : targetSource.GetType().Name)}] from [{(fromSource is AssetColorSource from && from.Asset != null ? from.Asset.name : fromSource.GetType().Name)}] to [{(toSource is AssetColorSource to && to.Asset != null ? to.Asset.name : toSource.GetType().Name)}]";
+		protected override string CreateAutoName() => $"Interpolate [{(targetSource is ColorSource_Asset s && s.Asset != null ? s.Asset.name : targetSource.GetType().Name)}] from [{(fromSource is ColorSource_Asset from && from.Asset != null ? from.Asset.name : fromSource.GetType().Name)}] to [{(toSource is ColorSource_Asset to && to.Asset != null ? to.Asset.name : toSource.GetType().Name)}]";
 
 
 		protected override async UniTask<Scope> _Run(Scope scope)

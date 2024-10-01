@@ -4,7 +4,7 @@ namespace Vanilla.MetaScript.DataSources.Strings
 {
     
 	[Serializable]
-	public abstract class StringSource : IDataSource<string>
+	public abstract class StringSource : IGettableSource<string>
 	{
 
 //		[SerializeField]

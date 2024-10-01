@@ -203,7 +203,7 @@ public class TypeMenuAttributeDrawer : PropertyDrawer
 
 
 	private static bool IsValidType(Type type,
-	                                IEnumerable<Func<Type, bool>> filters) => !type.IsSubclassOf(typeof(UnityEngine.Object))                &&
+	                                IEnumerable<Func<Type, bool>> filters) => !type.IsSubclassOf(typeof(UnityEngine.Object))              &&
 	                                                                          !type.IsAbstract                                                &&
 	                                                                          !type.ContainsGenericParameters                                 &&
 	                                                                          (!type.IsClass || type.GetConstructor(Type.EmptyTypes) != null) &&

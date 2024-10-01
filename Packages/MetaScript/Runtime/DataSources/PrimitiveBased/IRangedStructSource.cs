@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Vanilla.MetaScript.DataSources
 {
-    public interface IRangedDataSource<T> : IStructSource<T>
+    public interface IRangedSource<T> : IStructSource<T>
     {
 
 //        IDataSource<T> Min
@@ -31,13 +31,13 @@ namespace Vanilla.MetaScript.DataSources
             set;
         }
 
-        ProtectedBoolSource AtMin
+        BoolSource_Protected AtMin
         {
             get;
             set;
         }
 
-        ProtectedBoolSource AtMax
+        BoolSource_Protected AtMax
         {
             get;
             set;

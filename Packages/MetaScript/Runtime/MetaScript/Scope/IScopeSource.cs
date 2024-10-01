@@ -38,6 +38,9 @@ namespace Vanilla.MetaScript
         public Scope CreateScope(Scope parent) => new Scope(parent: parent,
                                                             name: name);
 
+
+        public override string ToString() => $"Named Scope Source [{name}]";
+
     }
 
     [Serializable]
@@ -57,6 +60,8 @@ namespace Vanilla.MetaScript
             return new Scope(parent: parent,
                              name: $"{prefix} [{i}]");
         }
+        
+        public override string ToString() => $"Indexed Scope Source [{prefix} [*]]";
 
     }
 
@@ -85,6 +90,8 @@ namespace Vanilla.MetaScript
 //
 //            return sb.ToString();
 //        }
+
+        public override string ToString() => "Randomised Scope Source";
 
     }
 

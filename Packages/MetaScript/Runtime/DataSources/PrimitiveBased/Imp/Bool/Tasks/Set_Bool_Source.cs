@@ -6,6 +6,6 @@ namespace Vanilla.MetaScript.DataAssets
 {
     
 	[Serializable]
-	public class Set_Bool_Source : Set_Source<bool, BoolSource, BoolAsset, AssetBoolSource> { }
+	public class Set_Bool_Source : Set_Source<bool, BoolSource, BoolAsset, BoolSource_Asset> { }
 
 }

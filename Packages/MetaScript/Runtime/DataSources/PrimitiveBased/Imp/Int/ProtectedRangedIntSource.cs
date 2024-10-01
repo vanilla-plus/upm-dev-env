@@ -8,7 +8,7 @@ namespace Vanilla.MetaScript.DataSources
     [Serializable]
     public class ProtectedRangedIntSource : IntSource,
                                               IProtectedSource<int>,
-                                              IRangedDataSource<int>
+                                              IRangedSource<int>
     {
 
         [SerializeField]
@@ -79,16 +79,16 @@ namespace Vanilla.MetaScript.DataSources
         }
 
         [SerializeField]
-        private ProtectedBoolSource _atMin = new ProtectedBoolSource();
-        public ProtectedBoolSource AtMin
+        private BoolSource_Protected _atMin = new BoolSource_Protected();
+        public BoolSource_Protected AtMin
         {
             get => _atMin;
             set => _atMin = value;
         }
 
         [SerializeField]
-        private ProtectedBoolSource _atMax = new ProtectedBoolSource();
-        public ProtectedBoolSource AtMax
+        private BoolSource_Protected _atMax = new BoolSource_Protected();
+        public BoolSource_Protected AtMax
         {
             get => _atMax;
             set => _atMax = value;

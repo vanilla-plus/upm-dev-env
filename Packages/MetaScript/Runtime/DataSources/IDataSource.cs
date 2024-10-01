@@ -1,24 +1,45 @@
 using System;
 
-using UnityEngine;
-
 namespace Vanilla.MetaScript.DataSources
 {
-    
-    public interface IDataSource<T> : ISerializationCallbackReceiver
+
+    public interface IGetSetSource<T> : IGettableSource<T>,
+                                        ISettableSource<T>
     {
 
-//        string Name
-//        {
-//            get;
-//            set;
-//        }
-        
-        T Value
+        new T Value
         {
             get;
             set;
         }
+
+    }
+
+    public interface IGettableSource<T>
+    {
+
+        T Value
+        {
+            get;
+        }
+
+    }
+    
+    public interface ISettableSource<T>
+    {
+
+        T Value
+        {
+            get;                
+            set;
+        }
+
+//        void Set(T value);
+
+    }
+
+    public interface IObservableSource<T>
+    {
 
         Action<T> OnSet
         {
@@ -33,4 +54,5 @@ namespace Vanilla.MetaScript.DataSources
         }
 
     }
+    
 }

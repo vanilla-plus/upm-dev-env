@@ -10,17 +10,17 @@ namespace Vanilla.MetaScript
     
 	[Serializable]
 	[CreateAssetMenu(order = 0, fileName = "New MetaAction_Vec2", menuName = "Vanilla/MetaScript/MetaActions/Vec2")]
-	public class MetaAction_Vec2 : MetaAction_Base
+	public class MetaAction_Vec2 : MetaAction_Base<Vector2>
 	{
 
-		[TypeMenu("red")]
-		[SerializeReference]
-		public Vec2Source Source;
+//		[TypeMenu("red")]
+//		[SerializeReference]
+//		public Vec2Source Source;
         
-		[NonSerialized] public Action<Vector2> OnInvoke;
+//		[NonSerialized] public Action<Vector2> OnInvoke;
 		
-		[ContextMenu("Debug Invoke")]
-		public override void Invoke() => OnInvoke?.Invoke(Source.Value);
+//		[ContextMenu("Debug Invoke")]
+//		public override void Invoke() => OnInvoke?.Invoke(Source.Value);
 		
 	}
 }

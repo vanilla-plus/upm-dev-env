@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.Drivers
 
 	[Serializable]
 	public abstract class Driver<T,S,A,M,D>
-		where S : class, IDataSource<T>
+		where S : class, IDataSource<T>, IObservableSource<T>
 		where A : DataAsset<T,S>
 		where M : Module<T,S,A,M,D>
 		where D : Driver<T,S,A,M,D>
@@ -20,8 +20,8 @@ namespace Vanilla.MetaScript.Drivers
 		[HideInInspector]
 		private string Name;
 		
-		[SerializeField]
-		public T InitialValue;
+//		[SerializeField]
+//		public T InitialValue;
 		
 		public abstract A Asset
 		{
@@ -44,7 +44,7 @@ namespace Vanilla.MetaScript.Drivers
 			}
 
 			// ToDo: Remove this line and InitialValue after porting has been performed.
-			Asset.DefaultValue = InitialValue;
+//			Asset.DefaultValue = InitialValue;
 
 			Name = $"{Asset.name} [{Asset.Source.GetType().Name}]";
 

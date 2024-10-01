@@ -7,23 +7,26 @@ using Vanilla.TypeMenu;
 
 namespace Vanilla.MetaScript.DataAssets
 {
-
+    
 	[Serializable]
 	[CreateAssetMenu(fileName = "Bool Asset",
 	                 menuName = "Vanilla/MetaScript/Data Assets/Bool",
 	                 order = 0)]
-	public class BoolAsset : DataAsset<bool, BoolSource>
+	public class BoolAsset : BaseAsset,
+	                         IGettableSource<bool>, 
+	                         ISettableSource<bool>
 	{
 
-		[SerializeReference]
-		[TypeMenu("yellow")]
-		private BoolSource _source;
-		public override BoolSource Source
+		[TypeMenu("blue")]
+		[SerializeReference] public IGetSetSource<bool> Source;
+
+		public bool Value
 		{
-			get => _source;
-			set => _source = value;
+			get => Source.Value;
+			set => Source.Value = value;
 		}
 
-	}
+		public void Set(bool newValue) { }
 
+	}
 }

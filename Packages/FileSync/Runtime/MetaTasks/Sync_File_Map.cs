@@ -31,8 +31,10 @@ namespace Vanilla.FileSync
 
 
 
-		[SerializeField]
-		public UnityEvent<float> OnProgressSinWave = new UnityEvent<float>();
+//		[SerializeField]
+//		public UnityEvent<float> OnProgressSinWave = new UnityEvent<float>();
+
+		[SerializeField] public MetaAction_Float OnProgressSinWave;
 
 		protected override bool Validate => true;
 
@@ -57,7 +59,7 @@ namespace Vanilla.FileSync
 
 				var sin = 0.5f * (float) Math.Sin(2 * Math.PI * t) + 0.5f;
 				
-				OnProgressSinWave.Invoke(sin);
+				OnProgressSinWave?.Invoke(sin);
 
 				await UniTask.Yield();
 			}
@@ -75,7 +77,7 @@ namespace Vanilla.FileSync
 				                     currentVelocity: ref tVelocity,
 				                     smoothTime: postLoadSmoothTime);
 				
-				OnProgressSinWave.Invoke(t);
+				OnProgressSinWave?.Invoke(t);
 				
 				await UniTask.Yield();
 			}

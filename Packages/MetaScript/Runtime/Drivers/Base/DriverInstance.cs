@@ -12,7 +12,7 @@ namespace Vanilla.MetaScript.Drivers
 	[Serializable]
 	public abstract class DriverInstance<T,S,A,M,D> : MonoBehaviour,
 	                                                  IInitiable
-		where S : class, IDataSource<T>
+		where S : class, IDataSource<T>, IObservableSource<T>
 		where A : DataAsset<T,S>
 		where M : Module<T,S,A,M,D>
 		where D : Driver<T,S,A,M,D>

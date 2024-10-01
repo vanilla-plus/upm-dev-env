@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 using Vanilla.MetaScript.DataSources;
-using Vanilla.MetaScript;
 using Vanilla.TypeMenu;
 
 namespace Vanilla.MetaScript.DataAssets
@@ -43,7 +42,7 @@ namespace Vanilla.MetaScript.DataAssets
 		protected override bool Validate => source != null && target != null;
 
 
-		protected override string CreateAutoName() => $"Lerp [{(source is AssetFloatSource s && s.Asset != null ? s.Asset.name : source.GetType().Name)}] to [{(target is AssetFloatSource t && t.Asset != null ? t.Asset.name : target.GetType().Name)}] over [{seconds}] seconds";
+		protected override string CreateAutoName() => $"Lerp [{(source is FloatSource_Asset s && s.Asset != null ? s.Asset.name : source.GetType().Name)}] to [{(target is FloatSource_Asset t && t.Asset != null ? t.Asset.name : target.GetType().Name)}] over [{seconds}] seconds";
 
 
 		protected override async UniTask<Scope> _Run(Scope scope)

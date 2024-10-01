@@ -12,10 +12,16 @@ namespace Vanilla.MetaScript.Flow
 
 		protected override string CreateAutoName() => "Proceed when all of the following complete:";
 
+//		protected override async UniTask<Scope> _Run(Scope scope)
+//		{
+//			await UniTask.WhenAll(tasks: Enumerable.Select(source: _tasks,
+//			                                               selector: t => t.Run(scope)));
+//			
+//			return scope;
+//		}
+		
 		protected override async UniTask<Scope> _Run(Scope scope)
 		{
-			
-
 			await UniTask.WhenAll(tasks: Enumerable.Select(source: _tasks,
 			                                               selector: t => t.Run(scope)));
 			

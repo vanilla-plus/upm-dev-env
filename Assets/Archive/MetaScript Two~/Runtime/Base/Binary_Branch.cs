@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 
 using UnityEngine;
 
-using Vanilla.DataAssets;
+using Vanilla.MetaScript.DataAssets;
 
 namespace Vanilla.MetaScript
 {

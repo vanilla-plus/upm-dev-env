@@ -28,7 +28,6 @@ namespace Vanilla.MetaScript
 
 		[SerializeField] public TaskOptions taskOptions = TaskOptions.Run | TaskOptions.Wait;
 		
-//		protected const string DefaultAutoName = "This task can't be auto-named yet.";
 		protected const string InvalidAutoName = "Invalid Task";
 
 		public virtual void OnValidate()
@@ -90,6 +89,8 @@ namespace Vanilla.MetaScript
 			{
 				Debug.LogException(exception: ex);
 			}
+			
+			
 
 //			if (s.Cancelled)
 //			{

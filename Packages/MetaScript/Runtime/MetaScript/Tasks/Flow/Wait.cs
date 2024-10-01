@@ -33,7 +33,7 @@ namespace Vanilla.MetaScript.Flow
 
 		[TypeMenu("Red")]
 		[SerializeReference]
-		public FloatSource SecondsToTake = new DirectFloatSource
+		public FloatSource SecondsToTake = new FloatSource_Direct
 		                                   {
 			                                   _value = 1.0f
 		                                   };

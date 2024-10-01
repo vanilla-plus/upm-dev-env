@@ -19,7 +19,7 @@ namespace Vanilla.MetaScript.Drivers.Float
 			#if UNITY_EDITOR
 			if (!ValidReferences(driver)) return;
 			
-			if (driver.Asset.Source is not IRangedDataSource<float> source)
+			if (driver.Asset.Source is not IRangedSource<float> source)
 			{
 				Debug.LogError("OnValidate failed because the drivers Asset.Source is not of type RangedDataSource<T>");
 				

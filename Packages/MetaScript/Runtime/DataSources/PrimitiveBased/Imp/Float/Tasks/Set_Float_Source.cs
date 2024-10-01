@@ -6,6 +6,6 @@ namespace Vanilla.MetaScript.DataAssets
 {
     
 	[Serializable]
-	public class Set_Float_Source : Set_Source<float, FloatSource, FloatAsset, AssetFloatSource> { }
+	public class Set_Float_Source : Set_Source<float, FloatSource, FloatAsset, FloatSource_Asset> { }
 
 }

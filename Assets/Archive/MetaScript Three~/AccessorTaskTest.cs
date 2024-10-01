@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using Vanilla.DataAssets;
+using Vanilla.MetaScript.DataAssets;
 
 namespace Vanilla.MetaScript.Three
 {

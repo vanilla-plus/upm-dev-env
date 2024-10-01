@@ -27,10 +27,10 @@ namespace Vanilla.NavStack
         public Stack<NavStack_Window> History = new Stack<NavStack_Window>();
 
         [NonSerialized]
-        public ProtectedBoolSource StackIsEmpty;
+        public BoolSource_Protected StackIsEmpty;
 
 
-        void Awake() => StackIsEmpty = new ProtectedBoolSource
+        void Awake() => StackIsEmpty = new BoolSource_Protected
                                        {
 	                                       Name  = $"[{gameObject.name}].NavStack.StackIsEmpty",
 	                                       Value = true

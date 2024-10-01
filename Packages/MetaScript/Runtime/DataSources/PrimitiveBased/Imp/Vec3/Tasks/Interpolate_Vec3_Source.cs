@@ -29,7 +29,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 		[SerializeReference]
 		[TypeMenu("magenta")]
-		public FloatSource seconds = new DirectFloatSource()
+		public FloatSource seconds = new FloatSource_Direct()
 		                           {
 			                           Value = 1.0f
 		                           };

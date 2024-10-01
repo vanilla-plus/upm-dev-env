@@ -3,18 +3,19 @@ using System;
 using UnityEngine;
 
 using Vanilla.MetaScript.DataSources.Strings;
+using Vanilla.TypeMenu;
 
 namespace Vanilla.MetaScript.DataSources.Bindings
 {
 
 	[SerializeField]
-	public abstract class DataSource_To_Animator_Parameter<T, S> : MonoBehaviour
-		where S : IDataSource<T>
+	public abstract class DataSource_To_Animator_Parameter<T> : MonoBehaviour
 	{
 
 		[SerializeField] public Animator Animator;
 
-		[SerializeReference] public S Source;
+		[TypeMenu("red")]
+		[SerializeReference] public IObservableSource<T> Source;
 
 		[SerializeReference] public StringSource ParameterName;
 

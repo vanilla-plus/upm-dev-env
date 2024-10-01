@@ -25,7 +25,7 @@ namespace Vanilla.MetaScript.DataAssets
 
 		[SerializeReference]
 		[TypeMenu("magenta")]
-		public FloatSource speed = new DirectFloatSource()
+		public FloatSource speed = new FloatSource_Direct()
 		                           {
 			                           Value = 1.0f
 		                           };
@@ -40,7 +40,7 @@ namespace Vanilla.MetaScript.DataAssets
 		protected override bool Validate => targetSource != null && toSource != null;
 
 
-		protected override string CreateAutoName() => $"Change [{(targetSource is AssetColorSource s && s.Asset != null ? s.Asset.name : targetSource.GetType().Name)}] to [{(toSource is AssetColorSource t && t.Asset != null ? t.Asset.name : toSource.GetType().Name)}] over time";
+		protected override string CreateAutoName() => $"Change [{(targetSource is ColorSource_Asset s && s.Asset != null ? s.Asset.name : targetSource.GetType().Name)}] to [{(toSource is ColorSource_Asset t && t.Asset != null ? t.Asset.name : toSource.GetType().Name)}] over time";
 
 
 		protected override async UniTask<Scope> _Run(Scope scope)

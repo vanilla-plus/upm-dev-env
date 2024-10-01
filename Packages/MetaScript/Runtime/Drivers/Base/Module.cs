@@ -10,7 +10,7 @@ namespace Vanilla.MetaScript.Drivers
     
     [Serializable]
     public abstract class Module<T,S,A,M,D>
-        where S : class, IDataSource<T>
+        where S : class, IDataSource<T>, IObservableSource<T>
         where A : DataAsset<T,S>
         where M : Module<T,S,A,M,D>
         where D : Driver<T,S,A,M,D>
@@ -105,7 +105,7 @@ namespace Vanilla.MetaScript.Drivers
                 return;
             }
             
-            if (driver.Asset.Source is not IRangedDataSource<T> source)
+            if (driver.Asset.Source is not IRangedSource<T> source)
             {
 				Debug.LogError("Connecting AtMin failed because the drivers Asset.Source is not of type RangedDataSource<T>");
 				
@@ -128,7 +128,7 @@ namespace Vanilla.MetaScript.Drivers
                 return;
             }
             
-            if (driver.Asset.Source is not IRangedDataSource<T> source)
+            if (driver.Asset.Source is not IRangedSource<T> source)
             {
                 Debug.LogError("Disconnecting AtMin failed because the drivers Asset.Source is not of type RangedDataSource<T>");
 				
@@ -150,7 +150,7 @@ namespace Vanilla.MetaScript.Drivers
                 return;
             }
             
-            if (driver.Asset.Source is not IRangedDataSource<T> source)
+            if (driver.Asset.Source is not IRangedSource<T> source)
             {
                 Debug.LogError("Connecting AtMax failed because the drivers Asset.Source is not of type RangedDataSource<T>");
 				
@@ -173,7 +173,7 @@ namespace Vanilla.MetaScript.Drivers
                 return;
             }
             
-            if (driver.Asset.Source is not IRangedDataSource<T> source)
+            if (driver.Asset.Source is not IRangedSource<T> source)
             {
                 Debug.LogError("Disconnecting AtMax failed because the drivers Asset.Source is not of type RangedDataSource<T>");
 				

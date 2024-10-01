@@ -6,7 +6,7 @@
 //
 //using UnityEngine;
 //
-//using Vanilla.DataAssets;
+//using Vanilla.MetaScript.DataAssets;
 //
 //using Vanilla.UnityExtensions;
 //

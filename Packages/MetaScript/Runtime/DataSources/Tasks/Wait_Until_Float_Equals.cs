@@ -17,21 +17,21 @@ namespace Vanilla.MetaScript
 
 		[TypeMenu("red")]
 		[SerializeReference]
-		public FloatSource A = new AssetFloatSource
+		public FloatSource A = new FloatSource_Asset
 		                       {
 			                       _asset = null
 		                       };
 
 		[TypeMenu("red")]
 		[SerializeReference]
-		public FloatSource B = new DirectFloatSource
+		public FloatSource B = new FloatSource_Direct
 		                       {
 			                       _value = 1.0f
 		                       };
 
 		[TypeMenu("red")]
 		[SerializeReference]
-		public FloatSource Epsilon = new DirectFloatSource
+		public FloatSource Epsilon = new FloatSource_Direct
 		                             {
 			                             _value = float.Epsilon
 		                             };

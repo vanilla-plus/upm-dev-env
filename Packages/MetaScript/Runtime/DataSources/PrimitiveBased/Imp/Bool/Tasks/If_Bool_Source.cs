@@ -15,14 +15,14 @@ namespace Vanilla.MetaScript.DataAssets
 
 		[SerializeReference]
 		[TypeMenu("red")]
-		public BoolSource source = new AssetBoolSource();
+		public BoolSource source = new BoolSource_Asset();
 
 		protected override bool Validate => source != null && _tasks is
 		                                         {
 			                                         Length: >= 2
 		                                         };
 
-		protected override string CreateAutoName() => $"If ({(source is AssetBoolSource boolSource ? boolSource.Asset.name : source.GetType().Name)}) ? {_tasks[0]?.Name} : {_tasks[1]?.Name}";
+		protected override string CreateAutoName() => $"If ({(source is BoolSource_Asset boolSource ? boolSource.Asset.name : source.GetType().Name)}) ? {_tasks[0]?.Name} : {_tasks[1]?.Name}";
 
 		public override    int    Evaluate()       => source.Value ? 0 : 1;
 

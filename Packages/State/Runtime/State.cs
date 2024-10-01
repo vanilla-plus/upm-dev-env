@@ -17,7 +17,7 @@ namespace Vanilla
 		public string Name;
 
 		[SerializeField]
-		public ProtectedBoolSource Active;
+		public BoolSource_Protected Active;
 
 		[SerializeField]
 		public RangedFloatSource Progress;
@@ -34,7 +34,7 @@ namespace Vanilla
 
 			FillSeconds = fillSeconds;
 
-			Active = new ProtectedBoolSource(defaultActiveState);
+			Active = new BoolSource_Protected(defaultActiveState);
 
 			Progress = new RangedFloatSource
 			           {

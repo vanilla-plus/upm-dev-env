@@ -31,21 +31,34 @@ namespace Vanilla.Init
 	public static class Initializer
 	{
 
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-		private static void Reset()
-		{
-			#if UNITY_EDITOR
-			SceneManager.sceneLoaded -= RunInit;
-			#endif
-			
-			SceneManager.sceneLoaded += RunInit;
-		}
+//		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+//		private static void SubsystemRegistration()
+//		{
+//			#if debug
+//			Debug.Log("Initializer.SubsystemRegistration)")
+//			#endif
+//			#if UNITY_EDITOR
+//			SceneManager.sceneLoaded -= RunInit;
+//			#endif
+//			
+//			SceneManager.sceneLoaded += RunInit;
+//		}
 		
 		// For some reason, the first scene load doesn't invoke SceneManager.sceneLoader. Go figure.
 		// illdoitmyself.gif
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 		private static void AfterSceneLoad()
 		{
+			#if debug
+			Debug.Log("Initializer.AfterSceneLoad");
+			#endif
+			
+			#if UNITY_EDITOR
+			SceneManager.sceneLoaded -= RunInit;
+			#endif
+			
+			SceneManager.sceneLoaded += RunInit;
+			
 			// The Editor is unique in that it can start with multiple scenes open.
 			// Builds don't have this condition.
 			#if UNITY_EDITOR
@@ -70,15 +83,14 @@ namespace Vanilla.Init
 
 		public static void Init(Scene scene)
 		{
-			
 			#if debug
-			Debug.LogWarning("[Initializer] Initialization begun");
+			Debug.Log($"Initializer.Init [{scene.name}]");
 			#endif
 
-			var initiables = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<IInitiable>(includeInactive: true));
+			var initiables = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<IInitiable>(includeInactive: true)).ToArray();
 
 			#if debug
-			var output = initiables.Aggregate(seed: "Found the following initiables:\n",
+			var output = initiables.Aggregate(seed: $"Found the following initiables in the scene [{scene.name}]:\n",
 			                                  func: (current,
 			                                         i) => current + $"\n\t •  {i}");
 

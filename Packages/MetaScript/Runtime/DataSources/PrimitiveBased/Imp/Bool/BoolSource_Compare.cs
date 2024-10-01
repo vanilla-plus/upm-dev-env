@@ -6,9 +6,9 @@ namespace Vanilla.MetaScript
 {
     
     [Serializable]
-    public abstract class BoolSource_Compare<T,S> : BoolSource
+    public abstract class BoolSource_Compare<T,S> : IGettableSource<bool>
         where T : struct, IComparable<T>, IEquatable<T>
-        where S : IDataSource<T>
+        where S : IGettableSource<T>
     {
 
         public enum NumericalComparisonType
@@ -30,6 +30,21 @@ namespace Vanilla.MetaScript
         }
 
         public abstract S B
+        {
+            get;
+        }
+
+        public override string ToString() => comparisonType switch
+                                             {
+                                                 NumericalComparisonType.EqualTo              => $"[{A} == {B}]",
+                                                 NumericalComparisonType.GreaterThan          => $"[{A} > {B}]",
+                                                 NumericalComparisonType.LessThan             => $"[{A} < {B}]",
+                                                 NumericalComparisonType.GreaterThanOrEqualTo => $"[{A} >= {B}]",
+                                                 NumericalComparisonType.LessThanOrEqualTo    => $"[{A} <= {B}]",
+                                                 _                                            => $"[{A} ? {B}]"
+                                             };
+
+        public abstract bool Value
         {
             get;
         }

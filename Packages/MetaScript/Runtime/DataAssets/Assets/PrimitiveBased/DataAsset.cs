@@ -7,12 +7,12 @@ using Vanilla.MetaScript.DataSources;
 namespace Vanilla.MetaScript.DataAssets
 {
 
-	// This was created to that collections of assets could be possible and iterated over together.
+	// This was created so that collections of assets could be possible and iterated over together.
 	// Anything that pertains to Assets in a payload-agnostic way should go in here.
 
 	[Serializable]
 	public abstract class DataAsset<T, S> : BaseAsset
-		where S : class, IDataSource<T>
+		where S : class, IGettableSource<T>, ISettableSource<T>, IObservableSource<T>
 	{
 
 		public T DefaultValue;

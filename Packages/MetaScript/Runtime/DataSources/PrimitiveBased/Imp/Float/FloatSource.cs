@@ -29,21 +29,21 @@ namespace Vanilla.MetaScript.DataSources
             set;
         }
 
-        [NonSerialized]
-        private Action<float> _onValueChange;
-        public Action<float> OnSet
-        {
-            get => _onValueChange;
-            set => _onValueChange = value;
-        }
-
-        [NonSerialized]
-        private Action<float, float> _onSetWithHistory;
-        public Action<float, float> OnSetWithHistory
-        {
-            get => _onSetWithHistory;
-            set => _onSetWithHistory = value;
-        }
+//        [NonSerialized]
+//        private Action<float> _onValueChange;
+//        public Action<float> OnSet
+//        {
+//            get => _onValueChange;
+//            set => _onValueChange = value;
+//        }
+//
+//        [NonSerialized]
+//        private Action<float, float> _onSetWithHistory;
+//        public Action<float, float> OnSetWithHistory
+//        {
+//            get => _onSetWithHistory;
+//            set => _onSetWithHistory = value;
+//        }
 
         public abstract void OnBeforeSerialize();
 

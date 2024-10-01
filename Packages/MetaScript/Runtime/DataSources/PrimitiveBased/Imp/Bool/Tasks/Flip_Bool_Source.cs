@@ -17,12 +17,12 @@ namespace Vanilla.MetaScript.DataAssets
 
         [SerializeReference]
         [TypeMenu("red")]
-        public BoolSource source = new AssetBoolSource();
+        public BoolSource source = new BoolSource_Asset();
 
         protected override bool Validate => source != null;
 
 
-        protected override string CreateAutoName() => $"Flip [{(source is AssetBoolSource boolSource ? boolSource.Asset.name : source.GetType().Name)}]";
+        protected override string CreateAutoName() => $"Flip [{(source is BoolSource_Asset boolSource ? boolSource.Asset.name : source.GetType().Name)}]";
 
 
         protected override UniTask<Scope> _Run(Scope scope)
