@@ -10,17 +10,17 @@ namespace Vanilla.MetaScript
     
 	[Serializable]
 	[CreateAssetMenu(order = 0, fileName = "New MetaAction_Color", menuName = "Vanilla/MetaScript/MetaActions/Color")]
-	public class MetaAction_Color : MetaAction_Base
+	public class MetaAction_Color : MetaAction_Base<Color>
 	{
 
-		[TypeMenu("red")]
-		[SerializeReference]
-		public ColorSource Source;
+//		[TypeMenu("red")]
+//		[SerializeReference]
+//		public ColorSource Source;
         
-		[NonSerialized] public Action<Color> OnInvoke;
+//		[NonSerialized] public Action<Color> OnInvoke;
 		
-		[ContextMenu("Debug Invoke")]
-		public override void Invoke() => OnInvoke?.Invoke(Source.Value);
+//		[ContextMenu("Debug Invoke")]
+//		public override void Invoke() => OnInvoke?.Invoke(Source.Value);
 		
 	}
 }

@@ -11,17 +11,17 @@ namespace Vanilla.MetaScript
     
 	[Serializable]
 	[CreateAssetMenu(order = 0, fileName = "New MetaAction_String", menuName = "Vanilla/MetaScript/MetaActions/String")]
-	public class MetaAction_String : MetaAction_Base
+	public class MetaAction_String : MetaAction_Base<string>
 	{
 
-		[TypeMenu("red")]
-		[SerializeReference]
-		public StringSource Source;
+//		[TypeMenu("red")]
+//		[SerializeReference]
+//		public StringSource Source;
         
-		[NonSerialized] public Action<string> OnInvoke;
+//		[NonSerialized] public Action<string> OnInvoke;
 		
-		[ContextMenu("Debug Invoke")]
-		public override void Invoke() => OnInvoke?.Invoke(Source.Value);
+//		[ContextMenu("Debug Invoke")]
+//		public override void Invoke() => OnInvoke?.Invoke(Source.Value);
 		
 	}
 }

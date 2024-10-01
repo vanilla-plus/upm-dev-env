@@ -27,9 +27,33 @@ namespace Vanilla.MetaScript
 
 
 		[ContextMenu(itemName: "Test Run")]
-		private void EditorStart() => task?.Run(new Scope(null, "editor"));
-		
-//		public void StartTask(Scope scope) => task.Run(scope: scope).Forget();
+		private void EditorStart()
+		{
+			var newScope = new Scope("editor");
+
+			task?.Run(newScope).Forget();
+		}
+
+
+		public void Run(string scopeName)
+		{
+			var newScope = new Scope(scopeName);
+			
+			task?.Run(newScope).Forget();
+		}
+
+
+		public async UniTask<Scope> RunAsync(string scopeName)
+		{
+			var newScope = new Scope(scopeName);
+
+			if (task == null) return newScope;
+			
+			return await task.Run(newScope);
+		}
+
+
+		//		public void StartTask(Scope scope) => task.Run(scope: scope).Forget();
 
 //		public void StartTask(Scope scope) => task.Run(scope);
 //

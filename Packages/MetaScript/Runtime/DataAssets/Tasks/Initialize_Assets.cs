@@ -21,8 +21,6 @@ namespace Vanilla.MetaScript
         
         protected override UniTask<Scope> _Run(Scope scope)
         {
-            
-
             foreach (var a in Assets) a.Reset();
 
             return UniTask.FromResult(scope);

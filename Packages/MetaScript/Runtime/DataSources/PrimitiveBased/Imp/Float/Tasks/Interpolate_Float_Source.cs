@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 using Vanilla.MetaScript.DataSources;
-using Vanilla.MetaScript;
 using Vanilla.TypeMenu;
 
 namespace Vanilla.MetaScript.DataAssets

@@ -37,10 +37,8 @@ namespace Vanilla.MetaScript
 		void Start() => Fire();
 
 
-		public void Fire()
-		{
-			if (target != null) target.Task?.Run(scopeSource.CreateScope(null));
-		}
+		public void Fire() => target?.Task?.Run(scopeSource.CreateScope(null));
+
 
 		void Update()
 		{

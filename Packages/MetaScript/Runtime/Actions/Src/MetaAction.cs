@@ -7,13 +7,13 @@ namespace Vanilla.MetaScript
     
     [Serializable]
     [CreateAssetMenu(order = 0, fileName = "New MetaAction", menuName = "Vanilla/MetaScript/MetaActions/Event")]
-    public class MetaAction : MetaAction_Base
+    public class MetaAction : ScriptableObject
     {
 
         [NonSerialized] public Action OnInvoke;
         
         [ContextMenu("Debug Invoke")]
-        public override void Invoke() => OnInvoke?.Invoke();
+        public void Invoke() => OnInvoke?.Invoke();
 
     }
 }

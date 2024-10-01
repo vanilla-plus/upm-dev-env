@@ -18,21 +18,21 @@ namespace Vanilla.MetaScript.DataAssets
 	    public virtual void Reset()
 	    {
 		    #if debug
-		    Debug.Log($"[{Time.frameCount}] {name}\t=> Reset");
+		    Debug.Log($"[{Time.frameCount}] {name}\t=> Reset (base)");
 		    #endif
 	    }
 
 	    protected virtual void OnValidate()
 		{
 			#if debug
-			Debug.Log($"[{Time.frameCount}] {name}\t=> OnValidate");
+			Debug.Log($"[{Time.frameCount}] {name}\t=> OnValidate (base)");
 			#endif
 		}
 
 		protected virtual void Awake()
 		{
 			#if debug
-			Debug.Log($"[{Time.frameCount}] {name}\t=> Awake");
+			Debug.Log($"[{Time.frameCount}] {name}\t=> Awake (base)");
 			#endif
 		}
 
@@ -40,7 +40,7 @@ namespace Vanilla.MetaScript.DataAssets
 		protected virtual void OnEnable()
 		{
 			#if debug
-			Debug.Log($"[{Time.frameCount}] {name}\t=> OnEnable");
+			Debug.Log($"[{Time.frameCount}] {name}\t=> OnEnable (base)");
 			#endif
 		}
 
@@ -48,14 +48,14 @@ namespace Vanilla.MetaScript.DataAssets
 		protected virtual void OnDisable()
 		{
 			#if debug
-			Debug.Log($"[{Time.frameCount}] {name}\t=> OnDisable");
+			Debug.Log($"[{Time.frameCount}] {name}\t=> OnDisable (base)");
 			#endif
 		}
 		
 		protected virtual void OnDestroy()
 		{
 			#if debug
-			Debug.Log($"[{Time.frameCount}] {name}\t=> OnDestroy");
+			Debug.Log($"[{Time.frameCount}] {name}\t=> OnDestroy (base)");
 			#endif
 		}
 

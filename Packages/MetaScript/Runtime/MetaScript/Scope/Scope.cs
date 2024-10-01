@@ -24,12 +24,13 @@ namespace Vanilla.MetaScript
     public class Scope : IDisposable
     {
 
-        public enum FlowState
+        public enum ScopeState : byte
         {
 
             Continue,
             Cancelled,
-            FastForward
+            Failed,
+            FastForward,
 
         }
         
@@ -38,7 +39,8 @@ namespace Vanilla.MetaScript
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void StaticReset()
         {
-            foreach (var s in Active.Values) s._Continue = false;
+//            foreach (var s in Active.Values) s._Continue = false;
+            foreach (var s in Active.Values) s.State = ScopeState.Cancelled;            
 
             Active.Clear();
         }
@@ -97,12 +99,19 @@ namespace Vanilla.MetaScript
             return true;
         }
 
-        public Scope GetLastActiveScope() => Continue ? this : parent?.GetLastActiveScope();
+//        public Scope GetLastActiveScope() => Continue ? this : parent?.GetLastActiveScope();
 
-        
         [SerializeField]
-        private bool _Continue = true;
-        public bool Continue => _Continue;
+        private ScopeState _state = ScopeState.Continue;
+        public ScopeState State
+        {
+            get => _state;
+            set => _state = value;
+        }
+
+        //        [SerializeField]
+//        private bool _Continue = true;
+//        public bool Continue => _Continue;
 
         public Scope parent = null;
 
@@ -118,13 +127,13 @@ namespace Vanilla.MetaScript
             set => _Depth = value;
         }
 
-        [SerializeField]
-        private byte activeTasks = 0;
-        public byte ActiveTasks
-        {
-            get => activeTasks;
-            set => activeTasks = value;
-        }
+//        [SerializeField]
+//        private byte activeTasks = 0;
+//        public byte ActiveTasks
+//        {
+//            get => activeTasks;
+//            set => activeTasks = value;
+//        }
 
         public Scope(Scope parent, string name)
         {
@@ -144,6 +153,22 @@ namespace Vanilla.MetaScript
 //            PrintActiveScopes();
             #endif
         }
+
+
+        public Scope(string name)
+        {
+            _Name = name;
+
+            Depth = 0;
+
+            Active.Add(key: name, value: this);
+
+            #if debug
+            PrintScopeOpened();
+            
+            //            PrintActiveScopes();
+            #endif
+        }
         
         public void Cancel()
         {
@@ -151,14 +176,16 @@ namespace Vanilla.MetaScript
             Debug.Log($"Scope [{Name}] cancelled");
             #endif
             
-            _Continue = false;
+//            _Continue = false;
+            State     = ScopeState.Cancelled;
 
             Active.Remove(_Name);
 
             Dispose();
         }
 
-        public bool Cancelled => !Continue || (parent?.Cancelled ?? false);
+//        public bool Cancelled => !Continue || (parent?.Cancelled ?? false);
+        public bool Cancelled => State == ScopeState.Cancelled || (parent?.Cancelled ?? false);
 
         private bool disposed = false;
 
